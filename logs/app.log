@@ -1,0 +1,983 @@
+[2026-03-14 01:49:24.468 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-03-14 01:49:24.835 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    logLevel: "debug"
+[2026-03-14 01:49:24.872 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:24.872 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:24.874 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:24.875 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:24.883 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:24.883 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:24.883 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-03-14 01:49:24.946 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "63ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-03-14 01:49:24.946 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:24.946 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:24.946 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-03-14 01:49:24.967 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-03-14 01:49:24.967 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-03-14 01:49:24.967 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    logLevel: "debug"
+[2026-03-14 01:49:41.769 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-03-14 01:49:42.120 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    logLevel: "debug"
+[2026-03-14 01:49:42.174 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:42.175 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:42.177 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:42.179 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:42.186 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:42.186 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:42.186 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-03-14 01:49:42.247 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "61ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-03-14 01:49:42.247 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:42.247 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:49:42.247 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-03-14 01:49:42.272 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-03-14 01:49:42.273 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-03-14 01:49:42.273 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    logLevel: "debug"
+[2026-03-14 01:51:05.928 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-03-14 01:51:06.252 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    logLevel: "debug"
+[2026-03-14 01:51:06.307 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:51:06.307 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:51:06.308 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:51:06.309 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:51:06.316 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:51:06.316 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:51:06.317 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-03-14 01:51:06.389 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "72ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-03-14 01:51:06.390 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:51:06.390 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 01:51:06.390 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-03-14 01:51:06.422 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-03-14 01:51:06.423 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-03-14 01:51:06.423 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    logLevel: "debug"
+[2026-03-14 02:25:43.961 -0300] DEBUG: Rota /swagger.json acessada
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 02:26:05.550 -0300] INFO: [REQUEST] POST /auth/signup
+    env: "development"
+    service: "physioGest-api"
+    requestId: "5cbv5"
+    method: "POST"
+    url: "/auth/signup"
+    path: "/auth/signup"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "87"
+[2026-03-14 02:26:05.551 -0300] DEBUG (João Silva): Tentativa de cadastro
+    env: "development"
+    service: "physioGest-api"
+    email: "usuario@example.com"
+[2026-03-14 02:26:05.579 -0300] DEBUG: Criptografando senha
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 02:26:05.726 -0300] INFO: Usuário criado com sucesso
+    env: "development"
+    service: "physioGest-api"
+    userId: "69b4f16ddac706ae1f596dd1"
+    email: "usuario@example.com"
+[2026-03-14 02:26:05.726 -0300] DEBUG: Enviando email de verificação
+    env: "development"
+    service: "physioGest-api"
+    email: "usuario@example.com"
+[2026-03-14 02:26:05.731 -0300] DEBUG: Tentando enviar email via RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    email: "usuario@example.com"
+[2026-03-14 02:26:05.731 -0300] ERROR: Tentativa de enviar mensagem sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-03-14 02:26:05.731 -0300] WARN: RabbitMQ não disponível, enviando email diretamente
+    env: "development"
+    service: "physioGest-api"
+    email: "usuario@example.com"
+    error: "RabbitMQ channel not initialized"
+[2026-03-14 02:26:05.731 -0300] DEBUG: EmailProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasApiKey: false
+    baseUrl: "https://api.brevo.com/v3"
+[2026-03-14 02:26:05.732 -0300] DEBUG: Enviando email via Brevo
+    env: "development"
+    service: "physioGest-api"
+    to: "usuario@example.com"
+    subject: "Verifique seu email - PhysioGest"
+    hasHtml: true
+    hasText: true
+[2026-03-14 02:26:06.440 -0300] ERROR: Falha ao enviar email via Brevo
+    env: "development"
+    service: "physioGest-api"
+    to: "usuario@example.com"
+    subject: "Verifique seu email - PhysioGest"
+    duration: "707ms"
+    status: 401
+    statusText: "Unauthorized"
+    errorMessage: "authentication not found in headers"
+    error: {
+      "code": "ERR_BAD_REQUEST",
+      "config": {
+        "adapter": [
+          "xhr",
+          "http",
+          "fetch"
+        ],
+        "allowAbsoluteUrls": true,
+        "data": "{\"sender\":{\"name\":\"PhysioGest\",\"email\":\"noreply@physiogest.com\"},\"to\":[{\"email\":\"usuario@example.com\"}],\"subject\":\"Verifique seu email - PhysioGest\",\"htmlContent\":\"\\n          <h1>Bem-vindo ao PhysioGest!</h1>\\n          <p>Para completar seu cadastro, clique no link abaixo para verificar seu email:</p>\\n          <a href=\\\"http://localhost:3000/verify-email?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9AZXhhbXBsZS5jb20iLCJpYXQiOjE3NzM0NjU5NjUsImV4cCI6MTc3MzU1MjM2NX0._9XexAFyywNgtdmdLc16sQwlQdGu7WE_x-1JlduKhLQ\\\">Verificar Email</a>\\n          <p>Este link expira em 24 horas.</p>\\n        \",\"textContent\":\"Bem-vindo ao PhysioGest! Para completar seu cadastro, acesse: http://localhost:3000/verify-email?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9AZXhhbXBsZS5jb20iLCJpYXQiOjE3NzM0NjU5NjUsImV4cCI6MTc3MzU1MjM2NX0._9XexAFyywNgtdmdLc16sQwlQdGu7WE_x-1JlduKhLQ. Este link expira em 24 horas.\"}",
+        "env": {},
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Accept-Encoding": "gzip, compress, deflate, br",
+          "Content-Length": "936",
+          "Content-Type": "application/json",
+          "User-Agent": "axios/1.13.6",
+          "api-key": ""
+        },
+        "maxBodyLength": -1,
+        "maxContentLength": -1,
+        "method": "post",
+        "timeout": 30000,
+        "transformRequest": [
+          null
+        ],
+        "transformResponse": [
+          null
+        ],
+        "transitional": {
+          "clarifyTimeoutError": false,
+          "forcedJSONParsing": true,
+          "legacyInterceptorReqResOrdering": true,
+          "silentJSONParsing": true
+        },
+        "url": "https://api.brevo.com/v3/smtp/email",
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN"
+      },
+      "isAxiosError": true,
+      "message": "Request failed with status code 401",
+      "name": "AxiosError",
+      "request": {
+        "_closed": true,
+        "_contentLength": 936,
+        "_defaultKeepAlive": true,
+        "_ended": true,
+        "_events": {},
+        "_eventsCount": 7,
+        "_hasBody": true,
+        "_header": "POST /v3/smtp/email HTTP/1.1\r\nAccept: application/json, text/plain, */*\r\nContent-Type: application/json\r\napi-key: \r\nUser-Agent: axios/1.13.6\r\nContent-Length: 936\r\nAccept-Encoding: gzip, compress, deflate, br\r\nHost: api.brevo.com\r\nConnection: keep-alive\r\n\r\n",
+        "_headerSent": true,
+        "_keepAliveTimeout": 0,
+        "_last": false,
+        "_redirectable": {
+          "_currentRequest": "[Circular]",
+          "_currentUrl": "https://api.brevo.com/v3/smtp/email",
+          "_ended": true,
+          "_ending": true,
+          "_events": {
+            "socket": [
+              null,
+              null
+            ]
+          },
+          "_eventsCount": 3,
+          "_options": {
+            "agents": {},
+            "beforeRedirects": {},
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Accept-Encoding": "gzip, compress, deflate, br",
+              "Content-Length": "936",
+              "Content-Type": "application/json",
+              "User-Agent": "axios/1.13.6",
+              "api-key": ""
+            },
+            "hostname": "api.brevo.com",
+            "maxBodyLength": null,
+            "maxRedirects": 21,
+            "method": "POST",
+            "nativeProtocols": {
+              "http:": "[Object]",
+              "https:": "[Object]"
+            },
+            "path": "/v3/smtp/email",
+            "pathname": "/v3/smtp/email",
+            "port": "",
+            "protocol": "https:"
+          },
+          "_redirectCount": 0,
+          "_redirects": [],
+          "_requestBodyBuffers": [],
+          "_requestBodyLength": 936,
+          "_timeout": null,
+          "_writableState": {
+            "bufferedIndex": 0,
+            "corked": 0,
+            "highWaterMark": 16384,
+            "length": 0,
+            "pendingcb": 0,
+            "writelen": 0
+          }
+        },
+        "_removedConnection": false,
+        "_removedContLen": false,
+        "_removedTE": false,
+        "_trailer": "",
+        "aborted": false,
+        "agent": {
+          "_events": {},
+          "_eventsCount": 2,
+          "_sessionCache": {
+            "list": [
+              "api.brevo.com:443:::::::::::::::::::::"
+            ],
+            "map": {
+              "api.brevo.com:443:::::::::::::::::::::": "[Object]"
+            }
+          },
+          "agentKeepAliveTimeoutBuffer": 1000,
+          "defaultPort": 443,
+          "freeSockets": {
+            "api.brevo.com:443:::::::::::::::::::::": [
+              "[Object]"
+            ]
+          },
+          "keepAlive": true,
+          "keepAliveMsecs": 1000,
+          "maxCachedSessions": 100,
+          "maxFreeSockets": 256,
+          "maxSockets": null,
+          "maxTotalSockets": null,
+          "options": {
+            "defaultPort": 443,
+            "keepAlive": true,
+            "noDelay": true,
+            "path": null,
+            "protocol": "https:",
+            "scheduling": "lifo",
+            "timeout": 5000
+          },
+          "protocol": "https:",
+          "requests": {},
+          "scheduling": "lifo",
+          "sockets": {},
+          "totalSocketCount": 1
+        },
+        "chunkedEncoding": false,
+        "destroyed": true,
+        "finished": true,
+        "host": "api.brevo.com",
+        "maxHeadersCount": null,
+        "maxRequestsOnConnectionReached": false,
+        "method": "POST",
+        "outputData": [],
+        "outputSize": 0,
+        "parser": null,
+        "path": "/v3/smtp/email",
+        "protocol": "https:",
+        "res": {
+          "_consuming": false,
+          "_dumped": false,
+          "_events": {
+            "end": [
+              null,
+              null
+            ]
+          },
+          "_eventsCount": 4,
+          "_readableState": {
+            "awaitDrainWriters": null,
+            "buffer": [],
+            "bufferIndex": 0,
+            "highWaterMark": 16384,
+            "length": 0,
+            "pipes": []
+          },
+          "aborted": false,
+          "client": {
+            "_SNICallback": null,
+            "_closeAfterHandlingError": false,
+            "_controlReleased": true,
+            "_events": {
+              "close": "[Array]",
+              "timeout": "[Array]"
+            },
+            "_eventsCount": 9,
+            "_hadError": false,
+            "_host": "api.brevo.com",
+            "_httpMessage": null,
+            "_newSessionPending": false,
+            "_parent": null,
+            "_pendingData": null,
+            "_pendingEncoding": "",
+            "_readableState": {
+              "awaitDrainWriters": null,
+              "buffer": [],
+              "bufferIndex": 0,
+              "highWaterMark": 16384,
+              "length": 0,
+              "pipes": []
+            },
+            "_rejectUnauthorized": true,
+            "_requestCert": true,
+            "_secureEstablished": true,
+            "_securePending": false,
+            "_server": null,
+            "_sockname": null,
+            "_tlsOptions": {
+              "isServer": false,
+              "pipe": false,
+              "rejectUnauthorized": true,
+              "requestCert": true,
+              "secureContext": "[Object]"
+            },
+            "_writableState": {
+              "bufferedIndex": 0,
+              "corked": 0,
+              "highWaterMark": 16384,
+              "length": 0,
+              "pendingcb": 0,
+              "writelen": 0
+            },
+            "allowHalfOpen": false,
+            "alpnProtocol": false,
+            "authorizationError": null,
+            "authorized": true,
+            "autoSelectFamilyAttemptedAddresses": [
+              "141.101.90.104:443"
+            ],
+            "connecting": false,
+            "encrypted": true,
+            "parser": null,
+            "secureConnecting": false,
+            "servername": "api.brevo.com",
+            "ssl": {
+              "_parent": "[Object]",
+              "_parentWrap": null,
+              "_secureContext": "[Object]",
+              "reading": true
+            },
+            "timeout": 5000
+          },
+          "complete": true,
+          "httpVersion": "1.1",
+          "httpVersionMajor": 1,
+          "httpVersionMinor": 1,
+          "method": null,
+          "rawHeaders": [
+            "Date",
+            "Sat, 14 Mar 2026 05:26:06 GMT",
+            "Content-Type",
+            "application/json",
+            "Content-Length",
+            "72",
+            "Connection",
+            "keep-alive",
+            "CF-RAY",
+            "9dc0dc91ae11024c-WAW",
+            "access-control-allow-credentials",
+            "true",
+            "sib-request-id",
+            "b84676f2-6d6a-9b48-a9bb-660c23560d42",
+            "access-control-allow-origin",
+            "*",
+            "access-control-allow-headers",
+            "*",
+            "access-control-allow-methods",
+            "PUT, POST, GET, DELETE, PATCH, OPTIONS",
+            "x-envoy-upstream-service-time",
+            "4",
+            "cf-cache-status",
+            "DYNAMIC",
+            "Server",
+            "cloudflare"
+          ],
+          "rawTrailers": [],
+          "redirects": [],
+          "req": "[Circular]",
+          "responseUrl": "https://api.brevo.com/v3/smtp/email",
+          "socket": null,
+          "statusCode": 401,
+          "statusMessage": "Unauthorized",
+          "upgrade": false,
+          "url": ""
+        },
+        "reusedSocket": false,
+        "sendDate": false,
+        "shouldKeepAlive": true,
+        "strictContentLength": false,
+        "timeoutCb": null,
+        "upgradeOrConnect": false,
+        "useChunkedEncodingByDefault": true,
+        "writable": true
+      },
+      "response": {
+        "config": {
+          "adapter": [
+            "xhr",
+            "http",
+            "fetch"
+          ],
+          "allowAbsoluteUrls": true,
+          "data": "{\"sender\":{\"name\":\"PhysioGest\",\"email\":\"noreply@physiogest.com\"},\"to\":[{\"email\":\"usuario@example.com\"}],\"subject\":\"Verifique seu email - PhysioGest\",\"htmlContent\":\"\\n          <h1>Bem-vindo ao PhysioGest!</h1>\\n          <p>Para completar seu cadastro, clique no link abaixo para verificar seu email:</p>\\n          <a href=\\\"http://localhost:3000/verify-email?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9AZXhhbXBsZS5jb20iLCJpYXQiOjE3NzM0NjU5NjUsImV4cCI6MTc3MzU1MjM2NX0._9XexAFyywNgtdmdLc16sQwlQdGu7WE_x-1JlduKhLQ\\\">Verificar Email</a>\\n          <p>Este link expira em 24 horas.</p>\\n        \",\"textContent\":\"Bem-vindo ao PhysioGest! Para completar seu cadastro, acesse: http://localhost:3000/verify-email?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9AZXhhbXBsZS5jb20iLCJpYXQiOjE3NzM0NjU5NjUsImV4cCI6MTc3MzU1MjM2NX0._9XexAFyywNgtdmdLc16sQwlQdGu7WE_x-1JlduKhLQ. Este link expira em 24 horas.\"}",
+          "env": {},
+          "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Encoding": "gzip, compress, deflate, br",
+            "Content-Length": "936",
+            "Content-Type": "application/json",
+            "User-Agent": "axios/1.13.6",
+            "api-key": ""
+          },
+          "maxBodyLength": -1,
+          "maxContentLength": -1,
+          "method": "post",
+          "timeout": 30000,
+          "transformRequest": [
+            null
+          ],
+          "transformResponse": [
+            null
+          ],
+          "transitional": {
+            "clarifyTimeoutError": false,
+            "forcedJSONParsing": true,
+            "legacyInterceptorReqResOrdering": true,
+            "silentJSONParsing": true
+          },
+          "url": "https://api.brevo.com/v3/smtp/email",
+          "xsrfCookieName": "XSRF-TOKEN",
+          "xsrfHeaderName": "X-XSRF-TOKEN"
+        },
+        "data": {
+          "code": "unauthorized",
+          "message": "authentication not found in headers"
+        },
+        "headers": {
+          "access-control-allow-credentials": "true",
+          "access-control-allow-headers": "*",
+          "access-control-allow-methods": "PUT, POST, GET, DELETE, PATCH, OPTIONS",
+          "access-control-allow-origin": "*",
+          "cf-cache-status": "DYNAMIC",
+          "cf-ray": "9dc0dc91ae11024c-WAW",
+          "connection": "keep-alive",
+          "content-length": "72",
+          "content-type": "application/json",
+          "date": "Sat, 14 Mar 2026 05:26:06 GMT",
+          "server": "cloudflare",
+          "sib-request-id": "b84676f2-6d6a-9b48-a9bb-660c23560d42",
+          "x-envoy-upstream-service-time": "4"
+        },
+        "request": {
+          "_closed": true,
+          "_contentLength": 936,
+          "_defaultKeepAlive": true,
+          "_ended": true,
+          "_events": {},
+          "_eventsCount": 7,
+          "_hasBody": true,
+          "_header": "POST /v3/smtp/email HTTP/1.1\r\nAccept: application/json, text/plain, */*\r\nContent-Type: application/json\r\napi-key: \r\nUser-Agent: axios/1.13.6\r\nContent-Length: 936\r\nAccept-Encoding: gzip, compress, deflate, br\r\nHost: api.brevo.com\r\nConnection: keep-alive\r\n\r\n",
+          "_headerSent": true,
+          "_keepAliveTimeout": 0,
+          "_last": false,
+          "_redirectable": {
+            "_currentRequest": "[Circular]",
+            "_currentUrl": "https://api.brevo.com/v3/smtp/email",
+            "_ended": true,
+            "_ending": true,
+            "_events": {
+              "socket": "[Array]"
+            },
+            "_eventsCount": 3,
+            "_options": {
+              "agents": "[Object]",
+              "beforeRedirects": "[Object]",
+              "headers": "[Object]",
+              "hostname": "api.brevo.com",
+              "maxBodyLength": null,
+              "maxRedirects": 21,
+              "method": "POST",
+              "nativeProtocols": "[Object]",
+              "path": "/v3/smtp/email",
+              "pathname": "/v3/smtp/email",
+              "port": "",
+              "protocol": "https:"
+            },
+            "_redirectCount": 0,
+            "_redirects": [],
+            "_requestBodyBuffers": [],
+            "_requestBodyLength": 936,
+            "_timeout": null,
+            "_writableState": {
+              "bufferedIndex": 0,
+              "corked": 0,
+              "highWaterMark": 16384,
+              "length": 0,
+              "pendingcb": 0,
+              "writelen": 0
+            }
+          },
+          "_removedConnection": false,
+          "_removedContLen": false,
+          "_removedTE": false,
+          "_trailer": "",
+          "aborted": false,
+          "agent": {
+            "_events": {},
+            "_eventsCount": 2,
+            "_sessionCache": {
+              "list": "[Array]",
+              "map": "[Object]"
+            },
+            "agentKeepAliveTimeoutBuffer": 1000,
+            "defaultPort": 443,
+            "freeSockets": {
+              "api.brevo.com:443:::::::::::::::::::::": "[Array]"
+            },
+            "keepAlive": true,
+            "keepAliveMsecs": 1000,
+            "maxCachedSessions": 100,
+            "maxFreeSockets": 256,
+            "maxSockets": null,
+            "maxTotalSockets": null,
+            "options": {
+              "defaultPort": 443,
+              "keepAlive": true,
+              "noDelay": true,
+              "path": null,
+              "protocol": "https:",
+              "scheduling": "lifo",
+              "timeout": 5000
+            },
+            "protocol": "https:",
+            "requests": {},
+            "scheduling": "lifo",
+            "sockets": {},
+            "totalSocketCount": 1
+          },
+          "chunkedEncoding": false,
+          "destroyed": true,
+          "finished": true,
+          "host": "api.brevo.com",
+          "maxHeadersCount": null,
+          "maxRequestsOnConnectionReached": false,
+          "method": "POST",
+          "outputData": [],
+          "outputSize": 0,
+          "parser": null,
+          "path": "/v3/smtp/email",
+          "protocol": "https:",
+          "res": {
+            "_consuming": false,
+            "_dumped": false,
+            "_events": {
+              "end": "[Array]"
+            },
+            "_eventsCount": 4,
+            "_readableState": {
+              "awaitDrainWriters": null,
+              "buffer": [],
+              "bufferIndex": 0,
+              "highWaterMark": 16384,
+              "length": 0,
+              "pipes": []
+            },
+            "aborted": false,
+            "client": {
+              "_SNICallback": null,
+              "_closeAfterHandlingError": false,
+              "_controlReleased": true,
+              "_events": "[Object]",
+              "_eventsCount": 9,
+              "_hadError": false,
+              "_host": "api.brevo.com",
+              "_httpMessage": null,
+              "_newSessionPending": false,
+              "_parent": null,
+              "_pendingData": null,
+              "_pendingEncoding": "",
+              "_readableState": "[Object]",
+              "_rejectUnauthorized": true,
+              "_requestCert": true,
+              "_secureEstablished": true,
+              "_securePending": false,
+              "_server": null,
+              "_sockname": null,
+              "_tlsOptions": "[Object]",
+              "_writableState": "[Object]",
+              "allowHalfOpen": false,
+              "alpnProtocol": false,
+              "authorizationError": null,
+              "authorized": true,
+              "autoSelectFamilyAttemptedAddresses": "[Array]",
+              "connecting": false,
+              "encrypted": true,
+              "parser": null,
+              "secureConnecting": false,
+              "servername": "api.brevo.com",
+              "ssl": "[Object]",
+              "timeout": 5000
+            },
+            "complete": true,
+            "httpVersion": "1.1",
+            "httpVersionMajor": 1,
+            "httpVersionMinor": 1,
+            "method": null,
+            "rawHeaders": [
+              "Date",
+              "Sat, 14 Mar 2026 05:26:06 GMT",
+              "Content-Type",
+              "application/json",
+              "Content-Length",
+              "72",
+              "Connection",
+              "keep-alive",
+              "CF-RAY",
+              "9dc0dc91ae11024c-WAW",
+              "access-control-allow-credentials",
+              "true",
+              "sib-request-id",
+              "b84676f2-6d6a-9b48-a9bb-660c23560d42",
+              "access-control-allow-origin",
+              "*",
+              "access-control-allow-headers",
+              "*",
+              "access-control-allow-methods",
+              "PUT, POST, GET, DELETE, PATCH, OPTIONS",
+              "x-envoy-upstream-service-time",
+              "4",
+              "cf-cache-status",
+              "DYNAMIC",
+              "Server",
+              "cloudflare"
+            ],
+            "rawTrailers": [],
+            "redirects": [],
+            "req": "[Circular]",
+            "responseUrl": "https://api.brevo.com/v3/smtp/email",
+            "socket": null,
+            "statusCode": 401,
+            "statusMessage": "Unauthorized",
+            "upgrade": false,
+            "url": ""
+          },
+          "reusedSocket": false,
+          "sendDate": false,
+          "shouldKeepAlive": true,
+          "strictContentLength": false,
+          "timeoutCb": null,
+          "upgradeOrConnect": false,
+          "useChunkedEncodingByDefault": true,
+          "writable": true
+        },
+        "status": 401,
+        "statusText": "Unauthorized"
+      },
+      "stack":
+          AxiosError: Request failed with status code 401
+              at settle (file:///C:/Applications/physioGest-api/node_modules/axios/lib/core/settle.js:20:7)
+              at IncomingMessage.handleStreamEnd (file:///C:/Applications/physioGest-api/node_modules/axios/lib/adapters/http.js:844:13)
+              at IncomingMessage.emit (node:events:531:35)
+              at endReadableNT (node:internal/streams/readable:1698:12)
+              at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+              at Axios.request (file:///C:/Applications/physioGest-api/node_modules/axios/lib/core/Axios.js:46:41)
+              at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+              at async EmailProvider.sendEmail (C:\Applications\physioGest-api\src\infrastructure\external\EmailProvider.ts:39:24)
+              at async AuthenticateService.sendVerificationEmail (C:\Applications\physioGest-api\src\application\services\AuthenticateService.ts:199:9)
+              at async AuthenticateService.signup (C:\Applications\physioGest-api\src\application\services\AuthenticateService.ts:90:9)
+              at async AuthenticateController.signup (C:\Applications\physioGest-api\src\presentation\auth\controllers\AuthController.ts:79:20)
+      "status": 401,
+      "type": "AxiosError"
+    }
+[2026-03-14 02:26:06.442 -0300] ERROR: Erro ao enviar email de verificação
+    env: "development"
+    service: "physioGest-api"
+    email: "usuario@example.com"
+    error: {
+      "type": "Error",
+      "message": "Failed to send email",
+      "stack":
+          Error: Failed to send email
+              at EmailProvider.sendEmail (C:\Applications\physioGest-api\src\infrastructure\external\EmailProvider.ts:88:13)
+              at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+              at async AuthenticateService.sendVerificationEmail (C:\Applications\physioGest-api\src\application\services\AuthenticateService.ts:199:9)
+              at async AuthenticateService.signup (C:\Applications\physioGest-api\src\application\services\AuthenticateService.ts:90:9)
+              at async AuthenticateController.signup (C:\Applications\physioGest-api\src\presentation\auth\controllers\AuthController.ts:79:20)
+    }
+[2026-03-14 02:26:06.443 -0300] ERROR: Falha ao enviar email de verificação
+    env: "development"
+    service: "physioGest-api"
+    userId: "69b4f16ddac706ae1f596dd1"
+    email: "usuario@example.com"
+    error: {
+      "type": "Error",
+      "message": "Failed to send email",
+      "stack":
+          Error: Failed to send email
+              at EmailProvider.sendEmail (C:\Applications\physioGest-api\src\infrastructure\external\EmailProvider.ts:88:13)
+              at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+              at async AuthenticateService.sendVerificationEmail (C:\Applications\physioGest-api\src\application\services\AuthenticateService.ts:199:9)
+              at async AuthenticateService.signup (C:\Applications\physioGest-api\src\application\services\AuthenticateService.ts:90:9)
+              at async AuthenticateController.signup (C:\Applications\physioGest-api\src\presentation\auth\controllers\AuthController.ts:79:20)
+    }
+[2026-03-14 02:26:06.445 -0300] INFO: [RESPONSE] POST /signup - 201
+    env: "development"
+    service: "physioGest-api"
+    requestId: "5cbv5"
+    method: "POST"
+    url: "/signup"
+    statusCode: 201
+    duration: "895ms"
+    contentLength: "359"

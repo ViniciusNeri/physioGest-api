@@ -13,5 +13,13 @@ export interface IAuthenticateRepository {
    * @param user - dados do usuário
    * @returns Usuário criado
    */
-  create(user: User): Promise<User>;
+  create(user: Omit<User, 'id'>): Promise<User>;
+
+  /**
+   * Atualiza um usuário
+   * @param id - ID do usuário
+   * @param user - dados para atualizar
+   * @returns Usuário atualizado
+   */
+  update(id: string, user: Partial<User>): Promise<User>;
 }

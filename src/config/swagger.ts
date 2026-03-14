@@ -22,5 +22,24 @@ const options: swaggerJsdoc.Options = {
 const swaggerSpec = swaggerJsdoc(options);
 
 export function setupSwagger(app: Express) {
-  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  // Serve o JSON da especificação
+  app.get("/swagger.json", (req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.send(swaggerSpec);
+  });
+
+  // Serve a interface do Swagger UI com URL externa
+  const swaggerOptions = {
+    explorer: true,
+    swaggerOptions: {
+      urls: [
+        {
+          url: "/swagger.json",
+          name: "PhysioGest API"
+        }
+      ]
+    }
+  };
+
+  app.use("/docs", swaggerUi.serve, swaggerUi.setup(null, swaggerOptions));
 }

@@ -1,0 +1,123 @@
+import { injectable, inject } from "tsyringe";
+import bcrypt from "bcryptjs";
+import type { IUserRepository } from "../../domain/interfaces/IUserRepository.js";
+import type { IUserService } from "../../domain/services/IUserService.js";
+import type { User } from "../../domain/entities/User.js";
+import logger from "../../infrastructure/logging/Logger.js";
+
+@injectable()
+export class UserService implements IUserService {
+  constructor(
+    @inject("IUserRepository")
+    private repository: IUserRepository
+  ) {}
+
+  async getUserById(id: string): Promise<User | null> {
+    logger.debug("Buscando usuário por ID", { userId: id });
+
+    try {
+      const user = await this.repository.findById(id);
+      if (user) {
+        logger.debug("Usuário encontrado", { userId: id, email: user.email });
+      } else {
+        logger.warn("Usuário não encontrado", { userId: id });
+      }
+      return user;
+    } catch (error) {
+      logger.error("Erro ao buscar usuário por ID", error, { userId: id });
+      throw error;
+    }
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    logger.debug("Buscando todos os usuários");
+
+    try {
+      const users = await this.repository.findAll();
+      logger.info("Usuários encontrados", { count: users.length });
+      return users;
+    } catch (error) {
+      logger.error("Erro ao buscar todos os usuários", error);
+      throw error;
+    }
+  }
+
+  async createUser(user: Omit<User, 'id'>): Promise<User> {
+    logger.debug("Criando usuário", { email: user.email, name: user.name });
+
+    try {
+      const existingUser = await this.repository.findByEmail(user.email);
+      if (existingUser) {
+        logger.warn("Tentativa de criar usuário com email já existente", { email: user.email });
+        throw new Error("Email já cadastrado");
+      }
+
+      let hashedPassword: string | undefined;
+      if (user.password) {
+        logger.debug("Criptografando senha do usuário");
+        hashedPassword = await bcrypt.hash(user.password, 10);
+      }
+
+      const newUser = { ...user, password: hashedPassword } as Omit<User, 'id'>;
+      const createdUser = await this.repository.create(newUser);
+
+      logger.info("Usuário criado com sucesso", {
+        userId: createdUser.id,
+        email: createdUser.email,
+        verified: createdUser.verified
+      });
+
+      return createdUser;
+    } catch (error) {
+      logger.error("Erro ao criar usuário", error, { email: user.email, name: user.name });
+      throw error;
+    }
+  }
+
+  async updateUser(id: string, user: Partial<User>): Promise<User | null> {
+    logger.debug("Atualizando usuário", { userId: id, updates: Object.keys(user) });
+
+    try {
+      if (user.password) {
+        logger.debug("Criptografando nova senha do usuário", { userId: id });
+        user.password = await bcrypt.hash(user.password, 10);
+      }
+
+      const updatedUser = await this.repository.update(id, user);
+
+      if (updatedUser) {
+        logger.info("Usuário atualizado com sucesso", {
+          userId: id,
+          email: updatedUser.email,
+          updates: Object.keys(user)
+        });
+      } else {
+        logger.warn("Usuário não encontrado para atualização", { userId: id });
+      }
+
+      return updatedUser;
+    } catch (error) {
+      logger.error("Erro ao atualizar usuário", error, { userId: id });
+      throw error;
+    }
+  }
+
+  async deleteUser(id: string): Promise<boolean> {
+    logger.debug("Deletando usuário", { userId: id });
+
+    try {
+      const deleted = await this.repository.delete(id);
+
+      if (deleted) {
+        logger.info("Usuário deletado com sucesso", { userId: id });
+      } else {
+        logger.warn("Usuário não encontrado para deleção", { userId: id });
+      }
+
+      return deleted;
+    } catch (error) {
+      logger.error("Erro ao deletar usuário", error, { userId: id });
+      throw error;
+    }
+  }
+}
