@@ -23,7 +23,7 @@ export declare class UserController {
      *       500:
      *         description: Erro interno do servidor
      */
-    getAll(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    getAll: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /users/{id}:
@@ -51,7 +51,7 @@ export declare class UserController {
      *       500:
      *         description: Erro interno do servidor
      */
-    getById(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    getById: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /users:
@@ -91,7 +91,7 @@ export declare class UserController {
      *       500:
      *         description: Erro interno do servidor
      */
-    create(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    create: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /users/{id}:
@@ -134,7 +134,7 @@ export declare class UserController {
      *       500:
      *         description: Erro interno do servidor
      */
-    update(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    update: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /users/{id}:
@@ -158,7 +158,7 @@ export declare class UserController {
      *       500:
      *         description: Erro interno do servidor
      */
-    delete(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    delete: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
 }
 export declare const userController: UserController;
 //# sourceMappingURL=UserController.d.ts.map

@@ -22,6 +22,13 @@ export interface IFinancialRepository {
   findByUserId(userId: string): Promise<Financial[]>;
 
   /**
+   * Busca registros financeiros por paciente
+   * @param patientId - ID do paciente
+   * @returns Lista de registros financeiros
+   */
+  findByPatientId(patientId: string): Promise<Financial[]>;
+
+  /**
    * Cria um novo registro financeiro
    * @param financial - dados do registro
    * @returns Financial criado

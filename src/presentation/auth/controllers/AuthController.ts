@@ -37,7 +37,7 @@ export class AuthenticateController {
    *             schema:
    *               $ref: '#/components/schemas/ErrorResponse'
    */
-  async handle(req: Request, res: Response) {
+  handle = async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
       const result = await this.service.login(email, password);
@@ -73,7 +73,7 @@ export class AuthenticateController {
    *             schema:
    *               $ref: '#/components/schemas/ErrorResponse'
    */
-  async signup(req: Request, res: Response) {
+  signup = async (req: Request, res: Response) => {
     try {
       const { name, email, password } = req.body;
       const user = await this.service.signup(name, email, password);
@@ -118,7 +118,7 @@ export class AuthenticateController {
    *             schema:
    *               $ref: '#/components/schemas/ErrorResponse'
    */
-  async confirmSignup(req: Request, res: Response) {
+  confirmSignup = async (req: Request, res: Response) => {
     try {
       const { email } = req.body;
       const user = await this.service.confirmSignup(email);
@@ -160,7 +160,7 @@ export class AuthenticateController {
    *             schema:
    *               $ref: '#/components/schemas/ErrorResponse'
    */
-  async googleLogin(req: Request, res: Response) {
+  googleLogin = async (req: Request, res: Response) => {
     try {
       const { token } = req.body; // Google ID token
       const googleProvider = container.resolve<GoogleProvider>("GoogleProvider");
@@ -211,7 +211,7 @@ export class AuthenticateController {
    *             schema:
    *               $ref: '#/components/schemas/ErrorResponse'
    */
-  async verifyEmail(req: Request, res: Response) {
+  verifyEmail = async (req: Request, res: Response) => {
     try {
       const { token } = req.body;
 

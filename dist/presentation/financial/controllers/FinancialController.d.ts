@@ -23,7 +23,7 @@ export declare class FinancialController {
      *       500:
      *         description: Erro interno do servidor
      */
-    getAll(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    getAll: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /financials/user/{userId}:
@@ -51,7 +51,35 @@ export declare class FinancialController {
      *       500:
      *         description: Erro interno do servidor
      */
-    getByUserId(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    getByUserId: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
+    /**
+     * @swagger
+     * /financials/patient/{patientId}:
+     *   get:
+     *     summary: Lista registros financeiros por paciente
+     *     tags: [Financials]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: patientId
+     *         required: true
+     *         schema:
+     *           type: string
+     *         description: ID do paciente
+     *     responses:
+     *       200:
+     *         description: Lista de registros financeiros do paciente
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: array
+     *               items:
+     *                 $ref: '#/components/schemas/Financial'
+     *       500:
+     *         description: Erro interno do servidor
+     */
+    getByPatientId: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /financials/{id}:
@@ -79,7 +107,7 @@ export declare class FinancialController {
      *       500:
      *         description: Erro interno do servidor
      */
-    getById(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    getById: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /financials:
@@ -125,7 +153,7 @@ export declare class FinancialController {
      *       500:
      *         description: Erro interno do servidor
      */
-    create(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    create: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /financials/{id}:
@@ -172,7 +200,7 @@ export declare class FinancialController {
      *       500:
      *         description: Erro interno do servidor
      */
-    update(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    update: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /financials/{id}:
@@ -196,7 +224,7 @@ export declare class FinancialController {
      *       500:
      *         description: Erro interno do servidor
      */
-    delete(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    delete: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
 }
 export declare const financialController: FinancialController;
 //# sourceMappingURL=FinancialController.d.ts.map

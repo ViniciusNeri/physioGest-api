@@ -26,7 +26,7 @@ export class UserController {
      *       500:
      *         description: Erro interno do servidor
      */
-    async getAll(req, res) {
+    getAll = async (req, res) => {
         try {
             this.logger.info("Listando todos os usuários");
             const users = await this.service.getAllUsers();
@@ -36,7 +36,7 @@ export class UserController {
             this.logger.error("Erro ao listar usuários", error);
             return res.status(500).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /users/{id}:
@@ -64,7 +64,7 @@ export class UserController {
      *       500:
      *         description: Erro interno do servidor
      */
-    async getById(req, res) {
+    getById = async (req, res) => {
         try {
             const { id } = req.params;
             if (!id) {
@@ -81,7 +81,7 @@ export class UserController {
             this.logger.error("Erro ao buscar usuário", error);
             return res.status(500).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /users:
@@ -121,7 +121,7 @@ export class UserController {
      *       500:
      *         description: Erro interno do servidor
      */
-    async create(req, res) {
+    create = async (req, res) => {
         try {
             const { name, email, password } = req.body;
             this.logger.info(`Criando usuário: ${email}`);
@@ -132,7 +132,7 @@ export class UserController {
             this.logger.error("Erro ao criar usuário", error);
             return res.status(400).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /users/{id}:
@@ -175,7 +175,7 @@ export class UserController {
      *       500:
      *         description: Erro interno do servidor
      */
-    async update(req, res) {
+    update = async (req, res) => {
         try {
             const { id } = req.params;
             if (!id) {
@@ -193,7 +193,7 @@ export class UserController {
             this.logger.error("Erro ao atualizar usuário", error);
             return res.status(500).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /users/{id}:
@@ -217,7 +217,7 @@ export class UserController {
      *       500:
      *         description: Erro interno do servidor
      */
-    async delete(req, res) {
+    delete = async (req, res) => {
         try {
             const { id } = req.params;
             if (!id) {
@@ -234,7 +234,7 @@ export class UserController {
             this.logger.error("Erro ao deletar usuário", error);
             return res.status(500).json({ message: error.message });
         }
-    }
+    };
 }
 export const userController = new UserController();
 //# sourceMappingURL=UserController.js.map

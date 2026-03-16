@@ -1,0 +1,1 @@
+{"version":3,"file":"PatientAgendaModel.d.ts","sourceRoot":"","sources":["../../../../src/infrastructure/database/models/PatientAgendaModel.ts"],"names":[],"mappings":"AAAA,OAAO,QAAQ,MAAM,UAAU,CAAC;AAChC,OAAO,KAAK,EAAE,aAAa,EAAE,MAAM,+CAA+C,CAAC;AA6BnF,QAAA,MAAM,kBAAkB;;;;;;sBAAsE,CAAC;AAE/F,eAAe,kBAAkB,CAAC"}

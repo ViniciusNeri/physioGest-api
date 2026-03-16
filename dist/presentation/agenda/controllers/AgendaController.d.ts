@@ -23,7 +23,7 @@ export declare class AgendaController {
      *       500:
      *         description: Erro interno do servidor
      */
-    getAll(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    getAll: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /agendas/user/{userId}:
@@ -51,7 +51,7 @@ export declare class AgendaController {
      *       500:
      *         description: Erro interno do servidor
      */
-    getByUserId(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    getByUserId: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /agendas/{id}:
@@ -79,7 +79,7 @@ export declare class AgendaController {
      *       500:
      *         description: Erro interno do servidor
      */
-    getById(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    getById: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /agendas:
@@ -124,7 +124,7 @@ export declare class AgendaController {
      *       500:
      *         description: Erro interno do servidor
      */
-    create(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    create: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /agendas/{id}:
@@ -170,7 +170,7 @@ export declare class AgendaController {
      *       500:
      *         description: Erro interno do servidor
      */
-    update(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    update: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /agendas/{id}:
@@ -194,7 +194,7 @@ export declare class AgendaController {
      *       500:
      *         description: Erro interno do servidor
      */
-    delete(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    delete: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
 }
 export declare const agendaController: AgendaController;
 //# sourceMappingURL=AgendaController.d.ts.map

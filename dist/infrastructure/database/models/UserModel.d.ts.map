@@ -1,1 +1,1 @@
-{"version":3,"file":"UserModel.d.ts","sourceRoot":"","sources":["../../../../src/infrastructure/database/models/UserModel.ts"],"names":[],"mappings":"AAAA,OAAO,QAAQ,MAAM,UAAU,CAAC;AAChC,OAAO,KAAK,EAAE,IAAI,EAAE,MAAM,kCAAkC,CAAC;AAa7D,QAAA,MAAM,SAAS;;;;;;aAA2C,CAAC;AAE3D,eAAe,SAAS,CAAC"}
+{"version":3,"file":"UserModel.d.ts","sourceRoot":"","sources":["../../../../src/infrastructure/database/models/UserModel.ts"],"names":[],"mappings":"AAAA,OAAO,QAAQ,MAAM,UAAU,CAAC;AAChC,OAAO,KAAK,EAAE,IAAI,EAAE,MAAM,kCAAkC,CAAC;AAoB7D,QAAA,MAAM,SAAS;;;;;;aAA2C,CAAC;AAE3D,eAAe,SAAS,CAAC"}

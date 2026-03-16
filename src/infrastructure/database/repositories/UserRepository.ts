@@ -7,15 +7,15 @@ import UserModel from "../models/UserModel.js";
 @injectable()
 export class UserRepository implements IUserRepository, IAuthenticateRepository {
   async findById(id: string): Promise<User | null> {
-    return UserModel.findById(id).lean<User>().exec();
+    return UserModel.findById(id).lean<User>({ virtuals: true }).exec();
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return UserModel.findOne({ email }).lean<User>().exec();
+    return UserModel.findOne({ email }).lean<User>({ virtuals: true }).exec();
   }
 
   async findAll(): Promise<User[]> {
-    return UserModel.find().lean<User[]>().exec();
+    return UserModel.find().lean<User[]>({ virtuals: true }).exec();
   }
 
   async create(user: Omit<User, 'id'>): Promise<User> {
@@ -23,11 +23,8 @@ export class UserRepository implements IUserRepository, IAuthenticateRepository 
     return newUser.save();
   }
 
-  async update(id: string, user: Partial<User>): Promise<User> {
-    const updatedUser = await UserModel.findByIdAndUpdate(id, user, { new: true }).lean<User>().exec();
-    if (!updatedUser) {
-      throw new Error('User not found');
-    }
+  async update(id: string, user: Partial<User>): Promise<User | null> {
+    const updatedUser = await UserModel.findByIdAndUpdate(id, user, { new: true }).lean<User>({ virtuals: true }).exec();
     return updatedUser;
   }
 

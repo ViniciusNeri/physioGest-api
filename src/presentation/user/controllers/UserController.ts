@@ -32,7 +32,7 @@ export class UserController {
    *       500:
    *         description: Erro interno do servidor
    */
-  async getAll(req: Request, res: Response) {
+  getAll = async (req: Request, res: Response) => {
     try {
       this.logger.info("Listando todos os usuários");
       const users = await this.service.getAllUsers();
@@ -70,7 +70,7 @@ export class UserController {
    *       500:
    *         description: Erro interno do servidor
    */
-  async getById(req: Request, res: Response) {
+  getById = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       if (!id) {
@@ -127,7 +127,7 @@ export class UserController {
    *       500:
    *         description: Erro interno do servidor
    */
-  async create(req: Request, res: Response) {
+  create = async (req: Request, res: Response) => {
     try {
       const { name, email, password } = req.body;
       this.logger.info(`Criando usuário: ${email}`);
@@ -181,7 +181,7 @@ export class UserController {
    *       500:
    *         description: Erro interno do servidor
    */
-  async update(req: Request, res: Response) {
+  update = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       if (!id) {
@@ -223,7 +223,7 @@ export class UserController {
    *       500:
    *         description: Erro interno do servidor
    */
-  async delete(req: Request, res: Response) {
+  delete = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       if (!id) {

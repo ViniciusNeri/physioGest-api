@@ -28,6 +28,11 @@ export class FinancialService implements IFinancialService {
     return this.repository.findByUserId(userId);
   }
 
+  async getFinancialsByPatientId(patientId: string): Promise<Financial[]> {
+    this.logger.info(`Buscando registros financeiros por paciente: ${patientId}`);
+    return this.repository.findByPatientId(patientId);
+  }
+
   async createFinancial(financial: Omit<Financial, 'id'>): Promise<Financial> {
     this.logger.info(`Criando registro financeiro para usuário: ${financial.userId}`);
     return this.repository.create(financial);

@@ -7,6 +7,8 @@ import authRoutes from "./presentation/auth/routes.js";
 import userRoutes from "./presentation/user/routes.js";
 import agendaRoutes from "./presentation/agenda/routes.js";
 import financialRoutes from "./presentation/financial/routes.js";
+import patientRoutes from "./presentation/patients/routes.js";
+import dashboardRoutes from "./presentation/dashboard/routes.js";
 import logger from "./infrastructure/logging/Logger.js";
 import { setupSwagger } from "./config/swagger.js";
 import { container } from "tsyringe";
@@ -75,6 +77,8 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/agendas", agendaRoutes);
 app.use("/financials", financialRoutes);
+app.use("/patients", patientRoutes);
+app.use("/dashboard", dashboardRoutes);
 // Middleware de tratamento de erros global
 app.use((error, req, res, next) => {
     logger.error("Erro não tratado na aplicação", error, {

@@ -3,6 +3,7 @@ import type { User } from "../../../domain/entities/User.js";
 
 const userSchema = new mongoose.Schema<User>(
   {
+    id: { type: String },
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: false },
@@ -11,6 +12,12 @@ const userSchema = new mongoose.Schema<User>(
   },
   { timestamps: true }
 );
+
+userSchema.pre('save', function() {
+  if (!this.id) {
+    this.id = this._id.toString();
+  }
+});
 
 const UserModel = mongoose.model<User>("User", userSchema);
 

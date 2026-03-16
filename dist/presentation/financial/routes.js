@@ -37,6 +37,9 @@ financialRoutes.use(JwtAuthService.authenticateToken);
  *         userId:
  *           type: string
  *           description: ID do usuário que criou
+ *         patientId:
+ *           type: string
+ *           description: ID do paciente (opcional)
  *       example:
  *         id: 60d5ecb74b24c72b8c8b4567
  *         type: income
@@ -44,9 +47,11 @@ financialRoutes.use(JwtAuthService.authenticateToken);
  *         date: 2023-12-25
  *         description: Pagamento de consulta
  *         userId: 60d5ecb74b24c72b8c8b4569
+ *         patientId: 60d5ecb74b24c72b8c8b4570
  */
 financialRoutes.get("/", (req, res) => financialController.getAll(req, res));
 financialRoutes.get("/user/:userId", (req, res) => financialController.getByUserId(req, res));
+financialRoutes.get("/patient/:patientId", (req, res) => financialController.getByPatientId(req, res));
 financialRoutes.get("/:id", (req, res) => financialController.getById(req, res));
 financialRoutes.post("/", (req, res) => financialController.create(req, res));
 financialRoutes.put("/:id", (req, res) => financialController.update(req, res));

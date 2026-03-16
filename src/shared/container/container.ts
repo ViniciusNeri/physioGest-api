@@ -4,17 +4,35 @@ import type { IAuthenticateRepository } from "../../domain/interfaces/IAuthentic
 import type { IUserRepository } from "../../domain/interfaces/IUserRepository.js";
 import type { IAgendaRepository } from "../../domain/interfaces/IAgendaRepository.js";
 import type { IFinancialRepository } from "../../domain/interfaces/IFinancialRepository.js";
+import type { IPatientRepository } from "../../domain/interfaces/IPatientRepository.js";
+import type { IDashboardRepository } from "../../domain/interfaces/IDashboardRepository.js";
+import type { IPatientAgendaRepository, IPatientAnamnesisRepository, IPatientFinancialRepository, IPatientAttachmentRepository } from "../../domain/interfaces/IPatientSubdomainRepositories.js";
 import { UserRepository } from "../../infrastructure/database/repositories/UserRepository.js";
 import { AgendaRepository } from "../../infrastructure/database/repositories/AgendaRepository.js";
 import { FinancialRepository } from "../../infrastructure/database/repositories/FinancialRepository.js";
+import { PatientRepository } from "../../infrastructure/database/repositories/PatientRepository.js";
+import { DashboardRepository } from "../../infrastructure/database/repositories/DashboardRepository.js";
+import { PatientAgendaRepository } from "../../infrastructure/database/repositories/PatientAgendaRepository.js";
+import { PatientAnamnesisRepository } from "../../infrastructure/database/repositories/PatientAnamnesisRepository.js";
+import { PatientFinancialRepository } from "../../infrastructure/database/repositories/PatientFinancialRepository.js";
+import { PatientAttachmentRepository } from "../../infrastructure/database/repositories/PatientAttachmentRepository.js";
 import type { IAuthenticateService } from "../../domain/services/IAuthenticateService.js";
 import type { IUserService } from "../../domain/services/IUserService.js";
 import type { IAgendaService } from "../../domain/services/IAgendaService.js";
 import type { IFinancialService } from "../../domain/services/IFinancialService.js";
+import type { IPatientService } from "../../domain/services/IPatientService.js";
+import type { IDashboardService } from "../../domain/services/IDashboardService.js";
+import type { IPatientAgendaService, IPatientAnamnesisService, IPatientFinancialService, IPatientAttachmentService } from "../../domain/services/IPatientSubdomainServices.js";
 import { AuthenticateService } from "../../application/services/AuthenticateService.js";
 import { UserService } from "../../application/services/UserService.js";
 import { AgendaService } from "../../application/services/AgendaService.js";
 import { FinancialService } from "../../application/services/FinancialService.js";
+import { PatientService } from "../../application/services/PatientService.js";
+import { DashboardService } from "../../application/services/DashboardService.js";
+import { PatientAgendaService } from "../../application/services/PatientAgendaService.js";
+import { PatientAnamnesisService } from "../../application/services/PatientAnamnesisService.js";
+import { PatientFinancialService } from "../../application/services/PatientFinancialService.js";
+import { PatientAttachmentService } from "../../application/services/PatientAttachmentService.js";
 import type { ILogger } from "../../infrastructure/logging/Logger.js";
 import Logger from "../../infrastructure/logging/Logger.js";
 import { GoogleProvider } from "../../infrastructure/external/GoogleProvider.js";
@@ -38,6 +56,30 @@ container.register<IFinancialRepository>("IFinancialRepository", {
   useClass: FinancialRepository,
 });
 
+container.register<IPatientRepository>("IPatientRepository", {
+  useClass: PatientRepository,
+});
+
+container.register<IDashboardRepository>("IDashboardRepository", {
+  useClass: DashboardRepository,
+});
+
+container.register<IPatientAgendaRepository>("IPatientAgendaRepository", {
+  useClass: PatientAgendaRepository,
+});
+
+container.register<IPatientAnamnesisRepository>("IPatientAnamnesisRepository", {
+  useClass: PatientAnamnesisRepository,
+});
+
+container.register<IPatientFinancialRepository>("IPatientFinancialRepository", {
+  useClass: PatientFinancialRepository,
+});
+
+container.register<IPatientAttachmentRepository>("IPatientAttachmentRepository", {
+  useClass: PatientAttachmentRepository,
+});
+
 container.register<IAuthenticateService>("IAuthenticateService", {
   useClass: AuthenticateService,
 });
@@ -52,6 +94,30 @@ container.register<IAgendaService>("IAgendaService", {
 
 container.register<IFinancialService>("IFinancialService", {
   useClass: FinancialService,
+});
+
+container.register<IPatientService>("IPatientService", {
+  useClass: PatientService,
+});
+
+container.register<IDashboardService>("IDashboardService", {
+  useClass: DashboardService,
+});
+
+container.register<IPatientAgendaService>("IPatientAgendaService", {
+  useClass: PatientAgendaService,
+});
+
+container.register<IPatientAnamnesisService>("IPatientAnamnesisService", {
+  useClass: PatientAnamnesisService,
+});
+
+container.register<IPatientFinancialService>("IPatientFinancialService", {
+  useClass: PatientFinancialService,
+});
+
+container.register<IPatientAttachmentService>("IPatientAttachmentService", {
+  useClass: PatientAttachmentService,
 });
 
 // Logger binding (assuming it's already implemented)

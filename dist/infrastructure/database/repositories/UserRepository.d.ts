@@ -6,7 +6,7 @@ export declare class UserRepository implements IUserRepository, IAuthenticateRep
     findByEmail(email: string): Promise<User | null>;
     findAll(): Promise<User[]>;
     create(user: Omit<User, 'id'>): Promise<User>;
-    update(id: string, user: Partial<User>): Promise<User>;
+    update(id: string, user: Partial<User>): Promise<User | null>;
     delete(id: string): Promise<boolean>;
 }
 //# sourceMappingURL=UserRepository.d.ts.map

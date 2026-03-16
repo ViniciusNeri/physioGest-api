@@ -114,6 +114,11 @@ export class AuthenticateService implements IAuthenticateService {
       logger.debug("Marcando usuário como verificado", { userId: user.id, email });
       const updatedUser = await this.repository.update(user.id!, { verified: true });
 
+      if (!updatedUser) {
+        logger.error("Falha ao atualizar usuário para verificado", { userId: user.id, email });
+        throw new Error("Falha ao confirmar cadastro");
+      }
+
       logger.info("Cadastro confirmado com sucesso", { userId: updatedUser.id, email });
       return updatedUser;
     } catch (error) {
@@ -142,7 +147,12 @@ export class AuthenticateService implements IAuthenticateService {
         // Verificar se já tem googleId
         if (!user.googleId) {
           logger.debug("Atualizando usuário com Google ID", { userId: user.id });
-          user = await this.repository.update(user.id!, { googleId });
+          const updatedUser = await this.repository.update(user.id!, { googleId });
+          if (!updatedUser) {
+            logger.error("Falha ao atualizar usuário com Google ID", { userId: user.id });
+            throw new Error("Falha ao atualizar usuário");
+          }
+          user = updatedUser;
         }
       }
 

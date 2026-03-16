@@ -32,7 +32,7 @@ export class FinancialController {
    *       500:
    *         description: Erro interno do servidor
    */
-  async getAll(req: Request, res: Response) {
+  getAll = async (req: Request, res: Response) => {
     try {
       this.logger.info("Listando todos os registros financeiros");
       const financials = await this.service.getAllFinancials();
@@ -70,7 +70,7 @@ export class FinancialController {
    *       500:
    *         description: Erro interno do servidor
    */
-  async getByUserId(req: Request, res: Response) {
+  getByUserId = async (req: Request, res: Response) => {
     try {
       const { userId } = req.params;
       if (!userId) {
@@ -81,6 +81,48 @@ export class FinancialController {
       return res.status(200).json(financials);
     } catch (error: any) {
       this.logger.error("Erro ao listar registros financeiros do usuário", error);
+      return res.status(500).json({ message: error.message });
+    }
+  }
+
+  /**
+   * @swagger
+   * /financials/patient/{patientId}:
+   *   get:
+   *     summary: Lista registros financeiros por paciente
+   *     tags: [Financials]
+   *     security:
+   *       - bearerAuth: []
+   *     parameters:
+   *       - in: path
+   *         name: patientId
+   *         required: true
+   *         schema:
+   *           type: string
+   *         description: ID do paciente
+   *     responses:
+   *       200:
+   *         description: Lista de registros financeiros do paciente
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: array
+   *               items:
+   *                 $ref: '#/components/schemas/Financial'
+   *       500:
+   *         description: Erro interno do servidor
+   */
+  getByPatientId = async (req: Request, res: Response) => {
+    try {
+      const { patientId } = req.params;
+      if (!patientId) {
+        return res.status(400).json({ message: "patientId é obrigatório" });
+      }
+      this.logger.info(`Listando registros financeiros do paciente: ${patientId}`);
+      const financials = await this.service.getFinancialsByPatientId(patientId as string);
+      return res.status(200).json(financials);
+    } catch (error: any) {
+      this.logger.error("Erro ao listar registros financeiros do paciente", error);
       return res.status(500).json({ message: error.message });
     }
   }
@@ -112,7 +154,7 @@ export class FinancialController {
    *       500:
    *         description: Erro interno do servidor
    */
-  async getById(req: Request, res: Response) {
+  getById = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       if (!id) {
@@ -175,7 +217,7 @@ export class FinancialController {
    *       500:
    *         description: Erro interno do servidor
    */
-  async create(req: Request, res: Response) {
+  create = async (req: Request, res: Response) => {
     try {
       const financialData = req.body;
       this.logger.info(`Criando registro financeiro para usuário: ${financialData.userId}`);
@@ -233,7 +275,7 @@ export class FinancialController {
    *       500:
    *         description: Erro interno do servidor
    */
-  async update(req: Request, res: Response) {
+  update = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       if (!id) {
@@ -275,7 +317,7 @@ export class FinancialController {
    *       500:
    *         description: Erro interno do servidor
    */
-  async delete(req: Request, res: Response) {
+  delete = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       if (!id) {

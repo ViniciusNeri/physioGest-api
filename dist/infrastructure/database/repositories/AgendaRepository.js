@@ -8,20 +8,20 @@ import { injectable } from "tsyringe";
 import AgendaModel from "../models/AgendaModel.js";
 let AgendaRepository = class AgendaRepository {
     async findById(id) {
-        return AgendaModel.findById(id).lean().exec();
+        return AgendaModel.findById(id).lean({ virtuals: true }).exec();
     }
     async findAll() {
-        return AgendaModel.find().lean().exec();
+        return AgendaModel.find().lean({ virtuals: true }).exec();
     }
     async findByUserId(userId) {
-        return AgendaModel.find({ userId }).lean().exec();
+        return AgendaModel.find({ userId }).lean({ virtuals: true }).exec();
     }
     async create(agenda) {
         const newAgenda = new AgendaModel(agenda);
         return newAgenda.save();
     }
     async update(id, agenda) {
-        return AgendaModel.findByIdAndUpdate(id, agenda, { new: true }).lean().exec();
+        return AgendaModel.findByIdAndUpdate(id, agenda, { new: true }).lean({ virtuals: true }).exec();
     }
     async delete(id) {
         const result = await AgendaModel.findByIdAndDelete(id).exec();

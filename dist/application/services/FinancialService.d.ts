@@ -9,6 +9,7 @@ export declare class FinancialService implements IFinancialService {
     getFinancialById(id: string): Promise<Financial | null>;
     getAllFinancials(): Promise<Financial[]>;
     getFinancialsByUserId(userId: string): Promise<Financial[]>;
+    getFinancialsByPatientId(patientId: string): Promise<Financial[]>;
     createFinancial(financial: Omit<Financial, 'id'>): Promise<Financial>;
     updateFinancial(id: string, financial: Partial<Financial>): Promise<Financial | null>;
     deleteFinancial(id: string): Promise<boolean>;

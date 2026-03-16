@@ -143,7 +143,7 @@ const authRoutes = Router();
  *       bearerFormat: JWT
  */
 authRoutes.post("/sessions", (req, res) => authenticateController.handle(req, res));
-authRoutes.post("/signup", (req, res) => authenticateController.signup(req, res));
+authRoutes.post("/signup", authenticateController.signup);
 authRoutes.post("/signup/confirm", (req, res) => authenticateController.confirmSignup(req, res));
 authRoutes.post("/google", (req, res) => authenticateController.googleLogin(req, res));
 authRoutes.post("/verify-email", (req, res) => authenticateController.verifyEmail(req, res));

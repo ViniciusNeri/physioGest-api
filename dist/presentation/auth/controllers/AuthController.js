@@ -31,7 +31,7 @@ export class AuthenticateController {
      *             schema:
      *               $ref: '#/components/schemas/ErrorResponse'
      */
-    async handle(req, res) {
+    handle = async (req, res) => {
         try {
             const { email, password } = req.body;
             const result = await this.service.login(email, password);
@@ -40,7 +40,7 @@ export class AuthenticateController {
         catch (error) {
             return res.status(401).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /auth/signup:
@@ -67,7 +67,7 @@ export class AuthenticateController {
      *             schema:
      *               $ref: '#/components/schemas/ErrorResponse'
      */
-    async signup(req, res) {
+    signup = async (req, res) => {
         try {
             const { name, email, password } = req.body;
             const user = await this.service.signup(name, email, password);
@@ -79,7 +79,7 @@ export class AuthenticateController {
         catch (error) {
             return res.status(400).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /auth/signup/confirm:
@@ -112,7 +112,7 @@ export class AuthenticateController {
      *             schema:
      *               $ref: '#/components/schemas/ErrorResponse'
      */
-    async confirmSignup(req, res) {
+    confirmSignup = async (req, res) => {
         try {
             const { email } = req.body;
             const user = await this.service.confirmSignup(email);
@@ -121,7 +121,7 @@ export class AuthenticateController {
         catch (error) {
             return res.status(400).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /auth/google:
@@ -154,7 +154,7 @@ export class AuthenticateController {
      *             schema:
      *               $ref: '#/components/schemas/ErrorResponse'
      */
-    async googleLogin(req, res) {
+    googleLogin = async (req, res) => {
         try {
             const { token } = req.body; // Google ID token
             const googleProvider = container.resolve("GoogleProvider");
@@ -169,7 +169,7 @@ export class AuthenticateController {
         catch (error) {
             return res.status(401).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /auth/verify-email:
@@ -202,7 +202,7 @@ export class AuthenticateController {
      *             schema:
      *               $ref: '#/components/schemas/ErrorResponse'
      */
-    async verifyEmail(req, res) {
+    verifyEmail = async (req, res) => {
         try {
             const { token } = req.body;
             const decoded = jwt.verify(token, process.env.JWT_SECRET || "default_secret");
@@ -215,7 +215,7 @@ export class AuthenticateController {
         catch (error) {
             return res.status(400).json({ message: "Token inválido ou expirado" });
         }
-    }
+    };
 }
 export const authenticateController = new AuthenticateController();
 //# sourceMappingURL=AuthController.js.map

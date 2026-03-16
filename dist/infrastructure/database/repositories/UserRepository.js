@@ -8,23 +8,20 @@ import { injectable } from "tsyringe";
 import UserModel from "../models/UserModel.js";
 let UserRepository = class UserRepository {
     async findById(id) {
-        return UserModel.findById(id).lean().exec();
+        return UserModel.findById(id).lean({ virtuals: true }).exec();
     }
     async findByEmail(email) {
-        return UserModel.findOne({ email }).lean().exec();
+        return UserModel.findOne({ email }).lean({ virtuals: true }).exec();
     }
     async findAll() {
-        return UserModel.find().lean().exec();
+        return UserModel.find().lean({ virtuals: true }).exec();
     }
     async create(user) {
         const newUser = new UserModel(user);
         return newUser.save();
     }
     async update(id, user) {
-        const updatedUser = await UserModel.findByIdAndUpdate(id, user, { new: true }).lean().exec();
-        if (!updatedUser) {
-            throw new Error('User not found');
-        }
+        const updatedUser = await UserModel.findByIdAndUpdate(id, user, { new: true }).lean({ virtuals: true }).exec();
         return updatedUser;
     }
     async delete(id) {

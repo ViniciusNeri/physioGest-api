@@ -2,10 +2,22 @@ import { container } from "tsyringe";
 import { UserRepository } from "../../infrastructure/database/repositories/UserRepository.js";
 import { AgendaRepository } from "../../infrastructure/database/repositories/AgendaRepository.js";
 import { FinancialRepository } from "../../infrastructure/database/repositories/FinancialRepository.js";
+import { PatientRepository } from "../../infrastructure/database/repositories/PatientRepository.js";
+import { DashboardRepository } from "../../infrastructure/database/repositories/DashboardRepository.js";
+import { PatientAgendaRepository } from "../../infrastructure/database/repositories/PatientAgendaRepository.js";
+import { PatientAnamnesisRepository } from "../../infrastructure/database/repositories/PatientAnamnesisRepository.js";
+import { PatientFinancialRepository } from "../../infrastructure/database/repositories/PatientFinancialRepository.js";
+import { PatientAttachmentRepository } from "../../infrastructure/database/repositories/PatientAttachmentRepository.js";
 import { AuthenticateService } from "../../application/services/AuthenticateService.js";
 import { UserService } from "../../application/services/UserService.js";
 import { AgendaService } from "../../application/services/AgendaService.js";
 import { FinancialService } from "../../application/services/FinancialService.js";
+import { PatientService } from "../../application/services/PatientService.js";
+import { DashboardService } from "../../application/services/DashboardService.js";
+import { PatientAgendaService } from "../../application/services/PatientAgendaService.js";
+import { PatientAnamnesisService } from "../../application/services/PatientAnamnesisService.js";
+import { PatientFinancialService } from "../../application/services/PatientFinancialService.js";
+import { PatientAttachmentService } from "../../application/services/PatientAttachmentService.js";
 import Logger from "../../infrastructure/logging/Logger.js";
 import { GoogleProvider } from "../../infrastructure/external/GoogleProvider.js";
 import { EmailProvider } from "../../infrastructure/external/EmailProvider.js";
@@ -23,6 +35,24 @@ container.register("IAgendaRepository", {
 container.register("IFinancialRepository", {
     useClass: FinancialRepository,
 });
+container.register("IPatientRepository", {
+    useClass: PatientRepository,
+});
+container.register("IDashboardRepository", {
+    useClass: DashboardRepository,
+});
+container.register("IPatientAgendaRepository", {
+    useClass: PatientAgendaRepository,
+});
+container.register("IPatientAnamnesisRepository", {
+    useClass: PatientAnamnesisRepository,
+});
+container.register("IPatientFinancialRepository", {
+    useClass: PatientFinancialRepository,
+});
+container.register("IPatientAttachmentRepository", {
+    useClass: PatientAttachmentRepository,
+});
 container.register("IAuthenticateService", {
     useClass: AuthenticateService,
 });
@@ -34,6 +64,24 @@ container.register("IAgendaService", {
 });
 container.register("IFinancialService", {
     useClass: FinancialService,
+});
+container.register("IPatientService", {
+    useClass: PatientService,
+});
+container.register("IDashboardService", {
+    useClass: DashboardService,
+});
+container.register("IPatientAgendaService", {
+    useClass: PatientAgendaService,
+});
+container.register("IPatientAnamnesisService", {
+    useClass: PatientAnamnesisService,
+});
+container.register("IPatientFinancialService", {
+    useClass: PatientFinancialService,
+});
+container.register("IPatientAttachmentService", {
+    useClass: PatientAttachmentService,
 });
 // Logger binding (assuming it's already implemented)
 container.register("Logger", {

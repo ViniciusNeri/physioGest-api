@@ -8,20 +8,23 @@ import { injectable } from "tsyringe";
 import FinancialModel from "../models/FinancialModel.js";
 let FinancialRepository = class FinancialRepository {
     async findById(id) {
-        return FinancialModel.findById(id).lean().exec();
+        return FinancialModel.findById(id).lean({ virtuals: true }).exec();
     }
     async findAll() {
-        return FinancialModel.find().lean().exec();
+        return FinancialModel.find().lean({ virtuals: true }).exec();
     }
     async findByUserId(userId) {
-        return FinancialModel.find({ userId }).lean().exec();
+        return FinancialModel.find({ userId }).lean({ virtuals: true }).exec();
+    }
+    async findByPatientId(patientId) {
+        return FinancialModel.find({ patientId }).lean({ virtuals: true }).exec();
     }
     async create(financial) {
         const newFinancial = new FinancialModel(financial);
         return newFinancial.save();
     }
     async update(id, financial) {
-        return FinancialModel.findByIdAndUpdate(id, financial, { new: true }).lean().exec();
+        return FinancialModel.findByIdAndUpdate(id, financial, { new: true }).lean({ virtuals: true }).exec();
     }
     async delete(id) {
         const result = await FinancialModel.findByIdAndDelete(id).exec();

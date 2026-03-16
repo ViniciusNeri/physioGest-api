@@ -5,4 +5,5 @@ export interface Financial {
   date: Date;
   description: string;
   userId: string;
+  patientId?: string;
 }

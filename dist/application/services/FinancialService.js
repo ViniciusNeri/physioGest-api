@@ -30,6 +30,10 @@ let FinancialService = class FinancialService {
         this.logger.info(`Buscando registros financeiros por usuário: ${userId}`);
         return this.repository.findByUserId(userId);
     }
+    async getFinancialsByPatientId(patientId) {
+        this.logger.info(`Buscando registros financeiros por paciente: ${patientId}`);
+        return this.repository.findByPatientId(patientId);
+    }
     async createFinancial(financial) {
         this.logger.info(`Criando registro financeiro para usuário: ${financial.userId}`);
         return this.repository.create(financial);

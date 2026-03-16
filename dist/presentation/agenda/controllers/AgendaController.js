@@ -26,7 +26,7 @@ export class AgendaController {
      *       500:
      *         description: Erro interno do servidor
      */
-    async getAll(req, res) {
+    getAll = async (req, res) => {
         try {
             this.logger.info("Listando todas as agendas");
             const agendas = await this.service.getAllAgendas();
@@ -36,7 +36,7 @@ export class AgendaController {
             this.logger.error("Erro ao listar agendas", error);
             return res.status(500).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /agendas/user/{userId}:
@@ -64,7 +64,7 @@ export class AgendaController {
      *       500:
      *         description: Erro interno do servidor
      */
-    async getByUserId(req, res) {
+    getByUserId = async (req, res) => {
         try {
             const { userId } = req.params;
             if (!userId) {
@@ -78,7 +78,7 @@ export class AgendaController {
             this.logger.error("Erro ao listar agendas do usuário", error);
             return res.status(500).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /agendas/{id}:
@@ -106,7 +106,7 @@ export class AgendaController {
      *       500:
      *         description: Erro interno do servidor
      */
-    async getById(req, res) {
+    getById = async (req, res) => {
         try {
             const { id } = req.params;
             if (!id) {
@@ -123,7 +123,7 @@ export class AgendaController {
             this.logger.error("Erro ao buscar agenda", error);
             return res.status(500).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /agendas:
@@ -168,7 +168,7 @@ export class AgendaController {
      *       500:
      *         description: Erro interno do servidor
      */
-    async create(req, res) {
+    create = async (req, res) => {
         try {
             const agendaData = req.body;
             this.logger.info(`Criando agenda para usuário: ${agendaData.userId}`);
@@ -179,7 +179,7 @@ export class AgendaController {
             this.logger.error("Erro ao criar agenda", error);
             return res.status(400).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /agendas/{id}:
@@ -225,7 +225,7 @@ export class AgendaController {
      *       500:
      *         description: Erro interno do servidor
      */
-    async update(req, res) {
+    update = async (req, res) => {
         try {
             const { id } = req.params;
             if (!id) {
@@ -243,7 +243,7 @@ export class AgendaController {
             this.logger.error("Erro ao atualizar agenda", error);
             return res.status(500).json({ message: error.message });
         }
-    }
+    };
     /**
      * @swagger
      * /agendas/{id}:
@@ -267,7 +267,7 @@ export class AgendaController {
      *       500:
      *         description: Erro interno do servidor
      */
-    async delete(req, res) {
+    delete = async (req, res) => {
         try {
             const { id } = req.params;
             if (!id) {
@@ -284,7 +284,7 @@ export class AgendaController {
             this.logger.error("Erro ao deletar agenda", error);
             return res.status(500).json({ message: error.message });
         }
-    }
+    };
 }
 export const agendaController = new AgendaController();
 //# sourceMappingURL=AgendaController.js.map

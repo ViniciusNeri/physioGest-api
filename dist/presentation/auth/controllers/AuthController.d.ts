@@ -28,7 +28,7 @@ export declare class AuthenticateController {
      *             schema:
      *               $ref: '#/components/schemas/ErrorResponse'
      */
-    handle(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    handle: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /auth/signup:
@@ -55,7 +55,7 @@ export declare class AuthenticateController {
      *             schema:
      *               $ref: '#/components/schemas/ErrorResponse'
      */
-    signup(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    signup: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /auth/signup/confirm:
@@ -88,7 +88,7 @@ export declare class AuthenticateController {
      *             schema:
      *               $ref: '#/components/schemas/ErrorResponse'
      */
-    confirmSignup(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    confirmSignup: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /auth/google:
@@ -121,7 +121,7 @@ export declare class AuthenticateController {
      *             schema:
      *               $ref: '#/components/schemas/ErrorResponse'
      */
-    googleLogin(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    googleLogin: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /auth/verify-email:
@@ -154,7 +154,7 @@ export declare class AuthenticateController {
      *             schema:
      *               $ref: '#/components/schemas/ErrorResponse'
      */
-    verifyEmail(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    verifyEmail: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
 }
 export declare const authenticateController: AuthenticateController;
 //# sourceMappingURL=AuthController.d.ts.map

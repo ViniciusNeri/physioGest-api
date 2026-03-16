@@ -16,8 +16,8 @@ export interface IAuthenticateRepository {
      * Atualiza um usuário
      * @param id - ID do usuário
      * @param user - dados para atualizar
-     * @returns Usuário atualizado
+     * @returns Usuário atualizado ou null se não encontrado
      */
-    update(id: string, user: Partial<User>): Promise<User>;
+    update(id: string, user: Partial<User>): Promise<User | null>;
 }
 //# sourceMappingURL=IAuthenticateRepository.d.ts.map

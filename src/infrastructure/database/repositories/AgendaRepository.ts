@@ -6,15 +6,15 @@ import AgendaModel from "../models/AgendaModel.js";
 @injectable()
 export class AgendaRepository implements IAgendaRepository {
   async findById(id: string): Promise<Agenda | null> {
-    return AgendaModel.findById(id).lean<Agenda>().exec();
+    return AgendaModel.findById(id).lean<Agenda>({ virtuals: true }).exec();
   }
 
   async findAll(): Promise<Agenda[]> {
-    return AgendaModel.find().lean<Agenda[]>().exec();
+    return AgendaModel.find().lean<Agenda[]>({ virtuals: true }).exec();
   }
 
   async findByUserId(userId: string): Promise<Agenda[]> {
-    return AgendaModel.find({ userId }).lean<Agenda[]>().exec();
+    return AgendaModel.find({ userId }).lean<Agenda[]>({ virtuals: true }).exec();
   }
 
   async create(agenda: Agenda): Promise<Agenda> {
@@ -23,7 +23,7 @@ export class AgendaRepository implements IAgendaRepository {
   }
 
   async update(id: string, agenda: Partial<Agenda>): Promise<Agenda | null> {
-    return AgendaModel.findByIdAndUpdate(id, agenda, { new: true }).lean<Agenda>().exec();
+    return AgendaModel.findByIdAndUpdate(id, agenda, { new: true }).lean<Agenda>({ virtuals: true }).exec();
   }
 
   async delete(id: string): Promise<boolean> {
