@@ -8,6 +8,9 @@ import { PatientAgendaRepository } from "../../infrastructure/database/repositor
 import { PatientAnamnesisRepository } from "../../infrastructure/database/repositories/PatientAnamnesisRepository.js";
 import { PatientFinancialRepository } from "../../infrastructure/database/repositories/PatientFinancialRepository.js";
 import { PatientAttachmentRepository } from "../../infrastructure/database/repositories/PatientAttachmentRepository.js";
+import { CategoryRepository } from "../../infrastructure/database/repositories/CategoryRepository.js";
+import { PaymentMethodRepository } from "../../infrastructure/database/repositories/PaymentMethodRepository.js";
+import { SettingRepository } from "../../infrastructure/database/repositories/SettingRepository.js";
 import { AuthenticateService } from "../../application/services/AuthenticateService.js";
 import { UserService } from "../../application/services/UserService.js";
 import { AgendaService } from "../../application/services/AgendaService.js";
@@ -18,6 +21,9 @@ import { PatientAgendaService } from "../../application/services/PatientAgendaSe
 import { PatientAnamnesisService } from "../../application/services/PatientAnamnesisService.js";
 import { PatientFinancialService } from "../../application/services/PatientFinancialService.js";
 import { PatientAttachmentService } from "../../application/services/PatientAttachmentService.js";
+import { CategoryService } from "../../application/services/CategoryService.js";
+import { PaymentMethodService } from "../../application/services/PaymentMethodService.js";
+import { SettingService } from "../../application/services/SettingService.js";
 import Logger from "../../infrastructure/logging/Logger.js";
 import { GoogleProvider } from "../../infrastructure/external/GoogleProvider.js";
 import { EmailProvider } from "../../infrastructure/external/EmailProvider.js";
@@ -53,6 +59,15 @@ container.register("IPatientFinancialRepository", {
 container.register("IPatientAttachmentRepository", {
     useClass: PatientAttachmentRepository,
 });
+container.register("ICategoryRepository", {
+    useClass: CategoryRepository,
+});
+container.register("IPaymentMethodRepository", {
+    useClass: PaymentMethodRepository,
+});
+container.register("ISettingRepository", {
+    useClass: SettingRepository,
+});
 container.register("IAuthenticateService", {
     useClass: AuthenticateService,
 });
@@ -70,6 +85,15 @@ container.register("IPatientService", {
 });
 container.register("IDashboardService", {
     useClass: DashboardService,
+});
+container.register("ICategoryService", {
+    useClass: CategoryService,
+});
+container.register("IPaymentMethodService", {
+    useClass: PaymentMethodService,
+});
+container.register("ISettingService", {
+    useClass: SettingService,
 });
 container.register("IPatientAgendaService", {
     useClass: PatientAgendaService,

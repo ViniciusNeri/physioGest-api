@@ -8,6 +8,9 @@ import userRoutes from "./presentation/user/routes.js";
 import agendaRoutes from "./presentation/agenda/routes.js";
 import financialRoutes from "./presentation/financial/routes.js";
 import patientRoutes from "./presentation/patients/routes.js";
+import settingsRoutes from "./presentation/settings/routes.js";
+import categoriesRoutes from "./presentation/categories/routes.js";
+import paymentMethodsRoutes from "./presentation/paymentMethods/routes.js";
 import dashboardRoutes from "./presentation/dashboard/routes.js";
 import logger from "./infrastructure/logging/Logger.js";
 import { setupSwagger } from "./config/swagger.js";
@@ -91,6 +94,9 @@ app.use("/users", userRoutes);
 app.use("/agendas", agendaRoutes);
 app.use("/financials", financialRoutes);
 app.use("/patients", patientRoutes);
+app.use("/settings", settingsRoutes);
+app.use("/categories", categoriesRoutes);
+app.use("/payment-methods", paymentMethodsRoutes);
 app.use("/dashboard", dashboardRoutes);
 
 // Middleware de tratamento de erros global
