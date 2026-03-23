@@ -14,7 +14,14 @@ export class CategoryRepository implements ICategoryRepository {
   }
 
   async findByUserId(userId: string): Promise<Category[]> {
-    return CategoryModel.find({ userId }).lean<Category[]>({ virtuals: true }).exec();
+    return CategoryModel.find({
+      $or: [
+        { userId: userId },
+        { userId: null }
+      ]
+    })
+    .lean<Category[]>({ virtuals: true })
+    .exec();
   }
 
   async create(category: Category): Promise<Category> {

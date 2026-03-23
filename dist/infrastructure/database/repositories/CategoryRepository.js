@@ -14,7 +14,14 @@ let CategoryRepository = class CategoryRepository {
         return CategoryModel.find().lean({ virtuals: true }).exec();
     }
     async findByUserId(userId) {
-        return CategoryModel.find({ userId }).lean({ virtuals: true }).exec();
+        return CategoryModel.find({
+            $or: [
+                { userId: userId },
+                { userId: null }
+            ]
+        })
+            .lean({ virtuals: true })
+            .exec();
     }
     async create(category) {
         const newCategory = new CategoryModel(category);

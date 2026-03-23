@@ -1,11 +1,12 @@
 export interface Category {
     id?: string;
-    userId: string;
+    userId: string | null;
     name: string;
     description?: string;
-    type: 'income' | 'expense' | 'general';
+    type: 'Traumato-Ortopédica' | 'Esportiva' | 'Neurofuncional' | 'Geriatria' | 'Pediatria' | 'Outros' | 'RPG';
     active?: boolean;
     createdAt?: Date;
     updatedAt?: Date;
+    settingsId?: string | null;
 }
 //# sourceMappingURL=Category.d.ts.map

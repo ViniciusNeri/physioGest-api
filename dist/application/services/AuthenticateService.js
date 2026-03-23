@@ -17,10 +17,13 @@ import { container } from "tsyringe";
 import logger from "../../infrastructure/logging/Logger.js";
 let AuthenticateService = class AuthenticateService {
     repository;
+    settingRepository;
     googleProvider;
     rabbitMQService;
-    constructor(repository, googleProvider, rabbitMQService) {
+    verificationCodes = new Map();
+    constructor(repository, settingRepository, googleProvider, rabbitMQService) {
         this.repository = repository;
+        this.settingRepository = settingRepository;
         this.googleProvider = googleProvider;
         this.rabbitMQService = rabbitMQService;
     }
@@ -72,6 +75,8 @@ let AuthenticateService = class AuthenticateService {
                 verified: false
             });
             logger.info("Usuário criado com sucesso", { userId: user.id, email });
+            await this.createSettingsForNewUser(user.id);
+            logger.debug("Configurações iniciais criadas para novo usuário", { userId: user.id });
             // Enviar email de verificação
             try {
                 await this.sendVerificationEmail(email);
@@ -88,13 +93,18 @@ let AuthenticateService = class AuthenticateService {
             throw error;
         }
     }
-    async confirmSignup(email) {
-        logger.debug("Tentativa de confirmação de cadastro", { email });
+    async confirmSignup(email, code) {
+        logger.debug("Tentativa de confirmação de cadastro", { email, hasCode: !!code });
         try {
             const user = await this.repository.findByEmail(email);
             if (!user) {
                 logger.warn("Tentativa de confirmação com email não encontrado", { email });
                 return null;
+            }
+            const storedCode = this.verificationCodes.get(email);
+            if (!storedCode || storedCode !== code) {
+                logger.warn("Código de verificação inválido", { email, providedCode: code });
+                throw new Error("Código de verificação inválido");
             }
             logger.debug("Marcando usuário como verificado", { userId: user.id, email });
             const updatedUser = await this.repository.update(user.id, { verified: true });
@@ -102,11 +112,205 @@ let AuthenticateService = class AuthenticateService {
                 logger.error("Falha ao atualizar usuário para verificado", { userId: user.id, email });
                 throw new Error("Falha ao confirmar cadastro");
             }
+            // Remover código do cache após verificação bem-sucedida
+            this.verificationCodes.delete(email);
             logger.info("Cadastro confirmado com sucesso", { userId: updatedUser.id, email });
             return updatedUser;
         }
         catch (error) {
             logger.error("Erro durante confirmação de cadastro", error, { email });
+            throw error;
+        }
+    }
+    async forgotPassword(email) {
+        logger.debug("Solicitação de redefinição de senha", { email });
+        try {
+            const user = await this.repository.findByEmail(email);
+            if (!user) {
+                logger.warn("Tentativa de redefinição de senha com email não encontrado", { email });
+                // Não retornar erro para não expor se o email existe ou não
+                return;
+            }
+            if (!user.verified) {
+                logger.warn("Tentativa de redefinição de senha com email não verificado", { email });
+                // Não retornar erro
+                return;
+            }
+            // Gerar token de redefinição (válido por 1 hora)
+            const resetToken = jwt.sign({ email, type: 'password_reset' }, process.env.JWT_SECRET || "default_secret", { expiresIn: "1h" });
+            const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`;
+            const message = {
+                to: email,
+                subject: 'Redefinição de Senha - PhysioGest',
+                html: `
+          <!DOCTYPE html>
+          <html lang="pt-BR">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Redefinição de Senha - PhysioGest</title>
+            <style>
+              body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+              }
+              .container {
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #ffffff;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+              }
+              .header {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 40px 30px;
+                text-align: center;
+              }
+              .header h1 {
+                margin: 0;
+                font-size: 28px;
+                font-weight: 300;
+              }
+              .content {
+                padding: 40px 30px;
+                color: #333333;
+                line-height: 1.6;
+              }
+              .button {
+                display: inline-block;
+                padding: 15px 30px;
+                background-color: #667eea;
+                color: white;
+                text-decoration: none;
+                border-radius: 6px;
+                font-weight: 500;
+                margin: 20px 0;
+                text-align: center;
+              }
+              .button:hover {
+                background-color: #5a6fd8;
+              }
+              .footer {
+                background-color: #f8f9fa;
+                padding: 20px 30px;
+                text-align: center;
+                color: #666666;
+                font-size: 14px;
+              }
+              .warning {
+                background-color: #fff3cd;
+                border: 1px solid #ffeaa7;
+                color: #856404;
+                padding: 15px;
+                border-radius: 4px;
+                margin: 20px 0;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>PhysioGest</h1>
+                <p>Sistema de Gestão Fisioterapêutica</p>
+              </div>
+              
+              <div class="content">
+                <h2>Redefinição de Senha</h2>
+                <p>Olá ${user.name}!</p>
+                <p>Recebemos uma solicitação para redefinir sua senha no <strong>PhysioGest</strong>. Se você não solicitou esta alteração, ignore este email.</p>
+                
+                <p>Para redefinir sua senha, clique no botão abaixo:</p>
+                
+                <div style="text-align: center;">
+                  <a href="${resetUrl}" class="button">Redefinir Senha</a>
+                </div>
+                
+                <p>Este link é válido por 1 hora. Após expirar, você precisará solicitar uma nova redefinição.</p>
+                
+                <div class="warning">
+                  <strong>Importante:</strong> Não compartilhe este link com ninguém. Nossa equipe nunca solicitará seus dados pessoais por email.
+                </div>
+                
+                <p>Atenciosamente,<br>
+                <strong>Equipe PhysioGest</strong></p>
+              </div>
+              
+              <div class="footer">
+                <p>Este é um email automático, por favor não responda.</p>
+                <p>&copy; 2026 PhysioGest. Todos os direitos reservados.</p>
+              </div>
+            </div>
+          </body>
+          </html>
+        `,
+                text: `PhysioGest - Redefinição de Senha
+
+Olá ${user.name}!
+
+Recebemos uma solicitação para redefinir sua senha no PhysioGest.
+
+Para redefinir sua senha, acesse: ${resetUrl}
+
+Este link é válido por 1 hora.
+
+Se você não solicitou esta alteração, ignore este email.
+
+Atenciosamente,
+Equipe PhysioGest
+
+---
+Este é um email automático. Não responda a este email.`
+            };
+            try {
+                logger.debug("Tentando enviar email de redefinição via RabbitMQ", { email });
+                await this.rabbitMQService.sendMessage({
+                    type: 'send_email',
+                    data: message
+                });
+                logger.debug("Email de redefinição enfileirado", { email });
+            }
+            catch (error) {
+                logger.warn("RabbitMQ não disponível, enviando email diretamente", { email, error: error.message });
+                const emailProvider = container.resolve("EmailProvider");
+                await emailProvider.sendEmail(message);
+                logger.debug("Email de redefinição enviado diretamente", { email });
+            }
+            logger.info("Email de redefinição de senha enviado", { userId: user.id, email });
+        }
+        catch (error) {
+            logger.error("Erro ao processar solicitação de redefinição de senha", error, { email });
+            throw error;
+        }
+    }
+    async resetPassword(token, newPassword) {
+        logger.debug("Tentativa de redefinição de senha com token");
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET || "default_secret");
+            if (decoded.type !== 'password_reset') {
+                logger.warn("Token inválido para redefinição de senha");
+                throw new Error("Token inválido");
+            }
+            const user = await this.repository.findByEmail(decoded.email);
+            if (!user) {
+                logger.warn("Tentativa de redefinição com email não encontrado", { email: decoded.email });
+                throw new Error("Usuário não encontrado");
+            }
+            logger.debug("Criptografando nova senha");
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            const updatedUser = await this.repository.update(user.id, { password: hashedPassword });
+            if (!updatedUser) {
+                logger.error("Falha ao atualizar senha do usuário", { userId: user.id });
+                throw new Error("Falha ao redefinir senha");
+            }
+            logger.info("Senha redefinida com sucesso", { userId: updatedUser.id });
+            return updatedUser;
+        }
+        catch (error) {
+            logger.error("Erro durante redefinição de senha", error);
             throw error;
         }
     }
@@ -149,18 +353,149 @@ let AuthenticateService = class AuthenticateService {
     async sendVerificationEmail(email) {
         logger.debug("Enviando email de verificação", { email });
         try {
-            const verificationToken = jwt.sign({ email }, process.env.JWT_SECRET || "default_secret", { expiresIn: "24h" });
-            const verificationUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/verify-email?token=${verificationToken}`;
+            // Gerar código de verificação de 6 dígitos
+            const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+            // Armazenar código no cache
+            this.verificationCodes.set(email, verificationCode);
             const message = {
                 to: email,
-                subject: 'Verifique seu email - PhysioGest',
+                subject: 'Código de Verificação - PhysioGest',
                 html: `
-          <h1>Bem-vindo ao PhysioGest!</h1>
-          <p>Para completar seu cadastro, clique no link abaixo para verificar seu email:</p>
-          <a href="${verificationUrl}">Verificar Email</a>
-          <p>Este link expira em 24 horas.</p>
+          <!DOCTYPE html>
+          <html lang="pt-BR">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Verificação de Email - PhysioGest</title>
+            <style>
+              body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+              }
+              .container {
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #ffffff;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+              }
+              .header {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 40px 30px;
+                text-align: center;
+              }
+              .header h1 {
+                margin: 0;
+                font-size: 28px;
+                font-weight: 300;
+              }
+              .content {
+                padding: 40px 30px;
+                color: #333333;
+                line-height: 1.6;
+              }
+              .code-container {
+                text-align: center;
+                margin: 30px 0;
+              }
+              .verification-code {
+                display: inline-block;
+                font-size: 32px;
+                font-weight: bold;
+                color: #667eea;
+                background-color: #f8f9fa;
+                border: 2px solid #667eea;
+                border-radius: 8px;
+                padding: 15px 30px;
+                letter-spacing: 4px;
+                margin: 20px 0;
+              }
+              .footer {
+                background-color: #f8f9fa;
+                padding: 20px 30px;
+                text-align: center;
+                color: #666666;
+                font-size: 14px;
+              }
+              .warning {
+                background-color: #fff3cd;
+                border: 1px solid #ffeaa7;
+                color: #856404;
+                padding: 15px;
+                border-radius: 4px;
+                margin: 20px 0;
+              }
+              .button {
+                display: inline-block;
+                padding: 12px 24px;
+                background-color: #667eea;
+                color: white;
+                text-decoration: none;
+                border-radius: 6px;
+                font-weight: 500;
+                margin: 10px 0;
+              }
+              .button:hover {
+                background-color: #5a6fd8;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>PhysioGest</h1>
+                <p>Sistema de Gestão Fisioterapêutica</p>
+              </div>
+              
+              <div class="content">
+                <h2>Verificação de Email</h2>
+                <p>Olá!</p>
+                <p>Obrigado por se cadastrar no <strong>PhysioGest</strong>. Para completar seu registro e garantir a segurança da sua conta, precisamos verificar seu endereço de email.</p>
+                
+                <div class="code-container">
+                  <p><strong>Seu código de verificação é:</strong></p>
+                  <div class="verification-code">${verificationCode}</div>
+                </div>
+                
+                <p>Insira este código na aplicação para confirmar seu cadastro. O código é válido por 24 horas.</p>
+                
+                <div class="warning">
+                  <strong>Importante:</strong> Não compartilhe este código com ninguém. Nossa equipe nunca solicitará seus dados pessoais por email.
+                </div>
+                
+                <p>Se você não solicitou este cadastro, ignore este email.</p>
+                
+                <p>Atenciosamente,<br>
+                <strong>Equipe PhysioGest</strong></p>
+              </div>
+              
+              <div class="footer">
+                <p>Este é um email automático, por favor não responda.</p>
+                <p>&copy; 2026 PhysioGest. Todos os direitos reservados.</p>
+              </div>
+            </div>
+          </body>
+          </html>
         `,
-                text: `Bem-vindo ao PhysioGest! Para completar seu cadastro, acesse: ${verificationUrl}. Este link expira em 24 horas.`
+                text: `PhysioGest - Verificação de Email
+
+Olá!
+
+Obrigado por se cadastrar no PhysioGest. Para completar seu registro, use o código de verificação: ${verificationCode}
+
+Este código expira em 24 horas.
+
+Se você não solicitou este cadastro, ignore este email.
+
+Atenciosamente,
+Equipe PhysioGest
+
+---
+Este é um email automático. Não responda a este email.`
             };
             try {
                 logger.debug("Tentando enviar email via RabbitMQ", { email });
@@ -184,13 +519,33 @@ let AuthenticateService = class AuthenticateService {
             throw error;
         }
     }
+    async createSettingsForNewUser(userId) {
+        logger.debug("Criando configurações iniciais para novo usuário", { userId });
+        try {
+            // 1. Criação das Configurações Iniciais
+            const settings = await this.settingRepository.create({
+                userId,
+                dashboardTheme: 'light',
+                showWeeklyAppointments: true,
+                showMonthlyIncome: true,
+                showActivePayments: true,
+                showNextAppointment: true,
+                categoryControlMode: 'none',
+            });
+        }
+        catch (error) {
+            console.error("Erro ao inicializar dados do usuário:", error);
+            throw error;
+        }
+    }
 };
 AuthenticateService = __decorate([
     injectable(),
     __param(0, inject("IAuthenticateRepository")),
-    __param(1, inject("GoogleProvider")),
-    __param(2, inject("RabbitMQService")),
-    __metadata("design:paramtypes", [Object, Function, Function])
+    __param(1, inject("ISettingRepository")),
+    __param(2, inject("GoogleProvider")),
+    __param(3, inject("RabbitMQService")),
+    __metadata("design:paramtypes", [Object, Object, Function, Function])
 ], AuthenticateService);
 export { AuthenticateService };
 //# sourceMappingURL=AuthenticateService.js.map

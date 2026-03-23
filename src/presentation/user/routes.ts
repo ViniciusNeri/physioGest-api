@@ -36,11 +36,7 @@ userRoutes.use(JwtAuthService.authenticateToken);
  *         name: João Silva
  *         email: joao@example.com
  *         password: $2a$10$...
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
+ *
  */
 
 userRoutes.get("/", (req, res) => userController.getAll(req, res));

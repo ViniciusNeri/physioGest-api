@@ -8,8 +8,6 @@ const settingSchema = new mongoose.Schema({
     showActivePayments: { type: Boolean, default: true },
     showNextAppointment: { type: Boolean, default: true },
     categoryControlMode: { type: String, enum: ['none', 'manual', 'auto'], default: 'none' },
-    defaultCategoryId: { type: String },
-    defaultPaymentMethodId: { type: String },
 }, { timestamps: true });
 // @ts-ignore
 settingSchema.pre('save', function () {

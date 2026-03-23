@@ -8,6 +8,7 @@ export class PaymentMethodController {
     }
     getAllPaymentMethods = async (req, res) => {
         try {
+            console.log("[CONTROLLER DEBUG] getAllPaymentMethods called");
             this.logger.info("Listando formas de pagamento");
             const methods = await this.service.getAllPaymentMethods();
             return res.status(200).json(methods);
@@ -20,6 +21,7 @@ export class PaymentMethodController {
     getPaymentMethodById = async (req, res) => {
         try {
             const { id } = req.params;
+            console.log(`[CONTROLLER DEBUG] getPaymentMethodById called with id: ${id}`);
             if (!id || Array.isArray(id))
                 return res.status(400).json({ message: "ID é obrigatório e deve ser string" });
             const method = await this.service.getPaymentMethodById(id);

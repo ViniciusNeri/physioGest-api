@@ -81,13 +81,47 @@ const authRoutes = Router();
  *       type: object
  *       required:
  *         - email
+ *         - code
  *       properties:
  *         email:
  *           type: string
  *           format: email
  *           description: Email do usuário para confirmar cadastro
+ *         code:
+ *           type: string
+ *           description: Código de verificação enviado por email
  *       example:
  *         email: "usuario@example.com"
+ *         code: "123456"
+ *
+ *     ForgotPasswordRequest:
+ *       type: object
+ *       required:
+ *         - email
+ *       properties:
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: Email do usuário para redefinição de senha
+ *       example:
+ *         email: "usuario@example.com"
+ *
+ *     ResetPasswordRequest:
+ *       type: object
+ *       required:
+ *         - token
+ *         - newPassword
+ *       properties:
+ *         token:
+ *           type: string
+ *           description: Token de redefinição de senha
+ *         newPassword:
+ *           type: string
+ *           minLength: 6
+ *           description: Nova senha do usuário
+ *       example:
+ *         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+ *         newPassword: "novaSenha123"
  *
  *     GoogleLoginRequest:
  *       type: object
@@ -99,17 +133,6 @@ const authRoutes = Router();
  *           description: Token ID do Google OAuth
  *       example:
  *         token: "eyJhbGciOiJSUzI1NiIsImtpZCI6..."
- *
- *     VerifyEmailRequest:
- *       type: object
- *       required:
- *         - token
- *       properties:
- *         token:
- *           type: string
- *           description: Token JWT de verificação de email
- *       example:
- *         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
  *
  *     ErrorResponse:
  *       type: object
@@ -138,17 +161,14 @@ const authRoutes = Router();
  *         name: "João Silva"
  *         email: "usuario@example.com"
  *
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
+ *
  */
 
 authRoutes.post("/sessions", (req, res) => authenticateController.handle(req, res));
 authRoutes.post("/signup", authenticateController.signup);
 authRoutes.post("/signup/confirm", (req, res) => authenticateController.confirmSignup(req, res));
+authRoutes.post("/forgot-password", (req, res) => authenticateController.forgotPassword(req, res));
+authRoutes.post("/reset-password", (req, res) => authenticateController.resetPassword(req, res));
 authRoutes.post("/google", (req, res) => authenticateController.googleLogin(req, res));
-authRoutes.post("/verify-email", (req, res) => authenticateController.verifyEmail(req, res));
 
 export default authRoutes;

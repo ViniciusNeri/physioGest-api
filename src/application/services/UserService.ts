@@ -60,6 +60,7 @@ export class UserService implements IUserService {
 
       const newUser = { ...user, password: hashedPassword } as Omit<User, 'id'>;
       const createdUser = await this.repository.create(newUser);
+      logger.debug('Documento salvo no banco:', createdUser.id);
 
       logger.info("Usuário criado com sucesso", {
         userId: createdUser.id,

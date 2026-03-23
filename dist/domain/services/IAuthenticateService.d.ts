@@ -5,7 +5,9 @@ export interface IAuthenticateService {
         user: User;
     }>;
     signup(name: string, email: string, password: string): Promise<User>;
-    confirmSignup(email: string): Promise<User | null>;
+    confirmSignup(email: string, code: string): Promise<User | null>;
+    forgotPassword(email: string): Promise<void>;
+    resetPassword(token: string, newPassword: string): Promise<User | null>;
     googleLogin(googleId: string, email: string, name: string): Promise<{
         token: string;
         user: User;

@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.js.map
+*.ts.map
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.code-workspace
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Testing
+coverage/
+.nyc_output/
+jest-coverage/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs
+logs/
+logs/*
+*.log
+
+# Database
+loki-data/
+mongodb/
+
+# Cache
+.cache/
+.eslintcache
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Application specific
+swagger-debug.json
+swagger-test.json

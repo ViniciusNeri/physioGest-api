@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import "reflect-metadata";
 import "./shared/container/container.js";
 import { connectMongo } from "./infrastructure/database/mongo.js";
@@ -26,6 +27,13 @@ logger.info("Iniciando aplicação PhysioGest API", {
 });
 const app = express();
 const PORT = process.env.PORT || 3000;
+// Configurar CORS
+app.use(cors({
+    origin: true,
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Authorization'],
+}));
 // Gerar especificação Swagger uma vez durante inicialização
 const swaggerOptions = {
     definition: {
@@ -37,9 +45,23 @@ const swaggerOptions = {
         },
         servers: [
             {
+                url: "http://localhost:3000/v1",
+                description: "API v1 - Production",
+            },
+            {
                 url: "http://localhost:3000",
+                description: "Base URL",
             },
         ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    bearerFormat: "JWT",
+                },
+            },
+        },
     },
     apis: ["./src/presentation/**/*.ts"],
 };
@@ -76,15 +98,18 @@ logger.debug("Configurando Swagger");
 setupSwagger(app);
 // Rotas
 logger.debug("Configurando rotas da aplicação");
-app.use("/auth", authRoutes);
-app.use("/users", userRoutes);
-app.use("/agendas", agendaRoutes);
-app.use("/financials", financialRoutes);
-app.use("/patients", patientRoutes);
-app.use("/settings", settingsRoutes);
-app.use("/categories", categoriesRoutes);
-app.use("/payment-methods", paymentMethodsRoutes);
-app.use("/dashboard", dashboardRoutes);
+// API v1
+const v1Router = express.Router();
+v1Router.use("/auth", authRoutes);
+v1Router.use("/users", userRoutes);
+v1Router.use("/agendas", agendaRoutes);
+v1Router.use("/financials", financialRoutes);
+v1Router.use("/patients", patientRoutes);
+v1Router.use("/settings", settingsRoutes);
+v1Router.use("/categories", categoriesRoutes);
+v1Router.use("/payment-methods", paymentMethodsRoutes);
+v1Router.use("/dashboard", dashboardRoutes);
+app.use("/v1", v1Router);
 // Middleware de tratamento de erros global
 app.use((error, req, res, next) => {
     logger.error("Erro não tratado na aplicação", error, {

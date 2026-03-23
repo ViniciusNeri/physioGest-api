@@ -91,6 +91,70 @@ export declare class AuthenticateController {
     confirmSignup: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
+     * /auth/forgot-password:
+     *   post:
+     *     summary: Solicitar redefinição de senha
+     *     tags: [Authentication]
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             $ref: '#/components/schemas/ForgotPasswordRequest'
+     *     responses:
+     *       200:
+     *         description: Email de redefinição enviado
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: object
+     *               properties:
+     *                 message:
+     *                   type: string
+     *                   example: "Se o email existir, você receberá instruções para redefinir sua senha"
+     *       400:
+     *         description: Erro na solicitação
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/ErrorResponse'
+     */
+    forgotPassword: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
+    /**
+     * @swagger
+     * /auth/reset-password:
+     *   post:
+     *     summary: Redefinir senha com token
+     *     tags: [Authentication]
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             $ref: '#/components/schemas/ResetPasswordRequest'
+     *     responses:
+     *       200:
+     *         description: Senha redefinida com sucesso
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: object
+     *               properties:
+     *                 message:
+     *                   type: string
+     *                   example: "Senha redefinida com sucesso"
+     *                 user:
+     *                   $ref: '#/components/schemas/User'
+     *       400:
+     *         description: Token inválido ou expirado
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/ErrorResponse'
+     */
+    resetPassword: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
+    /**
+     * @swagger
      * /auth/google:
      *   post:
      *     summary: Login com Google OAuth
@@ -122,39 +186,6 @@ export declare class AuthenticateController {
      *               $ref: '#/components/schemas/ErrorResponse'
      */
     googleLogin: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
-    /**
-     * @swagger
-     * /auth/verify-email:
-     *   post:
-     *     summary: Verificar email através de token JWT
-     *     tags: [Authentication]
-     *     requestBody:
-     *       required: true
-     *       content:
-     *         application/json:
-     *           schema:
-     *             $ref: '#/components/schemas/VerifyEmailRequest'
-     *     responses:
-     *       200:
-     *         description: Email verificado com sucesso
-     *         content:
-     *           application/json:
-     *             schema:
-     *               type: object
-     *               properties:
-     *                 message:
-     *                   type: string
-     *                   example: "Email verificado com sucesso"
-     *                 user:
-     *                   $ref: '#/components/schemas/User'
-     *       400:
-     *         description: Token inválido ou expirado
-     *         content:
-     *           application/json:
-     *             schema:
-     *               $ref: '#/components/schemas/ErrorResponse'
-     */
-    verifyEmail: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
 }
 export declare const authenticateController: AuthenticateController;
 //# sourceMappingURL=AuthController.d.ts.map

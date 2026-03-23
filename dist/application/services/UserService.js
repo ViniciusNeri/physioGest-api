@@ -62,6 +62,7 @@ let UserService = class UserService {
             }
             const newUser = { ...user, password: hashedPassword };
             const createdUser = await this.repository.create(newUser);
+            logger.debug('Documento salvo no banco:', createdUser.id);
             logger.info("Usuário criado com sucesso", {
                 userId: createdUser.id,
                 email: createdUser.email,

@@ -12,6 +12,7 @@ const paymentMethodSchema = new mongoose.Schema<PaymentMethod>(
       required: true
     },
     active: { type: Boolean, default: true },
+    settingsId: { type: String },
   },
   { timestamps: true }
 );

@@ -9,6 +9,7 @@ const paymentMethodSchema = new mongoose.Schema({
         required: true
     },
     active: { type: Boolean, default: true },
+    settingsId: { type: String },
 }, { timestamps: true });
 // @ts-ignore
 paymentMethodSchema.pre('save', function () {

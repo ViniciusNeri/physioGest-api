@@ -7,8 +7,6 @@ export interface Setting {
   showActivePayments?: boolean;
   showNextAppointment?: boolean;
   categoryControlMode?: 'none' | 'manual' | 'auto';
-  defaultCategoryId?: string;
-  defaultPaymentMethodId?: string;
   updatedAt?: Date;
   createdAt?: Date;
 }

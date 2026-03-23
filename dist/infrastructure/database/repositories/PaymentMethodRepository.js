@@ -8,13 +8,23 @@ import { injectable } from "tsyringe";
 import PaymentMethodModel from "../models/PaymentMethodModel.js";
 let PaymentMethodRepository = class PaymentMethodRepository {
     async findById(id) {
+        console.log(`[REPO DEBUG] findById called with id: ${id}`);
         return PaymentMethodModel.findById(id).lean({ virtuals: true }).exec();
     }
     async findAll() {
+        console.log("[REPO DEBUG] findAll called");
         return PaymentMethodModel.find().lean({ virtuals: true }).exec();
     }
     async findByUserId(userId) {
-        return PaymentMethodModel.find({ userId }).lean({ virtuals: true }).exec();
+        console.log(`[REPO DEBUG] findByUserId called with userId: ${userId}`);
+        return PaymentMethodModel.find({
+            $or: [
+                { userId: userId },
+                { userId: null }
+            ]
+        })
+            .lean({ virtuals: true })
+            .exec();
     }
     async create(paymentMethod) {
         const newPaymentMethod = new PaymentMethodModel(paymentMethod);

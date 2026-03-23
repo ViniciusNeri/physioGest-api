@@ -120,9 +120,92 @@ export class AuthenticateController {
    */
   confirmSignup = async (req: Request, res: Response) => {
     try {
-      const { email } = req.body;
-      const user = await this.service.confirmSignup(email);
+      const { email, code } = req.body;
+      const user = await this.service.confirmSignup(email, code);
       return res.status(200).json({ message: "Cadastro confirmado", user });
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  /**
+   * @swagger
+   * /auth/forgot-password:
+   *   post:
+   *     summary: Solicitar redefinição de senha
+   *     tags: [Authentication]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/ForgotPasswordRequest'
+   *     responses:
+   *       200:
+   *         description: Email de redefinição enviado
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: "Se o email existir, você receberá instruções para redefinir sua senha"
+   *       400:
+   *         description: Erro na solicitação
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/ErrorResponse'
+   */
+  forgotPassword = async (req: Request, res: Response) => {
+    try {
+      const { email } = req.body;
+      await this.service.forgotPassword(email);
+      // Sempre retornar sucesso para não expor se o email existe
+      return res.status(200).json({ message: "Se o email existir, você receberá instruções para redefinir sua senha" });
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  /**
+   * @swagger
+   * /auth/reset-password:
+   *   post:
+   *     summary: Redefinir senha com token
+   *     tags: [Authentication]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/ResetPasswordRequest'
+   *     responses:
+   *       200:
+   *         description: Senha redefinida com sucesso
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: "Senha redefinida com sucesso"
+   *                 user:
+   *                   $ref: '#/components/schemas/User'
+   *       400:
+   *         description: Token inválido ou expirado
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/ErrorResponse'
+   */
+  resetPassword = async (req: Request, res: Response) => {
+    try {
+      const { token, newPassword } = req.body;
+      const user = await this.service.resetPassword(token, newPassword);
+      return res.status(200).json({ message: "Senha redefinida com sucesso", user });
     } catch (error: any) {
       return res.status(400).json({ message: error.message });
     }
@@ -211,22 +294,6 @@ export class AuthenticateController {
    *             schema:
    *               $ref: '#/components/schemas/ErrorResponse'
    */
-  verifyEmail = async (req: Request, res: Response) => {
-    try {
-      const { token } = req.body;
-
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || "default_secret") as { email: string };
-      const user = await this.service.confirmSignup(decoded.email);
-
-      if (!user) {
-        return res.status(400).json({ message: "Token inválido ou expirado" });
-      }
-
-      return res.status(200).json({ message: "Email verificado com sucesso", user });
-    } catch (error: any) {
-      return res.status(400).json({ message: "Token inválido ou expirado" });
-    }
-  }
 }
 
 export const authenticateController = new AuthenticateController();
