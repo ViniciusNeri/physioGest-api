@@ -39,6 +39,7 @@ export interface PatientFinancial {
   category: string; // consulta, exame, tratamento, etc.
   description: string;
   amount: number;
+  totalSessions?: number;
   paymentMethod?: 'cash' | 'credit_card' | 'debit_card' | 'pix' | 'bank_transfer' | 'check' | 'other';
   status: 'pending' | 'paid' | 'cancelled' | 'refunded';
   dueDate?: Date;
@@ -58,4 +59,11 @@ export interface PatientAttachment {
   category?: string; // exame, receita, laudo, foto, etc.
   description?: string;
   uploadedAt: Date;
+}
+
+export interface PatientFinancialSummary {
+  outstandingBalance: number;
+  totalSessions: number;
+  totalPaidAmount: number;
+  payments: PatientFinancial[];
 }

@@ -11,6 +11,7 @@ const patientFinancialSchema = new mongoose.Schema<PatientFinancial>(
     category: { type: String, required: true },
     description: { type: String, required: true },
     amount: { type: Number, required: true, min: 0 },
+    totalSessions: { type: Number, required: false },
     paymentMethod: {
       type: String,
       enum: ['cash', 'credit_card', 'debit_card', 'pix', 'bank_transfer', 'check', 'other'],

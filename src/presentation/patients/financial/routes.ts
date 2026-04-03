@@ -39,6 +39,9 @@ const controller = new PatientFinancialController();
  *         amount:
  *           type: number
  *           description: Valor do registro
+ *         totalSessions:
+ *           type: number
+ *           description: Quantidade total de sessões vinculadas ao pagamento
  *         date:
  *           type: string
  *           format: date-time
@@ -78,6 +81,7 @@ const controller = new PatientFinancialController();
  *         category: Consulta
  *         description: Consulta fisioterapêutica - 50 minutos
  *         amount: 120.00
+ *         totalSessions: 10
  *         date: 2024-01-15T10:00:00.000Z
  *         paymentMethod: pix
  *         status: paid
@@ -106,6 +110,9 @@ const controller = new PatientFinancialController();
  *         amount:
  *           type: number
  *           description: Valor do registro
+ *         totalSessions:
+ *           type: number
+ *           description: Quantidade total de sessões vinculadas ao pagamento
  *         date:
  *           type: string
  *           format: date-time
@@ -134,6 +141,7 @@ const controller = new PatientFinancialController();
  *         category: Consulta
  *         description: Consulta fisioterapêutica - 50 minutos
  *         amount: 120.00
+ *         totalSessions: 10
  *         date: 2024-01-15T10:00:00.000Z
  *         paymentMethod: pix
  *         status: paid
@@ -156,6 +164,9 @@ const controller = new PatientFinancialController();
  *         amount:
  *           type: number
  *           description: Valor do registro
+ *         totalSessions:
+ *           type: number
+ *           description: Quantidade total de sessões vinculadas ao pagamento
  *         date:
  *           type: string
  *           format: date-time
@@ -181,13 +192,16 @@ const controller = new PatientFinancialController();
  *           description: Observações adicionais
  *       example:
  *         status: paid
+ *         totalSessions: 12
  *         paymentDate: 2024-01-15T10:30:00.000Z
  *         notes: Pagamento confirmado
  */
 
 patientFinancialRoutes.get("/:patientId/financial", controller.getPatientFinancial.bind(controller));
-patientFinancialRoutes.get("/:patientId/financial/:id", controller.getFinancialById.bind(controller));
 patientFinancialRoutes.get("/:patientId/financial/balance", controller.getPatientBalance.bind(controller));
+patientFinancialRoutes.get("/:patientId/financial/summary", controller.getFinancialSummary.bind(controller));
+patientFinancialRoutes.get("/:patientId/financial/:id", controller.getFinancialById.bind(controller));
+patientFinancialRoutes.patch("/:patientId/financial/:id/pay", controller.payFinancial.bind(controller));
 patientFinancialRoutes.post("/:patientId/financial", controller.createFinancial.bind(controller));
 patientFinancialRoutes.put("/:patientId/financial/:id", controller.updateFinancial.bind(controller));
 patientFinancialRoutes.delete("/:patientId/financial/:id", controller.deleteFinancial.bind(controller));

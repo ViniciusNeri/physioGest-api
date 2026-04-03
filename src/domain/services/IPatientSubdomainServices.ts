@@ -1,4 +1,4 @@
-import type { PatientAgenda, PatientAnamnesis, PatientFinancial, PatientAttachment } from "../entities/PatientSubdomains.js";
+import type { PatientAgenda, PatientAnamnesis, PatientFinancial, PatientAttachment, PatientFinancialSummary } from "../entities/PatientSubdomains.js";
 
 export interface IPatientAgendaService {
   getPatientAgenda(patientId: string): Promise<PatientAgenda[]>;
@@ -28,6 +28,8 @@ export interface IPatientFinancialService {
   getPatientBalance(patientId: string): Promise<number>;
   getPendingPayments(patientId: string): Promise<PatientFinancial[]>;
   getFinancialByDateRange(patientId: string, startDate: Date, endDate: Date): Promise<PatientFinancial[]>;
+  getFinancialSummary(patientId: string): Promise<PatientFinancialSummary>;
+  payFinancial(id: string, paymentMethod?: string): Promise<PatientFinancial | null>;
 }
 
 export interface IPatientAttachmentService {
