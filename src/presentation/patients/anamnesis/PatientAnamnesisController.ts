@@ -242,7 +242,11 @@ export class PatientAnamnesisController {
         return res.status(400).json({ message: "ID da anamnese é obrigatório" });
       }
       this.logger.info("Atualizando anamnese", { anamnesisId: id });
-      const anamnesis = await this.service.updateAnamnesis(id as string, req.body);
+      const updates = req.body;
+      if (updates.date) {
+        updates.date = new Date(updates.date);
+      }
+      const anamnesis = await this.service.updateAnamnesis(id as string, updates);
       if (!anamnesis) {
         return res.status(404).json({ message: "Anamnese não encontrada" });
       }

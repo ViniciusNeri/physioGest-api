@@ -7,5 +7,8 @@ export interface Patient {
   gender?: 'male' | 'female' | 'other';
   profession?: string;
   observations?: string;
+  completedAppointments?: number;
+  noShowAppointments?: number;
+  nextAppointmentDate?: Date | null;
   userId: string;
 }

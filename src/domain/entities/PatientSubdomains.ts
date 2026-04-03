@@ -16,14 +16,17 @@ export interface PatientAnamnesis {
   userId: string;
   date: Date;
   chiefComplaint: string; // queixa principal
-  historyOfPresentIllness: string; // história da doença atual
-  pastMedicalHistory: string; // antecedentes pessoais
-  familyHistory?: string; // antecedentes familiares
-  socialHistory?: string; // hábitos e estilo de vida
+  historyOfPresentIllness: string; // história da moléstia atual
+  pastMedicalHistory: string; // história médica pregressa
+  familyHistory?: string; // histórico familiar
+  socialHistory?: string; // hábitos de vida
+  currentMedications?: string; // medicamentos em uso
   reviewOfSystems?: string; // revisão de sistemas
   physicalExamination?: string; // exame físico
-  assessment?: string; // avaliação/impressão diagnóstica
+  assessment?: string; // diagnóstico clínico
   plan?: string; // plano de tratamento
+  height?: number; // altura em cm
+  weight?: number; // peso em kg
   notes?: string;
 }
 

@@ -33,16 +33,19 @@ const controller = new PatientAnamnesisController();
  *           description: Queixa principal
  *         historyOfPresentIllness:
  *           type: string
- *           description: História da doença atual
+ *           description: História da moléstia atual
  *         pastMedicalHistory:
  *           type: string
- *           description: Antecedentes pessoais
+ *           description: História médica pregressa
  *         familyHistory:
  *           type: string
- *           description: Antecedentes familiares
+ *           description: Histórico familiar
  *         socialHistory:
  *           type: string
- *           description: Antecedentes sociais
+ *           description: Hábitos de vida
+ *         currentMedications:
+ *           type: string
+ *           description: Medicamentos em uso
  *         reviewOfSystems:
  *           type: string
  *           description: Revisão de sistemas
@@ -51,10 +54,16 @@ const controller = new PatientAnamnesisController();
  *           description: Exame físico
  *         assessment:
  *           type: string
- *           description: Avaliação
+ *           description: Diagnóstico clínico
  *         plan:
  *           type: string
  *           description: Plano de tratamento
+ *         height:
+ *           type: number
+ *           description: Altura em cm
+ *         weight:
+ *           type: number
+ *           description: Peso em kg
  *         notes:
  *           type: string
  *           description: Observações adicionais
@@ -76,10 +85,13 @@ const controller = new PatientAnamnesisController();
  *         pastMedicalHistory: Nega patologias prévias
  *         familyHistory: Pai com hipertensão
  *         socialHistory: Não fumante, pratica atividade física regularmente
+ *         currentMedications: Ibuprofeno 400mg
  *         reviewOfSystems: Sem alterações significativas
  *         physicalExamination: Postura alterada, limitação de movimento
  *         assessment: Lombalgia crônica
  *         plan: Iniciar tratamento fisioterapêutico
+ *         height: 170
+ *         weight: 75
  *         notes: Paciente motivado para tratamento
  *         createdAt: 2024-01-10T09:00:00.000Z
  *         updatedAt: 2024-01-10T09:00:00.000Z
@@ -97,16 +109,19 @@ const controller = new PatientAnamnesisController();
  *           description: Queixa principal
  *         historyOfPresentIllness:
  *           type: string
- *           description: História da doença atual
+ *           description: História da moléstia atual
  *         pastMedicalHistory:
  *           type: string
- *           description: Antecedentes pessoais
+ *           description: História médica pregressa
  *         familyHistory:
  *           type: string
- *           description: Antecedentes familiares
+ *           description: Histórico familiar
  *         socialHistory:
  *           type: string
- *           description: Antecedentes sociais
+ *           description: Hábitos de vida
+ *         currentMedications:
+ *           type: string
+ *           description: Medicamentos em uso
  *         reviewOfSystems:
  *           type: string
  *           description: Revisão de sistemas
@@ -115,10 +130,16 @@ const controller = new PatientAnamnesisController();
  *           description: Exame físico
  *         assessment:
  *           type: string
- *           description: Avaliação
+ *           description: Diagnóstico clínico
  *         plan:
  *           type: string
  *           description: Plano de tratamento
+ *         height:
+ *           type: number
+ *           description: Altura em cm
+ *         weight:
+ *           type: number
+ *           description: Peso em kg
  *         notes:
  *           type: string
  *           description: Observações adicionais
@@ -129,10 +150,13 @@ const controller = new PatientAnamnesisController();
  *         pastMedicalHistory: Nega patologias prévias
  *         familyHistory: Pai com hipertensão
  *         socialHistory: Não fumante, pratica atividade física regularmente
+ *         currentMedications: Ibuprofeno 400mg
  *         reviewOfSystems: Sem alterações significativas
  *         physicalExamination: Postura alterada, limitação de movimento
  *         assessment: Lombalgia crônica
  *         plan: Iniciar tratamento fisioterapêutico
+ *         height: 170
+ *         weight: 75
  *         notes: Paciente motivado para tratamento
  *     UpdatePatientAnamnesis:
  *       type: object
@@ -146,16 +170,19 @@ const controller = new PatientAnamnesisController();
  *           description: Queixa principal
  *         historyOfPresentIllness:
  *           type: string
- *           description: História da doença atual
+ *           description: História da moléstia atual
  *         pastMedicalHistory:
  *           type: string
- *           description: Antecedentes pessoais
+ *           description: História médica pregressa
  *         familyHistory:
  *           type: string
- *           description: Antecedentes familiares
+ *           description: Histórico familiar
  *         socialHistory:
  *           type: string
- *           description: Antecedentes sociais
+ *           description: Hábitos de vida
+ *         currentMedications:
+ *           type: string
+ *           description: Medicamentos em uso
  *         reviewOfSystems:
  *           type: string
  *           description: Revisão de sistemas
@@ -164,20 +191,38 @@ const controller = new PatientAnamnesisController();
  *           description: Exame físico
  *         assessment:
  *           type: string
- *           description: Avaliação
+ *           description: Diagnóstico clínico
  *         plan:
  *           type: string
  *           description: Plano de tratamento
+ *         height:
+ *           type: number
+ *           description: Altura em cm
+ *         weight:
+ *           type: number
+ *           description: Peso em kg
  *         notes:
  *           type: string
  *           description: Observações adicionais
  *       example:
- *         assessment: Lombalgia crônica - Melhora significativa
- *         plan: Continuar tratamento fisioterapêutico
+ *         date: 2024-01-15T10:00:00.000Z
+ *         chiefComplaint: Dor lombar crônica
+ *         historyOfPresentIllness: Paciente apresenta dor lombar há 6 meses
+ *         pastMedicalHistory: Nega patologias prévias
+ *         familyHistory: Pai com hipertensão
+ *         socialHistory: Não fumante, pratica atividade física regularmente
+ *         currentMedications: Ibuprofeno 400mg
+ *         reviewOfSystems: Sem alterações significativas
+ *         physicalExamination: Postura alterada, limitação de movimento
+ *         assessment: Lombalgia crônica
+ *         plan: Iniciar tratamento fisioterapêutico
+ *         height: 170
+ *         weight: 75
  *         notes: Paciente apresenta boa evolução
  */
 
 patientAnamnesisRoutes.get("/:patientId/anamnesis", controller.getPatientAnamnesis.bind(controller));
+patientAnamnesisRoutes.get("/:patientId/anamnesis/latest", controller.getLatestAnamnesis.bind(controller));
 patientAnamnesisRoutes.get("/:patientId/anamnesis/:id", controller.getAnamnesisById.bind(controller));
 patientAnamnesisRoutes.post("/:patientId/anamnesis", controller.createAnamnesis.bind(controller));
 patientAnamnesisRoutes.put("/:patientId/anamnesis/:id", controller.updateAnamnesis.bind(controller));
