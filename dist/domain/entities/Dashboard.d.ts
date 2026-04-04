@@ -9,7 +9,10 @@ export interface DashboardData {
         patientId: string;
         patientName?: string;
         categoryId?: string;
+        categoryName?: string;
+        status: string;
         description: string;
+        notes?: string;
     }>;
     nextAppointment: {
         id: string;
@@ -18,7 +21,10 @@ export interface DashboardData {
         patientId: string;
         patientName?: string;
         categoryId?: string;
+        categoryName?: string;
+        status: string;
         description: string;
+        notes?: string;
     } | null;
 }
 //# sourceMappingURL=Dashboard.d.ts.map

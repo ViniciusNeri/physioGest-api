@@ -10,4 +10,6 @@ export interface Agenda {
   notes?: string;
   patientName?: string;
   patient?: { name: string };
+  categoryName?: string;
+  category?: { name: string };
 }

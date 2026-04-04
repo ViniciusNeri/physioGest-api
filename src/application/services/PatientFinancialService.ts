@@ -4,6 +4,7 @@ import type { IAgendaRepository } from "../../domain/interfaces/IAgendaRepositor
 import type { IPatientFinancialService } from "../../domain/services/IPatientSubdomainServices.js";
 import type { PatientFinancial, PatientFinancialSummary } from "../../domain/entities/PatientSubdomains.js";
 import logger from "../../infrastructure/logging/Logger.js";
+import type { IPatientActivityService } from "../../domain/services/IPatientActivityService.js";
 
 @injectable()
 export class PatientFinancialService implements IPatientFinancialService {
@@ -11,7 +12,9 @@ export class PatientFinancialService implements IPatientFinancialService {
     @inject("IPatientFinancialRepository")
     private repository: IPatientFinancialRepository,
     @inject("IAgendaRepository")
-    private agendaRepository: IAgendaRepository
+    private agendaRepository: IAgendaRepository,
+    @inject("IPatientActivityService")
+    private activityService: IPatientActivityService
   ) {}
 
   async getPatientFinancial(patientId: string): Promise<PatientFinancial[]> {
@@ -49,6 +52,16 @@ export class PatientFinancialService implements IPatientFinancialService {
 
     try {
       const newFinancial = await this.repository.create(financial);
+      
+      // Registra atividade
+      await this.activityService.logActivity({
+        patientId: newFinancial.patientId,
+        userId: newFinancial.userId || "", // Precisamos garantir que temos o userId
+        type: newFinancial.status === 'paid' ? 'payment_paid' : 'payment_pending',
+        description: `Pagamento ${newFinancial.status === 'paid' ? 'realizado' : 'pendente'}: R$ ${newFinancial.amount.toFixed(2)}`,
+        metadata: { financialId: newFinancial.id }
+      }).catch(err => logger.error("Erro ao logar atividade (create financial)", err));
+
       logger.info("Registro financeiro criado com sucesso", {
         financialId: newFinancial.id,
         patientId: financial.patientId,
@@ -187,7 +200,17 @@ export class PatientFinancialService implements IPatientFinancialService {
       }
 
       const updatedFinancial = await this.repository.update(id, updates);
+      
       if (updatedFinancial) {
+        // Registra atividade
+        await this.activityService.logActivity({
+          patientId: updatedFinancial.patientId,
+          userId: updatedFinancial.userId || "",
+          type: 'payment_paid',
+          description: `Pagamento realizado: R$ ${updatedFinancial.amount.toFixed(2)}`,
+          metadata: { financialId: id }
+        }).catch(err => logger.error("Erro ao logar atividade (pay financial)", err));
+
         logger.info("Registro financeiro marcado como pago com sucesso", { financialId: id });
       } else {
         logger.warn("Registro financeiro não encontrado para pagamento", { financialId: id });

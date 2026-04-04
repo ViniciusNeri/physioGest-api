@@ -5,7 +5,7 @@ export declare class AgendaRepository implements IAgendaRepository {
     findAll(): Promise<Agenda[]>;
     findByUserId(userId: string): Promise<Agenda[]>;
     findByPatientId(patientId: string): Promise<Agenda[]>;
-    hasOverlap(userId: string, startDate: Date, endDate: Date, excludeId?: string): Promise<boolean>;
+    hasOverlap(userId: string, patientId: string, startDate: Date, endDate: Date, excludeId?: string): Promise<boolean>;
     create(agenda: Agenda): Promise<Agenda>;
     update(id: string, agenda: Partial<Agenda>): Promise<Agenda | null>;
     delete(id: string): Promise<boolean>;

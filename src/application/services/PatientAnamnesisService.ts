@@ -3,12 +3,15 @@ import type { IPatientAnamnesisRepository } from "../../domain/interfaces/IPatie
 import type { IPatientAnamnesisService } from "../../domain/services/IPatientSubdomainServices.js";
 import type { PatientAnamnesis } from "../../domain/entities/PatientSubdomains.js";
 import logger from "../../infrastructure/logging/Logger.js";
+import type { IPatientActivityService } from "../../domain/services/IPatientActivityService.js";
 
 @injectable()
 export class PatientAnamnesisService implements IPatientAnamnesisService {
   constructor(
     @inject("IPatientAnamnesisRepository")
-    private repository: IPatientAnamnesisRepository
+    private repository: IPatientAnamnesisRepository,
+    @inject("IPatientActivityService")
+    private activityService: IPatientActivityService
   ) {}
 
   async getPatientAnamnesis(patientId: string): Promise<PatientAnamnesis[]> {
@@ -46,6 +49,16 @@ export class PatientAnamnesisService implements IPatientAnamnesisService {
 
     try {
       const newAnamnesis = await this.repository.create(anamnesis);
+      
+      // Registra atividade
+      await this.activityService.logActivity({
+        patientId: newAnamnesis.patientId,
+        userId: newAnamnesis.userId || "",
+        type: 'anamnesis_updated',
+        description: `Anamnese criada`,
+        metadata: { anamnesisId: newAnamnesis.id }
+      }).catch(err => logger.error("Erro ao logar atividade (create anamnesis)", err));
+
       logger.info("Anamnese criada com sucesso", { anamnesisId: newAnamnesis.id, patientId: anamnesis.patientId });
       return newAnamnesis;
     } catch (error) {
@@ -60,6 +73,15 @@ export class PatientAnamnesisService implements IPatientAnamnesisService {
     try {
       const updatedAnamnesis = await this.repository.update(id, anamnesis);
       if (updatedAnamnesis) {
+        // Registra atividade
+        await this.activityService.logActivity({
+          patientId: updatedAnamnesis.patientId,
+          userId: updatedAnamnesis.userId || "",
+          type: 'anamnesis_updated',
+          description: `Anamnese atualizada`,
+          metadata: { anamnesisId: id }
+        }).catch(err => logger.error("Erro ao logar atividade (update anamnesis)", err));
+
         logger.info("Anamnese atualizada com sucesso", { anamnesisId: id });
       } else {
         logger.warn("Anamnese não encontrada para atualização", { anamnesisId: id });

@@ -55,23 +55,19 @@ export class PatientRepository implements IPatientRepository {
     return patients.map(patient => {
       const pAgendas = agendaByPatient.get(patient.id!) || [];
       let completedCount = 0;
-      let noShowCount = 0;
+      let cancelledCount = 0;
       let nextAppt: Date | null = null;
 
       pAgendas.forEach(a => {
         if (a.status === 'completed') completedCount++;
-        if (a.status === 'no_show') noShowCount++;
+        if (a.status === 'cancelled') cancelledCount++;
 
         if (a.status === 'scheduled') {
-          const agDate = new Date(a.date);
-          if (a.time) {
-            const [hours, minutes] = a.time.split(':');
-            agDate.setHours(parseInt(hours, 10), parseInt(minutes, 10), 0, 0);
-          }
-
-          if (agDate >= now) {
-            if (!nextAppt || agDate < nextAppt) {
-              nextAppt = agDate;
+          const startDate = a.startDate ? new Date(a.startDate) : null;
+          
+          if (startDate && startDate >= now) {
+            if (!nextAppt || startDate < nextAppt) {
+              nextAppt = startDate;
             }
           }
         }
@@ -80,7 +76,7 @@ export class PatientRepository implements IPatientRepository {
       return {
         ...patient,
         completedAppointments: completedCount,
-        noShowAppointments: noShowCount,
+        cancelledAppointments: cancelledCount,
         nextAppointmentDate: nextAppt
       };
     });

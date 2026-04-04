@@ -15,9 +15,11 @@ import logger from "../../infrastructure/logging/Logger.js";
 let PatientFinancialService = class PatientFinancialService {
     repository;
     agendaRepository;
-    constructor(repository, agendaRepository) {
+    activityService;
+    constructor(repository, agendaRepository, activityService) {
         this.repository = repository;
         this.agendaRepository = agendaRepository;
+        this.activityService = activityService;
     }
     async getPatientFinancial(patientId) {
         logger.debug("Buscando financeiro do paciente", { patientId });
@@ -52,6 +54,14 @@ let PatientFinancialService = class PatientFinancialService {
         logger.debug("Criando novo registro financeiro", { patientId: financial.patientId, type: financial.type });
         try {
             const newFinancial = await this.repository.create(financial);
+            // Registra atividade
+            await this.activityService.logActivity({
+                patientId: newFinancial.patientId,
+                userId: newFinancial.userId || "", // Precisamos garantir que temos o userId
+                type: newFinancial.status === 'paid' ? 'payment_paid' : 'payment_pending',
+                description: `Pagamento ${newFinancial.status === 'paid' ? 'realizado' : 'pendente'}: R$ ${newFinancial.amount.toFixed(2)}`,
+                metadata: { financialId: newFinancial.id }
+            }).catch(err => logger.error("Erro ao logar atividade (create financial)", err));
             logger.info("Registro financeiro criado com sucesso", {
                 financialId: newFinancial.id,
                 patientId: financial.patientId,
@@ -180,6 +190,14 @@ let PatientFinancialService = class PatientFinancialService {
             }
             const updatedFinancial = await this.repository.update(id, updates);
             if (updatedFinancial) {
+                // Registra atividade
+                await this.activityService.logActivity({
+                    patientId: updatedFinancial.patientId,
+                    userId: updatedFinancial.userId || "",
+                    type: 'payment_paid',
+                    description: `Pagamento realizado: R$ ${updatedFinancial.amount.toFixed(2)}`,
+                    metadata: { financialId: id }
+                }).catch(err => logger.error("Erro ao logar atividade (pay financial)", err));
                 logger.info("Registro financeiro marcado como pago com sucesso", { financialId: id });
             }
             else {
@@ -197,7 +215,8 @@ PatientFinancialService = __decorate([
     injectable(),
     __param(0, inject("IPatientFinancialRepository")),
     __param(1, inject("IAgendaRepository")),
-    __metadata("design:paramtypes", [Object, Object])
+    __param(2, inject("IPatientActivityService")),
+    __metadata("design:paramtypes", [Object, Object, Object])
 ], PatientFinancialService);
 export { PatientFinancialService };
 //# sourceMappingURL=PatientFinancialService.js.map

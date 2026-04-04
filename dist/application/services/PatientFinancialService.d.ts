@@ -2,10 +2,12 @@ import type { IPatientFinancialRepository } from "../../domain/interfaces/IPatie
 import type { IAgendaRepository } from "../../domain/interfaces/IAgendaRepository.js";
 import type { IPatientFinancialService } from "../../domain/services/IPatientSubdomainServices.js";
 import type { PatientFinancial, PatientFinancialSummary } from "../../domain/entities/PatientSubdomains.js";
+import type { IPatientActivityService } from "../../domain/services/IPatientActivityService.js";
 export declare class PatientFinancialService implements IPatientFinancialService {
     private repository;
     private agendaRepository;
-    constructor(repository: IPatientFinancialRepository, agendaRepository: IAgendaRepository);
+    private activityService;
+    constructor(repository: IPatientFinancialRepository, agendaRepository: IAgendaRepository, activityService: IPatientActivityService);
     getPatientFinancial(patientId: string): Promise<PatientFinancial[]>;
     getFinancialById(id: string): Promise<PatientFinancial | null>;
     createFinancial(financial: Omit<PatientFinancial, 'id'>): Promise<PatientFinancial>;

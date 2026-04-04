@@ -12,5 +12,9 @@ export interface Agenda {
     patient?: {
         name: string;
     };
+    categoryName?: string;
+    category?: {
+        name: string;
+    };
 }
 //# sourceMappingURL=Agenda.d.ts.map

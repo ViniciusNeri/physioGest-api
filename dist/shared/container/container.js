@@ -10,6 +10,7 @@ import { PatientAttachmentRepository } from "../../infrastructure/database/repos
 import { CategoryRepository } from "../../infrastructure/database/repositories/CategoryRepository.js";
 import { PaymentMethodRepository } from "../../infrastructure/database/repositories/PaymentMethodRepository.js";
 import { SettingRepository } from "../../infrastructure/database/repositories/SettingRepository.js";
+import { PatientActivityRepository } from "../../infrastructure/database/repositories/PatientActivityRepository.js";
 import { AuthenticateService } from "../../application/services/AuthenticateService.js";
 import { UserService } from "../../application/services/UserService.js";
 import { AgendaService } from "../../application/services/AgendaService.js";
@@ -22,6 +23,7 @@ import { PatientAttachmentService } from "../../application/services/PatientAtta
 import { CategoryService } from "../../application/services/CategoryService.js";
 import { PaymentMethodService } from "../../application/services/PaymentMethodService.js";
 import { SettingService } from "../../application/services/SettingService.js";
+import { PatientActivityService } from "../../application/services/PatientActivityService.js";
 import Logger from "../../infrastructure/logging/Logger.js";
 import { GoogleProvider } from "../../infrastructure/external/GoogleProvider.js";
 import { EmailProvider } from "../../infrastructure/external/EmailProvider.js";
@@ -63,6 +65,9 @@ container.register("IPaymentMethodRepository", {
 container.register("ISettingRepository", {
     useClass: SettingRepository,
 });
+container.register("IPatientActivityRepository", {
+    useClass: PatientActivityRepository,
+});
 container.register("IAuthenticateService", {
     useClass: AuthenticateService,
 });
@@ -89,6 +94,9 @@ container.register("IPaymentMethodService", {
 });
 container.register("ISettingService", {
     useClass: SettingService,
+});
+container.register("IPatientActivityService", {
+    useClass: PatientActivityService,
 });
 container.register("IPatientAnamnesisService", {
     useClass: PatientAnamnesisService,

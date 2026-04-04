@@ -29,13 +29,12 @@ export interface IAgendaRepository {
   findByPatientId(patientId: string): Promise<Agenda[]>;
 
   /**
-   * Verifica se há conflito de agendamento para um usuário em um determinado período
-   * @param userId - ID do usuário
+   * @param patientId - ID do paciente
    * @param startDate - Data inicial
    * @param endDate - Data final
    * @param excludeId - (Opcional) ID de agenda para ignorar (usado no update)
    */
-  hasOverlap(userId: string, startDate: Date, endDate: Date, excludeId?: string): Promise<boolean>;
+  hasOverlap(userId: string, patientId: string, startDate: Date, endDate: Date, excludeId?: string): Promise<boolean>;
 
   /**
    * Cria uma nova agenda

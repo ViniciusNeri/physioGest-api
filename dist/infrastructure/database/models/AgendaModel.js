@@ -5,7 +5,10 @@ const agendaSchema = new mongoose.Schema({
     userId: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    categoryId: { type: String },
+    categoryId: {
+        type: String,
+        set: (v) => v === "" ? null : v
+    },
     status: {
         type: String,
         enum: ['scheduled', 'completed', 'cancelled', 'no_show'],
@@ -24,6 +27,12 @@ agendaSchema.virtual('patient', {
     ref: 'Patient',
     localField: 'patientId',
     foreignField: 'id',
+    justOne: true
+});
+agendaSchema.virtual('category', {
+    ref: 'Category',
+    localField: 'categoryId',
+    foreignField: '_id',
     justOne: true
 });
 agendaSchema.set('toObject', { virtuals: true });

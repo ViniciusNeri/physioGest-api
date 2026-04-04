@@ -8,6 +8,7 @@ export interface Patient {
     profession?: string;
     observations?: string;
     completedAppointments?: number;
+    cancelledAppointments?: number;
     noShowAppointments?: number;
     nextAppointmentDate?: Date | null;
     userId: string;

@@ -14,9 +14,26 @@ import { injectable, inject } from "tsyringe";
 let AgendaService = class AgendaService {
     repository;
     logger;
-    constructor(repository, logger) {
+    activityService;
+    constructor(repository, logger, activityService) {
         this.repository = repository;
         this.logger = logger;
+        this.activityService = activityService;
+    }
+    normalizeStatus(status) {
+        if (!status)
+            return status;
+        const mapping = {
+            'agendado': 'scheduled',
+            'realizado': 'completed',
+            'cancelado': 'cancelled',
+            'falta': 'no_show',
+            'scheduled': 'scheduled',
+            'completed': 'completed',
+            'cancelled': 'cancelled',
+            'no_show': 'no_show'
+        };
+        return mapping[status.toLowerCase()] || status;
     }
     async getAgendaById(id) {
         this.logger.info(`Buscando agenda por ID: ${id}`);
@@ -40,32 +57,80 @@ let AgendaService = class AgendaService {
             throw new Error("Erro: userId é obrigatório para registrar a agenda.");
         if (!agenda.startDate || !agenda.endDate)
             throw new Error("Erro: startDate e endDate são obrigatórios.");
+        // Normaliza o status se vier em português
+        if (agenda.status) {
+            agenda.status = this.normalizeStatus(agenda.status);
+        }
         const start = new Date(agenda.startDate);
         const end = new Date(agenda.endDate);
         if (isNaN(start.getTime()) || isNaN(end.getTime())) {
             throw new Error("Erro: Formato de startDate ou endDate inválidos.");
         }
-        const overlap = await this.repository.hasOverlap(agenda.userId, start, end);
+        console.log(`[AgendaService.create] Verificando conflito: ${start.toISOString()} - ${end.toISOString()} para usuário ${agenda.userId} e paciente ${agenda.patientId}`);
+        const overlap = await this.repository.hasOverlap(agenda.userId, agenda.patientId, start, end);
         if (overlap) {
+            console.log(`[AgendaService.create] Conflito impediu gravação.`);
             throw new Error("Horário indisponível. Já existe um agendamento para este período.");
         }
-        return this.repository.create(agenda);
+        const created = await this.repository.create(agenda);
+        // Registra atividade
+        await this.activityService.logActivity({
+            patientId: created.patientId,
+            userId: created.userId,
+            type: 'appointment_created',
+            description: `Agendamento criado para ${new Date(created.startDate).toLocaleDateString('pt-BR')}`,
+            metadata: { agendaId: created.id }
+        }).catch(err => this.logger.error("Erro ao logar atividade (create agenda)", err));
+        return created;
     }
     async updateAgenda(id, agenda) {
         this.logger.info(`Atualizando agenda: ${id}`);
+        // Normaliza o status se vier em português
+        if (agenda.status) {
+            agenda.status = this.normalizeStatus(agenda.status);
+        }
         // Se o update inclui intervalo de data, validar novamente
         if (agenda.startDate || agenda.endDate) {
             const existing = await this.repository.findById(id);
             if (existing) {
                 const start = agenda.startDate ? new Date(agenda.startDate) : existing.startDate;
                 const end = agenda.endDate ? new Date(agenda.endDate) : existing.endDate;
-                const overlap = await this.repository.hasOverlap(existing.userId, start, end, id);
+                const patientId = agenda.patientId || existing.patientId;
+                console.log(`[AgendaService.update] Verificando conflito para update: ${start.toISOString()} - ${end.toISOString()} (excluindo ID ${id})`);
+                const overlap = await this.repository.hasOverlap(existing.userId, patientId, start, end, id);
                 if (overlap) {
+                    console.log(`[AgendaService.update] Conflito impediu atualização.`);
                     throw new Error("Horário indisponível. Já existe um agendamento para este período.");
                 }
             }
         }
-        return this.repository.update(id, agenda);
+        const updated = await this.repository.update(id, agenda);
+        if (updated && agenda.status) {
+            let activityType = null;
+            let description = "";
+            if (agenda.status === 'completed') {
+                activityType = 'appointment_completed';
+                description = "Atendimento realizado";
+            }
+            else if (agenda.status === 'cancelled') {
+                activityType = 'appointment_cancelled';
+                description = "Atendimento cancelado";
+            }
+            else if (agenda.status === 'no_show') {
+                activityType = 'appointment_no_show';
+                description = "Falta (Paciente não compareceu)";
+            }
+            if (activityType) {
+                await this.activityService.logActivity({
+                    patientId: updated.patientId,
+                    userId: updated.userId,
+                    type: activityType,
+                    description,
+                    metadata: { agendaId: id }
+                }).catch(err => this.logger.error("Erro ao logar atividade (update agenda)", err));
+            }
+        }
+        return updated;
     }
     async deleteAgenda(id) {
         this.logger.info(`Deletando agenda: ${id}`);
@@ -76,7 +141,8 @@ AgendaService = __decorate([
     injectable(),
     __param(0, inject("IAgendaRepository")),
     __param(1, inject("Logger")),
-    __metadata("design:paramtypes", [Object, Object])
+    __param(2, inject("IPatientActivityService")),
+    __metadata("design:paramtypes", [Object, Object, Object])
 ], AgendaService);
 export { AgendaService };
 //# sourceMappingURL=AgendaService.js.map

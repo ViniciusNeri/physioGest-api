@@ -8,24 +8,32 @@ import PatientFinancialModel from "../models/PatientFinancialModel.js";
 @injectable()
 export class DashboardRepository implements IDashboardRepository {
   async getWeeklyAppointmentsCount(userId: string): Promise<number> {
-    const now = new Date();
-    const startOfWeek = new Date(now);
-    startOfWeek.setDate(now.getDate() - now.getDay()); // Domingo da semana atual
-    startOfWeek.setHours(0, 0, 0, 0);
+    const spTodayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(new Date());
+    const todayLocal = new Date(`${spTodayStr}T12:00:00-03:00`); // 12:00 do dia em SP
 
-    const endOfWeek = new Date(startOfWeek);
-    endOfWeek.setDate(startOfWeek.getDate() + 6); // Sábado da semana atual
-    endOfWeek.setHours(23, 59, 59, 999);
+    const startOfWeek = new Date(todayLocal);
+    startOfWeek.setHours(0, 0, 0, 0); // Começa zerado o objeto que representa o dia local
+    startOfWeek.setDate(todayLocal.getDate() - todayLocal.getDay());
 
-    const count = await AgendaModel.countDocuments({
-      userId,
-      status: { $nin: ['cancelled', 'no_show'] },
+    // Reinicializar para garantir o 00:00 daquele dia
+    const startOfWeekUTC = new Date(`${new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(startOfWeek)}T00:00:00-03:00`);
+
+    const endOfWeek = new Date(startOfWeekUTC);
+    endOfWeek.setDate(startOfWeekUTC.getDate() + 6);
+    const endOfWeekUTC = new Date(`${new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(endOfWeek)}T23:59:59-03:00`);
+
+    const query: any = {
+      $or: [
+        { userId },
+        { userId: null }
+      ],
       startDate: {
-        $gte: startOfWeek,
-        $lte: endOfWeek
+        $gte: startOfWeekUTC,
+        $lte: endOfWeekUTC
       }
-    });
+    };
 
+    const count = await AgendaModel.countDocuments(query);
     return count;
   }
 
@@ -82,16 +90,11 @@ export class DashboardRepository implements IDashboardRepository {
   }
 
   async getActivePaymentsCount(userId: string): Promise<number> {
-    // Considera pagamentos ativos como aqueles do mês atual (ou vencidos) que ainda não foram pagos
+    // Considera apenas pagamentos pendentes dos pacientes (vencidos ou do mês atual)
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 
-    const generalCountPromise = FinancialModel.countDocuments({
-      userId,
-      date: { $gte: startOfMonth }
-    });
-
-    const patientCountPromise = PatientFinancialModel.countDocuments({
+    const patientCount = await PatientFinancialModel.countDocuments({
       userId,
       status: 'pending',
       $or: [
@@ -100,29 +103,32 @@ export class DashboardRepository implements IDashboardRepository {
       ]
     });
 
-    const [generalCount, patientCount] = await Promise.all([generalCountPromise, patientCountPromise]);
-
-    return generalCount + patientCount;
+    return patientCount;
   }
 
   async getTodaysAppointments(userId: string): Promise<DashboardData['todaysAppointments']> {
-    const today = new Date();
-    const startOfDay = new Date(today);
-    startOfDay.setHours(0, 0, 0, 0);
+    const now = new Date();
+    const dateStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(now);
+    
+    // ISO Strings com offset garantem que o Mongoose compare no instante UTC correspondente
+    const startOfDay = new Date(`${dateStr}T00:00:00-03:00`);
+    const endOfDay = new Date(`${dateStr}T23:59:59-03:00`);
 
-    const endOfDay = new Date(today);
-    endOfDay.setHours(23, 59, 59, 999);
-
-    const appointments = await AgendaModel.find({
-      userId,
-      status: { $nin: ['cancelled', 'no_show'] },
+    const query: any = {
+      $or: [
+        { userId },
+        { userId: null }
+      ],
       startDate: {
         $gte: startOfDay,
         $lte: endOfDay
       }
-    })
+    };
+
+    const appointments = await AgendaModel.find(query)
     .populate('patient', 'name')
-    .select('id startDate patientId categoryId description patient')
+    .populate('category', 'name')
+    .select('id startDate patientId categoryId description patient status category notes')
     .lean({ virtuals: true })
     .sort({ startDate: 1 });
 
@@ -135,7 +141,10 @@ export class DashboardRepository implements IDashboardRepository {
       patientId: appointment.patientId,
       patientName: appointment.patient?.name || "",
       categoryId: appointment.categoryId || "",
-      description: appointment.description || ""
+      categoryName: appointment.category?.name || "",
+      status: appointment.status || "scheduled",
+      description: appointment.description || "",
+      notes: appointment.notes || ""
     }));
   }
 
@@ -143,30 +152,37 @@ export class DashboardRepository implements IDashboardRepository {
     const now = new Date();
 
     const appointment = await AgendaModel.findOne({
-      userId,
-      status: { $nin: ['cancelled', 'no_show'] },
+      $or: [
+        { userId },
+        { userId: null }
+      ],
+      status: 'scheduled',
       startDate: { $gte: now }
     })
     .populate('patient', 'name')
-    .select('id startDate patientId categoryId description patient')
+    .populate('category', 'name')
+    .select('id startDate patientId categoryId description patient status category')
     .lean({ virtuals: true })
-    .sort({ startDate: 1 })
-    .limit(1);
+    .sort({ startDate: 1 });
 
     if (!appointment) {
       return null;
     }
 
     const formatter = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit' });
+    const app = appointment as any;
 
     return {
-      id: appointment.id || appointment._id.toString(),
-      date: appointment.startDate,
-      time: formatter.format(appointment.startDate),
-      patientId: appointment.patientId,
-      patientName: (appointment as any).patient?.name || "",
-      categoryId: appointment.categoryId || "",
-      description: appointment.description || ""
+      id: app.id || app._id.toString(),
+      date: app.startDate,
+      time: formatter.format(app.startDate),
+      patientId: app.patientId,
+      patientName: app.patient?.name || "",
+      categoryId: app.categoryId || "",
+      categoryName: app.category?.name || "",
+      status: app.status || "scheduled",
+      description: app.description || "",
+      notes: app.notes || ""
     };
   }
 }

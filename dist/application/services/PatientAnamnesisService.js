@@ -14,8 +14,10 @@ import { injectable, inject } from "tsyringe";
 import logger from "../../infrastructure/logging/Logger.js";
 let PatientAnamnesisService = class PatientAnamnesisService {
     repository;
-    constructor(repository) {
+    activityService;
+    constructor(repository, activityService) {
         this.repository = repository;
+        this.activityService = activityService;
     }
     async getPatientAnamnesis(patientId) {
         logger.debug("Buscando anamneses do paciente", { patientId });
@@ -50,6 +52,14 @@ let PatientAnamnesisService = class PatientAnamnesisService {
         logger.debug("Criando nova anamnese", { patientId: anamnesis.patientId });
         try {
             const newAnamnesis = await this.repository.create(anamnesis);
+            // Registra atividade
+            await this.activityService.logActivity({
+                patientId: newAnamnesis.patientId,
+                userId: newAnamnesis.userId || "",
+                type: 'anamnesis_updated',
+                description: `Anamnese criada`,
+                metadata: { anamnesisId: newAnamnesis.id }
+            }).catch(err => logger.error("Erro ao logar atividade (create anamnesis)", err));
             logger.info("Anamnese criada com sucesso", { anamnesisId: newAnamnesis.id, patientId: anamnesis.patientId });
             return newAnamnesis;
         }
@@ -63,6 +73,14 @@ let PatientAnamnesisService = class PatientAnamnesisService {
         try {
             const updatedAnamnesis = await this.repository.update(id, anamnesis);
             if (updatedAnamnesis) {
+                // Registra atividade
+                await this.activityService.logActivity({
+                    patientId: updatedAnamnesis.patientId,
+                    userId: updatedAnamnesis.userId || "",
+                    type: 'anamnesis_updated',
+                    description: `Anamnese atualizada`,
+                    metadata: { anamnesisId: id }
+                }).catch(err => logger.error("Erro ao logar atividade (update anamnesis)", err));
                 logger.info("Anamnese atualizada com sucesso", { anamnesisId: id });
             }
             else {
@@ -113,7 +131,8 @@ let PatientAnamnesisService = class PatientAnamnesisService {
 PatientAnamnesisService = __decorate([
     injectable(),
     __param(0, inject("IPatientAnamnesisRepository")),
-    __metadata("design:paramtypes", [Object])
+    __param(1, inject("IPatientActivityService")),
+    __metadata("design:paramtypes", [Object, Object])
 ], PatientAnamnesisService);
 export { PatientAnamnesisService };
 //# sourceMappingURL=PatientAnamnesisService.js.map
