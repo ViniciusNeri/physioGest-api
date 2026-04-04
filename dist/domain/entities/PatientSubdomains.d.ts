@@ -1,14 +1,3 @@
-export interface PatientAgenda {
-    id?: string;
-    patientId: string;
-    userId: string;
-    date: Date;
-    time: string;
-    description?: string;
-    status: 'scheduled' | 'completed' | 'cancelled' | 'no_show';
-    notes?: string;
-    duration?: number;
-}
 export interface PatientAnamnesis {
     id?: string;
     patientId: string;
@@ -19,10 +8,13 @@ export interface PatientAnamnesis {
     pastMedicalHistory: string;
     familyHistory?: string;
     socialHistory?: string;
+    currentMedications?: string;
     reviewOfSystems?: string;
     physicalExamination?: string;
     assessment?: string;
     plan?: string;
+    height?: number;
+    weight?: number;
     notes?: string;
 }
 export interface PatientFinancial {
@@ -34,6 +26,7 @@ export interface PatientFinancial {
     category: string;
     description: string;
     amount: number;
+    totalSessions?: number;
     paymentMethod?: 'cash' | 'credit_card' | 'debit_card' | 'pix' | 'bank_transfer' | 'check' | 'other';
     status: 'pending' | 'paid' | 'cancelled' | 'refunded';
     dueDate?: Date;
@@ -52,5 +45,11 @@ export interface PatientAttachment {
     category?: string;
     description?: string;
     uploadedAt: Date;
+}
+export interface PatientFinancialSummary {
+    outstandingBalance: number;
+    totalSessions: number;
+    totalPaidAmount: number;
+    payments: PatientFinancial[];
 }
 //# sourceMappingURL=PatientSubdomains.d.ts.map

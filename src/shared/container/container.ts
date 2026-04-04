@@ -6,7 +6,7 @@ import type { IAgendaRepository } from "../../domain/interfaces/IAgendaRepositor
 import type { IFinancialRepository } from "../../domain/interfaces/IFinancialRepository.js";
 import type { IPatientRepository } from "../../domain/interfaces/IPatientRepository.js";
 import type { IDashboardRepository } from "../../domain/interfaces/IDashboardRepository.js";
-import type { IPatientAgendaRepository, IPatientAnamnesisRepository, IPatientFinancialRepository, IPatientAttachmentRepository } from "../../domain/interfaces/IPatientSubdomainRepositories.js";
+import type { IPatientAnamnesisRepository, IPatientFinancialRepository, IPatientAttachmentRepository } from "../../domain/interfaces/IPatientSubdomainRepositories.js";
 import type { ICategoryRepository } from "../../domain/interfaces/ICategoryRepository.js";
 import type { IPaymentMethodRepository } from "../../domain/interfaces/IPaymentMethodRepository.js";
 import type { ISettingRepository } from "../../domain/interfaces/ISettingRepository.js";
@@ -15,7 +15,6 @@ import { AgendaRepository } from "../../infrastructure/database/repositories/Age
 import { FinancialRepository } from "../../infrastructure/database/repositories/FinancialRepository.js";
 import { PatientRepository } from "../../infrastructure/database/repositories/PatientRepository.js";
 import { DashboardRepository } from "../../infrastructure/database/repositories/DashboardRepository.js";
-import { PatientAgendaRepository } from "../../infrastructure/database/repositories/PatientAgendaRepository.js";
 import { PatientAnamnesisRepository } from "../../infrastructure/database/repositories/PatientAnamnesisRepository.js";
 import { PatientFinancialRepository } from "../../infrastructure/database/repositories/PatientFinancialRepository.js";
 import { PatientAttachmentRepository } from "../../infrastructure/database/repositories/PatientAttachmentRepository.js";
@@ -28,7 +27,7 @@ import type { IAgendaService } from "../../domain/services/IAgendaService.js";
 import type { IFinancialService } from "../../domain/services/IFinancialService.js";
 import type { IPatientService } from "../../domain/services/IPatientService.js";
 import type { IDashboardService } from "../../domain/services/IDashboardService.js";
-import type { IPatientAgendaService, IPatientAnamnesisService, IPatientFinancialService, IPatientAttachmentService } from "../../domain/services/IPatientSubdomainServices.js";
+import type { IPatientAnamnesisService, IPatientFinancialService, IPatientAttachmentService } from "../../domain/services/IPatientSubdomainServices.js";
 import type { ICategoryService } from "../../domain/services/ICategoryService.js";
 import type { IPaymentMethodService } from "../../domain/services/IPaymentMethodService.js";
 import type { ISettingService } from "../../domain/services/ISettingService.js";
@@ -38,7 +37,6 @@ import { AgendaService } from "../../application/services/AgendaService.js";
 import { FinancialService } from "../../application/services/FinancialService.js";
 import { PatientService } from "../../application/services/PatientService.js";
 import { DashboardService } from "../../application/services/DashboardService.js";
-import { PatientAgendaService } from "../../application/services/PatientAgendaService.js";
 import { PatientAnamnesisService } from "../../application/services/PatientAnamnesisService.js";
 import { PatientFinancialService } from "../../application/services/PatientFinancialService.js";
 import { PatientAttachmentService } from "../../application/services/PatientAttachmentService.js";
@@ -74,10 +72,6 @@ container.register<IPatientRepository>("IPatientRepository", {
 
 container.register<IDashboardRepository>("IDashboardRepository", {
   useClass: DashboardRepository,
-});
-
-container.register<IPatientAgendaRepository>("IPatientAgendaRepository", {
-  useClass: PatientAgendaRepository,
 });
 
 container.register<IPatientAnamnesisRepository>("IPatientAnamnesisRepository", {
@@ -138,10 +132,6 @@ container.register<IPaymentMethodService>("IPaymentMethodService", {
 
 container.register<ISettingService>("ISettingService", {
   useClass: SettingService,
-});
-
-container.register<IPatientAgendaService>("IPatientAgendaService", {
-  useClass: PatientAgendaService,
 });
 
 container.register<IPatientAnamnesisService>("IPatientAnamnesisService", {

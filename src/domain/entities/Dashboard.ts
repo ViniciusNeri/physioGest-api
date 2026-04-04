@@ -7,6 +7,8 @@ export interface DashboardData {
     date: Date;
     time: string;
     patientId: string;
+    patientName?: string;
+    categoryId?: string;
     description: string;
   }>;
   nextAppointment: {
@@ -14,6 +16,8 @@ export interface DashboardData {
     date: Date;
     time: string;
     patientId: string;
+    patientName?: string;
+    categoryId?: string;
     description: string;
   } | null;
 }

@@ -14,8 +14,10 @@ import { injectable, inject } from "tsyringe";
 import logger from "../../infrastructure/logging/Logger.js";
 let PatientFinancialService = class PatientFinancialService {
     repository;
-    constructor(repository) {
+    agendaRepository;
+    constructor(repository, agendaRepository) {
         this.repository = repository;
+        this.agendaRepository = agendaRepository;
     }
     async getPatientFinancial(patientId) {
         logger.debug("Buscando financeiro do paciente", { patientId });
@@ -132,11 +134,70 @@ let PatientFinancialService = class PatientFinancialService {
             throw error;
         }
     }
+    async getFinancialSummary(patientId) {
+        logger.debug("Gerando resumo financeiro do paciente", { patientId });
+        try {
+            const financialRecords = await this.repository.findByPatientId(patientId);
+            const agendas = await this.agendaRepository.findByPatientId(patientId);
+            let outstandingBalance = 0;
+            let totalPaidAmount = 0;
+            let totalContractedSessions = 0;
+            financialRecords.forEach(record => {
+                if (record.status === 'pending') {
+                    outstandingBalance += record.amount;
+                }
+                else if (record.status === 'paid') {
+                    totalPaidAmount += record.amount;
+                }
+                // Soma sessões apenas de entradas (income)
+                if (record.type === 'income' && record.totalSessions) {
+                    totalContractedSessions += record.totalSessions;
+                }
+            });
+            const completedSessions = agendas.filter(a => a.status === 'completed').length;
+            const remainingSessions = Math.max(0, totalContractedSessions - completedSessions);
+            return {
+                outstandingBalance,
+                totalSessions: remainingSessions,
+                totalPaidAmount,
+                payments: financialRecords
+            };
+        }
+        catch (error) {
+            logger.error("Erro ao gerar resumo financeiro", error, { patientId });
+            throw error;
+        }
+    }
+    async payFinancial(id, paymentMethod) {
+        logger.debug("Marcando registro financeiro como pago", { financialId: id });
+        try {
+            const updates = {
+                status: 'paid',
+                paymentDate: new Date()
+            };
+            if (paymentMethod) {
+                updates.paymentMethod = paymentMethod;
+            }
+            const updatedFinancial = await this.repository.update(id, updates);
+            if (updatedFinancial) {
+                logger.info("Registro financeiro marcado como pago com sucesso", { financialId: id });
+            }
+            else {
+                logger.warn("Registro financeiro não encontrado para pagamento", { financialId: id });
+            }
+            return updatedFinancial;
+        }
+        catch (error) {
+            logger.error("Erro ao marcar registro financeiro como pago", error, { financialId: id });
+            throw error;
+        }
+    }
 };
 PatientFinancialService = __decorate([
     injectable(),
     __param(0, inject("IPatientFinancialRepository")),
-    __metadata("design:paramtypes", [Object])
+    __param(1, inject("IAgendaRepository")),
+    __metadata("design:paramtypes", [Object, Object])
 ], PatientFinancialService);
 export { PatientFinancialService };
 //# sourceMappingURL=PatientFinancialService.js.map

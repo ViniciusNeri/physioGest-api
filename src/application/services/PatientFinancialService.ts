@@ -1,5 +1,6 @@
 import { injectable, inject } from "tsyringe";
-import type { IPatientFinancialRepository, IPatientAgendaRepository } from "../../domain/interfaces/IPatientSubdomainRepositories.js";
+import type { IPatientFinancialRepository } from "../../domain/interfaces/IPatientSubdomainRepositories.js";
+import type { IAgendaRepository } from "../../domain/interfaces/IAgendaRepository.js";
 import type { IPatientFinancialService } from "../../domain/services/IPatientSubdomainServices.js";
 import type { PatientFinancial, PatientFinancialSummary } from "../../domain/entities/PatientSubdomains.js";
 import logger from "../../infrastructure/logging/Logger.js";
@@ -9,8 +10,8 @@ export class PatientFinancialService implements IPatientFinancialService {
   constructor(
     @inject("IPatientFinancialRepository")
     private repository: IPatientFinancialRepository,
-    @inject("IPatientAgendaRepository")
-    private agendaRepository: IPatientAgendaRepository
+    @inject("IAgendaRepository")
+    private agendaRepository: IAgendaRepository
   ) {}
 
   async getPatientFinancial(patientId: string): Promise<PatientFinancial[]> {

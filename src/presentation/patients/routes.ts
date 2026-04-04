@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { patientController } from "./controllers/PatientController.js";
 import { JwtAuthService } from "../../infrastructure/auth/JwtAuthService.js";
-import patientAgendaRoutes from "./agenda/routes.js";
 import patientAnamnesisRoutes from "./anamnesis/routes.js";
 import patientFinancialRoutes from "./financial/routes.js";
 import patientAttachmentRoutes from "./attachments/routes.js";
@@ -81,7 +80,6 @@ patientRoutes.put("/:id", (req, res) => patientController.update(req, res));
 patientRoutes.delete("/:id", (req, res) => patientController.delete(req, res));
 
 // Rotas dos subdomínios dos pacientes
-patientRoutes.use("/", patientAgendaRoutes);
 patientRoutes.use("/", patientAnamnesisRoutes);
 patientRoutes.use("/", patientFinancialRoutes);
 patientRoutes.use("/", patientAttachmentRoutes);

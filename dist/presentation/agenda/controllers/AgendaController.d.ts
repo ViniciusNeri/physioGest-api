@@ -54,6 +54,34 @@ export declare class AgendaController {
     getByUserId: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
+     * /agendas/patient/{patientId}:
+     *   get:
+     *     summary: Lista agendas por paciente
+     *     tags: [Agendas]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: patientId
+     *         required: true
+     *         schema:
+     *           type: string
+     *         description: ID do paciente
+     *     responses:
+     *       200:
+     *         description: Lista de agendas do paciente
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: array
+     *               items:
+     *                 $ref: '#/components/schemas/Agenda'
+     *       500:
+     *         description: Erro interno do servidor
+     */
+    getByPatientId: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
+    /**
+     * @swagger
      * /agendas/{id}:
      *   get:
      *     summary: Busca uma agenda por ID
@@ -95,22 +123,29 @@ export declare class AgendaController {
      *           schema:
      *             type: object
      *             required:
-     *               - date
-     *               - time
      *               - patientId
-     *               - description
      *               - userId
+     *               - startDate
+     *               - endDate
      *             properties:
-     *               date:
+     *               startDate:
      *                 type: string
-     *                 format: date
-     *               time:
+     *                 format: date-time
+     *               endDate:
      *                 type: string
+     *                 format: date-time
      *               patientId:
      *                 type: string
+     *               userId:
+     *                 type: string
+     *               categoryId:
+     *                 type: string
+     *               status:
+     *                 type: string
+     *                 enum: ['scheduled', 'completed', 'cancelled', 'no_show']
      *               description:
      *                 type: string
-     *               userId:
+     *               notes:
      *                 type: string
      *     responses:
      *       201:
@@ -147,16 +182,24 @@ export declare class AgendaController {
      *           schema:
      *             type: object
      *             properties:
-     *               date:
+     *               startDate:
      *                 type: string
-     *                 format: date
-     *               time:
+     *                 format: date-time
+     *               endDate:
      *                 type: string
+     *                 format: date-time
      *               patientId:
      *                 type: string
+     *               userId:
+     *                 type: string
+     *               categoryId:
+     *                 type: string
+     *               status:
+     *                 type: string
+     *                 enum: ['scheduled', 'completed', 'cancelled', 'no_show']
      *               description:
      *                 type: string
-     *               userId:
+     *               notes:
      *                 type: string
      *     responses:
      *       200:

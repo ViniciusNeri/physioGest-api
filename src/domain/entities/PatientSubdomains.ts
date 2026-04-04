@@ -1,15 +1,3 @@
-export interface PatientAgenda {
-  id?: string;
-  patientId: string;
-  userId: string;
-  date: Date;
-  time: string;
-  description?: string;
-  status: 'scheduled' | 'completed' | 'cancelled' | 'no_show';
-  notes?: string;
-  duration?: number; // em minutos
-}
-
 export interface PatientAnamnesis {
   id?: string;
   patientId: string;

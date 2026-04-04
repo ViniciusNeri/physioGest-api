@@ -9,6 +9,7 @@ export declare class AgendaService implements IAgendaService {
     getAgendaById(id: string): Promise<Agenda | null>;
     getAllAgendas(): Promise<Agenda[]>;
     getAgendasByUserId(userId: string): Promise<Agenda[]>;
+    getAgendasByPatientId(patientId: string): Promise<Agenda[]>;
     createAgenda(agenda: Omit<Agenda, 'id'>): Promise<Agenda>;
     updateAgenda(id: string, agenda: Partial<Agenda>): Promise<Agenda | null>;
     deleteAgenda(id: string): Promise<boolean>;

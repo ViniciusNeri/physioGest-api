@@ -91,6 +91,46 @@ export declare class PatientFinancialController {
     getPendingPayments: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
+     * /patients/{patientId}/financial/summary:
+     *   get:
+     *     summary: Busca o resumo financeiro do paciente
+     *     tags: [Patient Financial]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: patientId
+     *         required: true
+     *         schema:
+     *           type: string
+     *         description: ID do paciente
+     *     responses:
+     *       200:
+     *         description: Resumo financeiro gerado com sucesso
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: object
+     *               properties:
+     *                 outstandingBalance:
+     *                   type: number
+     *                   description: Saldo devedor (pendente)
+     *                 totalSessions:
+     *                   type: number
+     *                   description: Total de sessões restantes (contratadas - realizadas)
+     *                 totalPaidAmount:
+     *                   type: number
+     *                   description: Total de valor pago
+     *                 payments:
+     *                   type: array
+     *                   items:
+     *                     $ref: '#/components/schemas/PatientFinancial'
+     *       500:
+     *         description: Erro interno do servidor
+     */
+    getFinancialSummary: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
+    /**
+     * @swagger
      * /patients/{patientId}/financial/{id}:
      *   get:
      *     summary: Busca registro financeiro específico
@@ -157,6 +197,50 @@ export declare class PatientFinancialController {
      *         description: Erro interno do servidor
      */
     createFinancial: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
+    /**
+     * @swagger
+     * /patients/{patientId}/financial/{id}/pay:
+     *   patch:
+     *     summary: Marca um registro financeiro como pago
+     *     tags: [Patient Financial]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: patientId
+     *         required: true
+     *         schema:
+     *           type: string
+     *         description: ID do paciente
+     *       - in: path
+     *         name: id
+     *         required: true
+     *         schema:
+     *           type: string
+     *         description: ID do registro financeiro
+     *     requestBody:
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               paymentMethod:
+     *                 type: string
+     *                 enum: [cash, credit_card, debit_card, bank_transfer, check, pix, other]
+     *                 description: Método de pagamento opcional
+     *     responses:
+     *       200:
+     *         description: Registro marcado como pago com sucesso
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/PatientFinancial'
+     *       404:
+     *         description: Registro não encontrado
+     *       500:
+     *         description: Erro interno do servidor
+     */
+    payFinancial: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     /**
      * @swagger
      * /patients/{patientId}/financial/{id}:

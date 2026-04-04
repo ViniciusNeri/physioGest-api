@@ -1,4 +1,5 @@
 import { container } from "tsyringe";
+import { convertAgendaDates, convertAgendaArrayDates } from "../../../utils/dateUtils.js";
 export class AgendaController {
     service;
     logger;
@@ -30,7 +31,7 @@ export class AgendaController {
         try {
             this.logger.info("Listando todas as agendas");
             const agendas = await this.service.getAllAgendas();
-            return res.status(200).json(agendas);
+            return res.status(200).json(convertAgendaArrayDates(agendas));
         }
         catch (error) {
             this.logger.error("Erro ao listar agendas", error);
@@ -72,10 +73,52 @@ export class AgendaController {
             }
             this.logger.info(`Listando agendas do usuário: ${userId}`);
             const agendas = await this.service.getAgendasByUserId(userId);
-            return res.status(200).json(agendas);
+            return res.status(200).json(convertAgendaArrayDates(agendas));
         }
         catch (error) {
             this.logger.error("Erro ao listar agendas do usuário", error);
+            return res.status(500).json({ message: error.message });
+        }
+    };
+    /**
+     * @swagger
+     * /agendas/patient/{patientId}:
+     *   get:
+     *     summary: Lista agendas por paciente
+     *     tags: [Agendas]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: patientId
+     *         required: true
+     *         schema:
+     *           type: string
+     *         description: ID do paciente
+     *     responses:
+     *       200:
+     *         description: Lista de agendas do paciente
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: array
+     *               items:
+     *                 $ref: '#/components/schemas/Agenda'
+     *       500:
+     *         description: Erro interno do servidor
+     */
+    getByPatientId = async (req, res) => {
+        try {
+            const { patientId } = req.params;
+            if (!patientId) {
+                return res.status(400).json({ message: "patientId é obrigatório" });
+            }
+            this.logger.info(`Listando agendas do paciente: ${patientId}`);
+            const agendas = await this.service.getAgendasByPatientId(patientId);
+            return res.status(200).json(convertAgendaArrayDates(agendas));
+        }
+        catch (error) {
+            this.logger.error("Erro ao listar agendas do paciente", error);
             return res.status(500).json({ message: error.message });
         }
     };
@@ -117,7 +160,7 @@ export class AgendaController {
             if (!agenda) {
                 return res.status(404).json({ message: "Agenda não encontrada" });
             }
-            return res.status(200).json(agenda);
+            return res.status(200).json(convertAgendaDates(agenda));
         }
         catch (error) {
             this.logger.error("Erro ao buscar agenda", error);
@@ -139,22 +182,29 @@ export class AgendaController {
      *           schema:
      *             type: object
      *             required:
-     *               - date
-     *               - time
      *               - patientId
-     *               - description
      *               - userId
+     *               - startDate
+     *               - endDate
      *             properties:
-     *               date:
+     *               startDate:
      *                 type: string
-     *                 format: date
-     *               time:
+     *                 format: date-time
+     *               endDate:
      *                 type: string
+     *                 format: date-time
      *               patientId:
      *                 type: string
+     *               userId:
+     *                 type: string
+     *               categoryId:
+     *                 type: string
+     *               status:
+     *                 type: string
+     *                 enum: ['scheduled', 'completed', 'cancelled', 'no_show']
      *               description:
      *                 type: string
-     *               userId:
+     *               notes:
      *                 type: string
      *     responses:
      *       201:
@@ -173,7 +223,7 @@ export class AgendaController {
             const agendaData = req.body;
             this.logger.info(`Criando agenda para usuário: ${agendaData.userId}`);
             const agenda = await this.service.createAgenda(agendaData);
-            return res.status(201).json(agenda);
+            return res.status(201).json(convertAgendaDates(agenda));
         }
         catch (error) {
             this.logger.error("Erro ao criar agenda", error);
@@ -202,16 +252,24 @@ export class AgendaController {
      *           schema:
      *             type: object
      *             properties:
-     *               date:
+     *               startDate:
      *                 type: string
-     *                 format: date
-     *               time:
+     *                 format: date-time
+     *               endDate:
      *                 type: string
+     *                 format: date-time
      *               patientId:
      *                 type: string
+     *               userId:
+     *                 type: string
+     *               categoryId:
+     *                 type: string
+     *               status:
+     *                 type: string
+     *                 enum: ['scheduled', 'completed', 'cancelled', 'no_show']
      *               description:
      *                 type: string
-     *               userId:
+     *               notes:
      *                 type: string
      *     responses:
      *       200:
@@ -237,7 +295,7 @@ export class AgendaController {
             if (!agenda) {
                 return res.status(404).json({ message: "Agenda não encontrada" });
             }
-            return res.status(200).json(agenda);
+            return res.status(200).json(convertAgendaDates(agenda));
         }
         catch (error) {
             this.logger.error("Erro ao atualizar agenda", error);

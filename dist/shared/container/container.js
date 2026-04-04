@@ -4,7 +4,6 @@ import { AgendaRepository } from "../../infrastructure/database/repositories/Age
 import { FinancialRepository } from "../../infrastructure/database/repositories/FinancialRepository.js";
 import { PatientRepository } from "../../infrastructure/database/repositories/PatientRepository.js";
 import { DashboardRepository } from "../../infrastructure/database/repositories/DashboardRepository.js";
-import { PatientAgendaRepository } from "../../infrastructure/database/repositories/PatientAgendaRepository.js";
 import { PatientAnamnesisRepository } from "../../infrastructure/database/repositories/PatientAnamnesisRepository.js";
 import { PatientFinancialRepository } from "../../infrastructure/database/repositories/PatientFinancialRepository.js";
 import { PatientAttachmentRepository } from "../../infrastructure/database/repositories/PatientAttachmentRepository.js";
@@ -17,7 +16,6 @@ import { AgendaService } from "../../application/services/AgendaService.js";
 import { FinancialService } from "../../application/services/FinancialService.js";
 import { PatientService } from "../../application/services/PatientService.js";
 import { DashboardService } from "../../application/services/DashboardService.js";
-import { PatientAgendaService } from "../../application/services/PatientAgendaService.js";
 import { PatientAnamnesisService } from "../../application/services/PatientAnamnesisService.js";
 import { PatientFinancialService } from "../../application/services/PatientFinancialService.js";
 import { PatientAttachmentService } from "../../application/services/PatientAttachmentService.js";
@@ -46,9 +44,6 @@ container.register("IPatientRepository", {
 });
 container.register("IDashboardRepository", {
     useClass: DashboardRepository,
-});
-container.register("IPatientAgendaRepository", {
-    useClass: PatientAgendaRepository,
 });
 container.register("IPatientAnamnesisRepository", {
     useClass: PatientAnamnesisRepository,
@@ -94,9 +89,6 @@ container.register("IPaymentMethodService", {
 });
 container.register("ISettingService", {
     useClass: SettingService,
-});
-container.register("IPatientAgendaService", {
-    useClass: PatientAgendaService,
 });
 container.register("IPatientAnamnesisService", {
     useClass: PatientAnamnesisService,

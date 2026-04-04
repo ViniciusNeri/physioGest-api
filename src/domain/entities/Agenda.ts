@@ -1,8 +1,13 @@
 export interface Agenda {
   id?: string;
-  date: Date;
-  time: string;
   patientId: string;
-  description: string;
   userId: string;
+  startDate: Date;
+  endDate: Date;
+  categoryId?: string;
+  status: 'scheduled' | 'completed' | 'cancelled' | 'no_show';
+  description?: string;
+  notes?: string;
+  patientName?: string;
+  patient?: { name: string };
 }

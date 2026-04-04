@@ -7,5 +7,6 @@ export declare class PatientRepository implements IPatientRepository {
     create(patient: Omit<Patient, 'id'>): Promise<Patient>;
     update(id: string, patient: Partial<Patient>): Promise<Patient | null>;
     delete(id: string): Promise<boolean>;
+    private enrichWithAgendaStats;
 }
 //# sourceMappingURL=PatientRepository.d.ts.map

@@ -18,6 +18,12 @@ export interface IAgendaService {
      */
     getAgendasByUserId(userId: string): Promise<Agenda[]>;
     /**
+     * Busca agendas por paciente
+     * @param patientId - ID do paciente
+     * @returns Lista de agendas
+     */
+    getAgendasByPatientId(patientId: string): Promise<Agenda[]>;
+    /**
      * Cria uma nova agenda
      * @param agenda - dados da agenda
      * @returns Agenda criada

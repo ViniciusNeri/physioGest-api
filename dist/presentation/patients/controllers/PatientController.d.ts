@@ -108,6 +108,13 @@ export declare class PatientController {
      *               birthDate:
      *                 type: string
      *                 format: date
+     *               gender:
+     *                 type: string
+     *                 enum: [male, female, other]
+     *               profession:
+     *                 type: string
+     *               observations:
+     *                 type: string
      *               userId:
      *                 type: string
      *     responses:
@@ -155,6 +162,13 @@ export declare class PatientController {
      *               birthDate:
      *                 type: string
      *                 format: date
+     *               gender:
+     *                 type: string
+     *                 enum: [male, female, other]
+     *               profession:
+     *                 type: string
+     *               observations:
+     *                 type: string
      *     responses:
      *       200:
      *         description: Paciente atualizado

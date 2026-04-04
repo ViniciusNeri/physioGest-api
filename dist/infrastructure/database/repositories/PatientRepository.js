@@ -6,15 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { injectable } from "tsyringe";
 import PatientModel from "../models/PatientModel.js";
+import AgendaModel from "../models/AgendaModel.js";
 let PatientRepository = class PatientRepository {
     async findById(id) {
         return PatientModel.findById(id).lean({ virtuals: true }).exec();
     }
     async findByUserId(userId) {
-        return PatientModel.find({ userId }).lean({ virtuals: true }).exec();
+        const patients = await PatientModel.find({ userId }).lean({ virtuals: true }).exec();
+        return this.enrichWithAgendaStats(patients);
     }
     async findAll() {
-        return PatientModel.find().lean({ virtuals: true }).exec();
+        const patients = await PatientModel.find().lean({ virtuals: true }).exec();
+        return this.enrichWithAgendaStats(patients);
     }
     async create(patient) {
         const newPatient = new PatientModel(patient);
@@ -27,6 +30,50 @@ let PatientRepository = class PatientRepository {
     async delete(id) {
         const result = await PatientModel.findByIdAndDelete(id).exec();
         return result !== null;
+    }
+    async enrichWithAgendaStats(patients) {
+        if (!patients.length)
+            return [];
+        const patientIds = patients.map(p => p.id).filter(Boolean);
+        const agendas = await AgendaModel.find({ patientId: { $in: patientIds } }).lean().exec();
+        const agendaByPatient = new Map();
+        agendas.forEach(a => {
+            if (!agendaByPatient.has(a.patientId)) {
+                agendaByPatient.set(a.patientId, []);
+            }
+            agendaByPatient.get(a.patientId).push(a);
+        });
+        const now = new Date();
+        return patients.map(patient => {
+            const pAgendas = agendaByPatient.get(patient.id) || [];
+            let completedCount = 0;
+            let noShowCount = 0;
+            let nextAppt = null;
+            pAgendas.forEach(a => {
+                if (a.status === 'completed')
+                    completedCount++;
+                if (a.status === 'no_show')
+                    noShowCount++;
+                if (a.status === 'scheduled') {
+                    const agDate = new Date(a.date);
+                    if (a.time) {
+                        const [hours, minutes] = a.time.split(':');
+                        agDate.setHours(parseInt(hours, 10), parseInt(minutes, 10), 0, 0);
+                    }
+                    if (agDate >= now) {
+                        if (!nextAppt || agDate < nextAppt) {
+                            nextAppt = agDate;
+                        }
+                    }
+                }
+            });
+            return {
+                ...patient,
+                completedAppointments: completedCount,
+                noShowAppointments: noShowCount,
+                nextAppointmentDate: nextAppt
+            };
+        });
     }
 };
 PatientRepository = __decorate([

@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import { container } from "tsyringe";
 import type { IPatientFinancialService } from "../../../domain/services/IPatientSubdomainServices.js";
 import type { ILogger } from "../../../infrastructure/logging/Logger.js";
+import { convertFinancialDates, convertFinancialArrayDates } from "../../../utils/dateUtils.js";
 
 export class PatientFinancialController {
   private service: IPatientFinancialService;
@@ -47,7 +48,7 @@ export class PatientFinancialController {
       }
       this.logger.info("Listando registros financeiros do paciente", { patientId });
       const financial = await this.service.getPatientFinancial(patientId as string);
-      return res.status(200).json(financial);
+      return res.status(200).json(convertFinancialArrayDates(financial));
     } catch (error: any) {
       this.logger.error("Erro ao listar registros financeiros", error, { patientId: req.params.patientId });
       return res.status(500).json({ message: error.message });
@@ -133,7 +134,7 @@ export class PatientFinancialController {
       }
       this.logger.info("Listando pagamentos pendentes", { patientId });
       const payments = await this.service.getPendingPayments(patientId as string);
-      return res.status(200).json(payments);
+      return res.status(200).json(convertFinancialArrayDates(payments));
     } catch (error: any) {
       this.logger.error("Erro ao listar pagamentos pendentes", error, { patientId: req.params.patientId });
       return res.status(500).json({ message: error.message });
@@ -187,7 +188,10 @@ export class PatientFinancialController {
       }
       this.logger.info("Gerando resumo financeiro do paciente", { patientId });
       const summary = await this.service.getFinancialSummary(patientId as string);
-      return res.status(200).json(summary);
+      return res.status(200).json({
+        ...summary,
+        payments: convertFinancialArrayDates(summary.payments)
+      });
     } catch (error: any) {
       this.logger.error("Erro ao gerar resumo financeiro", error, { patientId: req.params.patientId });
       return res.status(500).json({ message: error.message });
@@ -238,7 +242,7 @@ export class PatientFinancialController {
       if (!financial) {
         return res.status(404).json({ message: "Registro financeiro não encontrado" });
       }
-      return res.status(200).json(financial);
+      return res.status(200).json(convertFinancialDates(financial));
     } catch (error: any) {
       this.logger.error("Erro ao buscar registro financeiro", error, { financialId: req.params.id });
       return res.status(500).json({ message: error.message });
@@ -289,7 +293,7 @@ export class PatientFinancialController {
 
       this.logger.info("Criando registro financeiro", { patientId, type: financialData.type, amount: financialData.amount });
       const financial = await this.service.createFinancial(financialData);
-      return res.status(201).json(financial);
+      return res.status(201).json(convertFinancialDates(financial));
     } catch (error: any) {
       this.logger.error("Erro ao criar registro financeiro", error, { patientId: req.params.patientId });
       return res.status(500).json({ message: error.message });
@@ -351,7 +355,7 @@ export class PatientFinancialController {
       if (!financial) {
         return res.status(404).json({ message: "Registro financeiro não encontrado" });
       }
-      return res.status(200).json(financial);
+      return res.status(200).json(convertFinancialDates(financial));
     } catch (error: any) {
       this.logger.error("Erro ao marcar como pago", error, { financialId: req.params.id });
       return res.status(500).json({ message: error.message });
@@ -413,7 +417,7 @@ export class PatientFinancialController {
       if (!financial) {
         return res.status(404).json({ message: "Registro financeiro não encontrado" });
       }
-      return res.status(200).json(financial);
+      return res.status(200).json(convertFinancialDates(financial));
     } catch (error: any) {
       this.logger.error("Erro ao atualizar registro financeiro", error, { financialId: req.params.id });
       return res.status(500).json({ message: error.message });

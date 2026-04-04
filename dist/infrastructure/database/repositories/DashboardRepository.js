@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { injectable } from "tsyringe";
 import AgendaModel from "../models/AgendaModel.js";
 import FinancialModel from "../models/FinancialModel.js";
+import PatientFinancialModel from "../models/PatientFinancialModel.js";
 let DashboardRepository = class DashboardRepository {
     async getWeeklyAppointmentsCount(userId) {
         const now = new Date();
@@ -18,7 +19,8 @@ let DashboardRepository = class DashboardRepository {
         endOfWeek.setHours(23, 59, 59, 999);
         const count = await AgendaModel.countDocuments({
             userId,
-            date: {
+            status: { $nin: ['cancelled', 'no_show'] },
+            startDate: {
                 $gte: startOfWeek,
                 $lte: endOfWeek
             }
@@ -29,7 +31,7 @@ let DashboardRepository = class DashboardRepository {
         const now = new Date();
         const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
         const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
-        const result = await FinancialModel.aggregate([
+        const generalIncomePromise = FinancialModel.aggregate([
             {
                 $match: {
                     userId,
@@ -47,18 +49,48 @@ let DashboardRepository = class DashboardRepository {
                 }
             }
         ]);
-        return result.length > 0 ? result[0].total : 0;
+        const patientIncomePromise = PatientFinancialModel.aggregate([
+            {
+                $match: {
+                    userId,
+                    type: 'income',
+                    status: 'paid',
+                    date: {
+                        $gte: startOfMonth,
+                        $lte: endOfMonth
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: null,
+                    total: { $sum: '$amount' }
+                }
+            }
+        ]);
+        const [generalIncome, patientIncome] = await Promise.all([generalIncomePromise, patientIncomePromise]);
+        const generalTotal = generalIncome.length > 0 ? generalIncome[0].total : 0;
+        const patientTotal = patientIncome.length > 0 ? patientIncome[0].total : 0;
+        return generalTotal + patientTotal;
     }
     async getActivePaymentsCount(userId) {
-        // Considera pagamentos ativos como aqueles do mês atual que ainda não foram pagos
-        // Como não temos campo de status, vamos contar todos os pagamentos do mês atual
+        // Considera pagamentos ativos como aqueles do mês atual (ou vencidos) que ainda não foram pagos
         const now = new Date();
         const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-        const count = await FinancialModel.countDocuments({
+        const generalCountPromise = FinancialModel.countDocuments({
             userId,
             date: { $gte: startOfMonth }
         });
-        return count;
+        const patientCountPromise = PatientFinancialModel.countDocuments({
+            userId,
+            status: 'pending',
+            $or: [
+                { dueDate: { $lte: now } },
+                { date: { $gte: startOfMonth } }
+            ]
+        });
+        const [generalCount, patientCount] = await Promise.all([generalCountPromise, patientCountPromise]);
+        return generalCount + patientCount;
     }
     async getTodaysAppointments(userId) {
         const today = new Date();
@@ -68,41 +100,51 @@ let DashboardRepository = class DashboardRepository {
         endOfDay.setHours(23, 59, 59, 999);
         const appointments = await AgendaModel.find({
             userId,
-            date: {
+            status: { $nin: ['cancelled', 'no_show'] },
+            startDate: {
                 $gte: startOfDay,
                 $lte: endOfDay
             }
         })
-            .select('id date time patientId description')
-            .lean()
-            .sort({ time: 1 });
-        return appointments.map(appointment => ({
+            .populate('patient', 'name')
+            .select('id startDate patientId categoryId description patient')
+            .lean({ virtuals: true })
+            .sort({ startDate: 1 });
+        const formatter = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit' });
+        return appointments.map((appointment) => ({
             id: appointment.id || appointment._id.toString(),
-            date: appointment.date,
-            time: appointment.time,
+            date: appointment.startDate,
+            time: formatter.format(appointment.startDate),
             patientId: appointment.patientId,
-            description: appointment.description
+            patientName: appointment.patient?.name || "",
+            categoryId: appointment.categoryId || "",
+            description: appointment.description || ""
         }));
     }
     async getNextAppointment(userId) {
         const now = new Date();
         const appointment = await AgendaModel.findOne({
             userId,
-            date: { $gte: now }
+            status: { $nin: ['cancelled', 'no_show'] },
+            startDate: { $gte: now }
         })
-            .select('id date time patientId description')
-            .lean()
-            .sort({ date: 1, time: 1 })
+            .populate('patient', 'name')
+            .select('id startDate patientId categoryId description patient')
+            .lean({ virtuals: true })
+            .sort({ startDate: 1 })
             .limit(1);
         if (!appointment) {
             return null;
         }
+        const formatter = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit' });
         return {
             id: appointment.id || appointment._id.toString(),
-            date: appointment.date,
-            time: appointment.time,
+            date: appointment.startDate,
+            time: formatter.format(appointment.startDate),
             patientId: appointment.patientId,
-            description: appointment.description
+            patientName: appointment.patient?.name || "",
+            categoryId: appointment.categoryId || "",
+            description: appointment.description || ""
         };
     }
 };

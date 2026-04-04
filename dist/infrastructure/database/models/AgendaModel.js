@@ -1,11 +1,18 @@
 import mongoose from "mongoose";
 const agendaSchema = new mongoose.Schema({
     id: { type: String },
-    date: { type: Date, required: true },
-    time: { type: String, required: true },
     patientId: { type: String, required: true },
-    description: { type: String, required: true },
     userId: { type: String, required: true },
+    startDate: { type: Date, required: true },
+    endDate: { type: Date, required: true },
+    categoryId: { type: String },
+    status: {
+        type: String,
+        enum: ['scheduled', 'completed', 'cancelled', 'no_show'],
+        default: 'scheduled'
+    },
+    description: { type: String },
+    notes: { type: String },
 }, { timestamps: true });
 // @ts-ignore
 agendaSchema.pre('save', function () {
@@ -13,6 +20,14 @@ agendaSchema.pre('save', function () {
         this.id = this._id.toString();
     }
 });
+agendaSchema.virtual('patient', {
+    ref: 'Patient',
+    localField: 'patientId',
+    foreignField: 'id',
+    justOne: true
+});
+agendaSchema.set('toObject', { virtuals: true });
+agendaSchema.set('toJSON', { virtuals: true });
 const AgendaModel = mongoose.model("Agenda", agendaSchema);
 export default AgendaModel;
 //# sourceMappingURL=AgendaModel.js.map

@@ -1,13 +1,4 @@
-import type { PatientAgenda, PatientAnamnesis, PatientFinancial, PatientAttachment } from "../entities/PatientSubdomains.js";
-export interface IPatientAgendaService {
-    getPatientAgenda(patientId: string): Promise<PatientAgenda[]>;
-    getAgendaById(id: string): Promise<PatientAgenda | null>;
-    createAgenda(agenda: Omit<PatientAgenda, 'id'>): Promise<PatientAgenda>;
-    updateAgenda(id: string, agenda: Partial<PatientAgenda>): Promise<PatientAgenda | null>;
-    deleteAgenda(id: string): Promise<boolean>;
-    getUpcomingAgenda(patientId: string, limit?: number): Promise<PatientAgenda[]>;
-    getAgendaByDateRange(patientId: string, startDate: Date, endDate: Date): Promise<PatientAgenda[]>;
-}
+import type { PatientAnamnesis, PatientFinancial, PatientAttachment, PatientFinancialSummary } from "../entities/PatientSubdomains.js";
 export interface IPatientAnamnesisService {
     getPatientAnamnesis(patientId: string): Promise<PatientAnamnesis[]>;
     getAnamnesisById(id: string): Promise<PatientAnamnesis | null>;
@@ -25,6 +16,8 @@ export interface IPatientFinancialService {
     getPatientBalance(patientId: string): Promise<number>;
     getPendingPayments(patientId: string): Promise<PatientFinancial[]>;
     getFinancialByDateRange(patientId: string, startDate: Date, endDate: Date): Promise<PatientFinancial[]>;
+    getFinancialSummary(patientId: string): Promise<PatientFinancialSummary>;
+    payFinancial(id: string, paymentMethod?: string): Promise<PatientFinancial | null>;
 }
 export interface IPatientAttachmentService {
     getPatientAttachments(patientId: string): Promise<PatientAttachment[]>;
