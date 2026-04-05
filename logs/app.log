@@ -58791,3 +58791,295 @@
     url: "/consolidated?userId=69c0a278b97db3310cf73dd3&month=4&year=2026"
     statusCode: 304
     duration: "22ms"
+[2026-04-05 02:45:58.607 -0300] INFO: [REQUEST] GET /v1/patients/user/69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+    requestId: "etiquy"
+    method: "GET"
+    url: "/v1/patients/user/69c0a278b97db3310cf73dd3"
+    path: "/v1/patients/user/69c0a278b97db3310cf73dd3"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-05 02:45:58.609 -0300] INFO: Listando pacientes por userId: 69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 02:45:58.609 -0300] DEBUG: Buscando pacientes por userId
+    env: "development"
+    service: "physioGest-api"
+    userId: "69c0a278b97db3310cf73dd3"
+[2026-04-05 02:45:58.623 -0300] INFO: Pacientes encontrados
+    env: "development"
+    service: "physioGest-api"
+    userId: "69c0a278b97db3310cf73dd3"
+    count: 2
+[2026-04-05 02:45:58.624 -0300] INFO: [RESPONSE] GET /user/69c0a278b97db3310cf73dd3 - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "etiquy"
+    method: "GET"
+    url: "/user/69c0a278b97db3310cf73dd3"
+    statusCode: 304
+    duration: "17ms"
+[2026-04-05 02:45:58.734 -0300] INFO: [REQUEST] GET /v1/categories/user/69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+    requestId: "igqimh"
+    method: "GET"
+    url: "/v1/categories/user/69c0a278b97db3310cf73dd3"
+    path: "/v1/categories/user/69c0a278b97db3310cf73dd3"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-05 02:45:58.737 -0300] INFO: Buscando categorias por usuário
+    env: "development"
+    service: "physioGest-api"
+    userId: "69c0a278b97db3310cf73dd3"
+[2026-04-05 02:45:58.737 -0300] INFO: Buscando categorias por usuário: 69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 02:45:58.745 -0300] INFO: [RESPONSE] GET /user/69c0a278b97db3310cf73dd3 - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "igqimh"
+    method: "GET"
+    url: "/user/69c0a278b97db3310cf73dd3"
+    statusCode: 304
+    duration: "11ms"
+[2026-04-05 02:45:58.860 -0300] INFO: [REQUEST] GET /v1/agendas/user/69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+    requestId: "cdqko9"
+    method: "GET"
+    url: "/v1/agendas/user/69c0a278b97db3310cf73dd3"
+    path: "/v1/agendas/user/69c0a278b97db3310cf73dd3"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-05 02:45:58.862 -0300] INFO: Listando agendas do usuário: 69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 02:45:58.862 -0300] INFO: Buscando agendas por usuário: 69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 02:45:58.945 -0300] INFO: [RESPONSE] GET /user/69c0a278b97db3310cf73dd3 - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "cdqko9"
+    method: "GET"
+    url: "/user/69c0a278b97db3310cf73dd3"
+    statusCode: 200
+    duration: "85ms"
+    contentLength: "4245"
+[2026-04-05 02:46:10.788 -0300] INFO: [REQUEST] GET /v1/settings
+    env: "development"
+    service: "physioGest-api"
+    requestId: "ijllp8"
+    method: "GET"
+    url: "/v1/settings"
+    path: "/v1/settings"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-05 02:46:10.789 -0300] INFO: Listando todas as configurações
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 02:46:10.789 -0300] INFO: Buscando todas as configurações
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 02:46:10.798 -0300] INFO: [REQUEST] GET /v1/dashboard
+    env: "development"
+    service: "physioGest-api"
+    requestId: "8mwpi8"
+    method: "GET"
+    url: "/v1/dashboard"
+    path: "/v1/dashboard"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-05 02:46:10.800 -0300] INFO: Buscando dados do dashboard para usuário: 69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 02:46:10.800 -0300] DEBUG: Buscando dados do dashboard
+    env: "development"
+    service: "physioGest-api"
+    userId: "69c0a278b97db3310cf73dd3"
+[2026-04-05 02:46:10.868 -0300] INFO: [RESPONSE] GET / - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "ijllp8"
+    method: "GET"
+    url: "/"
+    statusCode: 304
+    duration: "80ms"
+[2026-04-05 02:46:10.987 -0300] INFO: [REQUEST] GET /v1/categories/user/69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+    requestId: "2ba5q"
+    method: "GET"
+    url: "/v1/categories/user/69c0a278b97db3310cf73dd3"
+    path: "/v1/categories/user/69c0a278b97db3310cf73dd3"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-05 02:46:10.989 -0300] INFO: Buscando categorias por usuário
+    env: "development"
+    service: "physioGest-api"
+    userId: "69c0a278b97db3310cf73dd3"
+[2026-04-05 02:46:10.989 -0300] INFO: Buscando categorias por usuário: 69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 02:46:11.002 -0300] INFO: [REQUEST] GET /v1/payment-methods/user/69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+    requestId: "f8bmb8"
+    method: "GET"
+    url: "/v1/payment-methods/user/69c0a278b97db3310cf73dd3"
+    path: "/v1/payment-methods/user/69c0a278b97db3310cf73dd3"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-05 02:46:11.007 -0300] INFO: Buscando formas de pagamento por usuário: 69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 02:46:11.025 -0300] INFO: [RESPONSE] GET /user/69c0a278b97db3310cf73dd3 - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "f8bmb8"
+    method: "GET"
+    url: "/user/69c0a278b97db3310cf73dd3"
+    statusCode: 304
+    duration: "23ms"
+[2026-04-05 02:46:11.039 -0300] INFO: [RESPONSE] GET /user/69c0a278b97db3310cf73dd3 - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "2ba5q"
+    method: "GET"
+    url: "/user/69c0a278b97db3310cf73dd3"
+    statusCode: 304
+    duration: "51ms"
+[2026-04-05 02:46:11.077 -0300] INFO: Dados do dashboard obtidos com sucesso
+    env: "development"
+    service: "physioGest-api"
+    userId: "69c0a278b97db3310cf73dd3"
+    weeklyAppointments: 2
+    monthlyIncome: 2001
+    activePayments: 0
+    todaysAppointmentsCount: 2
+    hasNextAppointment: true
+[2026-04-05 02:46:11.078 -0300] INFO: [RESPONSE] GET / - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "8mwpi8"
+    method: "GET"
+    url: "/"
+    statusCode: 304
+    duration: "280ms"
+[2026-04-05 03:27:46.761 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-05 03:27:47.805 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-05 03:27:47.987 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 03:27:47.987 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 03:27:47.989 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 03:27:47.990 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 03:27:48.000 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 03:27:48.000 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 03:27:48.001 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-05 03:27:48.122 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "120ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-05 03:27:48.123 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 03:27:48.123 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 03:27:48.123 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-05 03:27:48.183 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+              at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-05 03:27:48.184 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-05 03:27:48.184 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"

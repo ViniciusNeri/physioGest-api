@@ -25,7 +25,6 @@
   "homepage": "https://github.com/ViniciusNeri/physioGest-api#readme",
   "dependencies": {
     "amqplib": "^0.10.4",
-    "axios": "^1.7.9",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
@@ -38,6 +37,7 @@
     "reflect-metadata": "^0.2.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
+    "@types/node": "^25.5.2",
     "tsyringe": "^4.10.0"
   },
   "devDependencies": {
@@ -46,7 +46,6 @@
     "@types/express": "^5.0.6",
     "@types/jest": "^29.5.12",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^25.5.2",
     "@types/supertest": "^6.0.2",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",

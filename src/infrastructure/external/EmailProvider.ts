@@ -1,4 +1,3 @@
-import axios from 'axios';
 import logger from '../logging/Logger.js';
 
 export interface EmailMessage {
@@ -34,44 +33,46 @@ export class EmailProvider {
     const startTime = Date.now();
 
     try {
-      const startTime = Date.now();
-
-      const response = await axios.post(
+      const response = await fetch(
         `${this.baseUrl}/smtp/email`,
         {
-          sender: {
-            name: 'PhysioGest',
-            email: process.env.BREVO_FROM_EMAIL || 'noreply@physiogest.com'
-          },
-          to: [{ email: message.to }],
-          subject: message.subject,
-          htmlContent: message.html,
-          textContent: message.text,
-        },
-        {
+          method: 'POST',
           headers: {
             'api-key': this.apiKey,
             'Content-Type': 'application/json',
           },
-          timeout: 30000, // 30 segundos
+          body: JSON.stringify({
+            sender: {
+              name: 'PhysioGest',
+              email: process.env.BREVO_FROM_EMAIL || 'noreply@physiogest.com'
+            },
+            to: [{ email: message.to }],
+            subject: message.subject,
+            htmlContent: message.html,
+            textContent: message.text,
+          }),
+          signal: AbortSignal.timeout(30000), // 30 segundos
         }
       );
 
       const duration = Date.now() - startTime;
+      const data = await response.json().catch(() => ({}));
 
       if (response.status === 201) {
         logger.info("Email enviado com sucesso via Brevo", {
           to: message.to,
           subject: message.subject,
-          messageId: response.data?.messageId,
+          messageId: data?.messageId,
           duration: `${duration}ms`
         });
       } else {
         logger.warn("Resposta inesperada do Brevo", {
           status: response.status,
           statusText: response.statusText,
-          to: message.to
+          to: message.to,
+          error: data
         });
+        throw new Error(`Unexpected status ${response.status}`);
       }
     } catch (error: any) {
       const duration = Date.now() - startTime;
@@ -80,9 +81,7 @@ export class EmailProvider {
         to: message.to,
         subject: message.subject,
         duration: `${duration}ms`,
-        status: error.response?.status,
-        statusText: error.response?.statusText,
-        errorMessage: error.response?.data?.message || error.message
+        errorMessage: error.message
       });
 
       throw new Error('Failed to send email');
