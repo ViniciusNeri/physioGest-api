@@ -5,25 +5,42 @@ import SettingModel from "../models/SettingModel.js";
 
 @injectable()
 export class SettingRepository implements ISettingRepository {
+  private mapSetting(doc: any): Setting | null {
+    if (!doc) return null;
+    
+    // Converte para objeto se for um documento Mongoose e adiciona id se faltar
+    const obj = doc.toObject ? doc.toObject({ virtuals: true }) : doc;
+    
+    return {
+      ...obj,
+      id: obj.id || obj._id?.toString()
+    } as Setting;
+  }
+
   async findById(id: string): Promise<Setting | null> {
-    return SettingModel.findById(id).lean<Setting>({ virtuals: true }).exec();
+    const doc = await SettingModel.findById(id).lean().exec();
+    return this.mapSetting(doc);
   }
 
   async findAll(): Promise<Setting[]> {
-    return SettingModel.find().lean<Setting[]>({ virtuals: true }).exec();
+    const docs = await SettingModel.find().lean().exec();
+    return docs.map(doc => this.mapSetting(doc) as Setting);
   }
 
   async findByUserId(userId: string): Promise<Setting | null> {
-    return SettingModel.findOne({ userId }).lean<Setting>({ virtuals: true }).exec();
+    const doc = await SettingModel.findOne({ userId }).lean().exec();
+    return this.mapSetting(doc);
   }
 
   async create(setting: Setting): Promise<Setting> {
     const newSetting = new SettingModel(setting);
-    return newSetting.save();
+    const saved = await newSetting.save();
+    return this.mapSetting(saved.toObject()) as Setting;
   }
 
   async update(id: string, setting: Partial<Setting>): Promise<Setting | null> {
-    return SettingModel.findByIdAndUpdate(id, setting, { new: true }).lean<Setting>({ virtuals: true }).exec();
+    const updated = await SettingModel.findByIdAndUpdate(id, setting, { new: true }).lean().exec();
+    return this.mapSetting(updated);
   }
 
   async delete(id: string): Promise<boolean> {
