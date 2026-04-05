@@ -74,9 +74,9 @@ export class UserController {
     try {
       const { id } = req.params;
       if (!id) {
-        return res.status(400).json({ message: "ID é obrigatório" });
+        return res.status(400).json({ message: "Identificador é obrigatório" });
       }
-      this.logger.info(`Buscando usuário por ID: ${id}`);
+      this.logger.info(`Buscando usuário por identificador: ${id}`);
       const user = await this.service.getUserById(id as string);
       if (!user) {
         return res.status(404).json({ message: "Usuário não encontrado" });
@@ -185,10 +185,10 @@ export class UserController {
     try {
       const { id } = req.params;
       if (!id) {
-        return res.status(400).json({ message: "ID é obrigatório" });
+        return res.status(400).json({ message: "Identificador é obrigatório" });
       }
       const updates = req.body;
-      this.logger.info(`Atualizando usuário: ${id}`);
+      this.logger.info(`Atualizando usuário por identificador: ${id}`);
       const user = await this.service.updateUser(id as string, updates);
       if (!user) {
         return res.status(404).json({ message: "Usuário não encontrado" });
@@ -227,9 +227,9 @@ export class UserController {
     try {
       const { id } = req.params;
       if (!id) {
-        return res.status(400).json({ message: "ID é obrigatório" });
+        return res.status(400).json({ message: "Identificador é obrigatório" });
       }
-      this.logger.info(`Deletando usuário: ${id}`);
+      this.logger.info(`Deletando usuário por identificador: ${id}`);
       const deleted = await this.service.deleteUser(id as string);
       if (!deleted) {
         return res.status(404).json({ message: "Usuário não encontrado" });

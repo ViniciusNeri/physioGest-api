@@ -59083,3 +59083,213 @@
     swaggerUrl: "http://localhost:3000/docs"
     environment: "development"
     logLevel: "debug"
+[2026-04-05 11:07:43.643 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-05 11:07:44.382 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-05 11:07:44.529 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:44.529 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:44.531 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:44.531 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:44.540 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:44.540 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:44.541 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-05 11:07:44.708 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "167ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-05 11:07:44.709 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:44.709 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:44.710 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-05 11:07:44.757 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-05 11:07:44.758 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-05 11:07:44.758 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-05 11:07:55.239 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-05 11:07:55.797 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-05 11:07:55.899 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:55.900 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:55.901 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:55.902 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:55.908 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:55.908 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:55.909 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-05 11:07:55.983 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "74ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-05 11:07:55.983 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:55.983 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-05 11:07:55.983 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-05 11:07:56.018 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-05 11:07:56.019 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-05 11:07:56.019 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"

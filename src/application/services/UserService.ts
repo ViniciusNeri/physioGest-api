@@ -13,7 +13,7 @@ export class UserService implements IUserService {
   ) {}
 
   async getUserById(id: string): Promise<User | null> {
-    logger.debug("Buscando usuário por ID", { userId: id });
+    logger.debug("Buscando usuário por identificador", { identifier: id });
 
     try {
       const user = await this.repository.findById(id);
@@ -24,7 +24,7 @@ export class UserService implements IUserService {
       }
       return user;
     } catch (error) {
-      logger.error("Erro ao buscar usuário por ID", error, { userId: id });
+      logger.error("Erro ao buscar usuário por identificador", error, { identifier: id });
       throw error;
     }
   }
@@ -76,7 +76,7 @@ export class UserService implements IUserService {
   }
 
   async updateUser(id: string, user: Partial<User>): Promise<User | null> {
-    logger.debug("Atualizando usuário", { userId: id, updates: Object.keys(user) });
+    logger.debug("Atualizando usuário", { identifier: id, updates: Object.keys(user) });
 
     try {
       if (user.password) {
@@ -98,13 +98,13 @@ export class UserService implements IUserService {
 
       return updatedUser;
     } catch (error) {
-      logger.error("Erro ao atualizar usuário", error, { userId: id });
+      logger.error("Erro ao atualizar usuário", error, { identifier: id });
       throw error;
     }
   }
 
   async deleteUser(id: string): Promise<boolean> {
-    logger.debug("Deletando usuário", { userId: id });
+    logger.debug("Deletando usuário", { identifier: id });
 
     try {
       const deleted = await this.repository.delete(id);
@@ -117,7 +117,7 @@ export class UserService implements IUserService {
 
       return deleted;
     } catch (error) {
-      logger.error("Erro ao deletar usuário", error, { userId: id });
+      logger.error("Erro ao deletar usuário", error, { identifier: id });
       throw error;
     }
   }
