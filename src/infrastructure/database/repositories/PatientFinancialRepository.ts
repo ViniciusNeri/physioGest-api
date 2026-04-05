@@ -83,6 +83,16 @@ export class PatientFinancialRepository implements IPatientFinancialRepository {
       .exec();
   }
 
+  async findByUserAndDate(userId: string, month: number, year: number): Promise<PatientFinancial[]> {
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+    
+    return PatientFinancialModel.find({ 
+      userId, 
+      date: { $gte: startDate, $lte: endDate } 
+    }).lean<PatientFinancial[]>({ virtuals: true }).exec();
+  }
+
   async findByDateRange(patientId: string, startDate: Date, endDate: Date): Promise<PatientFinancial[]> {
     return PatientFinancialModel.find({
       patientId,

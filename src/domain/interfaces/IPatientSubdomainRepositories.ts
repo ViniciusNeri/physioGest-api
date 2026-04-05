@@ -18,6 +18,7 @@ export interface IPatientFinancialRepository {
   getBalanceByPatientId(patientId: string): Promise<number>;
   findPendingPaymentsByPatientId(patientId: string): Promise<PatientFinancial[]>;
   findByDateRange(patientId: string, startDate: Date, endDate: Date): Promise<PatientFinancial[]>;
+  findByUserAndDate(userId: string, month: number, year: number): Promise<PatientFinancial[]>;
 }
 
 export interface IPatientAttachmentRepository {

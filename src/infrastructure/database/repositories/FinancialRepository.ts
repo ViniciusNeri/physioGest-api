@@ -17,6 +17,16 @@ export class FinancialRepository implements IFinancialRepository {
     return FinancialModel.find({ userId }).lean<Financial[]>({ virtuals: true }).exec();
   }
 
+  async findByFilters(userId: string, month: number, year: number): Promise<Financial[]> {
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+    
+    return FinancialModel.find({ 
+      userId, 
+      date: { $gte: startDate, $lte: endDate } 
+    }).lean<Financial[]>({ virtuals: true }).exec();
+  }
+
   async findByPatientId(patientId: string): Promise<Financial[]> {
     return FinancialModel.find({ patientId }).lean<Financial[]>({ virtuals: true }).exec();
   }

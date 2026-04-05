@@ -54,6 +54,7 @@ financialRoutes.use(JwtAuthService.authenticateToken);
  */
 
 financialRoutes.get("/", (req, res) => financialController.getAll(req, res));
+financialRoutes.get("/consolidated", (req, res) => financialController.getConsolidated(req, res));
 financialRoutes.get("/user/:userId", (req, res) => financialController.getByUserId(req, res));
 financialRoutes.get("/patient/:patientId", (req, res) => financialController.getByPatientId(req, res));
 financialRoutes.get("/:id", (req, res) => financialController.getById(req, res));
