@@ -16,6 +16,14 @@ let FinancialRepository = class FinancialRepository {
     async findByUserId(userId) {
         return FinancialModel.find({ userId }).lean({ virtuals: true }).exec();
     }
+    async findByFilters(userId, month, year) {
+        const startDate = new Date(year, month - 1, 1);
+        const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+        return FinancialModel.find({
+            userId,
+            date: { $gte: startDate, $lte: endDate }
+        }).lean({ virtuals: true }).exec();
+    }
     async findByPatientId(patientId) {
         return FinancialModel.find({ patientId }).lean({ virtuals: true }).exec();
     }

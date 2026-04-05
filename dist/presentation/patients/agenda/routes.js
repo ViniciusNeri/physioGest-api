@@ -1,6 +1,5 @@
 // import { Router } from "express";
 // import { PatientAgendaController } from "./PatientAgendaController.js";
-export {};
 // const patientAgendaRoutes = Router();
 // const controller = new PatientAgendaController();
 // /**

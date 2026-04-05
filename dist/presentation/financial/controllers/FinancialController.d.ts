@@ -5,6 +5,100 @@ export declare class FinancialController {
     constructor();
     /**
      * @swagger
+     * /financials/consolidated:
+     *   get:
+     *     summary: Retorna um resumo financeiro consolidado por mês e ano
+     *     tags: [Financials]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: query
+     *         name: userId
+     *         required: true
+     *         schema:
+     *           type: string
+     *         description: ID do usuário
+     *       - in: query
+     *         name: month
+     *         required: true
+     *         schema:
+     *           type: integer
+     *           minimum: 1
+     *           maximum: 12
+     *         description: Mês (1-12)
+     *       - in: query
+     *         name: year
+     *         required: true
+     *         schema:
+     *           type: integer
+     *         description: Ano (ex. 2023)
+     *     responses:
+     *       200:
+     *         description: Resumo financeiro consolidado
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: object
+     *               properties:
+     *                 monthlyTotal:
+     *                   type: number
+     *                 pendingTotal:
+     *                   type: number
+     *                 expenses:
+     *                   type: number
+     *                 variableExpenses:
+     *                   type: number
+     *                 netProfit:
+     *                   type: number
+     *                 totalIncome:
+     *                   type: number
+     *                 totalExpenses:
+     *                   type: number
+     *                 incomeByMethod:
+     *                   type: object
+     *                   additionalProperties:
+     *                     type: number
+     *                 expenseByMethod:
+     *                   type: object
+     *                   additionalProperties:
+     *                     type: number
+     *                 expensesByCategory:
+     *                   type: object
+     *                   additionalProperties:
+     *                     type: number
+     *                 cashFlow:
+     *                   type: array
+     *                   items:
+     *                     type: object
+     *                     properties:
+     *                       id:
+     *                         type: string
+     *                       source:
+     *                         type: string
+     *                         enum: [clinic, patient]
+     *                       date:
+     *                         type: string
+     *                         format: date-time
+     *                       amount:
+     *                         type: number
+     *                       type:
+     *                         type: string
+     *                       description:
+     *                         type: string
+     *                       category:
+     *                         type: string
+     *                       patientName:
+     *                         type: string
+     *                       status:
+     *                         type: string
+     *       400:
+     *         description: Dados inválidos
+     *       500:
+     *         description: Erro interno do servidor
+     */
+    getConsolidated: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
+    /**
+     * @swagger
      * /financials:
      *   get:
      *     summary: Lista todos os registros financeiros
@@ -132,6 +226,9 @@ export declare class FinancialController {
      *               type:
      *                 type: string
      *                 enum: [income, expense]
+     *               status:
+     *                 type: string
+     *                 enum: [pending, paid, cancelled, refunded]
      *               amount:
      *                 type: number
      *               date:
@@ -139,7 +236,17 @@ export declare class FinancialController {
      *                 format: date
      *               description:
      *                 type: string
+     *               category:
+     *                 type: string
+     *               expenseType:
+     *                 type: string
+     *                 enum: [fixed, variable]
+     *               paymentMethod:
+     *                 type: string
+     *                 enum: [cash, credit_card, debit_card, pix, bank_transfer, check, other]
      *               userId:
+     *                 type: string
+     *               patientId:
      *                 type: string
      *     responses:
      *       201:
@@ -179,6 +286,9 @@ export declare class FinancialController {
      *               type:
      *                 type: string
      *                 enum: [income, expense]
+     *               status:
+     *                 type: string
+     *                 enum: [pending, paid, cancelled, refunded]
      *               amount:
      *                 type: number
      *               date:
@@ -186,7 +296,17 @@ export declare class FinancialController {
      *                 format: date
      *               description:
      *                 type: string
+     *               category:
+     *                 type: string
+     *               expenseType:
+     *                 type: string
+     *                 enum: [fixed, variable]
+     *               paymentMethod:
+     *                 type: string
+     *                 enum: [cash, credit_card, debit_card, pix, bank_transfer, check, other]
      *               userId:
+     *                 type: string
+     *               patientId:
      *                 type: string
      *     responses:
      *       200:
@@ -216,6 +336,12 @@ export declare class FinancialController {
      *         schema:
      *           type: string
      *         description: ID do registro financeiro
+     *       - in: query
+     *         name: source
+     *         schema:
+     *           type: string
+     *           enum: [clinic, patient]
+     *         description: Origem do registro (clinic ou patient). Caso não informado, assume clinic.
      *     responses:
      *       200:
      *         description: Registro financeiro deletado

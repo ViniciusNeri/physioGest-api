@@ -1,5 +1,3 @@
-import { RabbitMQService } from "../messaging/RabbitMQService.js";
-import { EmailProvider } from "../external/EmailProvider.js";
 import logger from "../logging/Logger.js";
 export class EmailConsumerService {
     rabbitMQService;

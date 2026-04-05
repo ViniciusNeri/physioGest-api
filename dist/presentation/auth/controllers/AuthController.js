@@ -1,5 +1,4 @@
 import { container } from "tsyringe";
-import jwt from "jsonwebtoken";
 export class AuthenticateController {
     service;
     constructor() {

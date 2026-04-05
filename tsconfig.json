@@ -1,50 +1,32 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // File Layout
     "rootDir": "./src",
     "outDir": "./dist",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "NodeNext",
+    /* Configurações para Node Moderno (ESM) */
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "target": "ESNext",
-    "moduleResolution": "NodeNext",
-    "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
-    // Other Outputs
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-    // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": false,
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
-    // Recommended Options
+    "types": [
+      "node"
+    ],
+    /* Regras de Tolerância */
     "strict": false,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
-    "noImplicitAny": false
+    "isolatedModules": true,
+    "verbatimModuleSyntax": false, /* Desativamos isso para não dar erro nos imports */
+    "sourceMap": true
   },
+  "include": [
+    "src/**/*"
+  ],
   "exclude": [
-    "tests",
     "node_modules",
-    "dist"
+    "dist",
+    "tests"
   ]
 }

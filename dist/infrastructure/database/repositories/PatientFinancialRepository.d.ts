@@ -8,6 +8,7 @@ export declare class PatientFinancialRepository implements IPatientFinancialRepo
     delete(id: string): Promise<boolean>;
     getBalanceByPatientId(patientId: string): Promise<number>;
     findPendingPaymentsByPatientId(patientId: string): Promise<PatientFinancial[]>;
+    findByUserAndDate(userId: string, month: number, year: number): Promise<PatientFinancial[]>;
     findByDateRange(patientId: string, startDate: Date, endDate: Date): Promise<PatientFinancial[]>;
 }
 //# sourceMappingURL=PatientFinancialRepository.d.ts.map
