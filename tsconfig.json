@@ -4,19 +4,27 @@
     "outDir": "./dist",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    /* Configurações para Node Moderno (ESM) */
     "module": "ESNext",
     "moduleResolution": "bundler",
     "target": "ESNext",
-    "types": [],
-    /* Regras de Tolerância */
+    /* ADICIONE/ALTERE ESTAS LINHAS */
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
     "strict": false,
     "skipLibCheck": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "verbatimModuleSyntax": false, /* Desativamos isso para não dar erro nos imports */
+    "verbatimModuleSyntax": false,
     "sourceMap": true
   },
   "include": [
