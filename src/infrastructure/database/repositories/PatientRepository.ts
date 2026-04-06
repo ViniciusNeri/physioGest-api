@@ -36,6 +36,10 @@ export class PatientRepository implements IPatientRepository {
     return result !== null;
   }
 
+  async findByPin(userId: string, pin: string): Promise<Patient | null> {
+    return PatientModel.findOne({ userId, pin }).lean<Patient>({ virtuals: true }).exec();
+  }
+
   private async enrichWithAgendaStats(patients: Patient[]): Promise<Patient[]> {
     if (!patients.length) return [];
 

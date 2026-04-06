@@ -9,6 +9,7 @@ const patientSchema = new mongoose.Schema({
     profession: { type: String, required: false },
     observations: { type: String, required: false },
     userId: { type: String, required: true },
+    pin: { type: String, required: false },
 }, { timestamps: true });
 // @ts-ignore
 patientSchema.pre('save', function () {

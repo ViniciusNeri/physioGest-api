@@ -11,7 +11,18 @@ export class SettingRepository implements ISettingRepository {
     // Converte para objeto se for um documento Mongoose e adiciona id se faltar
     const obj = doc.toObject ? doc.toObject({ virtuals: true }) : doc;
     
+    // Garantir que todos os campos tenham valores default caso não existam no banco (devido ao .lean())
     return {
+      dashboardTheme: 'light',
+      showWeeklyAppointments: true,
+      showMonthlyIncome: true,
+      showActivePayments: true,
+      showNextAppointment: true,
+      showPendingPayments: true,
+      showBirthdays: true,
+      showOccupancyGraph: true,
+      showOverdueAppointments: true,
+      categoryControlMode: 'none',
       ...obj,
       id: obj.id || obj._id?.toString()
     } as Setting;

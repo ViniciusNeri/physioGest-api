@@ -37,6 +37,16 @@ patientFinancialSchema.pre('save', function() {
   }
 });
 
+patientFinancialSchema.virtual('patient', {
+  ref: 'Patient',
+  localField: 'patientId',
+  foreignField: '_id',
+  justOne: true
+});
+
+patientFinancialSchema.set('toObject', { virtuals: true });
+patientFinancialSchema.set('toJSON', { virtuals: true });
+
 const PatientFinancialModel = mongoose.model<PatientFinancial>("PatientFinancial", patientFinancialSchema);
 
-export default PatientFinancialModel;
+export default PatientFinancialModel;

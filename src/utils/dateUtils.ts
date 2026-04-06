@@ -63,11 +63,11 @@ export function convertFinancialArrayDates<T extends {
 
 /**
  * Converte todos os campos de data de um registro Agenda para Brasília.
- * Retorna any casting para contornar a tipagem do typeof Date e expor a String.
  */
 export function convertAgendaDates<T extends {
   startDate?: any;
   endDate?: any;
+  date?: any;
   createdAt?: any;
   updatedAt?: any;
 }>(record: T): any {
@@ -76,20 +76,61 @@ export function convertAgendaDates<T extends {
     ...record,
     startDate: record.startDate ? toBrasiliaDateString(record.startDate) : record.startDate,
     endDate: record.endDate ? toBrasiliaDateString(record.endDate) : record.endDate,
+    date: record.date ? toBrasiliaDateString(record.date) : record.date,
     createdAt: (record as any).createdAt ? toBrasiliaDateString((record as any).createdAt) : (record as any).createdAt,
     updatedAt: (record as any).updatedAt ? toBrasiliaDateString((record as any).updatedAt) : (record as any).updatedAt,
   };
 }
 
 /**
- * Aplica conversão de timezone em um array de registros de agenda.
+ * Aplica conversão de timezone em um array de registros de agenda ou bloqueio.
  */
 export function convertAgendaArrayDates<T extends {
   startDate?: any;
   endDate?: any;
+  date?: any;
   createdAt?: any;
   updatedAt?: any;
 }>(records: T[]): any[] {
   if (!Array.isArray(records)) return [];
   return records.map(convertAgendaDates);
+}
+
+/**
+ * Converte campos de data de um registro de Dashboard
+ */
+export function convertDashboardDates(data: any): any {
+  if (!data) return data;
+  
+  if (data.todaysAppointments) {
+    data.todaysAppointments = convertAgendaArrayDates(data.todaysAppointments);
+  }
+  
+  if (data.nextAppointment) {
+    data.nextAppointment = convertAgendaDates(data.nextAppointment);
+  }
+
+  if (data.birthdayList) {
+    data.birthdayList = data.birthdayList.map((p: any) => ({
+      ...p,
+      birthDate: toBrasiliaDateString(p.birthDate)
+    }));
+  }
+
+  if (data.pendingPayments) {
+    data.pendingPayments = data.pendingPayments.map((p: any) => ({
+      ...p,
+      date: toBrasiliaDateString(p.date),
+      dueDate: p.dueDate ? toBrasiliaDateString(p.dueDate) : p.dueDate
+    }));
+  }
+
+  if (data.overdueAppointments) {
+    data.overdueAppointments = data.overdueAppointments.map((a: any) => ({
+      ...a,
+      date: toBrasiliaDateString(a.date)
+    }));
+  }
+
+  return data;
 }

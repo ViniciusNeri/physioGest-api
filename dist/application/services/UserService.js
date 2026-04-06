@@ -19,7 +19,7 @@ let UserService = class UserService {
         this.repository = repository;
     }
     async getUserById(id) {
-        logger.debug("Buscando usuário por ID", { userId: id });
+        logger.debug("Buscando usuário por identificador", { identifier: id });
         try {
             const user = await this.repository.findById(id);
             if (user) {
@@ -31,7 +31,7 @@ let UserService = class UserService {
             return user;
         }
         catch (error) {
-            logger.error("Erro ao buscar usuário por ID", error, { userId: id });
+            logger.error("Erro ao buscar usuário por identificador", error, { identifier: id });
             throw error;
         }
     }
@@ -76,7 +76,7 @@ let UserService = class UserService {
         }
     }
     async updateUser(id, user) {
-        logger.debug("Atualizando usuário", { userId: id, updates: Object.keys(user) });
+        logger.debug("Atualizando usuário", { identifier: id, updates: Object.keys(user) });
         try {
             if (user.password) {
                 logger.debug("Criptografando nova senha do usuário", { userId: id });
@@ -96,12 +96,12 @@ let UserService = class UserService {
             return updatedUser;
         }
         catch (error) {
-            logger.error("Erro ao atualizar usuário", error, { userId: id });
+            logger.error("Erro ao atualizar usuário", error, { identifier: id });
             throw error;
         }
     }
     async deleteUser(id) {
-        logger.debug("Deletando usuário", { userId: id });
+        logger.debug("Deletando usuário", { identifier: id });
         try {
             const deleted = await this.repository.delete(id);
             if (deleted) {
@@ -113,7 +113,7 @@ let UserService = class UserService {
             return deleted;
         }
         catch (error) {
-            logger.error("Erro ao deletar usuário", error, { userId: id });
+            logger.error("Erro ao deletar usuário", error, { identifier: id });
             throw error;
         }
     }

@@ -31,6 +31,9 @@ let PatientRepository = class PatientRepository {
         const result = await PatientModel.findByIdAndDelete(id).exec();
         return result !== null;
     }
+    async findByPin(userId, pin) {
+        return PatientModel.findOne({ userId, pin }).lean({ virtuals: true }).exec();
+    }
     async enrichWithAgendaStats(patients) {
         if (!patients.length)
             return [];

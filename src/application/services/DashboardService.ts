@@ -12,7 +12,7 @@ export class DashboardService implements IDashboardService {
   ) {}
 
   async getDashboardData(userId: string): Promise<DashboardData> {
-    logger.debug("Buscando dados do dashboard", { userId });
+    logger.debug("Buscando dados completos do dashboard", { userId });
 
     try {
       const [
@@ -20,13 +20,21 @@ export class DashboardService implements IDashboardService {
         monthlyIncome,
         activePayments,
         todaysAppointments,
-        nextAppointment
+        nextAppointment,
+        birthdayList,
+        pendingPayments,
+        overdueAppointments,
+        occupancyGraph
       ] = await Promise.all([
         this.repository.getWeeklyAppointmentsCount(userId),
         this.repository.getMonthlyIncome(userId),
         this.repository.getActivePaymentsCount(userId),
         this.repository.getTodaysAppointments(userId),
-        this.repository.getNextAppointment(userId)
+        this.repository.getNextAppointment(userId),
+        this.repository.getBirthdayList(userId),
+        this.repository.getPendingPayments(userId),
+        this.repository.getOverdueAppointments(userId),
+        this.repository.getOccupancyGraph(userId)
       ]);
 
       const dashboardData: DashboardData = {
@@ -34,7 +42,11 @@ export class DashboardService implements IDashboardService {
         monthlyIncome,
         activePayments,
         todaysAppointments,
-        nextAppointment
+        nextAppointment,
+        birthdayList,
+        pendingPayments,
+        overdueAppointments,
+        occupancyGraph
       };
 
       logger.info("Dados do dashboard obtidos com sucesso", {
@@ -42,8 +54,10 @@ export class DashboardService implements IDashboardService {
         weeklyAppointments,
         monthlyIncome,
         activePayments,
-        todaysAppointmentsCount: todaysAppointments.length,
-        hasNextAppointment: nextAppointment !== null
+        todaysCount: todaysAppointments.length,
+        birthdaysCount: birthdayList.length,
+        pendingCount: pendingPayments.length,
+        overdueCount: overdueAppointments.length
       });
 
       return dashboardData;

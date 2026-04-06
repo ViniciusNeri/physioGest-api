@@ -29,12 +29,22 @@ export interface IAgendaRepository {
   findByPatientId(patientId: string): Promise<Agenda[]>;
 
   /**
+   * Verifica sobreposicao de horario
    * @param patientId - ID do paciente
    * @param startDate - Data inicial
    * @param endDate - Data final
    * @param excludeId - (Opcional) ID de agenda para ignorar (usado no update)
    */
   hasOverlap(userId: string, patientId: string, startDate: Date, endDate: Date, excludeId?: string): Promise<boolean>;
+
+  /**
+   * Busca agendamentos ativos em um intervalo de datas para um usuario
+   * @param userId - ID do usuario
+   * @param startDate - Data inicial
+   * @param endDate - Data final
+   * @returns Lista de agendamentos no periodo
+   */
+  findByDateRange(userId: string, startDate: Date, endDate: Date): Promise<Agenda[]>;
 
   /**
    * Cria uma nova agenda

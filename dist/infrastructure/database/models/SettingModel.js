@@ -7,7 +7,13 @@ const settingSchema = new mongoose.Schema({
     showMonthlyIncome: { type: Boolean, default: true },
     showActivePayments: { type: Boolean, default: true },
     showNextAppointment: { type: Boolean, default: true },
+    showPendingPayments: { type: Boolean, default: true },
+    showBirthdays: { type: Boolean, default: true },
+    showOccupancyGraph: { type: Boolean, default: true },
+    showOverdueAppointments: { type: Boolean, default: true },
     categoryControlMode: { type: String, enum: ['none', 'manual', 'auto'], default: 'none' },
+    defaultCategoryId: { type: String, required: false },
+    defaultPaymentMethodId: { type: String, required: false },
 }, { timestamps: true });
 // @ts-ignore
 settingSchema.pre('save', function () {

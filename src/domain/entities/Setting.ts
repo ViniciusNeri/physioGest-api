@@ -6,7 +6,13 @@ export interface Setting {
   showMonthlyIncome?: boolean;
   showActivePayments?: boolean;
   showNextAppointment?: boolean;
+  showPendingPayments?: boolean;
+  showBirthdays?: boolean;
+  showOccupancyGraph?: boolean;
+  showOverdueAppointments?: boolean;
   categoryControlMode?: 'none' | 'manual' | 'auto';
+  defaultCategoryId?: string;
+  defaultPaymentMethodId?: string;
   updatedAt?: Date;
   createdAt?: Date;
 }

@@ -30,6 +30,14 @@ const controller = new SettingController();
  *           type: boolean
  *         showNextAppointment:
  *           type: boolean
+ *         showPendingPayments:
+ *           type: boolean
+ *         showBirthdays:
+ *           type: boolean
+ *         showOccupancyGraph:
+ *           type: boolean
+ *         showOverdueAppointments:
+ *           type: boolean
  *         categoryControlMode:
  *           type: string
  *           enum: [none, manual, auto]

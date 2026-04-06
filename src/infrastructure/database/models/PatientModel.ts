@@ -12,6 +12,7 @@ const patientSchema = new mongoose.Schema<Patient>(
     profession: { type: String, required: false },
     observations: { type: String, required: false },
     userId: { type: String, required: true },
+    pin: { type: String, required: false },
   },
   { timestamps: true }
 );

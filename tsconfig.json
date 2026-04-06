@@ -7,7 +7,6 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "target": "ESNext",
-    /* ADICIONE/ALTERE ESTAS LINHAS */
     "lib": [
       "ESNext",
       "DOM"

@@ -18,29 +18,39 @@ let DashboardService = class DashboardService {
         this.repository = repository;
     }
     async getDashboardData(userId) {
-        logger.debug("Buscando dados do dashboard", { userId });
+        logger.debug("Buscando dados completos do dashboard", { userId });
         try {
-            const [weeklyAppointments, monthlyIncome, activePayments, todaysAppointments, nextAppointment] = await Promise.all([
+            const [weeklyAppointments, monthlyIncome, activePayments, todaysAppointments, nextAppointment, birthdayList, pendingPayments, overdueAppointments, occupancyGraph] = await Promise.all([
                 this.repository.getWeeklyAppointmentsCount(userId),
                 this.repository.getMonthlyIncome(userId),
                 this.repository.getActivePaymentsCount(userId),
                 this.repository.getTodaysAppointments(userId),
-                this.repository.getNextAppointment(userId)
+                this.repository.getNextAppointment(userId),
+                this.repository.getBirthdayList(userId),
+                this.repository.getPendingPayments(userId),
+                this.repository.getOverdueAppointments(userId),
+                this.repository.getOccupancyGraph(userId)
             ]);
             const dashboardData = {
                 weeklyAppointments,
                 monthlyIncome,
                 activePayments,
                 todaysAppointments,
-                nextAppointment
+                nextAppointment,
+                birthdayList,
+                pendingPayments,
+                overdueAppointments,
+                occupancyGraph
             };
             logger.info("Dados do dashboard obtidos com sucesso", {
                 userId,
                 weeklyAppointments,
                 monthlyIncome,
                 activePayments,
-                todaysAppointmentsCount: todaysAppointments.length,
-                hasNextAppointment: nextAppointment !== null
+                todaysCount: todaysAppointments.length,
+                birthdaysCount: birthdayList.length,
+                pendingCount: pendingPayments.length,
+                overdueCount: overdueAppointments.length
             });
             return dashboardData;
         }

@@ -42,4 +42,12 @@ export interface IPatientRepository {
    * @returns true se deletado, false se não encontrado
    */
   delete(id: string): Promise<boolean>;
+
+  /**
+   * Busca um paciente pelo PIN e userId
+   * @param userId - ID do usuário
+   * @param pin - PIN do paciente
+   * @returns Paciente ou null se não encontrado
+   */
+  findByPin(userId: string, pin: string): Promise<Patient | null>;
 }

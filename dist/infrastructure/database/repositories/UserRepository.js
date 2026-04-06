@@ -5,10 +5,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { injectable } from "tsyringe";
+import mongoose from "mongoose";
 import UserModel from "../models/UserModel.js";
 let UserRepository = class UserRepository {
+    getIdentifierQuery(identifier) {
+        return mongoose.Types.ObjectId.isValid(identifier)
+            ? { _id: identifier }
+            : { email: identifier };
+    }
     async findById(id) {
-        return UserModel.findById(id).lean({ virtuals: true }).exec();
+        const query = this.getIdentifierQuery(id);
+        return UserModel.findOne(query).lean({ virtuals: true }).exec();
     }
     async findByEmail(email) {
         return UserModel.findOne({ email }).lean({ virtuals: true }).exec();
@@ -21,11 +28,13 @@ let UserRepository = class UserRepository {
         return newUser.save();
     }
     async update(id, user) {
-        const updatedUser = await UserModel.findByIdAndUpdate(id, user, { new: true }).lean({ virtuals: true }).exec();
+        const query = this.getIdentifierQuery(id);
+        const updatedUser = await UserModel.findOneAndUpdate(query, user, { new: true }).lean({ virtuals: true }).exec();
         return updatedUser;
     }
     async delete(id) {
-        const result = await UserModel.findByIdAndDelete(id).exec();
+        const query = this.getIdentifierQuery(id);
+        const result = await UserModel.findOneAndDelete(query).exec();
         return result !== null;
     }
 };

@@ -1,6 +1,7 @@
 import { container } from "tsyringe";
 import { UserRepository } from "../../infrastructure/database/repositories/UserRepository.js";
 import { AgendaRepository } from "../../infrastructure/database/repositories/AgendaRepository.js";
+import { AgendaLockRepository } from "../../infrastructure/database/repositories/AgendaLockRepository.js";
 import { FinancialRepository } from "../../infrastructure/database/repositories/FinancialRepository.js";
 import { PatientRepository } from "../../infrastructure/database/repositories/PatientRepository.js";
 import { DashboardRepository } from "../../infrastructure/database/repositories/DashboardRepository.js";
@@ -37,6 +38,9 @@ container.register("IUserRepository", {
 });
 container.register("IAgendaRepository", {
     useClass: AgendaRepository,
+});
+container.register("IAgendaLockRepository", {
+    useClass: AgendaLockRepository,
 });
 container.register("IFinancialRepository", {
     useClass: FinancialRepository,
@@ -107,7 +111,7 @@ container.register("IPatientFinancialService", {
 container.register("IPatientAttachmentService", {
     useClass: PatientAttachmentService,
 });
-// Logger binding (assuming it's already implemented)
+// Logger binding
 container.register("Logger", {
     useValue: Logger,
 });

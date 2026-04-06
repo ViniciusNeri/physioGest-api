@@ -12,4 +12,5 @@ export interface Patient {
   noShowAppointments?: number;
   nextAppointmentDate?: Date | null;
   userId: string;
+  pin?: string;
 }

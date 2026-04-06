@@ -4,18 +4,18 @@ import type { DashboardData } from "../../../domain/entities/Dashboard.js";
 import AgendaModel from "../models/AgendaModel.js";
 import FinancialModel from "../models/FinancialModel.js";
 import PatientFinancialModel from "../models/PatientFinancialModel.js";
+import PatientModel from "../models/PatientModel.js";
 
 @injectable()
 export class DashboardRepository implements IDashboardRepository {
   async getWeeklyAppointmentsCount(userId: string): Promise<number> {
     const spTodayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(new Date());
-    const todayLocal = new Date(`${spTodayStr}T12:00:00-03:00`); // 12:00 do dia em SP
+    const todayLocal = new Date(`${spTodayStr}T12:00:00-03:00`); 
 
     const startOfWeek = new Date(todayLocal);
-    startOfWeek.setHours(0, 0, 0, 0); // Começa zerado o objeto que representa o dia local
+    startOfWeek.setHours(0, 0, 0, 0); 
     startOfWeek.setDate(todayLocal.getDate() - todayLocal.getDay());
 
-    // Reinicializar para garantir o 00:00 daquele dia
     const startOfWeekUTC = new Date(`${new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(startOfWeek)}T00:00:00-03:00`);
 
     const endOfWeek = new Date(startOfWeekUTC);
@@ -90,7 +90,6 @@ export class DashboardRepository implements IDashboardRepository {
   }
 
   async getActivePaymentsCount(userId: string): Promise<number> {
-    // Considera apenas pagamentos pendentes dos pacientes (vencidos ou do mês atual)
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 
@@ -110,7 +109,6 @@ export class DashboardRepository implements IDashboardRepository {
     const now = new Date();
     const dateStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(now);
     
-    // ISO Strings com offset garantem que o Mongoose compare no instante UTC correspondente
     const startOfDay = new Date(`${dateStr}T00:00:00-03:00`);
     const endOfDay = new Date(`${dateStr}T23:59:59-03:00`);
 
@@ -128,9 +126,8 @@ export class DashboardRepository implements IDashboardRepository {
     const appointments = await AgendaModel.find(query)
     .populate('patient', 'name')
     .populate('category', 'name')
-    .select('id startDate patientId categoryId description patient status category notes')
-    .lean({ virtuals: true })
-    .sort({ startDate: 1 });
+    .sort({ startDate: 1 })
+    .lean({ virtuals: true });
 
     const formatter = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit' });
 
@@ -161,9 +158,8 @@ export class DashboardRepository implements IDashboardRepository {
     })
     .populate('patient', 'name')
     .populate('category', 'name')
-    .select('id startDate patientId categoryId description patient status category')
-    .lean({ virtuals: true })
-    .sort({ startDate: 1 });
+    .sort({ startDate: 1 })
+    .lean({ virtuals: true });
 
     if (!appointment) {
       return null;
@@ -184,5 +180,121 @@ export class DashboardRepository implements IDashboardRepository {
       description: app.description || "",
       notes: app.notes || ""
     };
+  }
+
+  async getBirthdayList(userId: string): Promise<DashboardData['birthdayList']> {
+    const now = new Date();
+    const currentMonth = now.getMonth() + 1; // 1-12
+
+    const patients = await PatientModel.aggregate([
+      {
+        $match: {
+          userId,
+          birthDate: { $exists: true, $ne: null }
+        }
+      },
+      {
+        $project: {
+          id: "$_id",
+          name: 1,
+          birthDate: 1,
+          month: { $month: "$birthDate" },
+          day: { $dayOfMonth: "$birthDate" }
+        }
+      },
+      {
+        $match: {
+          month: currentMonth
+        }
+      },
+      {
+        $sort: { day: 1 }
+      }
+    ]);
+
+    return patients.map(p => ({
+      patientId: p.id.toString(),
+      name: p.name,
+      birthDate: p.birthDate,
+      day: p.day
+    }));
+  }
+
+  async getPendingPayments(userId: string): Promise<DashboardData['pendingPayments']> {
+    const pending = await PatientFinancialModel.find({
+      userId,
+      status: 'pending'
+    })
+    .populate('patient', 'name')
+    .sort({ date: -1 })
+    .lean({ virtuals: true });
+
+    return pending.map((p: any) => ({
+      patientId: p.patientId,
+      patientName: p.patient?.name || "Paciente Removido",
+      amount: p.amount,
+      date: p.date,
+      dueDate: p.dueDate
+    }));
+  }
+
+  async getOverdueAppointments(userId: string): Promise<DashboardData['overdueAppointments']> {
+    const now = new Date();
+
+    const overdue = await AgendaModel.find({
+      userId,
+      status: 'scheduled',
+      startDate: { $lt: now }
+    })
+    .populate('patient', 'name')
+    .sort({ startDate: -1 })
+    .lean({ virtuals: true });
+
+    const formatter = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit' });
+
+    return overdue.map((a: any) => ({
+      id: a._id.toString(),
+      date: a.startDate,
+      time: formatter.format(a.startDate),
+      patientId: a.patientId,
+      patientName: a.patient?.name || "Desconhecido",
+      description: a.description || ""
+    }));
+  }
+
+  async getOccupancyGraph(userId: string): Promise<DashboardData['occupancyGraph']> {
+    const startOfMonth = new Date();
+    startOfMonth.setDate(1);
+    startOfMonth.setHours(0, 0, 0, 0);
+
+    const appointments = await AgendaModel.aggregate([
+      {
+        $match: {
+          userId,
+          startDate: { $gte: startOfMonth }
+        }
+      },
+      {
+        $project: {
+          hour: { $hour: { date: "$startDate", timezone: "America/Sao_Paulo" } }
+        }
+      },
+      {
+        $group: {
+          _id: "$hour",
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $sort: { _id: 1 }
+      }
+    ]);
+
+    const result: { [hour: number]: number } = {};
+    appointments.forEach(a => {
+      result[a._id] = a.count;
+    });
+
+    return result;
   }
 }

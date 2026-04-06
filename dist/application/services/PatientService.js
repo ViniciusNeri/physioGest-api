@@ -61,7 +61,20 @@ let PatientService = class PatientService {
     async createPatient(patient) {
         logger.debug("Criando paciente", { name: patient.name, userId: patient.userId });
         try {
-            const createdPatient = await this.repository.create(patient);
+            // Gerar PIN de 4 dígitos único por usuário
+            let pin = "";
+            let pinUnique = false;
+            let attempts = 0;
+            while (!pinUnique && attempts < 10) {
+                pin = Math.floor(1000 + Math.random() * 9000).toString();
+                const existingWithPin = await this.repository.findByPin(patient.userId, pin);
+                if (!existingWithPin) {
+                    pinUnique = true;
+                }
+                attempts++;
+            }
+            const patientWithPin = { ...patient, pin };
+            const createdPatient = await this.repository.create(patientWithPin);
             logger.info("Paciente criado com sucesso", {
                 patientId: createdPatient.id,
                 name: createdPatient.name,

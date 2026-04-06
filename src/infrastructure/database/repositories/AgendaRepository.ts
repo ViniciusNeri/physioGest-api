@@ -80,6 +80,18 @@ export class AgendaRepository implements IAgendaRepository {
     return overlap !== null;
   }
 
+  async findByDateRange(userId: string, startDate: Date, endDate: Date): Promise<Agenda[]> {
+    const appointments = await AgendaModel.find({
+      userId,
+      status: { $nin: ['cancelled', 'no_show'] },
+      $and: [
+        { startDate: { $lt: endDate } },
+        { endDate: { $gt: startDate } }
+      ]
+    }).lean({ virtuals: true }).exec();
+    return appointments.map(mapAgenda);
+  }
+
   async create(agenda: Agenda): Promise<Agenda> {
     const newAgenda = new AgendaModel(agenda);
     const saved = await newAgenda.save();

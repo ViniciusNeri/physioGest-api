@@ -7,21 +7,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { injectable } from "tsyringe";
 import SettingModel from "../models/SettingModel.js";
 let SettingRepository = class SettingRepository {
+    mapSetting(doc) {
+        if (!doc)
+            return null;
+        // Converte para objeto se for um documento Mongoose e adiciona id se faltar
+        const obj = doc.toObject ? doc.toObject({ virtuals: true }) : doc;
+        return {
+            ...obj,
+            id: obj.id || obj._id?.toString()
+        };
+    }
     async findById(id) {
-        return SettingModel.findById(id).lean({ virtuals: true }).exec();
+        const doc = await SettingModel.findById(id).lean().exec();
+        return this.mapSetting(doc);
     }
     async findAll() {
-        return SettingModel.find().lean({ virtuals: true }).exec();
+        const docs = await SettingModel.find().lean().exec();
+        return docs.map(doc => this.mapSetting(doc));
     }
     async findByUserId(userId) {
-        return SettingModel.findOne({ userId }).lean({ virtuals: true }).exec();
+        const doc = await SettingModel.findOne({ userId }).lean().exec();
+        return this.mapSetting(doc);
     }
     async create(setting) {
         const newSetting = new SettingModel(setting);
-        return newSetting.save();
+        const saved = await newSetting.save();
+        return this.mapSetting(saved.toObject());
     }
     async update(id, setting) {
-        return SettingModel.findByIdAndUpdate(id, setting, { new: true }).lean({ virtuals: true }).exec();
+        const updated = await SettingModel.findByIdAndUpdate(id, setting, { new: true }).lean().exec();
+        return this.mapSetting(updated);
     }
     async delete(id) {
         const result = await SettingModel.findByIdAndDelete(id).exec();
