@@ -14,9 +14,12 @@ export class AgendaLockRepository implements IAgendaLockRepository {
   }
 
   async findByDateRange(userId: string, startDate: Date, endDate: Date): Promise<AgendaLock[]> {
+    const searchStart = new Date(Date.UTC(startDate.getUTCFullYear(), startDate.getUTCMonth(), startDate.getUTCDate(), 0, 0, 0));
+    const searchEnd = new Date(Date.UTC(endDate.getUTCFullYear(), endDate.getUTCMonth(), endDate.getUTCDate(), 23, 59, 59, 999));
+
     return AgendaLockModel.find({
       userId,
-      date: { $gte: startDate, $lte: endDate }
+      date: { $gte: searchStart, $lte: searchEnd }
     }).lean<AgendaLock[]>({ virtuals: true }).exec();
   }
 

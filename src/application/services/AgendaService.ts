@@ -140,7 +140,20 @@ export class AgendaService implements IAgendaService {
     }
 
     const locks = await this.lockRepository.findByDateRange(agenda.userId, start, end);
-    if (locks.some(l => l.type === 'total')) throw new Error("Bloqueio total na agenda.");
+    for (const lock of locks) {
+      if (lock.type === 'total') {
+        throw new Error("Não é possível realizar agendamento: Existe um bloqueio total para este dia.");
+      }
+      if (lock.type === 'partial' && lock.startTime && lock.endTime) {
+        if (
+          (detailsStart.time >= lock.startTime && detailsStart.time < lock.endTime) ||
+          (detailsEnd.time > lock.startTime && detailsEnd.time <= lock.endTime) ||
+          (detailsStart.time <= lock.startTime && detailsEnd.time >= lock.endTime)
+        ) {
+          throw new Error(`Não é possível realizar agendamento: Existe um bloqueio parcial das ${lock.startTime} às ${lock.endTime}.`);
+        }
+      }
+    }
 
     const created = await this.repository.create(agenda as Agenda);
 
