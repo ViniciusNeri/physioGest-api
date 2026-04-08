@@ -10,6 +10,8 @@ import type { AgendaLock } from "../../domain/entities/AgendaLock.js";
 import type { ILogger } from "../../infrastructure/logging/Logger.js";
 import type { IPatientActivityService } from "../../domain/services/IPatientActivityService.js";
 import type { EmailProvider } from "../../infrastructure/external/EmailProvider.js";
+import type { ISettingRepository } from "../../domain/interfaces/ISettingRepository.js";
+import { getUTCRangeForLocalDate } from "../../utils/dateUtils.js";
 
 @injectable()
 export class AgendaService implements IAgendaService {
@@ -30,6 +32,8 @@ export class AgendaService implements IAgendaService {
     private emailProvider: EmailProvider,
     @inject("IUserRepository")
     private userRepository: IUserRepository,
+    @inject("ISettingRepository")
+    private settingRepository: ISettingRepository,
   ) { }
 
   private normalizeStatus(status?: string): any {
@@ -49,12 +53,38 @@ export class AgendaService implements IAgendaService {
 
   private isPastDate(date: Date): boolean {
     const now = new Date();
-    // Considera apenas o início do minuto para evitar falsos positivos por segundos
     const checkDate = new Date(date);
     checkDate.setSeconds(0, 0);
     const nowDate = new Date(now);
     nowDate.setSeconds(0, 0);
     return checkDate < nowDate;
+  }
+
+  private getLocalDetails(date: Date, timezone: string) {
+    const options: Intl.DateTimeFormatOptions = {
+      timeZone: timezone,
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: false,
+    };
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+    const parts = formatter.formatToParts(date);
+    const getPart = (type: string) => parts.find(p => p.type === type)?.value || '0';
+
+    const year = parseInt(getPart('year'));
+    const month = parseInt(getPart('month')) - 1;
+    const day = parseInt(getPart('day'));
+    const hour = parseInt(getPart('hour'));
+    const minute = parseInt(getPart('minute'));
+
+    const d = new Date(Date.UTC(year, month, day, hour, minute));
+    return {
+      weekday: d.getUTCDay(),
+      time: `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`
+    };
   }
 
   async getAgendaById(id: string): Promise<Agenda | null> {
@@ -108,17 +138,46 @@ export class AgendaService implements IAgendaService {
       (agenda as any).status = this.normalizeStatus(agenda.status);
     }
 
-    // Verificar conflito com outros agendamentos
     const overlap = await this.repository.hasOverlap(agenda.userId, agenda.patientId, start, end);
     if (overlap) {
       throw new Error("Horário indisponível. Já existe um agendamento para este período.");
     }
 
-    // Verificar conflito com bloqueios (Locks)
+    const settings = await this.settingRepository.findByUserId(agenda.userId);
+    if (settings) {
+      const timezone = settings.timezone || 'America/Sao_Paulo';
+      const localStart = this.getLocalDetails(start, timezone);
+      const localEnd = this.getLocalDetails(end, timezone);
+
+      if (settings.operatingDays && !settings.operatingDays.includes(localStart.weekday)) {
+        const daysMap: Record<number, string> = {
+          0: 'domingos', 1: 'segundas-feiras', 2: 'terças-feiras', 3: 'quartas-feiras',
+          4: 'quintas-feiras', 5: 'sextas-feiras', 6: 'sábados'
+        };
+        throw new Error(`Não há funcionamento aos ${daysMap[localStart.weekday]}.`);
+      }
+
+      if (settings.businessHours) {
+        const { startTime, endTime, lunchStart, lunchEnd } = settings.businessHours;
+
+        if (localStart.time < startTime || localEnd.time > endTime) {
+          throw new Error(`Horário fora do expediente (${startTime} às ${endTime}).`);
+        }
+
+        if (lunchStart && lunchEnd) {
+          if (
+            (localStart.time >= lunchStart && localStart.time < lunchEnd) ||
+            (localEnd.time > lunchStart && localEnd.time <= lunchEnd) ||
+            (localStart.time <= lunchStart && localEnd.time >= lunchEnd)
+          ) {
+            throw new Error(`Horário indisponível devido ao intervalo de almoço (${lunchStart} às ${lunchEnd}).`);
+          }
+        }
+      }
+    }
+
     const locks = await this.lockRepository.findByDateRange(agenda.userId, start, end);
     if (locks.length > 0) {
-      // Verificação simplificada: se houver qualquer bloqueio no dia/período
-      // Para bloqueios parciais, validamos o horário
       for (const lock of locks) {
         if (lock.type === 'total') throw new Error("Horário indisponível devido a um bloqueio total na agenda.");
 
@@ -210,8 +269,8 @@ export class AgendaService implements IAgendaService {
   async createLock(lockData: Omit<AgendaLock, 'id'> & { dates?: (Date | string)[] }): Promise<AgendaLock[]> {
     this.logger.info(`Criando bloqueio(s) de agenda para usuário: ${lockData.userId}`);
 
-    const datesToProcess = lockData.dates && lockData.dates.length > 0 
-      ? lockData.dates 
+    const datesToProcess = lockData.dates && lockData.dates.length > 0
+      ? lockData.dates
       : [lockData.date];
 
     const results: AgendaLock[] = [];
@@ -221,20 +280,17 @@ export class AgendaService implements IAgendaService {
         throw new Error("Para bloqueios parciais, o horário de início e fim são obrigatórios.");
       }
 
-      // Montar o intervalo de datas a verificar
       const lockDate = new Date(date);
 
       let rangeStart: Date;
       let rangeEnd: Date;
 
       if (lockData.type === 'total') {
-        // Bloqueio total: verificar o dia inteiro (00:01 às 23:59)
         rangeStart = new Date(lockDate);
         rangeStart.setHours(0, 1, 0, 0);
         rangeEnd = new Date(lockDate);
         rangeEnd.setHours(23, 59, 0, 0);
       } else {
-        // Bloqueio parcial: verificar apenas o período especificado
         const [startH, startM] = lockData.startTime!.split(':').map(Number);
         const [endH, endM] = lockData.endTime!.split(':').map(Number);
         rangeStart = new Date(lockDate);
@@ -243,7 +299,6 @@ export class AgendaService implements IAgendaService {
         rangeEnd.setHours(endH, endM, 0, 0);
       }
 
-      // Buscar agendamentos ativos no período
       const conflictingAppointments = await this.repository.findByDateRange(lockData.userId, rangeStart, rangeEnd);
 
       if (conflictingAppointments.length > 0) {
@@ -278,18 +333,15 @@ export class AgendaService implements IAgendaService {
   }): Promise<Agenda> {
     this.logger.info(`Tentativa de agendamento online via PIN`, { userId: params.userId });
 
-    // 1. Validar Paciente pelo PIN
     const patient = await this.patientRepository.findByPin(params.userId, params.pin);
     if (!patient) {
       throw new Error("PIN ou Identificador de Usuário inválidos.");
     }
 
-    // 2. Preparar datas: startDate vem pronto, endDate = startDate + 1 hora
     const startDate = new Date(params.startDate);
     const endDate = new Date(startDate);
     endDate.setHours(endDate.getHours() + 1);
 
-    // 3. Criar a agenda (reutilizando lógica de validação de createAgenda)
     const newAgenda: Omit<Agenda, 'id'> = {
       userId: params.userId,
       patientId: patient.id!,
@@ -302,7 +354,6 @@ export class AgendaService implements IAgendaService {
 
     const created = await this.createAgenda(newAgenda);
 
-    // 4. Buscar dados do usuário (profissional) para enviar o e-mail
     const user = await this.userRepository.findById(params.userId);
     if (user && user.email) {
       this.sendAppointmentNotificationEmail(user.email, user.name, patient.name, startDate, params.categoryId);
@@ -312,6 +363,7 @@ export class AgendaService implements IAgendaService {
   }
 
   private async sendAppointmentNotificationEmail(to: string, userName: string, patientName: string, date: Date, categoryId: string) {
+    this.logger.info("Iniciando processo de envio de e-mail de notificação", { to, userName, patientName });
     const formattedDate = date.toLocaleDateString('pt-BR');
     const formattedTime = date.toTimeString().substring(0, 5);
 
@@ -367,9 +419,112 @@ export class AgendaService implements IAgendaService {
     };
 
     try {
+      this.logger.info("Chamando provedor de e-mail para envio...", { to });
       await this.emailProvider.sendEmail(message);
+      this.logger.info("E-mail de notificação enviado com sucesso", { to });
     } catch (error) {
-      this.logger.error("Falha ao enviar email de notificação de agendamento", error);
+      this.logger.error("Falha fatal ao enviar email de notificação de agendamento", error, { to });
     }
+  }
+
+  async getAvailableSlots(userId: string, date: string): Promise<string[]> {
+    this.logger.info(`Buscando horários disponíveis para usuário ${userId} em ${date}`);
+
+    // 1. Buscar configurações
+    const settings = await this.settingRepository.findByUserId(userId);
+    if (!settings || !settings.businessHours) {
+      throw new Error("Configurações de horário de funcionamento não encontradas para este usuário.");
+    }
+
+    const { startTime, endTime, lunchStart, lunchEnd } = settings.businessHours;
+    const timezone = settings.timezone || 'America/Sao_Paulo';
+    const duration = settings.sessionDuration || 60;
+    const operatingDays = settings.operatingDays || [1, 2, 3, 4, 5];
+
+    // 2. Validar se o dia é operante (usando meio-dia local para segurança)
+    const { start: startRange, end: endRange } = getUTCRangeForLocalDate(date, timezone);
+    const midDayLocal = new Date(startRange.getTime() + 12 * 3600000);
+    const localDetails = this.getLocalDetails(midDayLocal, timezone);
+
+    if (!operatingDays.includes(localDetails.weekday)) {
+      return [];
+    }
+
+    // 3. Buscar agendamentos e bloqueios usando a janela UTC real do dia local
+    const [appointments, locks] = await Promise.all([
+      this.repository.findByDateRange(userId, startRange, endRange),
+      this.lockRepository.findByDateRange(userId, startRange, endRange)
+    ]);
+
+    // Verificação de bloqueio total no dia
+    if (locks.some(l => l.type === 'total')) {
+      return [];
+    }
+
+    // 4. Gerar slots
+    const slots: string[] = [];
+    let currentSlot = startTime;
+
+    while (currentSlot < endTime) {
+      const [sh, sm] = currentSlot.split(':').map(Number);
+
+      // SlotStart e SlotEnd em UTC real
+      const slotStart = new Date(startRange.getTime());
+      slotStart.setUTCHours(startRange.getUTCHours() + sh, startRange.getUTCMinutes() + sm);
+
+      const slotEnd = new Date(slotStart.getTime() + duration * 60000);
+
+      // Formatar fim do slot localmente para comparação com endTime e lunchEnd
+      const localEndDetails = this.getLocalDetails(slotEnd, timezone);
+      const slotEndStr = localEndDetails.time;
+
+      if (slotEndStr > endTime || slotEnd > endRange) {
+        if (slotEndStr !== "00:00" || currentSlot >= endTime) break;
+      }
+
+      // Validar contra Almoço
+      let isLunchConflict = false;
+      if (lunchStart && lunchEnd) {
+        if (
+          (currentSlot >= lunchStart && currentSlot < lunchEnd) ||
+          (slotEndStr > lunchStart && slotEndStr <= lunchEnd) ||
+          (currentSlot <= lunchStart && slotEndStr >= lunchEnd)
+        ) {
+          isLunchConflict = true;
+        }
+      }
+
+      if (!isLunchConflict) {
+        // Validar contra Agendamentos
+        const hasAppointmentConflict = appointments.some(app => {
+          const appStart = new Date(app.startDate);
+          const appEnd = new Date(app.endDate);
+          return (slotStart < appEnd && slotEnd > appStart);
+        });
+
+        if (!hasAppointmentConflict) {
+          // Validar contra Bloqueios Parciais
+          const hasLockConflict = locks.some(lock => {
+            if (lock.type === 'partial' && lock.startTime && lock.endTime) {
+              return (currentSlot < lock.endTime && slotEndStr > lock.startTime);
+            }
+            return false;
+          });
+
+          if (!hasLockConflict) {
+            slots.push(currentSlot);
+          }
+        }
+      }
+
+      // Calcular próximo slot
+      const nextDate = new Date(slotStart.getTime() + duration * 60000);
+      const nextDetails = this.getLocalDetails(nextDate, timezone);
+      currentSlot = nextDetails.time;
+
+      if (duration <= 0) break;
+    }
+
+    return slots;
   }
 }

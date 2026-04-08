@@ -13,4 +13,5 @@ export interface Patient {
   nextAppointmentDate?: Date | null;
   userId: string;
   pin?: string;
+  status?: boolean;
 }

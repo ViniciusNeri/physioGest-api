@@ -72,7 +72,7 @@ export class PatientService implements IPatientService {
         attempts++;
       }
 
-      const patientWithPin = { ...patient, pin };
+      const patientWithPin = { ...patient, pin, status: patient.status ?? true };
       const createdPatient = await this.repository.create(patientWithPin);
 
       logger.info("Paciente criado com sucesso", {

@@ -132,6 +132,21 @@ export class AgendaController {
       return res.status(400).json({ message: error.message });
     }
   }
+
+  getAvailableSlots = async (req: Request, res: Response) => {
+    try {
+      const { userId, date } = req.query;
+      
+      if (!userId || !date) {
+        return res.status(400).json({ message: "userId e date são obrigatórios." });
+      }
+
+      const slots = await this.service.getAvailableSlots(userId as string, date as string);
+      return res.status(200).json(slots);
+    } catch (error: any) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
 }
 
 export const agendaController = new AgendaController();

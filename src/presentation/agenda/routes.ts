@@ -151,6 +151,42 @@ const agendaRoutes = Router();
  */
 agendaRoutes.post("/online", (req, res) => agendaController.createOnline(req, res));
 
+/**
+ * @swagger
+ * /agendas/available-slots:
+ *   get:
+ *     summary: Retorna horários disponíveis por profissional e data
+ *     tags: [Agendas]
+ *     parameters:
+ *       - in: query
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID do profissional
+ *       - in: query
+ *         name: date
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Data desejada (YYYY-MM-DD)
+ *     responses:
+ *       200:
+ *         description: Lista de horários disponíveis (ex. ["08:00", "09:00"])
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: string
+ *       400:
+ *         description: Parâmetros ausentes ou inválidos
+ *       404:
+ *         description: Configurações do profissional não encontradas
+ */
+agendaRoutes.get("/available-slots", (req, res) => agendaController.getAvailableSlots(req, res));
+
 // Middleware de autenticação para as demais rotas (uso profissional)
 agendaRoutes.use(JwtAuthService.authenticateToken);
 

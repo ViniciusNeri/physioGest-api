@@ -17,7 +17,7 @@ export class PatientRepository implements IPatientRepository {
   }
 
   async findAll(): Promise<Patient[]> {
-    const patients = await PatientModel.find().lean<Patient[]>({ virtuals: true }).exec();
+    const patients = await PatientModel.find({}).lean<Patient[]>({ virtuals: true }).exec();
     return this.enrichWithAgendaStats(patients);
   }
 

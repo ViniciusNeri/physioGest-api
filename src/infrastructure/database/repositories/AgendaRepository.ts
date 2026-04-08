@@ -111,4 +111,23 @@ export class AgendaRepository implements IAgendaRepository {
     const result = await AgendaModel.findOneAndDelete(query).exec();
     return result !== null;
   }
+
+  async countFutureAppointmentsOnWeekday(userId: string, weekday: number, timezone: string): Promise<number> {
+    const now = new Date();
+    
+    // JS getDay(): 0 (Dom) a 6 (Sáb)
+    // MongoDB $dayOfWeek: 1 (Dom) a 7 (Sáb)
+    const mongoWeekday = weekday + 1;
+
+    const count = await AgendaModel.countDocuments({
+      userId,
+      status: 'scheduled',
+      startDate: { $gte: now },
+      $expr: {
+        $eq: [{ $dayOfWeek: { date: "$startDate", timezone: timezone } }, mongoWeekday]
+      }
+    }).exec();
+
+    return count;
+  }
 }

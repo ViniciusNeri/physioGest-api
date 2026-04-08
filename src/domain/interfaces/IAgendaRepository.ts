@@ -67,4 +67,12 @@ export interface IAgendaRepository {
    * @returns true se deletada, false se não encontrada
    */
   delete(id: string): Promise<boolean>;
+
+  /**
+   * Conta agendamentos futuros em um dia específico da semana
+   * @param userId - ID do usuário
+   * @param weekday - Dia da semana (0-6)
+   * @param timezone - Fuso horário para converter UTC para local
+   */
+  countFutureAppointmentsOnWeekday(userId: string, weekday: number, timezone: string): Promise<number>;
 }

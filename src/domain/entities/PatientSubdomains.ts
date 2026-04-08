@@ -3,9 +3,9 @@ export interface PatientAnamnesis {
   patientId: string;
   userId: string;
   date: Date;
-  chiefComplaint: string; // queixa principal
-  historyOfPresentIllness: string; // história da moléstia atual
-  pastMedicalHistory: string; // história médica pregressa
+  chiefComplaint?: string; // queixa principal
+  historyOfPresentIllness?: string; // história da moléstia atual
+  pastMedicalHistory?: string; // história médica pregressa
   familyHistory?: string; // histórico familiar
   socialHistory?: string; // hábitos de vida
   currentMedications?: string; // medicamentos em uso

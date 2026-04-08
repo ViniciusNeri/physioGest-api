@@ -134,3 +134,33 @@ export function convertDashboardDates(data: any): any {
 
   return data;
 }
+
+/**
+ * Retorna o intervalo UTC (início e fim) que corresponde a um dia inteiro (00:00 a 23:59)
+ * no fuso horário local especificado.
+ */
+export function getUTCRangeForLocalDate(dateString: string, timezone: string): { start: Date; end: Date } {
+  // dateString: "YYYY-MM-DD"
+  const [year, month, day] = dateString.split('-').map(Number);
+  
+  // Criamos uma data base em UTC
+  const baseUTC = new Date(Date.UTC(year, month - 1, day, 12, 0, 0));
+  
+  // Descobrimos que horas são localmente para esse meio-dia UTC
+  const fmt = new Intl.DateTimeFormat('en-US', { 
+    timeZone: timezone, 
+    hour: 'numeric', 
+    hour12: false 
+  });
+  
+  const localHour = parseInt(fmt.format(baseUTC));
+  const offset = localHour - 12; // Ex: 9 - 12 = -3
+  
+  // Início do dia local (00:00) -> UTC (0 - offset)
+  const start = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+  start.setUTCHours(start.getUTCHours() - offset);
+  
+  const end = new Date(start.getTime() + 24 * 3600000 - 1);
+  
+  return { start, end };
+}

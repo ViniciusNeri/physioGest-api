@@ -13,6 +13,7 @@ const patientSchema = new mongoose.Schema<Patient>(
     observations: { type: String, required: false },
     userId: { type: String, required: true },
     pin: { type: String, required: false },
+    status: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

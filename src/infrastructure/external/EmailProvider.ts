@@ -12,11 +12,11 @@ export class EmailProvider {
   private baseUrl: string;
 
   constructor() {
-    this.apiKey = process.env.BREVO_API_KEY || '';
+    this.apiKey = (process.env.BREVO_API_KEY || '').trim();
     this.baseUrl = 'https://api.brevo.com/v3';
 
-    logger.debug("EmailProvider inicializado", {
-      hasApiKey: !!this.apiKey,
+    const maskedKey = this.apiKey ? `${this.apiKey.substring(0, 10)}...` : 'NÃO DEFINIDA';
+    logger.info(`EmailProvider: Inicializado. API Key: ${maskedKey}`, {
       baseUrl: this.baseUrl,
       fromEmail: process.env.BREVO_FROM_EMAIL
     });
@@ -25,10 +25,13 @@ export class EmailProvider {
   async sendEmail(message: EmailMessage): Promise<void> {
     logger.debug("Enviando email via Brevo", {
       to: message.to,
-      subject: message.subject,
-      hasHtml: !!message.html,
-      hasText: !!message.text
+      subject: message.subject
     });
+
+    if (!this.apiKey) {
+      logger.error("Falha ao enviar e-mail: BREVO_API_KEY não está configurada no ambiente.");
+      throw new Error('Email provider not configured');
+    }
 
     const startTime = Date.now();
 
@@ -39,6 +42,7 @@ export class EmailProvider {
           method: 'POST',
           headers: {
             'api-key': this.apiKey,
+            'accept': 'application/json',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({

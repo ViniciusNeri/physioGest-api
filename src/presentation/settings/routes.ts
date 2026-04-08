@@ -45,6 +45,29 @@ const controller = new SettingController();
  *           type: string
  *         defaultPaymentMethodId:
  *           type: string
+ *         operatingDays:
+ *           type: array
+ *           items:
+ *             type: integer
+ *           description: "Dias da semana com funcionamento (0-6)"
+ *         businessHours:
+ *           type: object
+ *           properties:
+ *             startTime:
+ *               type: string
+ *               example: "08:00"
+ *             endTime:
+ *               type: string
+ *               example: "18:00"
+ *             lunchStart:
+ *               type: string
+ *               example: "12:00"
+ *             lunchEnd:
+ *               type: string
+ *               example: "13:00"
+ *         timezone:
+ *           type: string
+ *           example: "America/Sao_Paulo"
  *         updatedAt:
  *           type: string
  *           format: date-time
