@@ -9,20 +9,9 @@ export function toBrasiliaDateString(date: Date | string | undefined | null): st
   const d = typeof date === "string" ? new Date(date) : date;
   if (isNaN(d.getTime())) return undefined;
   
-  // Extrai data e hora usando o fuso de SP
-  const formatter = new Intl.DateTimeFormat('sv-SE', {
-    timeZone: BRASILIA_TIMEZONE,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
-  });
-  
-  // 'sv-SE' retorna no formato: YYYY-MM-DD HH:mm:ss
-  const formatted = formatter.format(d).replace(' ', 'T');
-  return `${formatted}-03:00`;
+  // Retornamos a data ISO "crua" para o front-end. 
+  // No modelo Naive UTC, as horas guardadas já refletem o horário da clínica.
+  return d.toISOString();
 }
 
 /**
@@ -133,6 +122,28 @@ export function convertDashboardDates(data: any): any {
   }
 
   return data;
+}
+
+/**
+ * Retorna o "Agora" no fuso horário especificado, mas formatado como UTC (Naive)
+ */
+export function getNaiveNow(timezone: string = BRASILIA_TIMEZONE): Date {
+  const options: Intl.DateTimeFormatOptions = {
+    timeZone: timezone,
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: false,
+  };
+  const formatter = new Intl.DateTimeFormat('en-US', options);
+  const parts = formatter.formatToParts(new Date());
+  const getPart = (type: string) => parts.find(p => p.type === type)?.value || '0';
+
+  const iso = `${getPart('year')}-${getPart('month').padStart(2, '0')}-${getPart('day').padStart(2, '0')}T${getPart('hour').padStart(2, '0')}:${getPart('minute').padStart(2, '0')}:${getPart('second').padStart(2, '0')}.000Z`;
+  return new Date(iso);
 }
 
 /**

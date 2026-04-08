@@ -3,6 +3,7 @@ import type { IAgendaRepository } from "../../../domain/interfaces/IAgendaReposi
 import type { Agenda } from "../../../domain/entities/Agenda.js";
 import AgendaModel from "../models/AgendaModel.js";
 import mongoose from "mongoose";
+import { getNaiveNow } from "../../../utils/dateUtils.js";
 
 const mapAgenda = (agenda: any): Agenda => {
   if (!agenda) return agenda;
@@ -113,7 +114,7 @@ export class AgendaRepository implements IAgendaRepository {
   }
 
   async countFutureAppointmentsOnWeekday(userId: string, weekday: number, timezone: string): Promise<number> {
-    const now = new Date();
+    const now = getNaiveNow(timezone);
     
     // JS getDay(): 0 (Dom) a 6 (Sáb)
     // MongoDB $dayOfWeek: 1 (Dom) a 7 (Sáb)
@@ -124,7 +125,7 @@ export class AgendaRepository implements IAgendaRepository {
       status: 'scheduled',
       startDate: { $gte: now },
       $expr: {
-        $eq: [{ $dayOfWeek: { date: "$startDate", timezone: timezone } }, mongoWeekday]
+        $eq: [{ $dayOfWeek: { date: "$startDate" } }, mongoWeekday]
       }
     }).exec();
 

@@ -4,6 +4,7 @@ import type { ISettingService } from "../../domain/services/ISettingService.js";
 import type { Setting } from "../../domain/entities/Setting.js";
 import type { ILogger } from "../../infrastructure/logging/Logger.js";
 import type { IAgendaRepository } from "../../domain/interfaces/IAgendaRepository.js";
+import { getNaiveNow } from "../../utils/dateUtils.js";
 
 @injectable()
 export class SettingService implements ISettingService {
@@ -16,29 +17,14 @@ export class SettingService implements ISettingService {
     private logger: ILogger
   ) {}
 
-  private getLocalDetails(date: Date, timezone: string) {
-    const options: Intl.DateTimeFormatOptions = {
-      timeZone: timezone,
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: false,
-    };
-    const formatter = new Intl.DateTimeFormat('en-US', options);
-    const parts = formatter.formatToParts(date);
-    const getPart = (type: string) => parts.find(p => p.type === type)?.value || '0';
+  private getLocalDetails(date: Date) {
+    // No modelo Naive UTC, as horas UTC são as horas nominais da clínica.
+    const hour = date.getUTCHours();
+    const minute = date.getUTCMinutes();
+    const weekday = date.getUTCDay();
 
-    const year = parseInt(getPart('year'));
-    const month = parseInt(getPart('month')) - 1;
-    const day = parseInt(getPart('day'));
-    const hour = parseInt(getPart('hour'));
-    const minute = parseInt(getPart('minute'));
-
-    const d = new Date(Date.UTC(year, month, day, hour, minute));
     return {
-      weekday: d.getUTCDay(),
+      weekday,
       time: `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`
     };
   }
@@ -66,7 +52,6 @@ export class SettingService implements ISettingService {
   async updateSetting(id: string, setting: Partial<Setting>): Promise<Setting | null> {
     this.logger.info(`Atualizando configuração: ${id}`);
 
-    // Se houver alteração em regras de horário, validar com agendamentos existentes
     if (setting.operatingDays || setting.businessHours || setting.timezone) {
       const current = await this.repository.findById(id);
       if (current) {
@@ -74,42 +59,32 @@ export class SettingService implements ISettingService {
         const newBusinessHours = setting.businessHours ?? current.businessHours;
         const newTimezone = setting.timezone ?? current.timezone ?? 'America/Sao_Paulo';
 
-        // Buscar todos os agendamentos futuros
-        const now = new Date();
-        const farFuture = new Date();
-        farFuture.setFullYear(farFuture.getFullYear() + 2); // Validar próximos 2 anos
+        const now = getNaiveNow(newTimezone);
+        const farFuture = new Date(now);
+        farFuture.setUTCFullYear(now.getUTCFullYear() + 2);
         
         const appointments = await this.agendaRepository.findByDateRange(current.userId, now, farFuture);
 
         for (const app of appointments) {
-          const localStart = this.getLocalDetails(app.startDate, newTimezone);
-          const localEnd = this.getLocalDetails(app.endDate, newTimezone);
+          const localStart = this.getLocalDetails(app.startDate);
+          const localEnd = this.getLocalDetails(app.endDate);
 
-          // 1. Validar dia de funcionamento
           if (!newOperatingDays.includes(localStart.weekday)) {
-            const formattedDate = app.startDate.toLocaleDateString('pt-BR');
-            throw new Error(`Conflito: Existe um agendamento em ${formattedDate}, mas o dia da semana não terá mais funcionamento.`);
+            const formattedDate = `${app.startDate.getUTCDate().toString().padStart(2, '0')}/${(app.startDate.getUTCMonth() + 1).toString().padStart(2, '0')}`;
+            throw new Error(`Conflito: Existe um agendamento em ${formattedDate}, mas o dia não terá funcionamento.`);
           }
 
-          // 2. Validar horário (apenas se businessHours existir)
           if (newBusinessHours) {
             const { startTime, endTime, lunchStart, lunchEnd } = newBusinessHours;
-            
-            // Fora do expediente
             if (localStart.time < startTime || localEnd.time > endTime) {
-              const formattedDate = app.startDate.toLocaleString('pt-BR');
-              throw new Error(`Conflito: O agendamento em ${formattedDate} ficaria fora do novo horário de expediente.`);
+              const formattedDate = `${app.startDate.getUTCDate().toString().padStart(2, '0')}/${(app.startDate.getUTCMonth() + 1).toString().padStart(2, '0')} ${localStart.time}`;
+              throw new Error(`Conflito: Agendamento em ${formattedDate} fora do novo expediente.`);
             }
 
-            // Intervalo de almoço
             if (lunchStart && lunchEnd) {
-              if (
-                (localStart.time >= lunchStart && localStart.time < lunchEnd) ||
-                (localEnd.time > lunchStart && localEnd.time <= lunchEnd) ||
-                (localStart.time <= lunchStart && localEnd.time >= lunchEnd)
-              ) {
-                const formattedDate = app.startDate.toLocaleString('pt-BR');
-                throw new Error(`Conflito: O agendamento em ${formattedDate} coincide com o novo intervalo de almoço.`);
+              if ((localStart.time >= lunchStart && localStart.time < lunchEnd) || (localEnd.time > lunchStart && localEnd.time <= lunchEnd)) {
+                const formattedDate = `${app.startDate.getUTCDate().toString().padStart(2, '0')}/${(app.startDate.getUTCMonth() + 1).toString().padStart(2, '0')} ${localStart.time}`;
+                throw new Error(`Conflito: Agendamento em ${formattedDate} no novo intervalo de almoço.`);
               }
             }
           }

@@ -3,8 +3,10 @@ import type { IPatientFinancialRepository } from "../../domain/interfaces/IPatie
 import type { IAgendaRepository } from "../../domain/interfaces/IAgendaRepository.js";
 import type { IPatientFinancialService } from "../../domain/services/IPatientSubdomainServices.js";
 import type { PatientFinancial, PatientFinancialSummary } from "../../domain/entities/PatientSubdomains.js";
-import logger from "../../infrastructure/logging/Logger.js";
+import type { ILogger } from "../../infrastructure/logging/Logger.js";
 import type { IPatientActivityService } from "../../domain/services/IPatientActivityService.js";
+import type { ISettingRepository } from "../../domain/interfaces/ISettingRepository.js";
+import { getNaiveNow } from "../../utils/dateUtils.js";
 
 @injectable()
 export class PatientFinancialService implements IPatientFinancialService {
@@ -14,141 +16,144 @@ export class PatientFinancialService implements IPatientFinancialService {
     @inject("IAgendaRepository")
     private agendaRepository: IAgendaRepository,
     @inject("IPatientActivityService")
-    private activityService: IPatientActivityService
+    private activityService: IPatientActivityService,
+    @inject("Logger")
+    private logger: ILogger,
+    @inject("ISettingRepository")
+    private settingRepository: ISettingRepository
   ) {}
 
   async getPatientFinancial(patientId: string): Promise<PatientFinancial[]> {
-    logger.debug("Buscando financeiro do paciente", { patientId });
+    this.logger.debug("Buscando financeiro do paciente", { patientId });
 
     try {
       const financial = await this.repository.findByPatientId(patientId);
-      logger.debug("Registros financeiros do paciente encontrados", { patientId, count: financial.length });
+      this.logger.debug("Registros financeiros do paciente encontrados", { patientId, count: financial.length });
       return financial;
     } catch (error) {
-      logger.error("Erro ao buscar financeiro do paciente", error, { patientId });
+      this.logger.error("Erro ao buscar financeiro do paciente", error, { patientId });
       throw error;
     }
   }
 
   async getFinancialById(id: string): Promise<PatientFinancial | null> {
-    logger.debug("Buscando registro financeiro por ID", { financialId: id });
+    this.logger.debug("Buscando registro financeiro por ID", { financialId: id });
 
     try {
       const financial = await this.repository.findById(id);
       if (financial) {
-        logger.debug("Registro financeiro encontrado", { financialId: id, patientId: financial.patientId });
+        this.logger.debug("Registro financeiro encontrado", { financialId: id, patientId: financial.patientId });
       } else {
-        logger.warn("Registro financeiro não encontrado", { financialId: id });
+        this.logger.warn("Registro financeiro não encontrado", { financialId: id });
       }
       return financial;
     } catch (error) {
-      logger.error("Erro ao buscar registro financeiro por ID", error, { financialId: id });
+      this.logger.error("Erro ao buscar registro financeiro por ID", error, { financialId: id });
       throw error;
     }
   }
 
   async createFinancial(financial: Omit<PatientFinancial, 'id'>): Promise<PatientFinancial> {
-    logger.debug("Criando novo registro financeiro", { patientId: financial.patientId, type: financial.type });
+    this.logger.debug("Criando novo registro financeiro", { patientId: financial.patientId, type: financial.type });
 
     try {
       const newFinancial = await this.repository.create(financial);
       
-      // Registra atividade
       await this.activityService.logActivity({
         patientId: newFinancial.patientId,
-        userId: newFinancial.userId || "", // Precisamos garantir que temos o userId
+        userId: newFinancial.userId || "",
         type: newFinancial.status === 'paid' ? 'payment_paid' : 'payment_pending',
         description: `Pagamento ${newFinancial.status === 'paid' ? 'realizado' : 'pendente'}: R$ ${newFinancial.amount.toFixed(2)}`,
         metadata: { financialId: newFinancial.id }
-      }).catch(err => logger.error("Erro ao logar atividade (create financial)", err));
+      }).catch(err => this.logger.error("Erro ao logar atividade (create financial)", err));
 
-      logger.info("Registro financeiro criado com sucesso", {
+      this.logger.info("Registro financeiro criado com sucesso", {
         financialId: newFinancial.id,
         patientId: financial.patientId,
         amount: financial.amount
       });
       return newFinancial;
     } catch (error) {
-      logger.error("Erro ao criar registro financeiro", error, { patientId: financial.patientId });
+      this.logger.error("Erro ao criar registro financeiro", error, { patientId: financial.patientId });
       throw error;
     }
   }
 
   async updateFinancial(id: string, financial: Partial<PatientFinancial>): Promise<PatientFinancial | null> {
-    logger.debug("Atualizando registro financeiro", { financialId: id });
+    this.logger.debug("Atualizando registro financeiro", { financialId: id });
 
     try {
       const updatedFinancial = await this.repository.update(id, financial);
       if (updatedFinancial) {
-        logger.info("Registro financeiro atualizado com sucesso", { financialId: id });
+        this.logger.info("Registro financeiro atualizado com sucesso", { financialId: id });
       } else {
-        logger.warn("Registro financeiro não encontrado para atualização", { financialId: id });
+        this.logger.warn("Registro financeiro não encontrado para atualização", { financialId: id });
       }
       return updatedFinancial;
     } catch (error) {
-      logger.error("Erro ao atualizar registro financeiro", error, { financialId: id });
+      this.logger.error("Erro ao atualizar registro financeiro", error, { financialId: id });
       throw error;
     }
   }
 
   async deleteFinancial(id: string): Promise<boolean> {
-    logger.debug("Deletando registro financeiro", { financialId: id });
+    this.logger.debug("Deletando registro financeiro", { financialId: id });
 
     try {
       const deleted = await this.repository.delete(id);
       if (deleted) {
-        logger.info("Registro financeiro deletado com sucesso", { financialId: id });
+        this.logger.info("Registro financeiro deletado com sucesso", { financialId: id });
       } else {
-        logger.warn("Registro financeiro não encontrado para deleção", { financialId: id });
+        this.logger.warn("Registro financeiro não encontrado para deleção", { financialId: id });
       }
       return deleted;
     } catch (error) {
-      logger.error("Erro ao deletar registro financeiro", error, { financialId: id });
+      this.logger.error("Erro ao deletar registro financeiro", error, { financialId: id });
       throw error;
     }
   }
 
   async getPatientBalance(patientId: string): Promise<number> {
-    logger.debug("Calculando saldo do paciente", { patientId });
+    this.logger.debug("Calculando saldo do paciente", { patientId });
 
     try {
       const balance = await this.repository.getBalanceByPatientId(patientId);
-      logger.debug("Saldo do paciente calculado", { patientId, balance });
+      this.logger.debug("Saldo do paciente calculado", { patientId, balance });
       return balance;
     } catch (error) {
-      logger.error("Erro ao calcular saldo do paciente", error, { patientId });
+      this.logger.error("Erro ao calcular saldo do paciente", error, { patientId });
       throw error;
     }
   }
 
   async getPendingPayments(patientId: string): Promise<PatientFinancial[]> {
-    logger.debug("Buscando pagamentos pendentes do paciente", { patientId });
+    this.logger.debug("Buscando pagamentos pendentes do paciente", { patientId });
 
     try {
       const payments = await this.repository.findPendingPaymentsByPatientId(patientId);
-      logger.debug("Pagamentos pendentes encontrados", { patientId, count: payments.length });
+      this.logger.debug("Pagamentos pendentes encontrados", { patientId, count: payments.length });
       return payments;
     } catch (error) {
-      logger.error("Erro ao buscar pagamentos pendentes", error, { patientId });
+      this.logger.error("Erro ao buscar pagamentos pendentes", error, { patientId });
       throw error;
     }
   }
 
   async getFinancialByDateRange(patientId: string, startDate: Date, endDate: Date): Promise<PatientFinancial[]> {
-    logger.debug("Buscando registros financeiros por período", { patientId, startDate, endDate });
+    this.logger.debug("Buscando registros financeiros por período", { patientId, startDate, endDate });
 
     try {
       const financial = await this.repository.findByDateRange(patientId, startDate, endDate);
-      logger.debug("Registros financeiros do período encontrados", { patientId, count: financial.length });
+      this.logger.debug("Registros financeiros do período encontrados", { patientId, count: financial.length });
       return financial;
     } catch (error) {
-      logger.error("Erro ao buscar registros financeiros por período", error, { patientId, startDate, endDate });
+      this.logger.error("Erro ao buscar registros financeiros por período", error, { patientId, startDate, endDate });
       throw error;
     }
   }
 
   async getFinancialSummary(patientId: string): Promise<PatientFinancialSummary> {
-    logger.debug("Gerando resumo financeiro do paciente", { patientId });
+    this.logger.debug("Gerando resumo financeiro do paciente", { patientId });
 
     try {
       const financialRecords = await this.repository.findByPatientId(patientId);
@@ -165,7 +170,6 @@ export class PatientFinancialService implements IPatientFinancialService {
           totalPaidAmount += record.amount;
         }
 
-        // Soma sessões apenas de entradas (income)
         if (record.type === 'income' && record.totalSessions) {
           totalContractedSessions += record.totalSessions;
         }
@@ -181,18 +185,26 @@ export class PatientFinancialService implements IPatientFinancialService {
         payments: financialRecords
       };
     } catch (error) {
-      logger.error("Erro ao gerar resumo financeiro", error, { patientId });
+      this.logger.error("Erro ao gerar resumo financeiro", error, { patientId });
       throw error;
     }
   }
 
   async payFinancial(id: string, paymentMethod?: string): Promise<PatientFinancial | null> {
-    logger.debug("Marcando registro financeiro como pago", { financialId: id });
+    this.logger.debug("Marcando registro financeiro como pago", { financialId: id });
 
     try {
+      // Buscar timezone
+      const existing = await this.repository.findById(id);
+      let timezone = 'America/Sao_Paulo';
+      if (existing?.userId) {
+        const settings = await this.settingRepository.findByUserId(existing.userId);
+        if (settings?.timezone) timezone = settings.timezone;
+      }
+
       const updates: Partial<PatientFinancial> = {
         status: 'paid',
-        paymentDate: new Date()
+        paymentDate: getNaiveNow(timezone)
       };
 
       if (paymentMethod) {
@@ -202,22 +214,21 @@ export class PatientFinancialService implements IPatientFinancialService {
       const updatedFinancial = await this.repository.update(id, updates);
       
       if (updatedFinancial) {
-        // Registra atividade
         await this.activityService.logActivity({
           patientId: updatedFinancial.patientId,
           userId: updatedFinancial.userId || "",
           type: 'payment_paid',
           description: `Pagamento realizado: R$ ${updatedFinancial.amount.toFixed(2)}`,
           metadata: { financialId: id }
-        }).catch(err => logger.error("Erro ao logar atividade (pay financial)", err));
+        }).catch(err => this.logger.error("Erro ao logar atividade (pay financial)", err));
 
-        logger.info("Registro financeiro marcado como pago com sucesso", { financialId: id });
+        this.logger.info("Registro financeiro marcado como pago com sucesso", { financialId: id });
       } else {
-        logger.warn("Registro financeiro não encontrado para pagamento", { financialId: id });
+        this.logger.warn("Registro financeiro não encontrado para pagamento", { financialId: id });
       }
       return updatedFinancial;
     } catch (error) {
-      logger.error("Erro ao marcar registro financeiro como pago", error, { financialId: id });
+      this.logger.error("Erro ao marcar registro financeiro como pago", error, { financialId: id });
       throw error;
     }
   }
