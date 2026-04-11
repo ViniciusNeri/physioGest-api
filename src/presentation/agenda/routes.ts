@@ -171,6 +171,12 @@ agendaRoutes.post("/online", (req, res) => agendaController.createOnline(req, re
  *           type: string
  *           format: date
  *         description: Data desejada (YYYY-MM-DD)
+ *       - in: query
+ *         name: categoryId
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: (Opcional) ID da categoria para considerar sua duração específica
  *     responses:
  *       200:
  *         description: Lista de horários disponíveis (ex. ["08:00", "09:00"])

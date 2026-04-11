@@ -11,7 +11,8 @@ import type { ILogger } from "../../infrastructure/logging/Logger.js";
 import type { IPatientActivityService } from "../../domain/services/IPatientActivityService.js";
 import type { EmailProvider } from "../../infrastructure/external/EmailProvider.js";
 import type { ISettingRepository } from "../../domain/interfaces/ISettingRepository.js";
-import { getNaiveNow } from "../../utils/dateUtils.js";
+import type { ICategoryRepository } from "../../domain/interfaces/ICategoryRepository.js";
+import { toLocalISOString, getNaiveNowString, getLocalDayRange } from "../../utils/dateUtils.js";
 
 @injectable()
 export class AgendaService implements IAgendaService {
@@ -34,6 +35,8 @@ export class AgendaService implements IAgendaService {
     private userRepository: IUserRepository,
     @inject("ISettingRepository")
     private settingRepository: ISettingRepository,
+    @inject("ICategoryRepository")
+    private categoryRepository: ICategoryRepository,
   ) { }
 
   private normalizeStatus(status?: string): any {
@@ -51,24 +54,20 @@ export class AgendaService implements IAgendaService {
     return mapping[status.toLowerCase()] || status;
   }
 
-  private isPastDate(date: Date, timezone: string): boolean {
-    const now = getNaiveNow(timezone);
-    const checkDate = new Date(date);
-    checkDate.setSeconds(0, 0);
-    const nowDate = new Date(now);
-    nowDate.setSeconds(0, 0);
-    return checkDate < nowDate;
+  /** Compara string ISO local "YYYY-MM-DDTHH:mm:ss" com o agora local */
+  private isPastDate(localDateStr: string, timezone: string): boolean {
+    const nowStr = getNaiveNowString(timezone);
+    // Remove seconds for minute-level comparison
+    return localDateStr.substring(0, 16) < nowStr.substring(0, 16);
   }
 
-  private getDetails(date: Date) {
-    const hour = date.getUTCHours();
-    const minute = date.getUTCMinutes();
-    const weekday = date.getUTCDay();
-
-    return {
-      weekday,
-      time: `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`
-    };
+  /** Extrai HH:mm e dia-da-semana de uma string "YYYY-MM-DDTHH:mm:ss" */
+  private getDetails(localDateStr: string) {
+    // "2026-04-11T10:30:00" → time: "10:30", weekday: 6 (sábado)
+    const time = localDateStr.substring(11, 16); // "HH:mm"
+    const datePart = localDateStr.substring(0, 10); // "YYYY-MM-DD"
+    const weekday = new Date(datePart + 'T12:00:00Z').getUTCDay(); // safe weekday calc
+    return { time, weekday };
   }
 
   async getAgendaById(id: string): Promise<Agenda | null> {
@@ -106,20 +105,21 @@ export class AgendaService implements IAgendaService {
     const settings = await this.settingRepository.findByUserId(agenda.userId);
     const timezone = settings?.timezone || 'America/Sao_Paulo';
 
-    const start = new Date(agenda.startDate);
-    const end = new Date(agenda.endDate);
+    // Converte para string local "YYYY-MM-DDTHH:mm:ss"
+    const startStr = toLocalISOString(new Date(agenda.startDate), timezone);
+    const endStr = toLocalISOString(new Date(agenda.endDate), timezone);
 
-    if (this.isPastDate(start, timezone)) {
+    if (this.isPastDate(startStr, timezone)) {
       throw new Error("Não é possível realizar agendamentos para datas passadas.");
     }
 
     if (agenda.status) (agenda as any).status = this.normalizeStatus(agenda.status);
 
-    const overlap = await this.repository.hasOverlap(agenda.userId, agenda.patientId, start, end);
+    const overlap = await this.repository.hasOverlap(agenda.userId, agenda.patientId, startStr, endStr);
     if (overlap) throw new Error("Horário indisponível. Já existe um agendamento.");
 
-    const detailsStart = this.getDetails(start);
-    const detailsEnd = this.getDetails(end);
+    const detailsStart = this.getDetails(startStr);
+    const detailsEnd = this.getDetails(endStr);
 
     if (settings) {
       if (settings.operatingDays && !settings.operatingDays.includes(detailsStart.weekday)) {
@@ -132,14 +132,15 @@ export class AgendaService implements IAgendaService {
           throw new Error(`Fora do expediente (${startTime}-${endTime}).`);
         }
         if (lunchStart && lunchEnd) {
-          if ((detailsStart.time >= lunchStart && detailsStart.time < lunchEnd) || (detailsEnd.time > lunchStart && detailsEnd.time <= lunchEnd)) {
+          if ((detailsStart.time >= lunchStart && detailsStart.time < lunchEnd) ||
+            (detailsEnd.time > lunchStart && detailsEnd.time <= lunchEnd)) {
             throw new Error(`Intervalo de almoço.`);
           }
         }
       }
     }
 
-    const locks = await this.lockRepository.findByDateRange(agenda.userId, start, end);
+    const locks = await this.lockRepository.findByDateRange(agenda.userId, startStr, endStr);
     for (const lock of locks) {
       if (lock.type === 'total') {
         throw new Error("Não é possível realizar agendamento: Existe um bloqueio total para este dia.");
@@ -155,21 +156,27 @@ export class AgendaService implements IAgendaService {
       }
     }
 
-    const created = await this.repository.create(agenda as Agenda);
+    // Salva com strings locais
+    const agendaToSave = { ...agenda, startDate: startStr, endDate: endStr };
+    const created = await this.repository.create(agendaToSave as Agenda);
 
     await this.activityService.logActivity({
       patientId: created.patientId,
       userId: created.userId,
       type: 'appointment_created',
-      description: `Agendamento: ${created.startDate.getUTCDate().toString().padStart(2, '0')}/${(created.startDate.getUTCMonth() + 1).toString().padStart(2, '0')}`
-    }).catch(() => {});
+      description: `Agendamento: ${startStr.substring(8, 10)}/${startStr.substring(5, 7)}`
+    }).catch(() => { });
 
     return created;
   }
 
   async updateAgenda(id: string, agenda: Partial<Agenda>): Promise<Agenda | null> {
     if (agenda.status) (agenda as any).status = this.normalizeStatus(agenda.status);
-    return this.repository.update(id, agenda);
+    // Normaliza datas se presentes
+    const update = { ...agenda } as any;
+    if (update.startDate) update.startDate = toLocalISOString(new Date(update.startDate));
+    if (update.endDate) update.endDate = toLocalISOString(new Date(update.endDate));
+    return this.repository.update(id, update);
   }
 
   async deleteAgenda(id: string): Promise<boolean> {
@@ -182,27 +189,36 @@ export class AgendaService implements IAgendaService {
 
     for (const date of datesToProcess) {
       if (!date) continue;
-      const lockDate = new Date(date);
-      const year = lockDate.getUTCFullYear();
-      const month = lockDate.getUTCMonth();
-      const day = lockDate.getUTCDate();
 
-      let rangeStart: Date;
-      let rangeEnd: Date;
+      let lockDateStr: string;
+      let startOverlapStr: string;
+      let endOverlapStr: string;
 
       if (lockData.type === 'total') {
-        rangeStart = new Date(Date.UTC(year, month, day, 0, 0, 0));
-        rangeEnd = new Date(Date.UTC(year, month, day, 23, 59, 59));
+        lockDateStr = `${date}T00:00:00`;
+        startOverlapStr = `${date}T00:00:00`;
+        endOverlapStr = `${date}T23:59:59`;
       } else {
-        const [startH, startM] = lockData.startTime!.split(':').map(Number);
-        const [endH, endM] = lockData.endTime!.split(':').map(Number);
-        rangeStart = new Date(Date.UTC(year, month, day, startH, startM, 0));
-        rangeEnd = new Date(Date.UTC(year, month, day, endH, endM, 0));
+        const [startH, startM] = lockData.startTime!.split(':');
+        const [endH, endM] = lockData.endTime!.split(':');
+        lockDateStr = `${date}T${startH.padStart(2, '0')}:${startM.padStart(2, '0')}:00`;
+        startOverlapStr = lockDateStr;
+        endOverlapStr = `${date}T${endH.padStart(2, '0')}:${endM.padStart(2, '0')}:00`;
+      }
+
+      // Valida conflito com agendamentos existentes
+      const overlappingAppointments = await this.repository.findByDateRange(lockData.userId, startOverlapStr, endOverlapStr);
+      if (overlappingAppointments.length > 0) {
+        if (lockData.type === 'total') {
+          throw new Error('Não é possível criar o bloqueio total: Existem agendamentos marcados para este dia.');
+        } else {
+          throw new Error(`Não é possível criar um bloqueio no período: Existem agendamentos marcados das ${lockData.startTime} às ${lockData.endTime}.`);
+        }
       }
 
       const lockToSave: any = { ...lockData };
       delete lockToSave.dates;
-      lockToSave.date = rangeStart;
+      lockToSave.date = lockDateStr;
 
       results.push(await this.lockRepository.create(lockToSave as AgendaLock));
     }
@@ -222,34 +238,47 @@ export class AgendaService implements IAgendaService {
     const patient = await this.patientRepository.findByPin(params.userId, params.pin);
     if (!patient) throw new Error("PIN inválido.");
 
-    const startDate = new Date(params.startDate);
-    const endDate = new Date(startDate);
-    endDate.setUTCHours(endDate.getUTCHours() + 1);
+    const settings = await this.settingRepository.findByUserId(params.userId);
+    const timezone = settings?.timezone || 'America/Sao_Paulo';
+
+    const startStr = toLocalISOString(new Date(params.startDate), timezone);
+    // Adiciona 1 hora como string
+    const [datePart, timePart] = startStr.split('T');
+    const [h, min, s] = timePart.split(':').map(Number);
+    const endH = (h + 1).toString().padStart(2, '0');
+    const endStr = `${datePart}T${endH}:${min.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 
     return this.createAgenda({
       userId: params.userId,
       patientId: patient.id!,
-      startDate,
-      endDate,
+      startDate: startStr,
+      endDate: endStr,
       categoryId: params.categoryId,
       status: 'scheduled',
       description: "Online via portal."
     });
   }
 
-  async getAvailableSlots(userId: string, date: string): Promise<string[]> {
+  async getAvailableSlots(userId: string, date: string, categoryId?: string): Promise<string[]> {
     const settings = await this.settingRepository.findByUserId(userId);
     if (!settings || !settings.businessHours) throw new Error("Configurações ausentes.");
+    const timezone = settings?.timezone || 'America/Sao_Paulo';
 
     const { startTime, endTime, lunchStart, lunchEnd } = settings.businessHours;
-    const duration = settings.sessionDuration || 60;
-    const [year, month, day] = date.split('-').map(Number);
-    const startRange = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
-    const endRange = new Date(Date.UTC(year, month - 1, day, 23, 59, 59));
+    let duration = settings.sessionDuration || 60;
+
+    if (categoryId) {
+      const category = await this.categoryRepository.findById(categoryId);
+      if (category && category.duration) {
+        duration = category.duration;
+      }
+    }
+
+    const { start: rangeStartStr, end: rangeEndStr } = getLocalDayRange(date);
 
     const [appointments, locks] = await Promise.all([
-      this.repository.findByDateRange(userId, startRange, endRange),
-      this.lockRepository.findByDateRange(userId, startRange, endRange)
+      this.repository.findByDateRange(userId, rangeStartStr, rangeEndStr),
+      this.lockRepository.findByDateRange(userId, rangeStartStr, rangeEndStr)
     ]);
 
     if (locks.some(l => l.type === 'total')) return [];
@@ -259,21 +288,43 @@ export class AgendaService implements IAgendaService {
 
     while (currentTime < endTime) {
       const [h, m] = currentTime.split(':').map(Number);
-      const slotStart = new Date(Date.UTC(year, month - 1, day, h, m));
-      const slotEnd = new Date(slotStart.getTime() + duration * 60000);
-      const slotEndStr = slotEnd.getUTCHours().toString().padStart(2, '0') + ':' + slotEnd.getUTCMinutes().toString().padStart(2, '0');
+      const endH = Math.floor((h * 60 + m + duration) / 60);
+      const endM = (h * 60 + m + duration) % 60;
+      const slotEndStr = `${endH.toString().padStart(2, '0')}:${endM.toString().padStart(2, '0')}`;
 
-      if (slotEndStr > endTime && slotEnd.getUTCDate() === slotStart.getUTCDate()) break;
+      if (slotEndStr > endTime) break;
 
-      const hasAppConflict = appointments.some(app => slotStart < new Date(app.endDate) && slotEnd > new Date(app.startDate));
+      const slotStartFull = `${date}T${currentTime}:00`;
+      const slotEndFull = `${date}T${slotEndStr}:00`;
+
+      const hasAppConflict = appointments.some(app =>
+        slotStartFull < app.endDate && slotEndFull > app.startDate
+      );
+
       if (!hasAppConflict) {
-        const hasLockConflict = locks.some(lock => lock.type === 'partial' && lock.startTime && lock.endTime && (currentTime < lock.endTime && slotEndStr > lock.startTime));
-        if (!hasLockConflict) slots.push(currentTime);
+        const hasLockConflict = locks.some(lock =>
+          lock.type === 'partial' && lock.startTime && lock.endTime &&
+          (currentTime < lock.endTime && slotEndStr > lock.startTime)
+        );
+        if (!hasLockConflict) {
+          let isLunchConflict = false;
+          if (lunchStart && lunchEnd) {
+            if ((currentTime >= lunchStart && currentTime < lunchEnd) ||
+              (slotEndStr > lunchStart && slotEndStr <= lunchEnd)) {
+              isLunchConflict = true;
+            }
+          }
+          if (!isLunchConflict) slots.push(currentTime);
+        }
       }
 
-      const nextDate = new Date(slotStart.getTime() + duration * 60000);
-      currentTime = nextDate.getUTCHours().toString().padStart(2, '0') + ':' + nextDate.getUTCMinutes().toString().padStart(2, '0');
-      if (duration <= 0) break;
+      // Próximo slot
+      const gridStep = settings.sessionDuration || 60;
+      const nextTotalMin = h * 60 + m + gridStep;
+      const nextH = Math.floor(nextTotalMin / 60).toString().padStart(2, '0');
+      const nextM = (nextTotalMin % 60).toString().padStart(2, '0');
+      currentTime = `${nextH}:${nextM}`;
+      if (gridStep <= 0) break;
     }
     return slots;
   }

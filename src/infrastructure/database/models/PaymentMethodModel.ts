@@ -9,7 +9,7 @@ const paymentMethodSchema = new mongoose.Schema<PaymentMethod>(
     type: {
       type: String,
       enum: ['cash', 'credit_card', 'debit_card', 'bank_transfer', 'pix', 'check', 'other'],
-      required: true
+      required: false
     },
     active: { type: Boolean, default: true },
     settingsId: { type: String },
@@ -18,7 +18,7 @@ const paymentMethodSchema = new mongoose.Schema<PaymentMethod>(
 );
 
 // @ts-ignore
-paymentMethodSchema.pre('save', function() {
+paymentMethodSchema.pre('save', function () {
   if (!this.id) {
     this.id = this._id.toString();
   }

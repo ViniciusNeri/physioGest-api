@@ -14,7 +14,7 @@ export interface FinancialConsolidated {
   cashFlow: Array<{
     id: string;
     source: 'clinic' | 'patient';
-    date: Date;
+    date: string;
     amount: number;
     type: 'income' | 'expense';
     description: string;
@@ -23,6 +23,7 @@ export interface FinancialConsolidated {
     patientName?: string | undefined;
     status: 'pending' | 'paid' | 'cancelled' | 'refunded';
   }>;
+  monthlyHistory: Record<string, { income: number; expenses: number }>;
 }
 
 export interface IFinancialService {

@@ -6,7 +6,7 @@ import type { PatientFinancial, PatientFinancialSummary } from "../../domain/ent
 import type { ILogger } from "../../infrastructure/logging/Logger.js";
 import type { IPatientActivityService } from "../../domain/services/IPatientActivityService.js";
 import type { ISettingRepository } from "../../domain/interfaces/ISettingRepository.js";
-import { getNaiveNow } from "../../utils/dateUtils.js";
+import { getNaiveNowString, toLocalISOString } from "../../utils/dateUtils.js";
 
 @injectable()
 export class PatientFinancialService implements IPatientFinancialService {
@@ -57,7 +57,12 @@ export class PatientFinancialService implements IPatientFinancialService {
     this.logger.debug("Criando novo registro financeiro", { patientId: financial.patientId, type: financial.type });
 
     try {
-      const newFinancial = await this.repository.create(financial);
+      const normalized = { ...financial } as any;
+      if (normalized.date) normalized.date = toLocalISOString(new Date(normalized.date));
+      if (normalized.dueDate) normalized.dueDate = toLocalISOString(new Date(normalized.dueDate));
+      if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(new Date(normalized.paymentDate));
+
+      const newFinancial = await this.repository.create(normalized);
       
       await this.activityService.logActivity({
         patientId: newFinancial.patientId,
@@ -83,7 +88,12 @@ export class PatientFinancialService implements IPatientFinancialService {
     this.logger.debug("Atualizando registro financeiro", { financialId: id });
 
     try {
-      const updatedFinancial = await this.repository.update(id, financial);
+      const normalized = { ...financial } as any;
+      if (normalized.date) normalized.date = toLocalISOString(new Date(normalized.date));
+      if (normalized.dueDate) normalized.dueDate = toLocalISOString(new Date(normalized.dueDate));
+      if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(new Date(normalized.paymentDate));
+
+      const updatedFinancial = await this.repository.update(id, normalized);
       if (updatedFinancial) {
         this.logger.info("Registro financeiro atualizado com sucesso", { financialId: id });
       } else {
@@ -139,7 +149,7 @@ export class PatientFinancialService implements IPatientFinancialService {
     }
   }
 
-  async getFinancialByDateRange(patientId: string, startDate: Date, endDate: Date): Promise<PatientFinancial[]> {
+  async getFinancialByDateRange(patientId: string, startDate: string, endDate: string): Promise<PatientFinancial[]> {
     this.logger.debug("Buscando registros financeiros por período", { patientId, startDate, endDate });
 
     try {
@@ -204,7 +214,7 @@ export class PatientFinancialService implements IPatientFinancialService {
 
       const updates: Partial<PatientFinancial> = {
         status: 'paid',
-        paymentDate: getNaiveNow(timezone)
+        paymentDate: getNaiveNowString(timezone)
       };
 
       if (paymentMethod) {

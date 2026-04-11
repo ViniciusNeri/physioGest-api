@@ -10,6 +10,7 @@ const patientSchema = new mongoose.Schema({
     observations: { type: String, required: false },
     userId: { type: String, required: true },
     pin: { type: String, required: false },
+    status: { type: Boolean, default: true },
 }, { timestamps: true });
 // @ts-ignore
 patientSchema.pre('save', function () {

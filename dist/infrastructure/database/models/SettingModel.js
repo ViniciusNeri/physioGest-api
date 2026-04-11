@@ -14,6 +14,15 @@ const settingSchema = new mongoose.Schema({
     categoryControlMode: { type: String, enum: ['none', 'manual', 'auto'], default: 'none' },
     defaultCategoryId: { type: String, required: false },
     defaultPaymentMethodId: { type: String, required: false },
+    operatingDays: { type: [Number], default: [1, 2, 3, 4, 5] },
+    businessHours: {
+        startTime: { type: String, default: '08:00' },
+        endTime: { type: String, default: '18:00' },
+        lunchStart: { type: String },
+        lunchEnd: { type: String }
+    },
+    timezone: { type: String, default: 'America/Sao_Paulo' },
+    sessionDuration: { type: Number, default: 60 },
 }, { timestamps: true });
 // @ts-ignore
 settingSchema.pre('save', function () {

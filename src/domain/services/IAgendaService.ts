@@ -89,6 +89,7 @@ export interface IAgendaService {
    * Retorna os horários disponíveis de um usuário em uma data específica
    * @param userId - ID do usuário
    * @param date - Data no formato YYYY-MM-DD
+   * @param categoryId - (Opcional) ID da categoria para considerar sua duração específica
    */
-  getAvailableSlots(userId: string, date: string): Promise<string[]>;
+  getAvailableSlots(userId: string, date: string, categoryId?: string): Promise<string[]>;
 }

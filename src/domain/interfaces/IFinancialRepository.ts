@@ -29,6 +29,7 @@ export interface IFinancialRepository {
    * @returns Lista de registros financeiros
    */
   findByFilters(userId: string, month: number, year: number): Promise<Financial[]>;
+  findByYear(userId: string, year: number): Promise<Financial[]>;
 
   /**
    * Busca registros financeiros por paciente

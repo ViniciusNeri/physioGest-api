@@ -3,7 +3,7 @@ export interface Financial {
   type: 'income' | 'expense';
   status: 'pending' | 'paid' | 'cancelled' | 'refunded';
   amount: number;
-  date: Date;
+  date: string;
   description: string;
   category?: string;
   expenseType?: 'fixed' | 'variable';

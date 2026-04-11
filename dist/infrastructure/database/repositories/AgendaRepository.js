@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { injectable } from "tsyringe";
 import AgendaModel from "../models/AgendaModel.js";
 import mongoose from "mongoose";
+import { getNaiveNowString } from "../../../utils/dateUtils.js";
 const mapAgenda = (agenda) => {
     if (!agenda)
         return agenda;
@@ -22,21 +23,21 @@ let AgendaRepository = class AgendaRepository {
     async findById(id) {
         const isObjectId = mongoose.Types.ObjectId.isValid(id);
         const query = isObjectId ? { _id: id } : { id: id };
-        const a = await AgendaModel.findOne(query).populate('patient', 'name').populate('category', 'name').lean({ virtuals: true }).exec();
+        const a = await AgendaModel.findOne(query).populate('patient', 'name').populate('category', 'name duration').lean({ virtuals: true }).exec();
         return a ? mapAgenda(a) : null;
     }
     async findAll() {
-        const agendas = await AgendaModel.find().populate('patient', 'name').populate('category', 'name').lean({ virtuals: true }).exec();
+        const agendas = await AgendaModel.find().populate('patient', 'name').populate('category', 'name duration').lean({ virtuals: true }).exec();
         return agendas.map(mapAgenda);
     }
     async findByUserId(userId) {
-        const agendas = await AgendaModel.find({ userId }).populate('patient', 'name').populate('category', 'name').lean({ virtuals: true }).exec();
+        const agendas = await AgendaModel.find({ userId }).populate('patient', 'name').populate('category', 'name duration').lean({ virtuals: true }).exec();
         return agendas.map(mapAgenda);
     }
     async findByPatientId(patientId) {
         const agendas = await AgendaModel.find({ patientId })
             .populate('patient', 'name')
-            .populate('category', 'name')
+            .populate('category', 'name duration')
             .lean({ virtuals: true })
             .sort({ startDate: -1 })
             .exec();
@@ -49,6 +50,7 @@ let AgendaRepository = class AgendaRepository {
                 { userId: userId },
                 { patientId: patientId }
             ],
+            // String ISO comparison: startDate < endDate && endDate > startDate
             $and: [
                 { startDate: { $lt: endDate } },
                 { endDate: { $gt: startDate } }
@@ -62,28 +64,33 @@ let AgendaRepository = class AgendaRepository {
                 query.id = { $ne: excludeId };
             }
         }
-        console.log(`[hasOverlap] Buscando conflitos para Usuário: ${userId} OU Paciente: ${patientId}`);
-        console.log(`[hasOverlap] Intervalo solicitado: ${startDate.toISOString()} até ${endDate.toISOString()}`);
         const overlap = await AgendaModel.findOne(query).lean().exec();
         if (overlap) {
-            console.log(`[hasOverlap] CONFLITO DETECTADO!`);
             const o = overlap;
-            console.log(`[hasOverlap] Descrição do conflito: ID=${o.id || o._id}, User=${o.userId}, Patient=${o.patientId}, De=${o.startDate instanceof Date ? o.startDate.toISOString() : o.startDate} até=${o.endDate instanceof Date ? o.endDate.toISOString() : o.endDate}`);
-        }
-        else {
-            console.log("[hasOverlap] Nenhum conflito encontrado para este período.");
+            console.log(`[hasOverlap] Conflito: ID=${o.id || o._id} De=${o.startDate} até=${o.endDate}`);
         }
         return overlap !== null;
+    }
+    async findByDateRange(userId, startDate, endDate) {
+        const appointments = await AgendaModel.find({
+            userId,
+            status: { $nin: ['cancelled', 'no_show'] },
+            $and: [
+                { startDate: { $lt: endDate } },
+                { endDate: { $gt: startDate } }
+            ]
+        }).lean({ virtuals: true }).exec();
+        return appointments.map(mapAgenda);
     }
     async create(agenda) {
         const newAgenda = new AgendaModel(agenda);
         const saved = await newAgenda.save();
-        return AgendaModel.findById(saved._id).populate('patient', 'name').populate('category', 'name').lean({ virtuals: true }).exec().then(a => mapAgenda(a));
+        return AgendaModel.findById(saved._id).populate('patient', 'name').populate('category', 'name duration').lean({ virtuals: true }).exec().then(a => mapAgenda(a));
     }
     async update(id, agenda) {
         const isObjectId = mongoose.Types.ObjectId.isValid(id);
         const query = isObjectId ? { _id: id } : { id: id };
-        const updated = await AgendaModel.findOneAndUpdate(query, agenda, { new: true }).populate('patient', 'name').populate('category', 'name').lean({ virtuals: true }).exec();
+        const updated = await AgendaModel.findOneAndUpdate(query, agenda, { new: true }).populate('patient', 'name').populate('category', 'name duration').lean({ virtuals: true }).exec();
         return updated ? mapAgenda(updated) : null;
     }
     async delete(id) {
@@ -91,6 +98,22 @@ let AgendaRepository = class AgendaRepository {
         const query = isObjectId ? { _id: id } : { id: id };
         const result = await AgendaModel.findOneAndDelete(query).exec();
         return result !== null;
+    }
+    async countFutureAppointmentsOnWeekday(userId, weekday, timezone) {
+        const nowStr = getNaiveNowString(timezone);
+        const weekdayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        // Busca todos os agendamentos futuros e filtra por dia da semana via JS
+        const appointments = await AgendaModel.find({
+            userId,
+            status: 'scheduled',
+            startDate: { $gte: nowStr }
+        }).lean().exec();
+        return appointments.filter((a) => {
+            const datePart = a.startDate?.substring(0, 10);
+            if (!datePart)
+                return false;
+            return new Date(datePart + 'T12:00:00Z').getUTCDay() === weekday;
+        }).length;
     }
 };
 AgendaRepository = __decorate([

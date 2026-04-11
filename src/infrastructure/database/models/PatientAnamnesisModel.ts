@@ -6,7 +6,7 @@ const patientAnamnesisSchema = new mongoose.Schema<PatientAnamnesis>(
     id: { type: String },
     patientId: { type: String, required: true },
     userId: { type: String, required: true },
-    date: { type: Date, required: true, default: Date.now },
+    date: { type: String, required: true, default: () => new Date().toISOString().substring(0, 19) },
     chiefComplaint: { type: String, required: false },
     historyOfPresentIllness: { type: String, required: false },
     pastMedicalHistory: { type: String, required: false },

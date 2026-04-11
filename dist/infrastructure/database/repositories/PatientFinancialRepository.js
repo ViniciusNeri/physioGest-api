@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { injectable } from "tsyringe";
 import PatientFinancialModel from "../models/PatientFinancialModel.js";
+import { getLocalMonthRange, getLocalYearRange } from "../../../utils/dateUtils.js";
 let PatientFinancialRepository = class PatientFinancialRepository {
     async findByPatientId(patientId) {
         return PatientFinancialModel.find({ patientId })
@@ -78,11 +79,17 @@ let PatientFinancialRepository = class PatientFinancialRepository {
             .exec();
     }
     async findByUserAndDate(userId, month, year) {
-        const startDate = new Date(year, month - 1, 1);
-        const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+        const { start, end } = getLocalMonthRange(month, year);
         return PatientFinancialModel.find({
             userId,
-            date: { $gte: startDate, $lte: endDate }
+            date: { $gte: start, $lte: end }
+        }).lean({ virtuals: true }).exec();
+    }
+    async findByUserAndYear(userId, year) {
+        const { start, end } = getLocalYearRange(year);
+        return PatientFinancialModel.find({
+            userId,
+            date: { $gte: start, $lte: end }
         }).lean({ virtuals: true }).exec();
     }
     async findByDateRange(patientId, startDate, endDate) {

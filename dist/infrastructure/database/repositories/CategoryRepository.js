@@ -6,9 +6,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { injectable } from "tsyringe";
 import CategoryModel from "../models/CategoryModel.js";
+import mongoose from "mongoose";
 let CategoryRepository = class CategoryRepository {
     async findById(id) {
-        return CategoryModel.findById(id).lean({ virtuals: true }).exec();
+        const isObjectId = mongoose.Types.ObjectId.isValid(id);
+        const query = isObjectId ? { _id: id } : { id: id };
+        return CategoryModel.findOne(query).lean({ virtuals: true }).exec();
     }
     async findAll() {
         return CategoryModel.find().lean({ virtuals: true }).exec();
@@ -28,10 +31,14 @@ let CategoryRepository = class CategoryRepository {
         return newCategory.save();
     }
     async update(id, category) {
-        return CategoryModel.findByIdAndUpdate(id, category, { new: true }).lean({ virtuals: true }).exec();
+        const isObjectId = mongoose.Types.ObjectId.isValid(id);
+        const query = isObjectId ? { _id: id } : { id: id };
+        return CategoryModel.findOneAndUpdate(query, category, { new: true }).lean({ virtuals: true }).exec();
     }
     async delete(id) {
-        const result = await CategoryModel.findByIdAndDelete(id).exec();
+        const isObjectId = mongoose.Types.ObjectId.isValid(id);
+        const query = isObjectId ? { _id: id } : { id: id };
+        const result = await CategoryModel.findOneAndDelete(query).exec();
         return result !== null;
     }
 };

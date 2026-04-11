@@ -6,10 +6,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { injectable } from "tsyringe";
 import PaymentMethodModel from "../models/PaymentMethodModel.js";
+import mongoose from "mongoose";
 let PaymentMethodRepository = class PaymentMethodRepository {
     async findById(id) {
-        console.log(`[REPO DEBUG] findById called with id: ${id}`);
-        return PaymentMethodModel.findById(id).lean({ virtuals: true }).exec();
+        const isObjectId = mongoose.Types.ObjectId.isValid(id);
+        const query = isObjectId ? { _id: id } : { id: id };
+        return PaymentMethodModel.findOne(query).lean({ virtuals: true }).exec();
     }
     async findAll() {
         console.log("[REPO DEBUG] findAll called");
@@ -31,10 +33,14 @@ let PaymentMethodRepository = class PaymentMethodRepository {
         return newPaymentMethod.save();
     }
     async update(id, paymentMethod) {
-        return PaymentMethodModel.findByIdAndUpdate(id, paymentMethod, { new: true }).lean({ virtuals: true }).exec();
+        const isObjectId = mongoose.Types.ObjectId.isValid(id);
+        const query = isObjectId ? { _id: id } : { id: id };
+        return PaymentMethodModel.findOneAndUpdate(query, paymentMethod, { new: true }).lean({ virtuals: true }).exec();
     }
     async delete(id) {
-        const result = await PaymentMethodModel.findByIdAndDelete(id).exec();
+        const isObjectId = mongoose.Types.ObjectId.isValid(id);
+        const query = isObjectId ? { _id: id } : { id: id };
+        const result = await PaymentMethodModel.findOneAndDelete(query).exec();
         return result !== null;
     }
 };

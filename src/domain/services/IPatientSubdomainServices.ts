@@ -17,7 +17,7 @@ export interface IPatientFinancialService {
   deleteFinancial(id: string): Promise<boolean>;
   getPatientBalance(patientId: string): Promise<number>;
   getPendingPayments(patientId: string): Promise<PatientFinancial[]>;
-  getFinancialByDateRange(patientId: string, startDate: Date, endDate: Date): Promise<PatientFinancial[]>;
+  getFinancialByDateRange(patientId: string, startDate: string, endDate: string): Promise<PatientFinancial[]>;
   getFinancialSummary(patientId: string): Promise<PatientFinancialSummary>;
   payFinancial(id: string, paymentMethod?: string): Promise<PatientFinancial | null>;
 }

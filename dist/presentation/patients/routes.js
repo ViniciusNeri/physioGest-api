@@ -58,6 +58,12 @@ patientRoutes.use(JwtAuthService.authenticateToken);
  *         userId:
  *           type: string
  *           description: ID do usuário associado
+ *         pin:
+ *           type: string
+ *           description: PIN de 4 dígitos para agendamento online
+ *         status:
+ *           type: boolean
+ *           description: Status do paciente (true=ativo, false=inativo)
  *       example:
  *         id: 60d5ecb74b24c72b8c8b4567
  *         name: Maria Santos
@@ -68,6 +74,8 @@ patientRoutes.use(JwtAuthService.authenticateToken);
  *         profession: Engenheira de Software
  *         observations: Paciente com dores na lombar
  *         userId: 60d5ecb74b24c72b8c8b4568
+ *         pin: "1234"
+ *         status: true
  *
  *     PatientActivity:
  *       type: object

@@ -4,7 +4,7 @@ import type { ISettingService } from "../../domain/services/ISettingService.js";
 import type { Setting } from "../../domain/entities/Setting.js";
 import type { ILogger } from "../../infrastructure/logging/Logger.js";
 import type { IAgendaRepository } from "../../domain/interfaces/IAgendaRepository.js";
-import { getNaiveNow } from "../../utils/dateUtils.js";
+import { getNaiveNowString, getLocalDayRange } from "../../utils/dateUtils.js";
 
 @injectable()
 export class SettingService implements ISettingService {
@@ -17,16 +17,12 @@ export class SettingService implements ISettingService {
     private logger: ILogger
   ) {}
 
-  private getLocalDetails(date: Date) {
-    // No modelo Naive UTC, as horas UTC são as horas nominais da clínica.
-    const hour = date.getUTCHours();
-    const minute = date.getUTCMinutes();
-    const weekday = date.getUTCDay();
-
-    return {
-      weekday,
-      time: `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`
-    };
+  /** Extrai HH:mm e dia da semana de uma string "YYYY-MM-DDTHH:mm:ss" */
+  private getLocalDetails(dateStr: string) {
+    const time = dateStr.substring(11, 16); // "HH:mm"
+    const datePart = dateStr.substring(0, 10);
+    const weekday = new Date(datePart + 'T12:00:00Z').getUTCDay();
+    return { weekday, time };
   }
 
   async getSettingById(id: string): Promise<Setting | null> {
@@ -59,31 +55,33 @@ export class SettingService implements ISettingService {
         const newBusinessHours = setting.businessHours ?? current.businessHours;
         const newTimezone = setting.timezone ?? current.timezone ?? 'America/Sao_Paulo';
 
-        const now = getNaiveNow(newTimezone);
-        const farFuture = new Date(now);
-        farFuture.setUTCFullYear(now.getUTCFullYear() + 2);
-        
-        const appointments = await this.agendaRepository.findByDateRange(current.userId, now, farFuture);
+        const nowStr = getNaiveNowString(newTimezone);
+        // Far future = 2 years from now as a date string
+        const farFutureYear = parseInt(nowStr.substring(0, 4)) + 2;
+        const farFutureStr = `${farFutureYear}${nowStr.substring(4)}`;
+
+        const appointments = await this.agendaRepository.findByDateRange(current.userId, nowStr, farFutureStr);
 
         for (const app of appointments) {
           const localStart = this.getLocalDetails(app.startDate);
           const localEnd = this.getLocalDetails(app.endDate);
 
           if (!newOperatingDays.includes(localStart.weekday)) {
-            const formattedDate = `${app.startDate.getUTCDate().toString().padStart(2, '0')}/${(app.startDate.getUTCMonth() + 1).toString().padStart(2, '0')}`;
+            const formattedDate = `${app.startDate.substring(8, 10)}/${app.startDate.substring(5, 7)}`;
             throw new Error(`Conflito: Existe um agendamento em ${formattedDate}, mas o dia não terá funcionamento.`);
           }
 
           if (newBusinessHours) {
             const { startTime, endTime, lunchStart, lunchEnd } = newBusinessHours;
             if (localStart.time < startTime || localEnd.time > endTime) {
-              const formattedDate = `${app.startDate.getUTCDate().toString().padStart(2, '0')}/${(app.startDate.getUTCMonth() + 1).toString().padStart(2, '0')} ${localStart.time}`;
+              const formattedDate = `${app.startDate.substring(8, 10)}/${app.startDate.substring(5, 7)} ${localStart.time}`;
               throw new Error(`Conflito: Agendamento em ${formattedDate} fora do novo expediente.`);
             }
 
             if (lunchStart && lunchEnd) {
-              if ((localStart.time >= lunchStart && localStart.time < lunchEnd) || (localEnd.time > lunchStart && localEnd.time <= lunchEnd)) {
-                const formattedDate = `${app.startDate.getUTCDate().toString().padStart(2, '0')}/${(app.startDate.getUTCMonth() + 1).toString().padStart(2, '0')} ${localStart.time}`;
+              if ((localStart.time >= lunchStart && localStart.time < lunchEnd) ||
+                  (localEnd.time > lunchStart && localEnd.time <= lunchEnd)) {
+                const formattedDate = `${app.startDate.substring(8, 10)}/${app.startDate.substring(5, 7)} ${localStart.time}`;
                 throw new Error(`Conflito: Agendamento em ${formattedDate} no novo intervalo de almoço.`);
               }
             }

@@ -1,4 +1,5 @@
 import { injectable } from "tsyringe";
+import { getLocalMonthRange, getLocalYearRange } from "../../../utils/dateUtils.js";
 import type { IFinancialRepository } from "../../../domain/interfaces/IFinancialRepository.js";
 import type { Financial } from "../../../domain/entities/Financial.js";
 import FinancialModel from "../models/FinancialModel.js";
@@ -18,12 +19,18 @@ export class FinancialRepository implements IFinancialRepository {
   }
 
   async findByFilters(userId: string, month: number, year: number): Promise<Financial[]> {
-    const startDate = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0));
-    const endDate = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999));
-    
+    const { start, end } = getLocalMonthRange(month, year);
     return FinancialModel.find({ 
       userId, 
-      date: { $gte: startDate, $lte: endDate } 
+      date: { $gte: start, $lte: end } 
+    }).lean<Financial[]>({ virtuals: true }).exec();
+  }
+
+  async findByYear(userId: string, year: number): Promise<Financial[]> {
+    const { start, end } = getLocalYearRange(year);
+    return FinancialModel.find({ 
+      userId, 
+      date: { $gte: start, $lte: end } 
     }).lean<Financial[]>({ virtuals: true }).exec();
   }
 

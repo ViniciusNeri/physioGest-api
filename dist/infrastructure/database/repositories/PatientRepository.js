@@ -16,7 +16,7 @@ let PatientRepository = class PatientRepository {
         return this.enrichWithAgendaStats(patients);
     }
     async findAll() {
-        const patients = await PatientModel.find().lean({ virtuals: true }).exec();
+        const patients = await PatientModel.find({}).lean({ virtuals: true }).exec();
         return this.enrichWithAgendaStats(patients);
     }
     async create(patient) {

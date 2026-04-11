@@ -35,7 +35,7 @@ export interface IAgendaRepository {
    * @param endDate - Data final
    * @param excludeId - (Opcional) ID de agenda para ignorar (usado no update)
    */
-  hasOverlap(userId: string, patientId: string, startDate: Date, endDate: Date, excludeId?: string): Promise<boolean>;
+  hasOverlap(userId: string, patientId: string, startDate: string, endDate: string, excludeId?: string): Promise<boolean>;
 
   /**
    * Busca agendamentos ativos em um intervalo de datas para um usuario
@@ -44,7 +44,7 @@ export interface IAgendaRepository {
    * @param endDate - Data final
    * @returns Lista de agendamentos no periodo
    */
-  findByDateRange(userId: string, startDate: Date, endDate: Date): Promise<Agenda[]>;
+  findByDateRange(userId: string, startDate: string, endDate: string): Promise<Agenda[]>;
 
   /**
    * Cria uma nova agenda

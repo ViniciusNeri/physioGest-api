@@ -6,8 +6,8 @@ const agendaSchema = new mongoose.Schema<Agenda>(
     id: { type: String },
     patientId: { type: String, required: true },
     userId: { type: String, required: true },
-    startDate: { type: Date, required: true },
-    endDate: { type: Date, required: true },
+    startDate: { type: String, required: true },
+    endDate: { type: String, required: true },
     categoryId: { 
       type: String, 
       set: (v: string) => v === "" ? null : v 

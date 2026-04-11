@@ -9,115 +9,75 @@ import AgendaModel from "../models/AgendaModel.js";
 import FinancialModel from "../models/FinancialModel.js";
 import PatientFinancialModel from "../models/PatientFinancialModel.js";
 import PatientModel from "../models/PatientModel.js";
+import { getNaiveNowString, getLocalDayRange, getLocalMonthRange, } from "../../../utils/dateUtils.js";
 let DashboardRepository = class DashboardRepository {
     async getWeeklyAppointmentsCount(userId) {
-        const spTodayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(new Date());
-        const todayLocal = new Date(`${spTodayStr}T12:00:00-03:00`);
-        const startOfWeek = new Date(todayLocal);
-        startOfWeek.setHours(0, 0, 0, 0);
-        startOfWeek.setDate(todayLocal.getDate() - todayLocal.getDay());
-        const startOfWeekUTC = new Date(`${new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(startOfWeek)}T00:00:00-03:00`);
-        const endOfWeek = new Date(startOfWeekUTC);
-        endOfWeek.setDate(startOfWeekUTC.getDate() + 6);
-        const endOfWeekUTC = new Date(`${new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(endOfWeek)}T23:59:59-03:00`);
-        const query = {
-            $or: [
-                { userId },
-                { userId: null }
-            ],
-            startDate: {
-                $gte: startOfWeekUTC,
-                $lte: endOfWeekUTC
-            }
-        };
-        const count = await AgendaModel.countDocuments(query);
-        return count;
+        const nowStr = getNaiveNowString();
+        const datePart = nowStr.substring(0, 10); // "YYYY-MM-DD"
+        const d = new Date(datePart + 'T12:00:00Z');
+        const dayOfWeek = d.getUTCDay(); // 0=Sun
+        // Start of week (Sunday)
+        const startOfWeek = new Date(d);
+        startOfWeek.setUTCDate(d.getUTCDate() - dayOfWeek);
+        const startStr = startOfWeek.toISOString().substring(0, 10) + 'T00:00:00';
+        // End of week (Saturday)
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setUTCDate(startOfWeek.getUTCDate() + 6);
+        const endStr = endOfWeek.toISOString().substring(0, 10) + 'T23:59:59';
+        return AgendaModel.countDocuments({
+            userId,
+            startDate: { $gte: startStr, $lte: endStr }
+        });
     }
     async getMonthlyIncome(userId) {
-        const now = new Date();
-        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-        const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
-        const generalIncomePromise = FinancialModel.aggregate([
-            {
-                $match: {
-                    userId,
-                    type: 'income',
-                    date: {
-                        $gte: startOfMonth,
-                        $lte: endOfMonth
-                    }
-                }
-            },
-            {
-                $group: {
-                    _id: null,
-                    total: { $sum: '$amount' }
-                }
-            }
+        const nowStr = getNaiveNowString();
+        const month = parseInt(nowStr.substring(5, 7));
+        const year = parseInt(nowStr.substring(0, 4));
+        const { start, end } = getLocalMonthRange(month, year);
+        const [generalIncome, patientIncome] = await Promise.all([
+            FinancialModel.aggregate([
+                { $match: { userId, type: 'income', date: { $gte: start, $lte: end } } },
+                { $group: { _id: null, total: { $sum: '$amount' } } }
+            ]),
+            PatientFinancialModel.aggregate([
+                { $match: { userId, type: 'income', status: 'paid', date: { $gte: start, $lte: end } } },
+                { $group: { _id: null, total: { $sum: '$amount' } } }
+            ])
         ]);
-        const patientIncomePromise = PatientFinancialModel.aggregate([
-            {
-                $match: {
-                    userId,
-                    type: 'income',
-                    status: 'paid',
-                    date: {
-                        $gte: startOfMonth,
-                        $lte: endOfMonth
-                    }
-                }
-            },
-            {
-                $group: {
-                    _id: null,
-                    total: { $sum: '$amount' }
-                }
-            }
-        ]);
-        const [generalIncome, patientIncome] = await Promise.all([generalIncomePromise, patientIncomePromise]);
         const generalTotal = generalIncome.length > 0 ? generalIncome[0].total : 0;
         const patientTotal = patientIncome.length > 0 ? patientIncome[0].total : 0;
         return generalTotal + patientTotal;
     }
     async getActivePaymentsCount(userId) {
-        const now = new Date();
-        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-        const patientCount = await PatientFinancialModel.countDocuments({
+        const nowStr = getNaiveNowString();
+        const month = parseInt(nowStr.substring(5, 7));
+        const year = parseInt(nowStr.substring(0, 4));
+        const { start } = getLocalMonthRange(month, year);
+        return PatientFinancialModel.countDocuments({
             userId,
             status: 'pending',
             $or: [
-                { dueDate: { $lte: now } },
-                { date: { $gte: startOfMonth } }
+                { dueDate: { $lte: nowStr } },
+                { date: { $gte: start } }
             ]
         });
-        return patientCount;
     }
     async getTodaysAppointments(userId) {
-        const now = new Date();
-        const dateStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(now);
-        const startOfDay = new Date(`${dateStr}T00:00:00-03:00`);
-        const endOfDay = new Date(`${dateStr}T23:59:59-03:00`);
-        const query = {
-            $or: [
-                { userId },
-                { userId: null }
-            ],
-            startDate: {
-                $gte: startOfDay,
-                $lte: endOfDay
-            }
-        };
-        const appointments = await AgendaModel.find(query)
+        const nowStr = getNaiveNowString();
+        const datePart = nowStr.substring(0, 10);
+        const { start, end } = getLocalDayRange(datePart);
+        const appointments = await AgendaModel.find({
+            userId,
+            startDate: { $gte: start, $lte: end }
+        })
             .populate('patient', 'name')
             .populate('category', 'name')
-            .select('id startDate patientId categoryId description patient status category notes')
-            .lean({ virtuals: true })
-            .sort({ startDate: 1 });
-        const formatter = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit' });
+            .sort({ startDate: 1 })
+            .lean({ virtuals: true });
         return appointments.map((appointment) => ({
             id: appointment.id || appointment._id.toString(),
             date: appointment.startDate,
-            time: formatter.format(appointment.startDate),
+            time: appointment.startDate?.substring(11, 16) ?? '',
             patientId: appointment.patientId,
             patientName: appointment.patient?.name || "",
             categoryId: appointment.categoryId || "",
@@ -128,29 +88,23 @@ let DashboardRepository = class DashboardRepository {
         }));
     }
     async getNextAppointment(userId) {
-        const now = new Date();
+        const nowStr = getNaiveNowString();
         const appointment = await AgendaModel.findOne({
-            $or: [
-                { userId },
-                { userId: null }
-            ],
+            userId,
             status: 'scheduled',
-            startDate: { $gte: now }
+            startDate: { $gte: nowStr }
         })
             .populate('patient', 'name')
             .populate('category', 'name')
-            .select('id startDate patientId categoryId description patient status category')
-            .lean({ virtuals: true })
-            .sort({ startDate: 1 });
-        if (!appointment) {
+            .sort({ startDate: 1 })
+            .lean({ virtuals: true });
+        if (!appointment)
             return null;
-        }
-        const formatter = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit' });
         const app = appointment;
         return {
             id: app.id || app._id.toString(),
             date: app.startDate,
-            time: formatter.format(app.startDate),
+            time: app.startDate?.substring(11, 16) ?? '',
             patientId: app.patientId,
             patientName: app.patient?.name || "",
             categoryId: app.categoryId || "",
@@ -161,48 +115,35 @@ let DashboardRepository = class DashboardRepository {
         };
     }
     async getBirthdayList(userId) {
-        const now = new Date();
-        const currentMonth = now.getMonth() + 1; // 1-12
+        const nowStr = getNaiveNowString();
+        const currentMonth = nowStr.substring(5, 7); // "MM"
+        // birthDate stored as string "YYYY-MM-DD..." — use $substr for month comparison
         const patients = await PatientModel.aggregate([
-            {
-                $match: {
-                    userId,
-                    birthDate: { $exists: true, $ne: null }
-                }
-            },
+            { $match: { userId, birthDate: { $exists: true, $ne: null, $type: 'string' } } },
             {
                 $project: {
                     id: "$_id",
                     name: 1,
                     birthDate: 1,
-                    month: { $month: "$birthDate" },
-                    day: { $dayOfMonth: "$birthDate" }
+                    month: { $substr: ["$birthDate", 5, 2] },
+                    day: { $substr: ["$birthDate", 8, 2] }
                 }
             },
-            {
-                $match: {
-                    month: currentMonth
-                }
-            },
-            {
-                $sort: { day: 1 }
-            }
+            { $match: { month: currentMonth } },
+            { $sort: { day: 1 } }
         ]);
         return patients.map(p => ({
             patientId: p.id.toString(),
             name: p.name,
             birthDate: p.birthDate,
-            day: p.day
+            day: parseInt(p.day)
         }));
     }
     async getPendingPayments(userId) {
-        const pending = await PatientFinancialModel.find({
-            userId,
-            status: 'pending'
-        })
+        const pending = await PatientFinancialModel.find({ userId, status: 'pending' })
             .populate('patient', 'name')
             .sort({ date: -1 })
-            .lean();
+            .lean({ virtuals: true });
         return pending.map((p) => ({
             patientId: p.patientId,
             patientName: p.patient?.name || "Paciente Removido",
@@ -212,55 +153,42 @@ let DashboardRepository = class DashboardRepository {
         }));
     }
     async getOverdueAppointments(userId) {
-        const now = new Date();
+        const nowStr = getNaiveNowString();
         const overdue = await AgendaModel.find({
             userId,
             status: 'scheduled',
-            startDate: { $lt: now }
+            startDate: { $lt: nowStr }
         })
             .populate('patient', 'name')
             .sort({ startDate: -1 })
-            .lean();
-        const formatter = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit' });
+            .lean({ virtuals: true });
         return overdue.map((a) => ({
-            id: a._id.toString(),
+            id: a.id || a._id.toString(),
             date: a.startDate,
-            time: formatter.format(a.startDate),
+            time: a.startDate?.substring(11, 16) ?? '',
             patientId: a.patientId,
             patientName: a.patient?.name || "Desconhecido",
             description: a.description || ""
         }));
     }
     async getOccupancyGraph(userId) {
-        const startOfMonth = new Date();
-        startOfMonth.setDate(1);
-        startOfMonth.setHours(0, 0, 0, 0);
+        const nowStr = getNaiveNowString();
+        const month = nowStr.substring(5, 7);
+        const year = nowStr.substring(0, 4);
+        const startOfMonth = `${year}-${month}-01T00:00:00`;
         const appointments = await AgendaModel.aggregate([
-            {
-                $match: {
-                    userId,
-                    startDate: { $gte: startOfMonth }
-                }
-            },
+            { $match: { userId, startDate: { $gte: startOfMonth } } },
             {
                 $project: {
-                    hour: { $hour: { date: "$startDate", timezone: "America/Sao_Paulo" } }
+                    // Extract hour from string "YYYY-MM-DDTHH:mm:ss" → position 11, length 2
+                    hour: { $toInt: { $substr: ["$startDate", 11, 2] } }
                 }
             },
-            {
-                $group: {
-                    _id: "$hour",
-                    count: { $sum: 1 }
-                }
-            },
-            {
-                $sort: { _id: 1 }
-            }
+            { $group: { _id: "$hour", count: { $sum: 1 } } },
+            { $sort: { _id: 1 } }
         ]);
         const result = {};
-        appointments.forEach(a => {
-            result[a._id] = a.count;
-        });
+        appointments.forEach(a => { result[a._id] = a.count; });
         return result;
     }
 };

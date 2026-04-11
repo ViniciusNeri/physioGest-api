@@ -3,7 +3,7 @@ import type { IAgendaRepository } from "../../../domain/interfaces/IAgendaReposi
 import type { Agenda } from "../../../domain/entities/Agenda.js";
 import AgendaModel from "../models/AgendaModel.js";
 import mongoose from "mongoose";
-import { getNaiveNow } from "../../../utils/dateUtils.js";
+import { getNaiveNowString } from "../../../utils/dateUtils.js";
 
 const mapAgenda = (agenda: any): Agenda => {
   if (!agenda) return agenda;
@@ -21,37 +21,38 @@ export class AgendaRepository implements IAgendaRepository {
   async findById(id: string): Promise<Agenda | null> {
     const isObjectId = mongoose.Types.ObjectId.isValid(id);
     const query = isObjectId ? { _id: id } : { id: id };
-    const a = await AgendaModel.findOne(query).populate('patient', 'name').populate('category', 'name').lean({ virtuals: true }).exec();
+    const a = await AgendaModel.findOne(query).populate('patient', 'name').populate('category', 'name duration').lean({ virtuals: true }).exec();
     return a ? mapAgenda(a) : null;
   }
 
   async findAll(): Promise<Agenda[]> {
-    const agendas = await AgendaModel.find().populate('patient', 'name').populate('category', 'name').lean({ virtuals: true }).exec();
+    const agendas = await AgendaModel.find().populate('patient', 'name').populate('category', 'name duration').lean({ virtuals: true }).exec();
     return agendas.map(mapAgenda);
   }
 
   async findByUserId(userId: string): Promise<Agenda[]> {
-    const agendas = await AgendaModel.find({ userId }).populate('patient', 'name').populate('category', 'name').lean({ virtuals: true }).exec();
+    const agendas = await AgendaModel.find({ userId }).populate('patient', 'name').populate('category', 'name duration').lean({ virtuals: true }).exec();
     return agendas.map(mapAgenda);
   }
 
   async findByPatientId(patientId: string): Promise<Agenda[]> {
     const agendas = await AgendaModel.find({ patientId })
       .populate('patient', 'name')
-      .populate('category', 'name')
+      .populate('category', 'name duration')
       .lean({ virtuals: true })
       .sort({ startDate: -1 })
       .exec();
     return agendas.map(mapAgenda);
   }
 
-  async hasOverlap(userId: string, patientId: string, startDate: Date, endDate: Date, excludeId?: string): Promise<boolean> {
+  async hasOverlap(userId: string, patientId: string, startDate: string, endDate: string, excludeId?: string): Promise<boolean> {
     const query: any = {
       status: { $nin: ['cancelled', 'no_show'] },
       $or: [
         { userId: userId },
         { patientId: patientId }
       ],
+      // String ISO comparison: startDate < endDate && endDate > startDate
       $and: [
         { startDate: { $lt: endDate } },
         { endDate: { $gt: startDate } }
@@ -66,22 +67,15 @@ export class AgendaRepository implements IAgendaRepository {
       }
     }
 
-    console.log(`[hasOverlap] Buscando conflitos para Usuário: ${userId} OU Paciente: ${patientId}`);
-    console.log(`[hasOverlap] Intervalo solicitado: ${startDate.toISOString()} até ${endDate.toISOString()}`);
-    
     const overlap = await AgendaModel.findOne(query).lean().exec();
-    
     if (overlap) {
-      console.log(`[hasOverlap] CONFLITO DETECTADO!`);
       const o = overlap as any;
-      console.log(`[hasOverlap] Descrição do conflito: ID=${o.id || o._id}, User=${o.userId}, Patient=${o.patientId}, De=${o.startDate instanceof Date ? o.startDate.toISOString() : o.startDate} até=${o.endDate instanceof Date ? o.endDate.toISOString() : o.endDate}`);
-    } else {
-      console.log("[hasOverlap] Nenhum conflito encontrado para este período.");
+      console.log(`[hasOverlap] Conflito: ID=${o.id || o._id} De=${o.startDate} até=${o.endDate}`);
     }
     return overlap !== null;
   }
 
-  async findByDateRange(userId: string, startDate: Date, endDate: Date): Promise<Agenda[]> {
+  async findByDateRange(userId: string, startDate: string, endDate: string): Promise<Agenda[]> {
     const appointments = await AgendaModel.find({
       userId,
       status: { $nin: ['cancelled', 'no_show'] },
@@ -96,13 +90,13 @@ export class AgendaRepository implements IAgendaRepository {
   async create(agenda: Agenda): Promise<Agenda> {
     const newAgenda = new AgendaModel(agenda);
     const saved = await newAgenda.save();
-    return AgendaModel.findById(saved._id).populate('patient', 'name').populate('category', 'name').lean({ virtuals: true }).exec().then(a => mapAgenda(a));
+    return AgendaModel.findById(saved._id).populate('patient', 'name').populate('category', 'name duration').lean({ virtuals: true }).exec().then(a => mapAgenda(a));
   }
 
   async update(id: string, agenda: Partial<Agenda>): Promise<Agenda | null> {
     const isObjectId = mongoose.Types.ObjectId.isValid(id);
     const query = isObjectId ? { _id: id } : { id: id };
-    const updated = await AgendaModel.findOneAndUpdate(query, agenda, { new: true }).populate('patient', 'name').populate('category', 'name').lean({ virtuals: true }).exec();
+    const updated = await AgendaModel.findOneAndUpdate(query, agenda, { new: true }).populate('patient', 'name').populate('category', 'name duration').lean({ virtuals: true }).exec();
     return updated ? mapAgenda(updated) : null;
   }
 
@@ -114,21 +108,20 @@ export class AgendaRepository implements IAgendaRepository {
   }
 
   async countFutureAppointmentsOnWeekday(userId: string, weekday: number, timezone: string): Promise<number> {
-    const now = getNaiveNow(timezone);
-    
-    // JS getDay(): 0 (Dom) a 6 (Sáb)
-    // MongoDB $dayOfWeek: 1 (Dom) a 7 (Sáb)
-    const mongoWeekday = weekday + 1;
+    const nowStr = getNaiveNowString(timezone);
+    const weekdayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-    const count = await AgendaModel.countDocuments({
+    // Busca todos os agendamentos futuros e filtra por dia da semana via JS
+    const appointments = await AgendaModel.find({
       userId,
       status: 'scheduled',
-      startDate: { $gte: now },
-      $expr: {
-        $eq: [{ $dayOfWeek: { date: "$startDate" } }, mongoWeekday]
-      }
-    }).exec();
+      startDate: { $gte: nowStr }
+    }).lean().exec();
 
-    return count;
+    return appointments.filter((a: any) => {
+      const datePart = a.startDate?.substring(0, 10);
+      if (!datePart) return false;
+      return new Date(datePart + 'T12:00:00Z').getUTCDay() === weekday;
+    }).length;
   }
 }

@@ -3,8 +3,8 @@ const agendaSchema = new mongoose.Schema({
     id: { type: String },
     patientId: { type: String, required: true },
     userId: { type: String, required: true },
-    startDate: { type: Date, required: true },
-    endDate: { type: Date, required: true },
+    startDate: { type: String, required: true },
+    endDate: { type: String, required: true },
     categoryId: {
         type: String,
         set: (v) => v === "" ? null : v
@@ -26,7 +26,7 @@ agendaSchema.pre('save', function () {
 agendaSchema.virtual('patient', {
     ref: 'Patient',
     localField: 'patientId',
-    foreignField: 'id',
+    foreignField: '_id',
     justOne: true
 });
 agendaSchema.virtual('category', {

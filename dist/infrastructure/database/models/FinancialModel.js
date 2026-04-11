@@ -4,7 +4,7 @@ const financialSchema = new mongoose.Schema({
     type: { type: String, enum: ['income', 'expense'], required: true },
     status: { type: String, enum: ['pending', 'paid', 'cancelled', 'refunded'], default: 'paid', required: true },
     amount: { type: Number, required: true },
-    date: { type: Date, required: true },
+    date: { type: String, required: true },
     description: { type: String, required: true },
     category: { type: String, required: false },
     expenseType: { type: String, enum: ['fixed', 'variable'], required: false },

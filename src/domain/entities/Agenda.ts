@@ -2,8 +2,8 @@ export interface Agenda {
   id?: string;
   patientId: string;
   userId: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   categoryId?: string;
   status: 'scheduled' | 'completed' | 'cancelled' | 'no_show';
   description?: string;

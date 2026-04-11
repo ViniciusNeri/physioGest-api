@@ -5,6 +5,7 @@ import type { Financial } from "../../domain/entities/Financial.js";
 import type { PatientFinancial } from "../../domain/entities/PatientSubdomains.js";
 import type { ILogger } from "../../infrastructure/logging/Logger.js";
 import type { IPatientRepository } from "../../domain/interfaces/IPatientRepository.js";
+import { toLocalISOString } from "../../utils/dateUtils.js";
 
 @injectable()
 export class FinancialService implements IFinancialService {
@@ -158,10 +159,36 @@ export class FinancialService implements IFinancialService {
     // Ordena fluxo de caixa por data
     cashFlow.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
+    // Busca dados para o histórico do ano todo
+    const [allClinicForYear, allPatientForYear] = await Promise.all([
+      this.repository.findByYear(userId, year),
+      this.patientFinancialRepository.findByUserAndYear(userId, year)
+    ]);
+
+    const monthlyHistory: FinancialConsolidated['monthlyHistory'] = {};
+    const monthNames = [
+      "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+    
+    monthNames.forEach(m => {
+      monthlyHistory[m] = { income: 0, expenses: 0 };
+    });
+
+    [...allClinicForYear, ...allPatientForYear].forEach(item => {
+      const d = new Date(item.date);
+      const mName = monthNames[d.getUTCMonth()];
+      if (item.type === 'income') {
+        monthlyHistory[mName].income += item.amount;
+      } else {
+        monthlyHistory[mName].expenses += item.amount;
+      }
+    });
+
     return {
-      monthlyTotal: totalIncome, // Voltou para as variaveis que eram antes (monthlyTotal = receita total)
+      monthlyTotal: totalIncome,
       pendingTotal,
-      expenses: expensesTotal, // Onde tem despesas fixas deixe apenas despesas
+      expenses: expensesTotal,
       variableExpenses: variableExpensesTotal,
       totalIncome,
       totalExpenses,
@@ -169,7 +196,8 @@ export class FinancialService implements IFinancialService {
       incomeByMethod,
       expenseByMethod,
       expensesByCategory,
-      cashFlow
+      cashFlow,
+      monthlyHistory
     };
   }
 
@@ -195,12 +223,21 @@ export class FinancialService implements IFinancialService {
 
   async createFinancial(financial: Omit<Financial, 'id'>): Promise<Financial> {
     this.logger.info(`Criando registro financeiro para usuário: ${financial.userId}`);
-    return this.repository.create(financial);
+    // Normaliza datas para Naive UTC antes de salvar
+    const normalized = { ...financial } as any;
+    if (normalized.date) normalized.date = toLocalISOString(new Date(normalized.date));
+    if (normalized.dueDate) normalized.dueDate = toLocalISOString(new Date(normalized.dueDate));
+    if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(new Date(normalized.paymentDate));
+    return this.repository.create(normalized);
   }
 
   async updateFinancial(id: string, financial: Partial<Financial>): Promise<Financial | null> {
     this.logger.info(`Atualizando registro financeiro: ${id}`);
-    return this.repository.update(id, financial);
+    const normalized = { ...financial } as any;
+    if (normalized.date) normalized.date = toLocalISOString(new Date(normalized.date));
+    if (normalized.dueDate) normalized.dueDate = toLocalISOString(new Date(normalized.dueDate));
+    if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(new Date(normalized.paymentDate));
+    return this.repository.update(id, normalized);
   }
 
   async deleteFinancial(id: string, source?: string): Promise<boolean> {

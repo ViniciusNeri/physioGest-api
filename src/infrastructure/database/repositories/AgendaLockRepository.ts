@@ -10,17 +10,25 @@ export class AgendaLockRepository implements IAgendaLockRepository {
   }
 
   async findByUserId(userId: string): Promise<AgendaLock[]> {
-    return AgendaLockModel.find({ userId }).lean<AgendaLock[]>({ virtuals: true }).exec();
+    return AgendaLockModel.find({ userId })
+      .sort({ date: 1, startTime: 1 })
+      .lean<AgendaLock[]>({ virtuals: true })
+      .exec();
   }
 
-  async findByDateRange(userId: string, startDate: Date, endDate: Date): Promise<AgendaLock[]> {
-    const searchStart = new Date(Date.UTC(startDate.getUTCFullYear(), startDate.getUTCMonth(), startDate.getUTCDate(), 0, 0, 0));
-    const searchEnd = new Date(Date.UTC(endDate.getUTCFullYear(), endDate.getUTCMonth(), endDate.getUTCDate(), 23, 59, 59, 999));
+  async findByDateRange(userId: string, startDate: string, endDate: string): Promise<AgendaLock[]> {
+    // Extrai o dia (YYYY-MM-DD) da string de startDate para cobrir o dia inteiro
+    const datePart = startDate.substring(0, 10);
+    const dayStart = `${datePart}T00:00:00`;
+    const dayEnd = `${datePart}T23:59:59`;
 
     return AgendaLockModel.find({
       userId,
-      date: { $gte: searchStart, $lte: searchEnd }
-    }).lean<AgendaLock[]>({ virtuals: true }).exec();
+      date: { $gte: dayStart, $lte: dayEnd }
+    })
+      .sort({ date: 1, startTime: 1 })
+      .lean<AgendaLock[]>({ virtuals: true })
+      .exec();
   }
 
   async create(lock: AgendaLock): Promise<AgendaLock> {

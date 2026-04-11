@@ -2,6 +2,7 @@ import { injectable } from "tsyringe";
 import type { IPatientFinancialRepository } from "../../../domain/interfaces/IPatientSubdomainRepositories.js";
 import type { PatientFinancial } from "../../../domain/entities/PatientSubdomains.js";
 import PatientFinancialModel from "../models/PatientFinancialModel.js";
+import { getLocalMonthRange, getLocalYearRange } from "../../../utils/dateUtils.js";
 
 @injectable()
 export class PatientFinancialRepository implements IPatientFinancialRepository {
@@ -84,16 +85,22 @@ export class PatientFinancialRepository implements IPatientFinancialRepository {
   }
 
   async findByUserAndDate(userId: string, month: number, year: number): Promise<PatientFinancial[]> {
-    const startDate = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0));
-    const endDate = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999));
-    
+    const { start, end } = getLocalMonthRange(month, year);
     return PatientFinancialModel.find({ 
       userId, 
-      date: { $gte: startDate, $lte: endDate } 
+      date: { $gte: start, $lte: end } 
     }).lean<PatientFinancial[]>({ virtuals: true }).exec();
   }
 
-  async findByDateRange(patientId: string, startDate: Date, endDate: Date): Promise<PatientFinancial[]> {
+  async findByUserAndYear(userId: string, year: number): Promise<PatientFinancial[]> {
+    const { start, end } = getLocalYearRange(year);
+    return PatientFinancialModel.find({ 
+      userId, 
+      date: { $gte: start, $lte: end } 
+    }).lean<PatientFinancial[]>({ virtuals: true }).exec();
+  }
+
+  async findByDateRange(patientId: string, startDate: string, endDate: string): Promise<PatientFinancial[]> {
     return PatientFinancialModel.find({
       patientId,
       date: {

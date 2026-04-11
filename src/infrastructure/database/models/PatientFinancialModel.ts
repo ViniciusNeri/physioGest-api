@@ -6,7 +6,7 @@ const patientFinancialSchema = new mongoose.Schema<PatientFinancial>(
     id: { type: String },
     patientId: { type: String, required: true },
     userId: { type: String, required: true },
-    date: { type: Date, required: true, default: Date.now },
+    date: { type: String, required: true, default: () => new Date().toISOString().substring(0, 19) },
     type: { type: String, enum: ['income', 'expense'], required: true },
     category: { type: String, required: true },
     description: { type: String, required: true },
@@ -23,8 +23,8 @@ const patientFinancialSchema = new mongoose.Schema<PatientFinancial>(
       default: 'pending',
       required: true
     },
-    dueDate: { type: Date, required: false },
-    paymentDate: { type: Date, required: false },
+    dueDate: { type: String, required: false },
+    paymentDate: { type: String, required: false },
     notes: { type: String, required: false },
   },
   { timestamps: true }

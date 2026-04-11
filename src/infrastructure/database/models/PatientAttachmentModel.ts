@@ -13,7 +13,7 @@ const patientAttachmentSchema = new mongoose.Schema<PatientAttachment>(
     path: { type: String, required: true },
     category: { type: String, required: false },
     description: { type: String, required: false },
-    uploadedAt: { type: Date, required: true, default: Date.now },
+    uploadedAt: { type: String, required: true, default: () => new Date().toISOString().substring(0, 19) },
   },
   { timestamps: true }
 );

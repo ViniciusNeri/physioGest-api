@@ -7,8 +7,9 @@ const categorySchema = new mongoose.Schema<Category>(
     userId: { type: String, required: true },
     name: { type: String, required: true },
     description: { type: String, required: false },
-    type: { type: String, enum: ['Traumato-Ortopédica', 'Esportiva', 'Neurofuncional', 'Geriatria', 'Pediatria', 'Outros', 'RPG'], required: true },
+    type: { type: String, enum: ['Traumato-Ortopédica', 'Esportiva', 'Neurofuncional', 'Geriatria', 'Pediatria', 'Outros', 'RPG'], required: false },
     active: { type: Boolean, default: true },
+    duration: { type: Number, required: false },
     settingsId: { type: String },
   },
   { timestamps: true }

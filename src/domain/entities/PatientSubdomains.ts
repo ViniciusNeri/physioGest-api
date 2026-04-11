@@ -2,7 +2,7 @@ export interface PatientAnamnesis {
   id?: string;
   patientId: string;
   userId: string;
-  date: Date;
+  date: string;
   chiefComplaint?: string; // queixa principal
   historyOfPresentIllness?: string; // história da moléstia atual
   pastMedicalHistory?: string; // história médica pregressa
@@ -22,7 +22,7 @@ export interface PatientFinancial {
   id?: string;
   patientId: string;
   userId: string;
-  date: Date;
+  date: string;
   type: 'income' | 'expense';
   category: string; // consulta, exame, tratamento, etc.
   description: string;
@@ -30,8 +30,8 @@ export interface PatientFinancial {
   totalSessions?: number;
   paymentMethod?: 'cash' | 'credit_card' | 'debit_card' | 'pix' | 'bank_transfer' | 'check' | 'other';
   status: 'pending' | 'paid' | 'cancelled' | 'refunded';
-  dueDate?: Date;
-  paymentDate?: Date;
+  dueDate?: string;
+  paymentDate?: string;
   notes?: string;
 }
 
@@ -46,7 +46,7 @@ export interface PatientAttachment {
   path: string;
   category?: string; // exame, receita, laudo, foto, etc.
   description?: string;
-  uploadedAt: Date;
+  uploadedAt: string;
 }
 
 export interface PatientFinancialSummary {

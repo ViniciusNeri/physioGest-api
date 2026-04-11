@@ -11,6 +11,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { injectable, inject } from "tsyringe";
+import { toLocalISOString } from "../../utils/dateUtils.js";
 let FinancialService = class FinancialService {
     repository;
     patientFinancialRepository;
@@ -147,10 +148,33 @@ let FinancialService = class FinancialService {
         });
         // Ordena fluxo de caixa por data
         cashFlow.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        // Busca dados para o histórico do ano todo
+        const [allClinicForYear, allPatientForYear] = await Promise.all([
+            this.repository.findByYear(userId, year),
+            this.patientFinancialRepository.findByUserAndYear(userId, year)
+        ]);
+        const monthlyHistory = {};
+        const monthNames = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+        monthNames.forEach(m => {
+            monthlyHistory[m] = { income: 0, expenses: 0 };
+        });
+        [...allClinicForYear, ...allPatientForYear].forEach(item => {
+            const d = new Date(item.date);
+            const mName = monthNames[d.getUTCMonth()];
+            if (item.type === 'income') {
+                monthlyHistory[mName].income += item.amount;
+            }
+            else {
+                monthlyHistory[mName].expenses += item.amount;
+            }
+        });
         return {
-            monthlyTotal: totalIncome, // Voltou para as variaveis que eram antes (monthlyTotal = receita total)
+            monthlyTotal: totalIncome,
             pendingTotal,
-            expenses: expensesTotal, // Onde tem despesas fixas deixe apenas despesas
+            expenses: expensesTotal,
             variableExpenses: variableExpensesTotal,
             totalIncome,
             totalExpenses,
@@ -158,7 +182,8 @@ let FinancialService = class FinancialService {
             incomeByMethod,
             expenseByMethod,
             expensesByCategory,
-            cashFlow
+            cashFlow,
+            monthlyHistory
         };
     }
     async getFinancialById(id) {
@@ -179,11 +204,26 @@ let FinancialService = class FinancialService {
     }
     async createFinancial(financial) {
         this.logger.info(`Criando registro financeiro para usuário: ${financial.userId}`);
-        return this.repository.create(financial);
+        // Normaliza datas para Naive UTC antes de salvar
+        const normalized = { ...financial };
+        if (normalized.date)
+            normalized.date = toLocalISOString(new Date(normalized.date));
+        if (normalized.dueDate)
+            normalized.dueDate = toLocalISOString(new Date(normalized.dueDate));
+        if (normalized.paymentDate)
+            normalized.paymentDate = toLocalISOString(new Date(normalized.paymentDate));
+        return this.repository.create(normalized);
     }
     async updateFinancial(id, financial) {
         this.logger.info(`Atualizando registro financeiro: ${id}`);
-        return this.repository.update(id, financial);
+        const normalized = { ...financial };
+        if (normalized.date)
+            normalized.date = toLocalISOString(new Date(normalized.date));
+        if (normalized.dueDate)
+            normalized.dueDate = toLocalISOString(new Date(normalized.dueDate));
+        if (normalized.paymentDate)
+            normalized.paymentDate = toLocalISOString(new Date(normalized.paymentDate));
+        return this.repository.update(id, normalized);
     }
     async deleteFinancial(id, source) {
         this.logger.info(`Deletando registro financeiro: ${id} (fonte: ${source || 'clinic'})`);

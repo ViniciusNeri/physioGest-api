@@ -5,38 +5,49 @@ import AgendaModel from "../models/AgendaModel.js";
 import FinancialModel from "../models/FinancialModel.js";
 import PatientFinancialModel from "../models/PatientFinancialModel.js";
 import PatientModel from "../models/PatientModel.js";
-import { getNaiveNow } from "../../../utils/dateUtils.js";
+import {
+  getNaiveNowString,
+  getLocalDayRange,
+  getLocalMonthRange,
+} from "../../../utils/dateUtils.js";
 
 @injectable()
 export class DashboardRepository implements IDashboardRepository {
   async getWeeklyAppointmentsCount(userId: string): Promise<number> {
-    const nowLocal = getNaiveNow(); // Default SP
-    const startOfWeek = new Date(nowLocal);
-    startOfWeek.setUTCHours(0, 0, 0, 0);
-    startOfWeek.setUTCDate(nowLocal.getUTCDate() - nowLocal.getUTCDay());
+    const nowStr = getNaiveNowString();
+    const datePart = nowStr.substring(0, 10); // "YYYY-MM-DD"
+    const d = new Date(datePart + 'T12:00:00Z');
+    const dayOfWeek = d.getUTCDay(); // 0=Sun
 
+    // Start of week (Sunday)
+    const startOfWeek = new Date(d);
+    startOfWeek.setUTCDate(d.getUTCDate() - dayOfWeek);
+    const startStr = startOfWeek.toISOString().substring(0, 10) + 'T00:00:00';
+
+    // End of week (Saturday)
     const endOfWeek = new Date(startOfWeek);
     endOfWeek.setUTCDate(startOfWeek.getUTCDate() + 6);
-    endOfWeek.setUTCHours(23, 59, 59, 999);
+    const endStr = endOfWeek.toISOString().substring(0, 10) + 'T23:59:59';
 
     return AgendaModel.countDocuments({
       userId,
-      startDate: { $gte: startOfWeek, $lte: endOfWeek }
+      startDate: { $gte: startStr, $lte: endStr }
     });
   }
 
   async getMonthlyIncome(userId: string): Promise<number> {
-    const now = getNaiveNow();
-    const startOfMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0));
-    const endOfMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 0, 23, 59, 59));
+    const nowStr = getNaiveNowString();
+    const month = parseInt(nowStr.substring(5, 7));
+    const year = parseInt(nowStr.substring(0, 4));
+    const { start, end } = getLocalMonthRange(month, year);
 
     const [generalIncome, patientIncome] = await Promise.all([
       FinancialModel.aggregate([
-        { $match: { userId, type: 'income', date: { $gte: startOfMonth, $lte: endOfMonth } } },
+        { $match: { userId, type: 'income', date: { $gte: start, $lte: end } } },
         { $group: { _id: null, total: { $sum: '$amount' } } }
       ]),
       PatientFinancialModel.aggregate([
-        { $match: { userId, type: 'income', status: 'paid', date: { $gte: startOfMonth, $lte: endOfMonth } } },
+        { $match: { userId, type: 'income', status: 'paid', date: { $gte: start, $lte: end } } },
         { $group: { _id: null, total: { $sum: '$amount' } } }
       ])
     ]);
@@ -48,27 +59,29 @@ export class DashboardRepository implements IDashboardRepository {
   }
 
   async getActivePaymentsCount(userId: string): Promise<number> {
-    const now = getNaiveNow();
-    const startOfMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0));
+    const nowStr = getNaiveNowString();
+    const month = parseInt(nowStr.substring(5, 7));
+    const year = parseInt(nowStr.substring(0, 4));
+    const { start } = getLocalMonthRange(month, year);
 
     return PatientFinancialModel.countDocuments({
       userId,
       status: 'pending',
       $or: [
-        { dueDate: { $lte: now } },
-        { date: { $gte: startOfMonth } }
+        { dueDate: { $lte: nowStr } },
+        { date: { $gte: start } }
       ]
     });
   }
 
   async getTodaysAppointments(userId: string): Promise<DashboardData['todaysAppointments']> {
-    const now = getNaiveNow();
-    const startOfDay = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0));
-    const endOfDay = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59));
+    const nowStr = getNaiveNowString();
+    const datePart = nowStr.substring(0, 10);
+    const { start, end } = getLocalDayRange(datePart);
 
     const appointments = await AgendaModel.find({
       userId,
-      startDate: { $gte: startOfDay, $lte: endOfDay }
+      startDate: { $gte: start, $lte: end }
     })
     .populate('patient', 'name')
     .populate('category', 'name')
@@ -78,7 +91,7 @@ export class DashboardRepository implements IDashboardRepository {
     return appointments.map((appointment: any) => ({
       id: appointment.id || appointment._id.toString(),
       date: appointment.startDate,
-      time: appointment.startDate.getUTCHours().toString().padStart(2, '0') + ':' + appointment.startDate.getUTCMinutes().toString().padStart(2, '0'),
+      time: appointment.startDate?.substring(11, 16) ?? '',
       patientId: appointment.patientId,
       patientName: appointment.patient?.name || "",
       categoryId: appointment.categoryId || "",
@@ -90,12 +103,12 @@ export class DashboardRepository implements IDashboardRepository {
   }
 
   async getNextAppointment(userId: string): Promise<DashboardData['nextAppointment']> {
-    const now = getNaiveNow();
+    const nowStr = getNaiveNowString();
 
     const appointment = await AgendaModel.findOne({
       userId,
       status: 'scheduled',
-      startDate: { $gte: now }
+      startDate: { $gte: nowStr }
     })
     .populate('patient', 'name')
     .populate('category', 'name')
@@ -108,7 +121,7 @@ export class DashboardRepository implements IDashboardRepository {
     return {
       id: app.id || app._id.toString(),
       date: app.startDate,
-      time: app.startDate.getUTCHours().toString().padStart(2, '0') + ':' + app.startDate.getUTCMinutes().toString().padStart(2, '0'),
+      time: app.startDate?.substring(11, 16) ?? '',
       patientId: app.patientId,
       patientName: app.patient?.name || "",
       categoryId: app.categoryId || "",
@@ -120,18 +133,19 @@ export class DashboardRepository implements IDashboardRepository {
   }
 
   async getBirthdayList(userId: string): Promise<DashboardData['birthdayList']> {
-    const now = getNaiveNow();
-    const currentMonth = now.getUTCMonth() + 1;
+    const nowStr = getNaiveNowString();
+    const currentMonth = nowStr.substring(5, 7); // "MM"
 
+    // birthDate stored as string "YYYY-MM-DD..." — use $substr for month comparison
     const patients = await PatientModel.aggregate([
-      { $match: { userId, birthDate: { $exists: true, $ne: null } } },
+      { $match: { userId, birthDate: { $exists: true, $ne: null, $type: 'string' } } },
       {
         $project: {
           id: "$_id",
           name: 1,
           birthDate: 1,
-          month: { $month: "$birthDate" },
-          day: { $dayOfMonth: "$birthDate" }
+          month: { $substr: ["$birthDate", 5, 2] },
+          day: { $substr: ["$birthDate", 8, 2] }
         }
       },
       { $match: { month: currentMonth } },
@@ -142,7 +156,7 @@ export class DashboardRepository implements IDashboardRepository {
       patientId: p.id.toString(),
       name: p.name,
       birthDate: p.birthDate,
-      day: p.day
+      day: parseInt(p.day)
     }));
   }
 
@@ -162,12 +176,12 @@ export class DashboardRepository implements IDashboardRepository {
   }
 
   async getOverdueAppointments(userId: string): Promise<DashboardData['overdueAppointments']> {
-    const now = getNaiveNow();
+    const nowStr = getNaiveNowString();
 
     const overdue = await AgendaModel.find({
       userId,
       status: 'scheduled',
-      startDate: { $lt: now }
+      startDate: { $lt: nowStr }
     })
     .populate('patient', 'name')
     .sort({ startDate: -1 })
@@ -176,7 +190,7 @@ export class DashboardRepository implements IDashboardRepository {
     return overdue.map((a: any) => ({
       id: a.id || a._id.toString(),
       date: a.startDate,
-      time: a.startDate.getUTCHours().toString().padStart(2, '0') + ':' + a.startDate.getUTCMinutes().toString().padStart(2, '0'),
+      time: a.startDate?.substring(11, 16) ?? '',
       patientId: a.patientId,
       patientName: a.patient?.name || "Desconhecido",
       description: a.description || ""
@@ -184,12 +198,19 @@ export class DashboardRepository implements IDashboardRepository {
   }
 
   async getOccupancyGraph(userId: string): Promise<DashboardData['occupancyGraph']> {
-    const now = getNaiveNow();
-    const startOfMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+    const nowStr = getNaiveNowString();
+    const month = nowStr.substring(5, 7);
+    const year = nowStr.substring(0, 4);
+    const startOfMonth = `${year}-${month}-01T00:00:00`;
 
     const appointments = await AgendaModel.aggregate([
       { $match: { userId, startDate: { $gte: startOfMonth } } },
-      { $project: { hour: { $hour: "$startDate" } } },
+      {
+        $project: {
+          // Extract hour from string "YYYY-MM-DDTHH:mm:ss" → position 11, length 2
+          hour: { $toInt: { $substr: ["$startDate", 11, 2] } }
+        }
+      },
       { $group: { _id: "$hour", count: { $sum: 1 } } },
       { $sort: { _id: 1 } }
     ]);

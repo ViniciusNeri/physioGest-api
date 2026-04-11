@@ -2,8 +2,31 @@ import { Router } from "express";
 import { CategoryController } from "./CategoryController.js";
 import { JwtAuthService } from "../../infrastructure/auth/JwtAuthService.js";
 const routes = Router();
-routes.use(JwtAuthService.authenticateToken);
 const controller = new CategoryController();
+/**
+ * @swagger
+ * /categories/user/{userId}:
+ *   get:
+ *     summary: Buscar categorias por ID de usuário
+ *     tags: [Categories]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Categorias encontradas
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Category'
+ */
+routes.get("/user/:userId", (req, res) => controller.getCategoriesByUser(req, res));
+routes.use(JwtAuthService.authenticateToken);
 /**
  * @swagger
  * components:
@@ -21,6 +44,9 @@ const controller = new CategoryController();
  *           type: string
  *         color:
  *           type: string
+ *         duration:
+ *           type: integer
+ *           description: Duração da categoria em minutos
  *         updatedAt:
  *           type: string
  *           format: date-time
@@ -130,32 +156,7 @@ const controller = new CategoryController();
  *       404:
  *         description: Categoria não encontrada
  */
-/**
- * @swagger
- * /categories/user/{userId}:
- *   get:
- *     summary: Buscar categorias por ID de usuário
- *     tags: [Categories]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: userId
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Categorias encontradas
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Category'
- */
 routes.get("/", (req, res) => controller.getAllCategories(req, res));
-routes.get("/user/:userId", (req, res) => controller.getCategoriesByUser(req, res));
 routes.get("/:id", (req, res) => controller.getCategoryById(req, res));
 routes.post("/", (req, res) => controller.createCategory(req, res));
 routes.put("/:id", (req, res) => controller.updateCategory(req, res));

@@ -94,6 +94,15 @@ export class FinancialController {
      *                         type: string
      *                       status:
      *                         type: string
+     *                 monthlyHistory:
+     *                   type: object
+     *                   additionalProperties:
+     *                     type: object
+     *                     properties:
+     *                       income:
+     *                         type: number
+     *                       expenses:
+     *                         type: number
      *       400:
      *         description: Dados inválidos
      *       500:
