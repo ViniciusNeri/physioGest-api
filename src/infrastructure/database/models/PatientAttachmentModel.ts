@@ -13,6 +13,7 @@ const patientAttachmentSchema = new mongoose.Schema<PatientAttachment>(
     path: { type: String, required: true },
     category: { type: String, required: false },
     description: { type: String, required: false },
+    status: { type: String, enum: ['pending_upload', 'uploaded', 'failed'], default: 'uploaded' },
     uploadedAt: { type: String, required: true, default: () => new Date().toISOString().substring(0, 19) },
   },
   { timestamps: true }

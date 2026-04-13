@@ -192,8 +192,36 @@ export class PatientAttachmentController {
       if (!patientId) {
         return res.status(400).json({ message: "ID do paciente é obrigatório" });
       }
-      const attachmentData = { ...req.body, patientId: patientId as string, userId: (req as any).user?.id };
-      this.logger.info("Criando anexo", { patientId, fileName: attachmentData.fileName });
+
+      const userId = (req as any).user?.id;
+      if (!userId) {
+        return res.status(401).json({ message: "Usuário não autenticado" });
+      }
+
+      const file = req.file;
+
+      // Se houver um arquivo físico (Multipart), usamos o fluxo de upload padrão
+      if (file) {
+        this.logger.info("Criando anexo via upload físico", { patientId, fileName: file.originalname });
+        const { category, description } = req.body;
+        const attachment = await this.service.uploadAndCreateAttachment(
+          patientId as string,
+          userId,
+          {
+            buffer: file.buffer,
+            originalname: file.originalname,
+            mimetype: file.mimetype,
+            size: file.size
+          },
+          category,
+          description
+        );
+        return res.status(201).json(attachment);
+      }
+
+      // Se não houver arquivo, tratamos como criação via metadados JSON (Fluxo antigo/Swagger)
+      const attachmentData = { ...req.body, patientId: patientId as string, userId };
+      this.logger.info("Criando anexo via metadados JSON", { patientId, fileName: attachmentData.fileName });
       const attachment = await this.service.createAttachment(attachmentData);
       return res.status(201).json(attachment);
     } catch (error: any) {
@@ -302,6 +330,85 @@ export class PatientAttachmentController {
       return res.status(204).send();
     } catch (error: any) {
       this.logger.error("Erro ao deletar anexo", error, { attachmentId: req.params.id });
+      return res.status(500).json({ message: error.message });
+    }
+  }
+
+  /**
+   * @swagger
+   * /patients/{patientId}/attachments/upload:
+   *   post:
+   *     summary: Faz upload de um arquivo para o paciente
+   *     tags: [Patient Attachments]
+   *     security:
+   *       - bearerAuth: []
+   *     parameters:
+   *       - in: path
+   *         name: patientId
+   *         required: true
+   *         schema:
+   *           type: string
+   *     requestBody:
+   *       content:
+   *         multipart/form-data:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               file:
+   *                 type: string
+   *                 format: binary
+   *               category:
+   *                 type: string
+   *               description:
+   *                 type: string
+   *     responses:
+   *       201:
+   *         description: Upload realizado com sucesso
+   *       400:
+   *         description: Arquivo não enviado
+   *       500:
+   *         description: Falha no upload
+   */
+  uploadAttachment = async (req: Request, res: Response) => {
+    try {
+      const { patientId } = req.params;
+      const file = req.file;
+
+      if (!file) {
+        return res.status(400).json({ message: "Arquivo não enviado" });
+      }
+
+      const userId = (req as any).user?.id;
+      if (!userId) {
+        return res.status(401).json({ message: "Usuário não autenticado" });
+      }
+
+      this.logger.info("Iniciando upload de anexo", { 
+        patientId, 
+        fileName: file.originalname,
+        size: file.size 
+      });
+
+      const { category, description } = req.body;
+
+      const attachment = await this.service.uploadAndCreateAttachment(
+        patientId as string,
+        userId,
+        {
+          buffer: file.buffer,
+          originalname: file.originalname,
+          mimetype: file.mimetype,
+          size: file.size
+        },
+        category,
+        description
+      );
+
+      return res.status(201).json(attachment);
+    } catch (error: any) {
+      this.logger.error("Erro no controller ao fazer upload", error, { 
+        patientId: req.params.patientId 
+      });
       return res.status(500).json({ message: error.message });
     }
   }

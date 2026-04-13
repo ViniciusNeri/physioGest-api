@@ -47,6 +47,7 @@ export interface PatientAttachment {
   category?: string; // exame, receita, laudo, foto, etc.
   description?: string;
   uploadedAt: string;
+  status: 'pending_upload' | 'uploaded' | 'failed';
 }
 
 export interface PatientFinancialSummary {

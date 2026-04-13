@@ -3,12 +3,15 @@ import type { IPatientAttachmentRepository } from "../../domain/interfaces/IPati
 import type { IPatientAttachmentService } from "../../domain/services/IPatientSubdomainServices.js";
 import type { PatientAttachment } from "../../domain/entities/PatientSubdomains.js";
 import logger from "../../infrastructure/logging/Logger.js";
+import { SupabaseStorageProvider } from "../../infrastructure/external/SupabaseStorageProvider.js";
 
 @injectable()
 export class PatientAttachmentService implements IPatientAttachmentService {
   constructor(
     @inject("IPatientAttachmentRepository")
-    private repository: IPatientAttachmentRepository
+    private repository: IPatientAttachmentRepository,
+    @inject(SupabaseStorageProvider)
+    private storageProvider: SupabaseStorageProvider
   ) {}
 
   async getPatientAttachments(patientId: string): Promise<PatientAttachment[]> {
@@ -41,11 +44,25 @@ export class PatientAttachmentService implements IPatientAttachmentService {
     }
   }
 
-  async createAttachment(attachment: Omit<PatientAttachment, 'id'>): Promise<PatientAttachment> {
+  async createAttachment(attachment: any): Promise<PatientAttachment> {
     logger.debug("Criando novo anexo", { patientId: attachment.patientId, fileName: attachment.fileName });
 
     try {
-      const newAttachment = await this.repository.create(attachment);
+      // Normalização: De-para dos campos que podem vir do Flutter/Legacy
+      const normalized: any = {
+        ...attachment,
+        mimeType: attachment.mimeType || attachment.fileType,
+        size: attachment.size || attachment.fileSize,
+        path: attachment.path || attachment.filePath,
+        status: attachment.status || 'uploaded'
+      };
+
+      // Remove os campos antigos para não poluir o objeto/banco
+      delete normalized.fileType;
+      delete normalized.fileSize;
+      delete normalized.filePath;
+
+      const newAttachment = await this.repository.create(normalized as PatientAttachment);
       logger.info("Anexo criado com sucesso", {
         attachmentId: newAttachment.id,
         patientId: attachment.patientId,
@@ -54,6 +71,56 @@ export class PatientAttachmentService implements IPatientAttachmentService {
       return newAttachment;
     } catch (error) {
       logger.error("Erro ao criar anexo", error, { patientId: attachment.patientId });
+      throw error;
+    }
+  }
+
+  /**
+   * Realiza o upload completo: Cria record pendente -> Upload -> Atualiza record
+   */
+  async uploadAndCreateAttachment(
+    patientId: string, 
+    userId: string, 
+    file: { buffer: Buffer, originalname: string, mimetype: string, size: number },
+    category?: string,
+    description?: string
+  ): Promise<PatientAttachment> {
+    const fileName = `${Date.now()}-${file.originalname}`;
+    
+    // 1. Cria registro pendente
+    const pendingAttachment = await this.repository.create({
+      patientId,
+      userId,
+      fileName,
+      originalName: file.originalname,
+      mimeType: file.mimetype,
+      size: file.size,
+      path: 'uploading...',
+      category,
+      description,
+      status: 'pending_upload',
+      uploadedAt: new Date().toISOString().substring(0, 19)
+    });
+
+    try {
+      // 2. Upload para Supabase
+      const publicUrl = await this.storageProvider.uploadFile(
+        patientId,
+        fileName,
+        file.buffer,
+        file.mimetype
+      );
+
+      // 3. Atualiza registro com URL final
+      const updated = await this.repository.update(pendingAttachment.id!, {
+        path: publicUrl,
+        status: 'uploaded'
+      });
+
+      return updated!;
+    } catch (error: any) {
+      logger.error("Falha no processo de upload de anexo", error, { attachmentId: pendingAttachment.id });
+      await this.repository.update(pendingAttachment.id!, { status: 'failed' });
       throw error;
     }
   }

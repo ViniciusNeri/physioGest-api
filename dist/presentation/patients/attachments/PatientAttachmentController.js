@@ -300,5 +300,72 @@ export class PatientAttachmentController {
             return res.status(500).json({ message: error.message });
         }
     };
+    /**
+     * @swagger
+     * /patients/{patientId}/attachments/upload:
+     *   post:
+     *     summary: Faz upload de um arquivo para o paciente
+     *     tags: [Patient Attachments]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: patientId
+     *         required: true
+     *         schema:
+     *           type: string
+     *     requestBody:
+     *       content:
+     *         multipart/form-data:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               file:
+     *                 type: string
+     *                 format: binary
+     *               category:
+     *                 type: string
+     *               description:
+     *                 type: string
+     *     responses:
+     *       201:
+     *         description: Upload realizado com sucesso
+     *       400:
+     *         description: Arquivo não enviado
+     *       500:
+     *         description: Falha no upload
+     */
+    uploadAttachment = async (req, res) => {
+        try {
+            const { patientId } = req.params;
+            const file = req.file;
+            if (!file) {
+                return res.status(400).json({ message: "Arquivo não enviado" });
+            }
+            const userId = req.user?.id;
+            if (!userId) {
+                return res.status(401).json({ message: "Usuário não autenticado" });
+            }
+            this.logger.info("Iniciando upload de anexo", {
+                patientId,
+                fileName: file.originalname,
+                size: file.size
+            });
+            const { category, description } = req.body;
+            const attachment = await this.service.uploadAndCreateAttachment(patientId, userId, {
+                buffer: file.buffer,
+                originalname: file.originalname,
+                mimetype: file.mimetype,
+                size: file.size
+            }, category, description);
+            return res.status(201).json(attachment);
+        }
+        catch (error) {
+            this.logger.error("Erro no controller ao fazer upload", error, {
+                patientId: req.params.patientId
+            });
+            return res.status(500).json({ message: error.message });
+        }
+    };
 }
 //# sourceMappingURL=PatientAttachmentController.js.map

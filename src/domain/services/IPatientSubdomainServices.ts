@@ -29,4 +29,11 @@ export interface IPatientAttachmentService {
   updateAttachment(id: string, attachment: Partial<PatientAttachment>): Promise<PatientAttachment | null>;
   deleteAttachment(id: string): Promise<boolean>;
   getAttachmentsByCategory(patientId: string, category: string): Promise<PatientAttachment[]>;
+  uploadAndCreateAttachment(
+    patientId: string, 
+    userId: string, 
+    file: { buffer: Buffer, originalname: string, mimetype: string, size: number },
+    category?: string,
+    description?: string
+  ): Promise<PatientAttachment>;
 }

@@ -76953,3 +76953,1773 @@
     swaggerUrl: "http://localhost:3000/docs"
     environment: "development"
     logLevel: "debug"
+[2026-04-13 01:06:11.409 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-13 01:06:11.417 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-13 01:06:12.624 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-13 01:06:12.889 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:06:12.889 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:06:12.891 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:06:12.893 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:06:12.906 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:06:12.906 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:06:12.907 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-13 01:06:13.075 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "168ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-13 01:06:13.076 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:06:13.076 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:06:13.076 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-13 01:06:13.178 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+              at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-13 01:06:13.179 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-13 01:06:13.179 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-13 01:08:36.782 -0300] INFO: [REQUEST] POST /v1/auth/sessions
+    env: "development"
+    service: "physioGest-api"
+    requestId: "tely2w"
+    method: "POST"
+    url: "/v1/auth/sessions"
+    path: "/v1/auth/sessions"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+    contentLength: "61"
+[2026-04-13 01:08:36.783 -0300] DEBUG: Tentativa de login
+    env: "development"
+    service: "physioGest-api"
+    email: "viniciusneri777@hotmail.com"
+    hasPassword: true
+[2026-04-13 01:08:36.803 -0300] DEBUG: Usuário encontrado
+    env: "development"
+    service: "physioGest-api"
+    userId: "69da92e9f957341ed78f6d52"
+    verified: true
+[2026-04-13 01:08:37.085 -0300] INFO: Login realizado com sucesso
+    env: "development"
+    service: "physioGest-api"
+    userId: "69da92e9f957341ed78f6d52"
+    email: "viniciusneri777@hotmail.com"
+[2026-04-13 01:08:37.091 -0300] INFO: [RESPONSE] POST /sessions - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "tely2w"
+    method: "POST"
+    url: "/sessions"
+    statusCode: 200
+    duration: "309ms"
+    contentLength: "545"
+[2026-04-13 01:08:37.882 -0300] INFO: [REQUEST] GET /v1/dashboard
+    env: "development"
+    service: "physioGest-api"
+    requestId: "te6628"
+    method: "GET"
+    url: "/v1/dashboard"
+    path: "/v1/dashboard"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:37.894 -0300] INFO: Buscando dados do dashboard para usuário: 69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:08:37.894 -0300] DEBUG: Buscando dados completos do dashboard
+    env: "development"
+    service: "physioGest-api"
+    userId: "69da92e9f957341ed78f6d52"
+[2026-04-13 01:08:38.078 -0300] INFO: [REQUEST] GET /v1/categories/user/69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+    requestId: "rjr4us"
+    method: "GET"
+    url: "/v1/categories/user/69da92e9f957341ed78f6d52"
+    path: "/v1/categories/user/69da92e9f957341ed78f6d52"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:38.081 -0300] INFO: Buscando categorias por usuário
+    env: "development"
+    service: "physioGest-api"
+    userId: "69da92e9f957341ed78f6d52"
+[2026-04-13 01:08:38.081 -0300] INFO: Buscando categorias por usuário: 69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:08:38.086 -0300] INFO: [REQUEST] GET /v1/payment-methods/user/69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+    requestId: "f6ou8"
+    method: "GET"
+    url: "/v1/payment-methods/user/69da92e9f957341ed78f6d52"
+    path: "/v1/payment-methods/user/69da92e9f957341ed78f6d52"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:38.090 -0300] INFO: Buscando formas de pagamento por usuário: 69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:08:38.105 -0300] INFO: [REQUEST] GET /v1/settings/user/69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+    requestId: "v3w5o"
+    method: "GET"
+    url: "/v1/settings/user/69da92e9f957341ed78f6d52"
+    path: "/v1/settings/user/69da92e9f957341ed78f6d52"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:38.106 -0300] INFO: Buscando configuração do usuário
+    env: "development"
+    service: "physioGest-api"
+    userId: "69da92e9f957341ed78f6d52"
+[2026-04-13 01:08:38.106 -0300] INFO: Buscando configuração do usuário: 69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:08:38.114 -0300] INFO: [REQUEST] GET /v1/agendas/user/69da92e9f957341ed78f6d52/locks
+    env: "development"
+    service: "physioGest-api"
+    requestId: "8e385b"
+    method: "GET"
+    url: "/v1/agendas/user/69da92e9f957341ed78f6d52/locks"
+    path: "/v1/agendas/user/69da92e9f957341ed78f6d52/locks"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:38.200 -0300] INFO: [RESPONSE] GET /user/69da92e9f957341ed78f6d52 - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "rjr4us"
+    method: "GET"
+    url: "/user/69da92e9f957341ed78f6d52"
+    statusCode: 200
+    duration: "122ms"
+    contentLength: "2207"
+[2026-04-13 01:08:38.206 -0300] INFO: [RESPONSE] GET /user/69da92e9f957341ed78f6d52 - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "v3w5o"
+    method: "GET"
+    url: "/user/69da92e9f957341ed78f6d52"
+    statusCode: 200
+    duration: "101ms"
+    contentLength: "736"
+[2026-04-13 01:08:38.219 -0300] INFO: [RESPONSE] GET /user/69da92e9f957341ed78f6d52/locks - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "8e385b"
+    method: "GET"
+    url: "/user/69da92e9f957341ed78f6d52/locks"
+    statusCode: 200
+    duration: "106ms"
+    contentLength: "993"
+[2026-04-13 01:08:38.246 -0300] INFO: [RESPONSE] GET /user/69da92e9f957341ed78f6d52 - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "f6ou8"
+    method: "GET"
+    url: "/user/69da92e9f957341ed78f6d52"
+    statusCode: 200
+    duration: "160ms"
+    contentLength: "1231"
+[2026-04-13 01:08:38.248 -0300] INFO: [REQUEST] GET /v1/categories/user/69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+    requestId: "khgupo"
+    method: "GET"
+    url: "/v1/categories/user/69da92e9f957341ed78f6d52"
+    path: "/v1/categories/user/69da92e9f957341ed78f6d52"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:38.248 -0300] INFO: Buscando categorias por usuário
+    env: "development"
+    service: "physioGest-api"
+    userId: "69da92e9f957341ed78f6d52"
+[2026-04-13 01:08:38.248 -0300] INFO: Buscando categorias por usuário: 69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:08:38.256 -0300] INFO: [REQUEST] GET /v1/settings/user/69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+    requestId: "ijjlfh"
+    method: "GET"
+    url: "/v1/settings/user/69da92e9f957341ed78f6d52"
+    path: "/v1/settings/user/69da92e9f957341ed78f6d52"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:38.258 -0300] INFO: Buscando configuração do usuário
+    env: "development"
+    service: "physioGest-api"
+    userId: "69da92e9f957341ed78f6d52"
+[2026-04-13 01:08:38.258 -0300] INFO: Buscando configuração do usuário: 69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:08:38.263 -0300] INFO: [REQUEST] GET /v1/agendas/user/69da92e9f957341ed78f6d52/locks
+    env: "development"
+    service: "physioGest-api"
+    requestId: "19356"
+    method: "GET"
+    url: "/v1/agendas/user/69da92e9f957341ed78f6d52/locks"
+    path: "/v1/agendas/user/69da92e9f957341ed78f6d52/locks"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:38.286 -0300] INFO: [REQUEST] GET /v1/payment-methods/user/69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+    requestId: "05zu6a"
+    method: "GET"
+    url: "/v1/payment-methods/user/69da92e9f957341ed78f6d52"
+    path: "/v1/payment-methods/user/69da92e9f957341ed78f6d52"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:38.292 -0300] INFO: Buscando formas de pagamento por usuário: 69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:08:38.301 -0300] INFO: [RESPONSE] GET /user/69da92e9f957341ed78f6d52 - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "khgupo"
+    method: "GET"
+    url: "/user/69da92e9f957341ed78f6d52"
+    statusCode: 304
+    duration: "53ms"
+[2026-04-13 01:08:38.304 -0300] INFO: [RESPONSE] GET /user/69da92e9f957341ed78f6d52 - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "ijjlfh"
+    method: "GET"
+    url: "/user/69da92e9f957341ed78f6d52"
+    statusCode: 304
+    duration: "48ms"
+[2026-04-13 01:08:38.318 -0300] INFO: [RESPONSE] GET /user/69da92e9f957341ed78f6d52/locks - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "19356"
+    method: "GET"
+    url: "/user/69da92e9f957341ed78f6d52/locks"
+    statusCode: 304
+    duration: "55ms"
+[2026-04-13 01:08:38.322 -0300] INFO: Dados do dashboard obtidos com sucesso
+    env: "development"
+    service: "physioGest-api"
+    userId: "69da92e9f957341ed78f6d52"
+    weeklyAppointments: 1
+    monthlyIncome: 1511
+    activePayments: 0
+    todaysCount: 1
+    birthdaysCount: 0
+    pendingCount: 0
+    overdueCount: 0
+[2026-04-13 01:08:38.326 -0300] INFO: [RESPONSE] GET / - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "te6628"
+    method: "GET"
+    url: "/"
+    statusCode: 200
+    duration: "444ms"
+    contentLength: "756"
+[2026-04-13 01:08:38.344 -0300] INFO: [RESPONSE] GET /user/69da92e9f957341ed78f6d52 - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "05zu6a"
+    method: "GET"
+    url: "/user/69da92e9f957341ed78f6d52"
+    statusCode: 304
+    duration: "58ms"
+[2026-04-13 01:08:41.268 -0300] INFO: [REQUEST] GET /v1/patients/user/69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+    requestId: "t2f6s"
+    method: "GET"
+    url: "/v1/patients/user/69da92e9f957341ed78f6d52"
+    path: "/v1/patients/user/69da92e9f957341ed78f6d52"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:41.269 -0300] INFO: Listando pacientes por userId: 69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:08:41.269 -0300] DEBUG: Buscando pacientes por userId
+    env: "development"
+    service: "physioGest-api"
+    userId: "69da92e9f957341ed78f6d52"
+[2026-04-13 01:08:41.278 -0300] INFO: Pacientes encontrados
+    env: "development"
+    service: "physioGest-api"
+    userId: "69da92e9f957341ed78f6d52"
+    count: 1
+[2026-04-13 01:08:41.281 -0300] INFO: [RESPONSE] GET /user/69da92e9f957341ed78f6d52 - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "t2f6s"
+    method: "GET"
+    url: "/user/69da92e9f957341ed78f6d52"
+    statusCode: 200
+    duration: "13ms"
+    contentLength: "475"
+[2026-04-13 01:08:42.804 -0300] INFO: [REQUEST] GET /v1/patients/69da9a5ab771663b5556a750/activities
+    env: "development"
+    service: "physioGest-api"
+    requestId: "e7v7i"
+    method: "GET"
+    url: "/v1/patients/69da9a5ab771663b5556a750/activities"
+    path: "/v1/patients/69da9a5ab771663b5556a750/activities"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:42.806 -0300] DEBUG: Buscando histórico do paciente
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+[2026-04-13 01:08:42.811 -0300] INFO: [REQUEST] GET /v1/patients/user/69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+    requestId: "zdkzs8"
+    method: "GET"
+    url: "/v1/patients/user/69da92e9f957341ed78f6d52"
+    path: "/v1/patients/user/69da92e9f957341ed78f6d52"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:42.814 -0300] INFO: Listando pacientes por userId: 69da92e9f957341ed78f6d52
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:08:42.814 -0300] DEBUG: Buscando pacientes por userId
+    env: "development"
+    service: "physioGest-api"
+    userId: "69da92e9f957341ed78f6d52"
+[2026-04-13 01:08:42.824 -0300] INFO: [RESPONSE] GET /69da9a5ab771663b5556a750/activities - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "e7v7i"
+    method: "GET"
+    url: "/69da9a5ab771663b5556a750/activities"
+    statusCode: 200
+    duration: "20ms"
+    contentLength: "2578"
+[2026-04-13 01:08:42.839 -0300] INFO: Pacientes encontrados
+    env: "development"
+    service: "physioGest-api"
+    userId: "69da92e9f957341ed78f6d52"
+    count: 1
+[2026-04-13 01:08:42.841 -0300] INFO: [RESPONSE] GET /user/69da92e9f957341ed78f6d52 - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "zdkzs8"
+    method: "GET"
+    url: "/user/69da92e9f957341ed78f6d52"
+    statusCode: 304
+    duration: "29ms"
+[2026-04-13 01:08:44.270 -0300] INFO: [REQUEST] GET /v1/patients/69da9a5ab771663b5556a750/attachments
+    env: "development"
+    service: "physioGest-api"
+    requestId: "o1re2a"
+    method: "GET"
+    url: "/v1/patients/69da9a5ab771663b5556a750/attachments"
+    path: "/v1/patients/69da9a5ab771663b5556a750/attachments"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "application/json"
+[2026-04-13 01:08:44.274 -0300] INFO: Listando anexos do paciente
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+[2026-04-13 01:08:44.274 -0300] DEBUG: Buscando anexos do paciente
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+[2026-04-13 01:08:44.283 -0300] DEBUG: Anexos do paciente encontrados
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+    count: 3
+[2026-04-13 01:08:44.287 -0300] INFO: [RESPONSE] GET /69da9a5ab771663b5556a750/attachments - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "o1re2a"
+    method: "GET"
+    url: "/69da9a5ab771663b5556a750/attachments"
+    statusCode: 200
+    duration: "17ms"
+    contentLength: "1886"
+[2026-04-13 01:08:53.968 -0300] INFO: [REQUEST] POST /v1/patients/69da9a5ab771663b5556a750/attachments
+    env: "development"
+    service: "physioGest-api"
+    requestId: "l8se1"
+    method: "POST"
+    url: "/v1/patients/69da9a5ab771663b5556a750/attachments"
+    path: "/v1/patients/69da9a5ab771663b5556a750/attachments"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "multipart/form-data; boundary=--dio-boundary-2128385022"
+    contentLength: "41578"
+[2026-04-13 01:08:53.970 -0300] INFO: Criando anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+[2026-04-13 01:08:53.970 -0300] DEBUG: Criando novo anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+[2026-04-13 01:08:53.988 -0300] ERROR: Erro ao criar anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+    error: {
+      "type": "ValidationError",
+      "message": "PatientAttachment validation failed: path: Path `path` is required., size: Path `size` is required., mimeType: Path `mimeType` is required., originalName: Path `originalName` is required., fileName: Path `fileName` is required.",
+      "stack":
+          ValidationError: PatientAttachment validation failed: path: Path `path` is required., size: Path `size` is required., mimeType: Path `mimeType` is required., originalName: Path `originalName` is required., fileName: Path `fileName` is required.
+              at model.validate (C:\Applications\physioGest-api\node_modules\mongoose\lib\document.js:2864:36)
+              at async model.$__save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:389:7)
+              at async model.save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:663:5)
+              at async PatientAttachmentService.createAttachment (C:\Applications\physioGest-api\src\application\services\PatientAttachmentService.ts:48:29)
+              at async PatientAttachmentController.createAttachment (C:\Applications\physioGest-api\src\presentation\patients\attachments\PatientAttachmentController.ts:197:26)
+      "errors": {
+        "path": {
+          "name": "ValidatorError",
+          "message": "Path `path` is required.",
+          "properties": {
+            "message": "Path `path` is required.",
+            "type": "required",
+            "path": "path"
+          },
+          "kind": "required",
+          "path": "path"
+        },
+        "size": {
+          "name": "ValidatorError",
+          "message": "Path `size` is required.",
+          "properties": {
+            "message": "Path `size` is required.",
+            "type": "required",
+            "path": "size"
+          },
+          "kind": "required",
+          "path": "size"
+        },
+        "mimeType": {
+          "name": "ValidatorError",
+          "message": "Path `mimeType` is required.",
+          "properties": {
+            "message": "Path `mimeType` is required.",
+            "type": "required",
+            "path": "mimeType"
+          },
+          "kind": "required",
+          "path": "mimeType"
+        },
+        "originalName": {
+          "name": "ValidatorError",
+          "message": "Path `originalName` is required.",
+          "properties": {
+            "message": "Path `originalName` is required.",
+            "type": "required",
+            "path": "originalName"
+          },
+          "kind": "required",
+          "path": "originalName"
+        },
+        "fileName": {
+          "name": "ValidatorError",
+          "message": "Path `fileName` is required.",
+          "properties": {
+            "message": "Path `fileName` is required.",
+            "type": "required",
+            "path": "fileName"
+          },
+          "kind": "required",
+          "path": "fileName"
+        }
+      },
+      "_message": "PatientAttachment validation failed"
+    }
+[2026-04-13 01:08:53.997 -0300] ERROR: Erro ao criar anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+    error: {
+      "type": "ValidationError",
+      "message": "PatientAttachment validation failed: path: Path `path` is required., size: Path `size` is required., mimeType: Path `mimeType` is required., originalName: Path `originalName` is required., fileName: Path `fileName` is required.",
+      "stack":
+          ValidationError: PatientAttachment validation failed: path: Path `path` is required., size: Path `size` is required., mimeType: Path `mimeType` is required., originalName: Path `originalName` is required., fileName: Path `fileName` is required.
+              at model.validate (C:\Applications\physioGest-api\node_modules\mongoose\lib\document.js:2864:36)
+              at async model.$__save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:389:7)
+              at async model.save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:663:5)
+              at async PatientAttachmentService.createAttachment (C:\Applications\physioGest-api\src\application\services\PatientAttachmentService.ts:48:29)
+              at async PatientAttachmentController.createAttachment (C:\Applications\physioGest-api\src\presentation\patients\attachments\PatientAttachmentController.ts:197:26)
+      "errors": {
+        "path": {
+          "name": "ValidatorError",
+          "message": "Path `path` is required.",
+          "properties": {
+            "message": "Path `path` is required.",
+            "type": "required",
+            "path": "path"
+          },
+          "kind": "required",
+          "path": "path"
+        },
+        "size": {
+          "name": "ValidatorError",
+          "message": "Path `size` is required.",
+          "properties": {
+            "message": "Path `size` is required.",
+            "type": "required",
+            "path": "size"
+          },
+          "kind": "required",
+          "path": "size"
+        },
+        "mimeType": {
+          "name": "ValidatorError",
+          "message": "Path `mimeType` is required.",
+          "properties": {
+            "message": "Path `mimeType` is required.",
+            "type": "required",
+            "path": "mimeType"
+          },
+          "kind": "required",
+          "path": "mimeType"
+        },
+        "originalName": {
+          "name": "ValidatorError",
+          "message": "Path `originalName` is required.",
+          "properties": {
+            "message": "Path `originalName` is required.",
+            "type": "required",
+            "path": "originalName"
+          },
+          "kind": "required",
+          "path": "originalName"
+        },
+        "fileName": {
+          "name": "ValidatorError",
+          "message": "Path `fileName` is required.",
+          "properties": {
+            "message": "Path `fileName` is required.",
+            "type": "required",
+            "path": "fileName"
+          },
+          "kind": "required",
+          "path": "fileName"
+        }
+      },
+      "_message": "PatientAttachment validation failed"
+    }
+[2026-04-13 01:08:53.999 -0300] WARN: [RESPONSE] POST /69da9a5ab771663b5556a750/attachments - 500
+    env: "development"
+    service: "physioGest-api"
+    requestId: "l8se1"
+    method: "POST"
+    url: "/69da9a5ab771663b5556a750/attachments"
+    statusCode: 500
+    duration: "31ms"
+    contentLength: "241"
+[2026-04-13 01:09:39.090 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-13 01:09:39.100 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-13 01:09:40.857 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-13 01:09:40.980 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:09:40.980 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:09:40.981 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:09:40.982 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:09:40.993 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:09:40.993 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:09:40.994 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-13 01:09:41.116 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "122ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-13 01:09:41.117 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:09:41.117 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:09:41.118 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-13 01:09:41.201 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+              at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-13 01:09:41.202 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-13 01:09:41.202 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-13 01:10:52.472 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-13 01:10:52.482 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-13 01:10:53.811 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-13 01:10:53.918 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:10:53.919 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:10:53.920 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:10:53.920 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:10:53.932 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:10:53.932 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:10:53.932 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-13 01:10:54.028 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "96ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-13 01:10:54.029 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:10:54.029 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:10:54.031 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-13 01:10:54.100 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+              at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-13 01:10:54.101 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-13 01:10:54.101 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-13 01:12:06.248 -0300] INFO: [REQUEST] POST /v1/patients/69da9a5ab771663b5556a750/attachments
+    env: "development"
+    service: "physioGest-api"
+    requestId: "4cp35c"
+    method: "POST"
+    url: "/v1/patients/69da9a5ab771663b5556a750/attachments"
+    path: "/v1/patients/69da9a5ab771663b5556a750/attachments"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "multipart/form-data; boundary=--dio-boundary-3165714328"
+    contentLength: "8939471"
+[2026-04-13 01:12:06.260 -0300] INFO: Criando anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+[2026-04-13 01:12:06.260 -0300] DEBUG: Criando novo anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+[2026-04-13 01:12:06.277 -0300] ERROR: Erro ao criar anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+    error: {
+      "type": "ValidationError",
+      "message": "PatientAttachment validation failed: originalName: Path `originalName` is required., fileName: Path `fileName` is required., mimeType: Path `mimeType` is required., size: Path `size` is required., path: Path `path` is required.",
+      "stack":
+          ValidationError: PatientAttachment validation failed: originalName: Path `originalName` is required., fileName: Path `fileName` is required., mimeType: Path `mimeType` is required., size: Path `size` is required., path: Path `path` is required.
+              at model.validate (C:\Applications\physioGest-api\node_modules\mongoose\lib\document.js:2864:36)
+              at async model.$__save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:389:7)
+              at async model.save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:663:5)
+              at async PatientAttachmentService.createAttachment (C:\Applications\physioGest-api\src\application\services\PatientAttachmentService.ts:65:29)
+              at async PatientAttachmentController.createAttachment (C:\Applications\physioGest-api\src\presentation\patients\attachments\PatientAttachmentController.ts:197:26)
+      "errors": {
+        "originalName": {
+          "name": "ValidatorError",
+          "message": "Path `originalName` is required.",
+          "properties": {
+            "message": "Path `originalName` is required.",
+            "type": "required",
+            "path": "originalName"
+          },
+          "kind": "required",
+          "path": "originalName"
+        },
+        "fileName": {
+          "name": "ValidatorError",
+          "message": "Path `fileName` is required.",
+          "properties": {
+            "message": "Path `fileName` is required.",
+            "type": "required",
+            "path": "fileName"
+          },
+          "kind": "required",
+          "path": "fileName"
+        },
+        "mimeType": {
+          "name": "ValidatorError",
+          "message": "Path `mimeType` is required.",
+          "properties": {
+            "message": "Path `mimeType` is required.",
+            "type": "required",
+            "path": "mimeType"
+          },
+          "kind": "required",
+          "path": "mimeType"
+        },
+        "size": {
+          "name": "ValidatorError",
+          "message": "Path `size` is required.",
+          "properties": {
+            "message": "Path `size` is required.",
+            "type": "required",
+            "path": "size"
+          },
+          "kind": "required",
+          "path": "size"
+        },
+        "path": {
+          "name": "ValidatorError",
+          "message": "Path `path` is required.",
+          "properties": {
+            "message": "Path `path` is required.",
+            "type": "required",
+            "path": "path"
+          },
+          "kind": "required",
+          "path": "path"
+        }
+      },
+      "_message": "PatientAttachment validation failed"
+    }
+[2026-04-13 01:12:06.288 -0300] ERROR: Erro ao criar anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+    error: {
+      "type": "ValidationError",
+      "message": "PatientAttachment validation failed: originalName: Path `originalName` is required., fileName: Path `fileName` is required., mimeType: Path `mimeType` is required., size: Path `size` is required., path: Path `path` is required.",
+      "stack":
+          ValidationError: PatientAttachment validation failed: originalName: Path `originalName` is required., fileName: Path `fileName` is required., mimeType: Path `mimeType` is required., size: Path `size` is required., path: Path `path` is required.
+              at model.validate (C:\Applications\physioGest-api\node_modules\mongoose\lib\document.js:2864:36)
+              at async model.$__save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:389:7)
+              at async model.save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:663:5)
+              at async PatientAttachmentService.createAttachment (C:\Applications\physioGest-api\src\application\services\PatientAttachmentService.ts:65:29)
+              at async PatientAttachmentController.createAttachment (C:\Applications\physioGest-api\src\presentation\patients\attachments\PatientAttachmentController.ts:197:26)
+      "errors": {
+        "originalName": {
+          "name": "ValidatorError",
+          "message": "Path `originalName` is required.",
+          "properties": {
+            "message": "Path `originalName` is required.",
+            "type": "required",
+            "path": "originalName"
+          },
+          "kind": "required",
+          "path": "originalName"
+        },
+        "fileName": {
+          "name": "ValidatorError",
+          "message": "Path `fileName` is required.",
+          "properties": {
+            "message": "Path `fileName` is required.",
+            "type": "required",
+            "path": "fileName"
+          },
+          "kind": "required",
+          "path": "fileName"
+        },
+        "mimeType": {
+          "name": "ValidatorError",
+          "message": "Path `mimeType` is required.",
+          "properties": {
+            "message": "Path `mimeType` is required.",
+            "type": "required",
+            "path": "mimeType"
+          },
+          "kind": "required",
+          "path": "mimeType"
+        },
+        "size": {
+          "name": "ValidatorError",
+          "message": "Path `size` is required.",
+          "properties": {
+            "message": "Path `size` is required.",
+            "type": "required",
+            "path": "size"
+          },
+          "kind": "required",
+          "path": "size"
+        },
+        "path": {
+          "name": "ValidatorError",
+          "message": "Path `path` is required.",
+          "properties": {
+            "message": "Path `path` is required.",
+            "type": "required",
+            "path": "path"
+          },
+          "kind": "required",
+          "path": "path"
+        }
+      },
+      "_message": "PatientAttachment validation failed"
+    }
+[2026-04-13 01:12:06.297 -0300] WARN: [RESPONSE] POST /69da9a5ab771663b5556a750/attachments - 500
+    env: "development"
+    service: "physioGest-api"
+    requestId: "4cp35c"
+    method: "POST"
+    url: "/69da9a5ab771663b5556a750/attachments"
+    statusCode: 500
+    duration: "49ms"
+    contentLength: "241"
+[2026-04-13 01:12:48.081 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-13 01:12:48.088 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-13 01:12:48.960 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-13 01:12:49.036 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:12:49.036 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:12:49.037 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:12:49.038 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:12:49.045 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:12:49.045 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:12:49.045 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-13 01:12:49.146 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "101ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-13 01:12:49.147 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:12:49.147 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:12:49.148 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-13 01:12:49.226 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+              at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-13 01:12:49.228 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-13 01:12:49.228 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-13 01:13:04.729 -0300] INFO: [REQUEST] POST /v1/patients/69da9a5ab771663b5556a750/attachments
+    env: "development"
+    service: "physioGest-api"
+    requestId: "ikgorp"
+    method: "POST"
+    url: "/v1/patients/69da9a5ab771663b5556a750/attachments"
+    path: "/v1/patients/69da9a5ab771663b5556a750/attachments"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "multipart/form-data; boundary=--dio-boundary-3931520491"
+    contentLength: "8939471"
+[2026-04-13 01:13:04.734 -0300] INFO: Criando anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+[2026-04-13 01:13:04.734 -0300] DEBUG: Criando novo anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+[2026-04-13 01:13:04.742 -0300] ERROR: Erro ao criar anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+    error: {
+      "type": "ValidationError",
+      "message": "PatientAttachment validation failed: originalName: Path `originalName` is required., fileName: Path `fileName` is required., mimeType: Path `mimeType` is required., size: Path `size` is required., path: Path `path` is required.",
+      "stack":
+          ValidationError: PatientAttachment validation failed: originalName: Path `originalName` is required., fileName: Path `fileName` is required., mimeType: Path `mimeType` is required., size: Path `size` is required., path: Path `path` is required.
+              at model.validate (C:\Applications\physioGest-api\node_modules\mongoose\lib\document.js:2864:36)
+              at async model.$__save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:389:7)
+              at async model.save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:663:5)
+              at async PatientAttachmentService.createAttachment (C:\Applications\physioGest-api\src\application\services\PatientAttachmentService.ts:65:29)
+              at async PatientAttachmentController.createAttachment (C:\Applications\physioGest-api\src\presentation\patients\attachments\PatientAttachmentController.ts:197:26)
+      "errors": {
+        "originalName": {
+          "name": "ValidatorError",
+          "message": "Path `originalName` is required.",
+          "properties": {
+            "message": "Path `originalName` is required.",
+            "type": "required",
+            "path": "originalName"
+          },
+          "kind": "required",
+          "path": "originalName"
+        },
+        "fileName": {
+          "name": "ValidatorError",
+          "message": "Path `fileName` is required.",
+          "properties": {
+            "message": "Path `fileName` is required.",
+            "type": "required",
+            "path": "fileName"
+          },
+          "kind": "required",
+          "path": "fileName"
+        },
+        "mimeType": {
+          "name": "ValidatorError",
+          "message": "Path `mimeType` is required.",
+          "properties": {
+            "message": "Path `mimeType` is required.",
+            "type": "required",
+            "path": "mimeType"
+          },
+          "kind": "required",
+          "path": "mimeType"
+        },
+        "size": {
+          "name": "ValidatorError",
+          "message": "Path `size` is required.",
+          "properties": {
+            "message": "Path `size` is required.",
+            "type": "required",
+            "path": "size"
+          },
+          "kind": "required",
+          "path": "size"
+        },
+        "path": {
+          "name": "ValidatorError",
+          "message": "Path `path` is required.",
+          "properties": {
+            "message": "Path `path` is required.",
+            "type": "required",
+            "path": "path"
+          },
+          "kind": "required",
+          "path": "path"
+        }
+      },
+      "_message": "PatientAttachment validation failed"
+    }
+[2026-04-13 01:13:04.742 -0300] ERROR: Erro ao criar anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+    error: {
+      "type": "ValidationError",
+      "message": "PatientAttachment validation failed: originalName: Path `originalName` is required., fileName: Path `fileName` is required., mimeType: Path `mimeType` is required., size: Path `size` is required., path: Path `path` is required.",
+      "stack":
+          ValidationError: PatientAttachment validation failed: originalName: Path `originalName` is required., fileName: Path `fileName` is required., mimeType: Path `mimeType` is required., size: Path `size` is required., path: Path `path` is required.
+              at model.validate (C:\Applications\physioGest-api\node_modules\mongoose\lib\document.js:2864:36)
+              at async model.$__save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:389:7)
+              at async model.save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:663:5)
+              at async PatientAttachmentService.createAttachment (C:\Applications\physioGest-api\src\application\services\PatientAttachmentService.ts:65:29)
+              at async PatientAttachmentController.createAttachment (C:\Applications\physioGest-api\src\presentation\patients\attachments\PatientAttachmentController.ts:197:26)
+      "errors": {
+        "originalName": {
+          "name": "ValidatorError",
+          "message": "Path `originalName` is required.",
+          "properties": {
+            "message": "Path `originalName` is required.",
+            "type": "required",
+            "path": "originalName"
+          },
+          "kind": "required",
+          "path": "originalName"
+        },
+        "fileName": {
+          "name": "ValidatorError",
+          "message": "Path `fileName` is required.",
+          "properties": {
+            "message": "Path `fileName` is required.",
+            "type": "required",
+            "path": "fileName"
+          },
+          "kind": "required",
+          "path": "fileName"
+        },
+        "mimeType": {
+          "name": "ValidatorError",
+          "message": "Path `mimeType` is required.",
+          "properties": {
+            "message": "Path `mimeType` is required.",
+            "type": "required",
+            "path": "mimeType"
+          },
+          "kind": "required",
+          "path": "mimeType"
+        },
+        "size": {
+          "name": "ValidatorError",
+          "message": "Path `size` is required.",
+          "properties": {
+            "message": "Path `size` is required.",
+            "type": "required",
+            "path": "size"
+          },
+          "kind": "required",
+          "path": "size"
+        },
+        "path": {
+          "name": "ValidatorError",
+          "message": "Path `path` is required.",
+          "properties": {
+            "message": "Path `path` is required.",
+            "type": "required",
+            "path": "path"
+          },
+          "kind": "required",
+          "path": "path"
+        }
+      },
+      "_message": "PatientAttachment validation failed"
+    }
+[2026-04-13 01:13:04.744 -0300] WARN: [RESPONSE] POST /69da9a5ab771663b5556a750/attachments - 500
+    env: "development"
+    service: "physioGest-api"
+    requestId: "ikgorp"
+    method: "POST"
+    url: "/69da9a5ab771663b5556a750/attachments"
+    statusCode: 500
+    duration: "15ms"
+    contentLength: "241"
+[2026-04-13 01:13:26.954 -0300] INFO: [REQUEST] POST /v1/patients/69da9a5ab771663b5556a750/attachments
+    env: "development"
+    service: "physioGest-api"
+    requestId: "r9g5p"
+    method: "POST"
+    url: "/v1/patients/69da9a5ab771663b5556a750/attachments"
+    path: "/v1/patients/69da9a5ab771663b5556a750/attachments"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "multipart/form-data; boundary=--dio-boundary-2666505625"
+    contentLength: "8939471"
+[2026-04-13 01:13:26.957 -0300] INFO: Criando anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+[2026-04-13 01:13:26.957 -0300] DEBUG: Criando novo anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+[2026-04-13 01:13:26.960 -0300] ERROR: Erro ao criar anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+    error: {
+      "type": "ValidationError",
+      "message": "PatientAttachment validation failed: originalName: Path `originalName` is required., fileName: Path `fileName` is required., mimeType: Path `mimeType` is required., size: Path `size` is required., path: Path `path` is required.",
+      "stack":
+          ValidationError: PatientAttachment validation failed: originalName: Path `originalName` is required., fileName: Path `fileName` is required., mimeType: Path `mimeType` is required., size: Path `size` is required., path: Path `path` is required.
+              at model.validate (C:\Applications\physioGest-api\node_modules\mongoose\lib\document.js:2864:36)
+              at async model.$__save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:389:7)
+              at async model.save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:663:5)
+              at async PatientAttachmentService.createAttachment (C:\Applications\physioGest-api\src\application\services\PatientAttachmentService.ts:65:29)
+              at async PatientAttachmentController.createAttachment (C:\Applications\physioGest-api\src\presentation\patients\attachments\PatientAttachmentController.ts:197:26)
+      "errors": {
+        "originalName": {
+          "name": "ValidatorError",
+          "message": "Path `originalName` is required.",
+          "properties": {
+            "message": "Path `originalName` is required.",
+            "type": "required",
+            "path": "originalName"
+          },
+          "kind": "required",
+          "path": "originalName"
+        },
+        "fileName": {
+          "name": "ValidatorError",
+          "message": "Path `fileName` is required.",
+          "properties": {
+            "message": "Path `fileName` is required.",
+            "type": "required",
+            "path": "fileName"
+          },
+          "kind": "required",
+          "path": "fileName"
+        },
+        "mimeType": {
+          "name": "ValidatorError",
+          "message": "Path `mimeType` is required.",
+          "properties": {
+            "message": "Path `mimeType` is required.",
+            "type": "required",
+            "path": "mimeType"
+          },
+          "kind": "required",
+          "path": "mimeType"
+        },
+        "size": {
+          "name": "ValidatorError",
+          "message": "Path `size` is required.",
+          "properties": {
+            "message": "Path `size` is required.",
+            "type": "required",
+            "path": "size"
+          },
+          "kind": "required",
+          "path": "size"
+        },
+        "path": {
+          "name": "ValidatorError",
+          "message": "Path `path` is required.",
+          "properties": {
+            "message": "Path `path` is required.",
+            "type": "required",
+            "path": "path"
+          },
+          "kind": "required",
+          "path": "path"
+        }
+      },
+      "_message": "PatientAttachment validation failed"
+    }
+[2026-04-13 01:13:26.960 -0300] ERROR: Erro ao criar anexo
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+    error: {
+      "type": "ValidationError",
+      "message": "PatientAttachment validation failed: originalName: Path `originalName` is required., fileName: Path `fileName` is required., mimeType: Path `mimeType` is required., size: Path `size` is required., path: Path `path` is required.",
+      "stack":
+          ValidationError: PatientAttachment validation failed: originalName: Path `originalName` is required., fileName: Path `fileName` is required., mimeType: Path `mimeType` is required., size: Path `size` is required., path: Path `path` is required.
+              at model.validate (C:\Applications\physioGest-api\node_modules\mongoose\lib\document.js:2864:36)
+              at async model.$__save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:389:7)
+              at async model.save (C:\Applications\physioGest-api\node_modules\mongoose\lib\model.js:663:5)
+              at async PatientAttachmentService.createAttachment (C:\Applications\physioGest-api\src\application\services\PatientAttachmentService.ts:65:29)
+              at async PatientAttachmentController.createAttachment (C:\Applications\physioGest-api\src\presentation\patients\attachments\PatientAttachmentController.ts:197:26)
+      "errors": {
+        "originalName": {
+          "name": "ValidatorError",
+          "message": "Path `originalName` is required.",
+          "properties": {
+            "message": "Path `originalName` is required.",
+            "type": "required",
+            "path": "originalName"
+          },
+          "kind": "required",
+          "path": "originalName"
+        },
+        "fileName": {
+          "name": "ValidatorError",
+          "message": "Path `fileName` is required.",
+          "properties": {
+            "message": "Path `fileName` is required.",
+            "type": "required",
+            "path": "fileName"
+          },
+          "kind": "required",
+          "path": "fileName"
+        },
+        "mimeType": {
+          "name": "ValidatorError",
+          "message": "Path `mimeType` is required.",
+          "properties": {
+            "message": "Path `mimeType` is required.",
+            "type": "required",
+            "path": "mimeType"
+          },
+          "kind": "required",
+          "path": "mimeType"
+        },
+        "size": {
+          "name": "ValidatorError",
+          "message": "Path `size` is required.",
+          "properties": {
+            "message": "Path `size` is required.",
+            "type": "required",
+            "path": "size"
+          },
+          "kind": "required",
+          "path": "size"
+        },
+        "path": {
+          "name": "ValidatorError",
+          "message": "Path `path` is required.",
+          "properties": {
+            "message": "Path `path` is required.",
+            "type": "required",
+            "path": "path"
+          },
+          "kind": "required",
+          "path": "path"
+        }
+      },
+      "_message": "PatientAttachment validation failed"
+    }
+[2026-04-13 01:13:26.962 -0300] WARN: [RESPONSE] POST /69da9a5ab771663b5556a750/attachments - 500
+    env: "development"
+    service: "physioGest-api"
+    requestId: "r9g5p"
+    method: "POST"
+    url: "/69da9a5ab771663b5556a750/attachments"
+    statusCode: 500
+    duration: "9ms"
+    contentLength: "241"
+[2026-04-13 01:15:55.677 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-13 01:15:55.687 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-13 01:15:56.861 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-13 01:15:57.069 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:57.069 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:57.071 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:57.072 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:57.083 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:57.083 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:57.083 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-13 01:15:57.211 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "128ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-13 01:15:57.212 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:57.212 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:57.212 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-13 01:15:57.262 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-13 01:15:57.263 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-13 01:15:57.263 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-13 01:15:58.795 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-13 01:15:58.801 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-13 01:15:59.601 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-13 01:15:59.699 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:59.699 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:59.700 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:59.701 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:59.708 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:59.708 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:59.709 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-13 01:15:59.789 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "80ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-13 01:15:59.789 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:59.789 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-13 01:15:59.790 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-13 01:15:59.833 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+              at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-13 01:15:59.833 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-13 01:15:59.833 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-13 01:16:36.969 -0300] INFO: [REQUEST] POST /v1/patients/69da9a5ab771663b5556a750/attachments
+    env: "development"
+    service: "physioGest-api"
+    requestId: "8eveng"
+    method: "POST"
+    url: "/v1/patients/69da9a5ab771663b5556a750/attachments"
+    path: "/v1/patients/69da9a5ab771663b5556a750/attachments"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    contentType: "multipart/form-data; boundary=--dio-boundary-2579232832"
+    contentLength: "8939471"
+[2026-04-13 01:16:37.062 -0300] INFO: Criando anexo via upload físico
+    env: "development"
+    service: "physioGest-api"
+    patientId: "69da9a5ab771663b5556a750"
+    fileName: "Gemini_Generated_Image_hi31tkhi31tkhi31.png"
+[2026-04-13 01:16:39.918 -0300] INFO: [RESPONSE] POST /69da9a5ab771663b5556a750/attachments - 201
+    env: "development"
+    service: "physioGest-api"
+    requestId: "8eveng"
+    method: "POST"
+    url: "/69da9a5ab771663b5556a750/attachments"
+    statusCode: 201
+    duration: "2950ms"
+    contentLength: "680"
+[2026-04-13 01:17:08.848 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-13 01:17:08.855 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"

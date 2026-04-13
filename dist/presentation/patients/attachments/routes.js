@@ -1,5 +1,12 @@
 import { Router } from "express";
+import multer from "multer";
 import { PatientAttachmentController } from "./PatientAttachmentController.js";
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: 10 * 1024 * 1024 // 10MB limit
+    }
+});
 const patientAttachmentRoutes = Router();
 const controller = new PatientAttachmentController();
 /**
@@ -150,6 +157,7 @@ patientAttachmentRoutes.get("/:patientId/attachments", controller.getPatientAtta
 patientAttachmentRoutes.get("/:patientId/attachments/category/:category", controller.getAttachmentsByCategory.bind(controller));
 patientAttachmentRoutes.get("/:patientId/attachments/:id", controller.getAttachmentById.bind(controller));
 patientAttachmentRoutes.post("/:patientId/attachments", controller.createAttachment.bind(controller));
+patientAttachmentRoutes.post("/:patientId/attachments/upload", upload.single('file'), controller.uploadAttachment.bind(controller));
 patientAttachmentRoutes.put("/:patientId/attachments/:id", controller.updateAttachment.bind(controller));
 patientAttachmentRoutes.delete("/:patientId/attachments/:id", controller.deleteAttachment.bind(controller));
 export default patientAttachmentRoutes;
