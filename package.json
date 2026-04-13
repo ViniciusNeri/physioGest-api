@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/ViniciusNeri/physioGest-api#readme",
   "dependencies": {
+    "@supabase/supabase-js": "^2.103.0",
+    "@types/node": "^25.5.2",
     "amqplib": "^0.10.4",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
@@ -37,7 +39,6 @@
     "reflect-metadata": "^0.2.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "@types/node": "^25.5.2",
     "tsyringe": "^4.10.0"
   },
   "devDependencies": {
