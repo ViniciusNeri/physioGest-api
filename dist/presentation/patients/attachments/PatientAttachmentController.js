@@ -186,8 +186,26 @@ export class PatientAttachmentController {
             if (!patientId) {
                 return res.status(400).json({ message: "ID do paciente é obrigatório" });
             }
-            const attachmentData = { ...req.body, patientId: patientId, userId: req.user?.id };
-            this.logger.info("Criando anexo", { patientId, fileName: attachmentData.fileName });
+            const userId = req.user?.id;
+            if (!userId) {
+                return res.status(401).json({ message: "Usuário não autenticado" });
+            }
+            const file = req.file;
+            // Se houver um arquivo físico (Multipart), usamos o fluxo de upload padrão
+            if (file) {
+                this.logger.info("Criando anexo via upload físico", { patientId, fileName: file.originalname });
+                const { category, description } = req.body;
+                const attachment = await this.service.uploadAndCreateAttachment(patientId, userId, {
+                    buffer: file.buffer,
+                    originalname: file.originalname,
+                    mimetype: file.mimetype,
+                    size: file.size
+                }, category, description);
+                return res.status(201).json(attachment);
+            }
+            // Se não houver arquivo, tratamos como criação via metadados JSON (Fluxo antigo/Swagger)
+            const attachmentData = { ...req.body, patientId: patientId, userId };
+            this.logger.info("Criando anexo via metadados JSON", { patientId, fileName: attachmentData.fileName });
             const attachment = await this.service.createAttachment(attachmentData);
             return res.status(201).json(attachment);
         }
