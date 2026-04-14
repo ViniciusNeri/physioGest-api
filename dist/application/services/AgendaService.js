@@ -94,8 +94,8 @@ let AgendaService = class AgendaService {
         const settings = await this.settingRepository.findByUserId(agenda.userId);
         const timezone = settings?.timezone || 'America/Sao_Paulo';
         // Converte para string local "YYYY-MM-DDTHH:mm:ss"
-        const startStr = toLocalISOString(new Date(agenda.startDate), timezone);
-        const endStr = toLocalISOString(new Date(agenda.endDate), timezone);
+        const startStr = toLocalISOString(agenda.startDate, timezone);
+        const endStr = toLocalISOString(agenda.endDate, timezone);
         if (this.isPastDate(startStr, timezone)) {
             throw new Error("Não é possível realizar agendamentos para datas passadas.");
         }
@@ -153,9 +153,9 @@ let AgendaService = class AgendaService {
         // Normaliza datas se presentes
         const update = { ...agenda };
         if (update.startDate)
-            update.startDate = toLocalISOString(new Date(update.startDate));
+            update.startDate = toLocalISOString(update.startDate);
         if (update.endDate)
-            update.endDate = toLocalISOString(new Date(update.endDate));
+            update.endDate = toLocalISOString(update.endDate);
         return this.repository.update(id, update);
     }
     async deleteAgenda(id) {
@@ -208,7 +208,7 @@ let AgendaService = class AgendaService {
             throw new Error("PIN inválido.");
         const settings = await this.settingRepository.findByUserId(params.userId);
         const timezone = settings?.timezone || 'America/Sao_Paulo';
-        const startStr = toLocalISOString(new Date(params.startDate), timezone);
+        const startStr = toLocalISOString(params.startDate, timezone);
         // Adiciona 1 hora como string
         const [datePart, timePart] = startStr.split('T');
         const [h, min, s] = timePart.split(':').map(Number);

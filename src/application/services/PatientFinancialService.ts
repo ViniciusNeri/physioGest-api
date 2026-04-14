@@ -58,9 +58,9 @@ export class PatientFinancialService implements IPatientFinancialService {
 
     try {
       const normalized = { ...financial } as any;
-      if (normalized.date) normalized.date = toLocalISOString(new Date(normalized.date));
-      if (normalized.dueDate) normalized.dueDate = toLocalISOString(new Date(normalized.dueDate));
-      if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(new Date(normalized.paymentDate));
+      if (normalized.date) normalized.date = toLocalISOString(normalized.date);
+      if (normalized.dueDate) normalized.dueDate = toLocalISOString(normalized.dueDate);
+      if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(normalized.paymentDate);
 
       const newFinancial = await this.repository.create(normalized);
       
@@ -89,9 +89,9 @@ export class PatientFinancialService implements IPatientFinancialService {
 
     try {
       const normalized = { ...financial } as any;
-      if (normalized.date) normalized.date = toLocalISOString(new Date(normalized.date));
-      if (normalized.dueDate) normalized.dueDate = toLocalISOString(new Date(normalized.dueDate));
-      if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(new Date(normalized.paymentDate));
+      if (normalized.date) normalized.date = toLocalISOString(normalized.date);
+      if (normalized.dueDate) normalized.dueDate = toLocalISOString(normalized.dueDate);
+      if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(normalized.paymentDate);
 
       const updatedFinancial = await this.repository.update(id, normalized);
       if (updatedFinancial) {

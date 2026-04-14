@@ -78723,3 +78723,23 @@
     env: "development"
     service: "physioGest-api"
     baseUrl: "https://api.brevo.com/v3"
+[2026-04-14 12:37:18.814 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-14 12:37:18.822 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-14 12:37:21.044 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-14 12:37:21.064 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"

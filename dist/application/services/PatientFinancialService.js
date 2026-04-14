@@ -59,11 +59,11 @@ let PatientFinancialService = class PatientFinancialService {
         try {
             const normalized = { ...financial };
             if (normalized.date)
-                normalized.date = toLocalISOString(new Date(normalized.date));
+                normalized.date = toLocalISOString(normalized.date);
             if (normalized.dueDate)
-                normalized.dueDate = toLocalISOString(new Date(normalized.dueDate));
+                normalized.dueDate = toLocalISOString(normalized.dueDate);
             if (normalized.paymentDate)
-                normalized.paymentDate = toLocalISOString(new Date(normalized.paymentDate));
+                normalized.paymentDate = toLocalISOString(normalized.paymentDate);
             const newFinancial = await this.repository.create(normalized);
             await this.activityService.logActivity({
                 patientId: newFinancial.patientId,
@@ -89,11 +89,11 @@ let PatientFinancialService = class PatientFinancialService {
         try {
             const normalized = { ...financial };
             if (normalized.date)
-                normalized.date = toLocalISOString(new Date(normalized.date));
+                normalized.date = toLocalISOString(normalized.date);
             if (normalized.dueDate)
-                normalized.dueDate = toLocalISOString(new Date(normalized.dueDate));
+                normalized.dueDate = toLocalISOString(normalized.dueDate);
             if (normalized.paymentDate)
-                normalized.paymentDate = toLocalISOString(new Date(normalized.paymentDate));
+                normalized.paymentDate = toLocalISOString(normalized.paymentDate);
             const updatedFinancial = await this.repository.update(id, normalized);
             if (updatedFinancial) {
                 this.logger.info("Registro financeiro atualizado com sucesso", { financialId: id });

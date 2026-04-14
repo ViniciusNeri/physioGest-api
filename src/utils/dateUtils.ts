@@ -31,6 +31,15 @@ const BRASILIA_TIMEZONE = "America/Sao_Paulo";
  * @param timezone - timezone de referência (default: America/Sao_Paulo)
  */
 export function toLocalISOString(date: Date | string, timezone: string = BRASILIA_TIMEZONE): string {
+  if (typeof date === "string" && date.includes('T')) {
+    // Detecta se a string já é naive (sem Z e sem offset +/-HH:mm)
+    // Se não tiver indicador de fuso, assumimos que o valor nominal é o pretendido.
+    const hasTimezone = date.includes('Z') || /([+-]\d{2}:?\d{2})$/.test(date);
+    if (!hasTimezone) {
+      return date.substring(0, 19).replace(' ', 'T');
+    }
+  }
+
   const d = typeof date === "string" ? new Date(date) : date;
   if (isNaN(d.getTime())) return "";
 

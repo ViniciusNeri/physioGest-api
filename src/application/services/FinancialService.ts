@@ -225,18 +225,18 @@ export class FinancialService implements IFinancialService {
     this.logger.info(`Criando registro financeiro para usuário: ${financial.userId}`);
     // Normaliza datas para Naive UTC antes de salvar
     const normalized = { ...financial } as any;
-    if (normalized.date) normalized.date = toLocalISOString(new Date(normalized.date));
-    if (normalized.dueDate) normalized.dueDate = toLocalISOString(new Date(normalized.dueDate));
-    if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(new Date(normalized.paymentDate));
+    if (normalized.date) normalized.date = toLocalISOString(normalized.date);
+    if (normalized.dueDate) normalized.dueDate = toLocalISOString(normalized.dueDate);
+    if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(normalized.paymentDate);
     return this.repository.create(normalized);
   }
 
   async updateFinancial(id: string, financial: Partial<Financial>): Promise<Financial | null> {
     this.logger.info(`Atualizando registro financeiro: ${id}`);
     const normalized = { ...financial } as any;
-    if (normalized.date) normalized.date = toLocalISOString(new Date(normalized.date));
-    if (normalized.dueDate) normalized.dueDate = toLocalISOString(new Date(normalized.dueDate));
-    if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(new Date(normalized.paymentDate));
+    if (normalized.date) normalized.date = toLocalISOString(normalized.date);
+    if (normalized.dueDate) normalized.dueDate = toLocalISOString(normalized.dueDate);
+    if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(normalized.paymentDate);
     return this.repository.update(id, normalized);
   }
 
