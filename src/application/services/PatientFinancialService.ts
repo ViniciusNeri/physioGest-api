@@ -58,6 +58,8 @@ export class PatientFinancialService implements IPatientFinancialService {
 
     try {
       const normalized = { ...financial } as any;
+      if (normalized.amount) normalized.amount = Number(normalized.amount);
+      if (normalized.totalSessions) normalized.totalSessions = Number(normalized.totalSessions);
       if (normalized.date) normalized.date = toLocalISOString(normalized.date);
       if (normalized.dueDate) normalized.dueDate = toLocalISOString(normalized.dueDate);
       if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(normalized.paymentDate);
@@ -89,6 +91,8 @@ export class PatientFinancialService implements IPatientFinancialService {
 
     try {
       const normalized = { ...financial } as any;
+      if (normalized.amount) normalized.amount = Number(normalized.amount);
+      if (normalized.totalSessions) normalized.totalSessions = Number(normalized.totalSessions);
       if (normalized.date) normalized.date = toLocalISOString(normalized.date);
       if (normalized.dueDate) normalized.dueDate = toLocalISOString(normalized.dueDate);
       if (normalized.paymentDate) normalized.paymentDate = toLocalISOString(normalized.paymentDate);

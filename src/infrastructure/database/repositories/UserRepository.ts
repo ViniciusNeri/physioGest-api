@@ -22,6 +22,10 @@ export class UserRepository implements IUserRepository, IAuthenticateRepository 
     return UserModel.findOne({ email }).lean<User>({ virtuals: true }).exec();
   }
 
+  async findByPhone(phone: string): Promise<User | null> {
+    return UserModel.findOne({ phone }).lean<User>({ virtuals: true }).exec();
+  }
+
   async findAll(): Promise<User[]> {
     return UserModel.find().lean<User[]>({ virtuals: true }).exec();
   }

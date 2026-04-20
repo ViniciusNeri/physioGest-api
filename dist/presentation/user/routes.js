@@ -14,6 +14,7 @@ userRoutes.use(JwtAuthService.authenticateToken);
  *         - name
  *         - email
  *         - password
+ *         - phone
  *       properties:
  *         id:
  *           type: string
@@ -25,6 +26,10 @@ userRoutes.use(JwtAuthService.authenticateToken);
  *           type: string
  *           format: email
  *           description: Email do usuário
+ *         phone:
+ *           type: string
+ *           description: "Telefone com DDD, somente números (ex: 5511999998888)"
+ *           example: "5511999998888"
  *         password:
  *           type: string
  *           description: Senha do usuário (hash)
@@ -32,6 +37,7 @@ userRoutes.use(JwtAuthService.authenticateToken);
  *         id: 60d5ecb74b24c72b8c8b4567
  *         name: João Silva
  *         email: joao@example.com
+ *         phone: "5511999998888"
  *         password: $2a$10$...
  *
  */

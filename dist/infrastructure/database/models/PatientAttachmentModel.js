@@ -12,7 +12,7 @@ const patientAttachmentSchema = new mongoose.Schema({
     description: { type: String, required: false },
     status: { type: String, enum: ['pending_upload', 'uploaded', 'failed'], default: 'uploaded' },
     uploadedAt: { type: String, required: true, default: () => new Date().toISOString().substring(0, 19) },
-}, { timestamps: true });
+}, { timestamps: true, id: false });
 // @ts-ignore
 patientAttachmentSchema.pre('save', function () {
     if (!this.id) {

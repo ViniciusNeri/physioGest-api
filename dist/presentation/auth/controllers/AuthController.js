@@ -239,13 +239,7 @@ export class AuthenticateController {
     googleLogin = async (req, res) => {
         try {
             const { token } = req.body; // Google ID token
-            const googleProvider = container.resolve("GoogleProvider");
-            const payload = await googleProvider.verifyToken(token);
-            if (!payload) {
-                return res.status(400).json({ message: "Token inválido" });
-            }
-            const { sub: googleId, email, name } = payload;
-            const result = await this.service.googleLogin(googleId, email, name);
+            const result = await this.service.loginWithGoogle(token);
             return res.status(200).json(result);
         }
         catch (error) {

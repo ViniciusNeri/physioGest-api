@@ -12,10 +12,16 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 import { injectable, inject } from "tsyringe";
 import logger from "../../infrastructure/logging/Logger.js";
+import { sanitizePhone } from "../../utils/phoneUtils.js";
+import { WhatsappNotificationService } from "../../infrastructure/external/WhatsappNotificationService.js";
 let PatientService = class PatientService {
     repository;
-    constructor(repository) {
+    userRepository;
+    notificationService;
+    constructor(repository, userRepository, notificationService) {
         this.repository = repository;
+        this.userRepository = userRepository;
+        this.notificationService = notificationService;
     }
     async getPatientById(id) {
         logger.debug("Buscando paciente por ID", { patientId: id });
@@ -73,6 +79,12 @@ let PatientService = class PatientService {
                 }
                 attempts++;
             }
+            if (patient.phone) {
+                patient.phone = sanitizePhone(patient.phone);
+            }
+            if (patient.birthDate && typeof patient.birthDate === 'string') {
+                patient.birthDate = new Date(patient.birthDate);
+            }
             const patientWithPin = { ...patient, pin, status: patient.status ?? true };
             const createdPatient = await this.repository.create(patientWithPin);
             logger.info("Paciente criado com sucesso", {
@@ -80,6 +92,17 @@ let PatientService = class PatientService {
                 name: createdPatient.name,
                 userId: createdPatient.userId
             });
+            // Busca o profissional para pegar o nome e enviar notificação
+            this.userRepository.findById(createdPatient.userId).then(professional => {
+                const professionalName = professional ? professional.name : "Seu profissional";
+                if (createdPatient.phone) {
+                    this.notificationService.notificarBoasVindasPaciente({
+                        phone: createdPatient.phone,
+                        nomePaciente: createdPatient.name,
+                        nomeUsuario: professionalName
+                    }).catch(err => logger.error("Erro ao enviar boas-vindas ao paciente via WhatsApp", err));
+                }
+            }).catch(err => logger.error("Erro ao buscar profissional para notificação", err));
             return createdPatient;
         }
         catch (error) {
@@ -90,6 +113,12 @@ let PatientService = class PatientService {
     async updatePatient(id, patient) {
         logger.debug("Atualizando paciente", { patientId: id, updates: Object.keys(patient) });
         try {
+            if (patient.phone) {
+                patient.phone = sanitizePhone(patient.phone);
+            }
+            if (patient.birthDate && typeof patient.birthDate === 'string') {
+                patient.birthDate = new Date(patient.birthDate);
+            }
             const updatedPatient = await this.repository.update(id, patient);
             if (updatedPatient) {
                 logger.info("Paciente atualizado com sucesso", {
@@ -129,7 +158,9 @@ let PatientService = class PatientService {
 PatientService = __decorate([
     injectable(),
     __param(0, inject("IPatientRepository")),
-    __metadata("design:paramtypes", [Object])
+    __param(1, inject("IUserRepository")),
+    __param(2, inject("WhatsappNotificationService")),
+    __metadata("design:paramtypes", [Object, Object, WhatsappNotificationService])
 ], PatientService);
 export { PatientService };
 //# sourceMappingURL=PatientService.js.map

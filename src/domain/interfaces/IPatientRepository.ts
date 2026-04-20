@@ -50,4 +50,11 @@ export interface IPatientRepository {
    * @returns Paciente ou null se não encontrado
    */
   findByPin(userId: string, pin: string): Promise<Patient | null>;
+
+  /**
+   * Busca um paciente pelo telefone
+   * @param phone - Telefone do paciente (somente números, com DDD)
+   * @returns Paciente ou null se não encontrado
+   */
+  findByPhone(phone: string): Promise<Patient | null>;
 }

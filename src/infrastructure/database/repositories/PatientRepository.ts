@@ -3,12 +3,15 @@ import type { IPatientRepository } from "../../../domain/interfaces/IPatientRepo
 import type { Patient } from "../../../domain/entities/Patient.js";
 import PatientModel from "../models/PatientModel.js";
 import AgendaModel from "../models/AgendaModel.js";
+import mongoose from "mongoose";
 
 
 @injectable()
 export class PatientRepository implements IPatientRepository {
   async findById(id: string): Promise<Patient | null> {
-    return PatientModel.findById(id).lean<Patient>({ virtuals: true }).exec();
+    const isObjectId = mongoose.Types.ObjectId.isValid(id);
+    const query = isObjectId ? { _id: id } : { id: id };
+    return PatientModel.findOne(query).lean<Patient>({ virtuals: true }).exec();
   }
 
   async findByUserId(userId: string): Promise<Patient[]> {
@@ -27,17 +30,25 @@ export class PatientRepository implements IPatientRepository {
   }
 
   async update(id: string, patient: Partial<Patient>): Promise<Patient | null> {
-    const updatedPatient = await PatientModel.findByIdAndUpdate(id, patient, { new: true }).lean<Patient>({ virtuals: true }).exec();
+    const isObjectId = mongoose.Types.ObjectId.isValid(id);
+    const query = isObjectId ? { _id: id } : { id: id };
+    const updatedPatient = await PatientModel.findOneAndUpdate(query, patient, { new: true }).lean<Patient>({ virtuals: true }).exec();
     return updatedPatient;
   }
 
   async delete(id: string): Promise<boolean> {
-    const result = await PatientModel.findByIdAndDelete(id).exec();
+    const isObjectId = mongoose.Types.ObjectId.isValid(id);
+    const query = isObjectId ? { _id: id } : { id: id };
+    const result = await PatientModel.findOneAndDelete(query).exec();
     return result !== null;
   }
 
   async findByPin(userId: string, pin: string): Promise<Patient | null> {
     return PatientModel.findOne({ userId, pin }).lean<Patient>({ virtuals: true }).exec();
+  }
+
+  async findByPhone(phone: string): Promise<Patient | null> {
+    return PatientModel.findOne({ phone }).lean<Patient>({ virtuals: true }).exec();
   }
 
   private async enrichWithAgendaStats(patients: Patient[]): Promise<Patient[]> {

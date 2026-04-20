@@ -72,6 +72,7 @@ let AuthenticateService = class AuthenticateService {
                 name,
                 email,
                 password: hashedPassword,
+                phone: '', // phone é coletado via endpoint /users, não no signup inicial
                 verified: false
             });
             logger.info("Usuário criado com sucesso", { userId: user.id, email });
@@ -324,6 +325,7 @@ Este é um email automático. Não responda a este email.`
                     name,
                     email,
                     googleId,
+                    phone: '', // phone pode ser atualizado posteriormente pelo usuário
                     verified: true // Usuários do Google são considerados verificados
                 });
                 logger.info("Novo usuário criado via Google", { userId: user.id, email, googleId });
@@ -347,6 +349,22 @@ Este é um email automático. Não responda a este email.`
         }
         catch (error) {
             logger.error("Erro durante login com Google", error, { googleId, email, name });
+            throw error;
+        }
+    }
+    async loginWithGoogle(token) {
+        logger.debug("Tentativa de login com token do Google");
+        try {
+            const payload = await this.googleProvider.verifyToken(token);
+            if (!payload) {
+                logger.warn("Token do Google inválido");
+                throw new Error("Token do Google inválido");
+            }
+            const { sub: googleId, email, name } = payload;
+            return await this.googleLogin(googleId, email, name);
+        }
+        catch (error) {
+            logger.error("Erro durante login com token do Google", error);
             throw error;
         }
     }

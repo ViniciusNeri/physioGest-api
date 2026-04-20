@@ -10,7 +10,7 @@ const agendaLockSchema = new mongoose.Schema<AgendaLock>(
     endTime: { type: String, required: false },
     description: { type: String, required: false },
   },
-  { timestamps: true }
+  { timestamps: true, id: false }
 );
 
 const AgendaLockModel = mongoose.model<AgendaLock>("AgendaLock", agendaLockSchema);

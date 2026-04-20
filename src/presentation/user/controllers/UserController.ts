@@ -106,6 +106,7 @@ export class UserController {
    *               - name
    *               - email
    *               - password
+   *               - phone
    *             properties:
    *               name:
    *                 type: string
@@ -115,6 +116,10 @@ export class UserController {
    *               password:
    *                 type: string
    *                 minLength: 6
+   *               phone:
+   *                 type: string
+   *                 description: "Telefone com DDD, somente números (ex: 5511999998888)"
+   *                 example: "5511999998888"
    *     responses:
    *       201:
    *         description: Usuário criado
@@ -123,15 +128,18 @@ export class UserController {
    *             schema:
    *               $ref: '#/components/schemas/User'
    *       400:
-   *         description: Dados inválidos
+   *         description: Dados inválidos ou telefone já cadastrado
    *       500:
    *         description: Erro interno do servidor
    */
   create = async (req: Request, res: Response) => {
     try {
-      const { name, email, password } = req.body;
+      const { name, email, password, phone } = req.body;
+      if (!phone) {
+        return res.status(400).json({ message: "O campo telefone (phone) é obrigatório." });
+      }
       this.logger.info(`Criando usuário: ${email}`);
-      const user = await this.service.createUser({ name, email, password, verified: false });
+      const user = await this.service.createUser({ name, email, password, phone });
       return res.status(201).json(user);
     } catch (error: any) {
       this.logger.error("Erro ao criar usuário", error);
@@ -169,6 +177,10 @@ export class UserController {
    *               password:
    *                 type: string
    *                 minLength: 6
+   *               phone:
+   *                 type: string
+   *                 description: "Telefone com DDD, somente números (ex: 5511999998888)"
+   *                 example: "5511999998888"
    *     responses:
    *       200:
    *         description: Usuário atualizado
@@ -176,6 +188,8 @@ export class UserController {
    *           application/json:
    *             schema:
    *               $ref: '#/components/schemas/User'
+   *       400:
+   *         description: Telefone inválido ou já cadastrado
    *       404:
    *         description: Usuário não encontrado
    *       500:

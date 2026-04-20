@@ -8,7 +8,7 @@ const categorySchema = new mongoose.Schema({
     active: { type: Boolean, default: true },
     duration: { type: Number, required: false },
     settingsId: { type: String },
-}, { timestamps: true });
+}, { timestamps: true, id: false });
 // @ts-ignore
 categorySchema.pre('save', function () {
     if (!this.id) {

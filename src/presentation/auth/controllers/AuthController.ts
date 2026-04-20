@@ -1,7 +1,6 @@
 import type { Request, Response } from "express";
 import { container } from "tsyringe";
 import type { IAuthenticateService } from "../../../domain/services/IAuthenticateService.js";
-import type { GoogleProvider } from "../../../infrastructure/external/GoogleProvider.js";
 import jwt from "jsonwebtoken";
 
 export class AuthenticateController {
@@ -246,16 +245,7 @@ export class AuthenticateController {
   googleLogin = async (req: Request, res: Response) => {
     try {
       const { token } = req.body; // Google ID token
-      const googleProvider = container.resolve<GoogleProvider>("GoogleProvider");
-
-      const payload = await googleProvider.verifyToken(token);
-      if (!payload) {
-        return res.status(400).json({ message: "Token inválido" });
-      }
-
-      const { sub: googleId, email, name } = payload;
-
-      const result = await this.service.googleLogin(googleId, email, name);
+      const result = await this.service.loginWithGoogle(token);
       return res.status(200).json(result);
     } catch (error: any) {
       return res.status(401).json({ message: error.message });

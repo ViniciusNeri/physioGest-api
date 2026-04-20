@@ -13,6 +13,7 @@ import settingsRoutes from "./presentation/settings/routes.js";
 import categoriesRoutes from "./presentation/categories/routes.js";
 import paymentMethodsRoutes from "./presentation/paymentMethods/routes.js";
 import dashboardRoutes from "./presentation/dashboard/routes.js";
+import whatsappRoutes from "./presentation/whatsapp/routes.js";
 import logger from "./infrastructure/logging/Logger.js";
 import { setupSwagger } from "./config/swagger.js";
 import { container } from "tsyringe";
@@ -105,6 +106,7 @@ v1Router.use("/settings", settingsRoutes);
 v1Router.use("/categories", categoriesRoutes);
 v1Router.use("/payment-methods", paymentMethodsRoutes);
 v1Router.use("/dashboard", dashboardRoutes);
+v1Router.use("/whatsapp", whatsappRoutes);
 app.use("/v1", v1Router);
 // Middleware de tratamento de erros global
 app.use((error, req, res, next) => {
@@ -144,7 +146,7 @@ app.listen(PORT, async () => {
     try {
         logger.debug("Tentando conectar ao RabbitMQ");
         const rabbitMQService = container.resolve("RabbitMQService");
-        await rabbitMQService.connect();
+        //await rabbitMQService.connect();
         const emailProvider = container.resolve("EmailProvider");
         const emailConsumerService = new EmailConsumerService(rabbitMQService, emailProvider);
         await emailConsumerService.startConsuming();

@@ -7,9 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { injectable } from "tsyringe";
 import PatientModel from "../models/PatientModel.js";
 import AgendaModel from "../models/AgendaModel.js";
+import mongoose from "mongoose";
 let PatientRepository = class PatientRepository {
     async findById(id) {
-        return PatientModel.findById(id).lean({ virtuals: true }).exec();
+        const isObjectId = mongoose.Types.ObjectId.isValid(id);
+        const query = isObjectId ? { _id: id } : { id: id };
+        return PatientModel.findOne(query).lean({ virtuals: true }).exec();
     }
     async findByUserId(userId) {
         const patients = await PatientModel.find({ userId }).lean({ virtuals: true }).exec();
@@ -24,15 +27,22 @@ let PatientRepository = class PatientRepository {
         return newPatient.save();
     }
     async update(id, patient) {
-        const updatedPatient = await PatientModel.findByIdAndUpdate(id, patient, { new: true }).lean({ virtuals: true }).exec();
+        const isObjectId = mongoose.Types.ObjectId.isValid(id);
+        const query = isObjectId ? { _id: id } : { id: id };
+        const updatedPatient = await PatientModel.findOneAndUpdate(query, patient, { new: true }).lean({ virtuals: true }).exec();
         return updatedPatient;
     }
     async delete(id) {
-        const result = await PatientModel.findByIdAndDelete(id).exec();
+        const isObjectId = mongoose.Types.ObjectId.isValid(id);
+        const query = isObjectId ? { _id: id } : { id: id };
+        const result = await PatientModel.findOneAndDelete(query).exec();
         return result !== null;
     }
     async findByPin(userId, pin) {
         return PatientModel.findOne({ userId, pin }).lean({ virtuals: true }).exec();
+    }
+    async findByPhone(phone) {
+        return PatientModel.findOne({ phone }).lean({ virtuals: true }).exec();
     }
     async enrichWithAgendaStats(patients) {
         if (!patients.length)

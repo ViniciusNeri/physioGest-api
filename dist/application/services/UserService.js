@@ -13,10 +13,14 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 import { injectable, inject } from "tsyringe";
 import bcrypt from "bcryptjs";
 import logger from "../../infrastructure/logging/Logger.js";
+import { sanitizePhone } from "../../utils/phoneUtils.js";
+import { WhatsappNotificationService } from "../../infrastructure/external/WhatsappNotificationService.js";
 let UserService = class UserService {
     repository;
-    constructor(repository) {
+    notificationService;
+    constructor(repository, notificationService) {
         this.repository = repository;
+        this.notificationService = notificationService;
     }
     async getUserById(id) {
         logger.debug("Buscando usuário por identificador", { identifier: id });
@@ -50,17 +54,29 @@ let UserService = class UserService {
     async createUser(user) {
         logger.debug("Criando usuário", { email: user.email, name: user.name });
         try {
+            if (!user.phone) {
+                throw new Error("O campo telefone (phone) é obrigatório.");
+            }
+            user.phone = sanitizePhone(user.phone);
+            if (!/^\d{10,15}$/.test(user.phone)) {
+                throw new Error("Telefone inválido. Informe somente números com DDD (ex: 5511999998888).");
+            }
             const existingUser = await this.repository.findByEmail(user.email);
             if (existingUser) {
                 logger.warn("Tentativa de criar usuário com email já existente", { email: user.email });
                 throw new Error("Email já cadastrado");
+            }
+            const existingPhone = await this.repository.findByPhone(user.phone);
+            if (existingPhone) {
+                logger.warn("Tentativa de criar usuário com telefone já existente", { phone: user.phone });
+                throw new Error("Telefone já cadastrado por outro usuário.");
             }
             let hashedPassword;
             if (user.password) {
                 logger.debug("Criptografando senha do usuário");
                 hashedPassword = await bcrypt.hash(user.password, 10);
             }
-            const newUser = { ...user, password: hashedPassword };
+            const newUser = { ...user, password: hashedPassword, verified: user.verified ?? false };
             const createdUser = await this.repository.create(newUser);
             logger.debug('Documento salvo no banco:', createdUser.id);
             logger.info("Usuário criado com sucesso", {
@@ -68,6 +84,11 @@ let UserService = class UserService {
                 email: createdUser.email,
                 verified: createdUser.verified
             });
+            // Envia notificação de boas-vindas
+            this.notificationService.notificarBoasVindasUsuario({
+                phone: createdUser.phone,
+                nome: createdUser.name
+            }).catch(err => logger.error("Erro ao enviar boas-vindas via WhatsApp", err));
             return createdUser;
         }
         catch (error) {
@@ -78,6 +99,16 @@ let UserService = class UserService {
     async updateUser(id, user) {
         logger.debug("Atualizando usuário", { identifier: id, updates: Object.keys(user) });
         try {
+            if (user.phone !== undefined) {
+                user.phone = sanitizePhone(user.phone);
+                if (!/^\d{10,15}$/.test(user.phone)) {
+                    throw new Error("Telefone inválido. Informe somente números com DDD (ex: 5511999998888).");
+                }
+                const existingPhone = await this.repository.findByPhone(user.phone);
+                if (existingPhone && existingPhone.id !== id) {
+                    throw new Error("Telefone já cadastrado por outro usuário.");
+                }
+            }
             if (user.password) {
                 logger.debug("Criptografando nova senha do usuário", { userId: id });
                 user.password = await bcrypt.hash(user.password, 10);
@@ -121,7 +152,8 @@ let UserService = class UserService {
 UserService = __decorate([
     injectable(),
     __param(0, inject("IUserRepository")),
-    __metadata("design:paramtypes", [Object])
+    __param(1, inject("WhatsappNotificationService")),
+    __metadata("design:paramtypes", [Object, WhatsappNotificationService])
 ], UserService);
 export { UserService };
 //# sourceMappingURL=UserService.js.map

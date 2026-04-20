@@ -37,6 +37,13 @@ export interface IUserRepository {
   update(id: string, user: Partial<User>): Promise<User | null>;
 
   /**
+   * Busca um usuário pelo telefone
+   * @param phone - telefone do usuário (somente números, com DDD)
+   * @returns Usuário ou null se não encontrado
+   */
+  findByPhone(phone: string): Promise<User | null>;
+
+  /**
    * Deleta um usuário
    * @param id - ID do usuário
    * @returns true se deletado, false se não encontrado

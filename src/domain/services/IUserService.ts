@@ -19,7 +19,7 @@ export interface IUserService {
    * @param user - dados do usuário
    * @returns Usuário criado
    */
-  createUser(user: Omit<User, 'id'>): Promise<User>;
+  createUser(user: Omit<User, 'id' | 'verified'> & { verified?: boolean }): Promise<User>;
 
   /**
    * Atualiza um usuário

@@ -12,7 +12,7 @@ const categorySchema = new mongoose.Schema<Category>(
     duration: { type: Number, required: false },
     settingsId: { type: String },
   },
-  { timestamps: true }
+  { timestamps: true, id: false }
 );
 
 // @ts-ignore

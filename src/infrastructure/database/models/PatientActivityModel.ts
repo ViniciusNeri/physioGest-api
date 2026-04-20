@@ -15,7 +15,7 @@ const patientActivitySchema = new mongoose.Schema<PatientActivity>(
     date: { type: Date, default: Date.now },
     metadata: { type: mongoose.Schema.Types.Mixed, required: false },
   },
-  { timestamps: true }
+  { timestamps: true, id: false }
 );
 
 // @ts-ignore

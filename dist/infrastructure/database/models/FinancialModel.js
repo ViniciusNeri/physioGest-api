@@ -15,7 +15,7 @@ const financialSchema = new mongoose.Schema({
     },
     userId: { type: String, required: true },
     patientId: { type: String, required: false },
-}, { timestamps: true });
+}, { timestamps: true, id: false });
 // @ts-ignore
 financialSchema.pre('save', function () {
     if (!this.id) {

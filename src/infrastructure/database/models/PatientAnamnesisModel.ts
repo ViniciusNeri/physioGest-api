@@ -21,7 +21,7 @@ const patientAnamnesisSchema = new mongoose.Schema<PatientAnamnesis>(
     weight: { type: Number, required: false },
     notes: { type: String, required: false },
   },
-  { timestamps: true }
+  { timestamps: true, id: false }
 );
 
 // @ts-ignore

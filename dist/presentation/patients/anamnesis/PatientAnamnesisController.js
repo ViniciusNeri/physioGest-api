@@ -237,9 +237,6 @@ export class PatientAnamnesisController {
             }
             this.logger.info("Atualizando anamnese", { anamnesisId: id });
             const updates = req.body;
-            if (updates.date) {
-                updates.date = new Date(updates.date);
-            }
             const anamnesis = await this.service.updateAnamnesis(id, updates);
             if (!anamnesis) {
                 return res.status(404).json({ message: "Anamnese não encontrada" });

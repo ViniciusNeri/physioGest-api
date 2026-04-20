@@ -27,7 +27,7 @@ const settingSchema = new mongoose.Schema<Setting>(
     timezone: { type: String, default: 'America/Sao_Paulo' },
     sessionDuration: { type: Number, default: 60 },
   },
-  { timestamps: true }
+  { timestamps: true, id: false }
 );
 
 // @ts-ignore

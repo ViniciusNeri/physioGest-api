@@ -20,7 +20,7 @@ const agendaSchema = new mongoose.Schema<Agenda>(
     description: { type: String },
     notes: { type: String },
   },
-  { timestamps: true }
+  { timestamps: true, id: false }
 );
 
 // @ts-ignore
@@ -33,14 +33,14 @@ agendaSchema.pre('save', function() {
 agendaSchema.virtual('patient', {
   ref: 'Patient',
   localField: 'patientId',
-  foreignField: '_id',
+  foreignField: 'id',
   justOne: true
 });
 
 agendaSchema.virtual('category', {
   ref: 'Category',
   localField: 'categoryId',
-  foreignField: '_id',
+  foreignField: 'id',
   justOne: true
 });
 

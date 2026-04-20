@@ -14,7 +14,7 @@ const paymentMethodSchema = new mongoose.Schema<PaymentMethod>(
     active: { type: Boolean, default: true },
     settingsId: { type: String },
   },
-  { timestamps: true }
+  { timestamps: true, id: false }
 );
 
 // @ts-ignore

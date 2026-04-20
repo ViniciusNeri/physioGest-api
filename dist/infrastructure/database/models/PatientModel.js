@@ -3,7 +3,7 @@ const patientSchema = new mongoose.Schema({
     id: { type: String },
     name: { type: String, required: true },
     email: { type: String, required: false },
-    phone: { type: String, required: false },
+    phone: { type: String, required: false, unique: true, sparse: true, index: true },
     birthDate: { type: Date, required: false },
     gender: { type: String, enum: ['male', 'female', 'other'], required: false },
     profession: { type: String, required: false },
@@ -11,7 +11,7 @@ const patientSchema = new mongoose.Schema({
     userId: { type: String, required: true },
     pin: { type: String, required: false },
     status: { type: Boolean, default: true },
-}, { timestamps: true });
+}, { timestamps: true, id: false });
 // @ts-ignore
 patientSchema.pre('save', function () {
     if (!this.id) {

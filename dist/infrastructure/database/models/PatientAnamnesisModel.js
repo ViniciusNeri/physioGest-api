@@ -17,7 +17,7 @@ const patientAnamnesisSchema = new mongoose.Schema({
     height: { type: Number, required: false },
     weight: { type: Number, required: false },
     notes: { type: String, required: false },
-}, { timestamps: true });
+}, { timestamps: true, id: false });
 // @ts-ignore
 patientAnamnesisSchema.pre('save', function () {
     if (!this.id) {

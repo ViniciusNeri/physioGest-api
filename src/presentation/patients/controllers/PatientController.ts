@@ -182,18 +182,9 @@ export class PatientController {
   create = async (req: Request, res: Response) => {
     try {
       const { name, email, phone, birthDate, gender, profession, observations, userId } = req.body;
-      if (!name || !userId) {
-        return res.status(400).json({ message: "Nome e userId são obrigatórios" });
-      }
       this.logger.info(`Criando paciente: ${name} para userId: ${userId}`);
-      const patientData: any = { name, userId };
-      if (email) patientData.email = email;
-      if (phone) patientData.phone = phone;
-      if (birthDate) patientData.birthDate = new Date(birthDate);
-      if (gender) patientData.gender = gender;
-      if (profession) patientData.profession = profession;
-      if (observations) patientData.observations = observations;
-      const patient = await this.service.createPatient(patientData);
+      const patient = await this.service.createPatient(req.body);
+      return res.status(201).json(patient);
       return res.status(201).json(patient);
     } catch (error: any) {
       this.logger.error("Erro ao criar paciente", error);
@@ -259,9 +250,6 @@ export class PatientController {
         return res.status(400).json({ message: "ID é obrigatório" });
       }
       const updates = req.body;
-      if (updates.birthDate) {
-        updates.birthDate = new Date(updates.birthDate);
-      }
       this.logger.info(`Atualizando paciente: ${id}`);
       const patient = await this.service.updatePatient(id as string, updates);
       if (!patient) {

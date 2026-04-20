@@ -78743,3 +78743,4226 @@
     env: "development"
     service: "physioGest-api"
     baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:34:02.014 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:34:02.020 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:35:44.118 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:35:44.126 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:35:45.680 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 21:35:45.855 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:35:45.856 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:35:45.857 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:35:45.858 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:35:45.873 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:35:45.874 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:35:45.874 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb+srv://***:***@cluster0.z9g74ud.mongodb.net/physioGest?appName=Cluster0"
+    hasCredentials: true
+[2026-04-19 21:35:45.934 -0300] FATAL: Falha ao conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb+srv://***:***@cluster0.z9g74ud.mongodb.net/physioGest?appName=Cluster0"
+    error: {
+      "type": "Error",
+      "message": "querySrv ECONNREFUSED _mongodb._tcp.cluster0.z9g74ud.mongodb.net",
+      "stack":
+          Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.z9g74ud.mongodb.net
+              at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17)
+              at QueryReqWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "code": "ECONNREFUSED",
+      "syscall": "querySrv",
+      "hostname": "_mongodb._tcp.cluster0.z9g74ud.mongodb.net"
+    }
+[2026-04-19 21:39:34.808 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:39:34.813 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:39:35.867 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 21:39:35.999 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:39:35.999 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:39:36.001 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:39:36.002 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:39:36.017 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:39:36.017 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:39:36.018 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/"
+    hasCredentials: false
+[2026-04-19 21:39:36.117 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "99ms"
+    database: "test"
+    host: "localhost"
+    port: 27017
+[2026-04-19 21:39:36.119 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:39:36.119 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:39:36.120 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-19 21:39:36.144 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+              at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-19 21:39:36.145 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-19 21:39:36.145 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 21:41:16.748 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:41:16.756 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:41:18.184 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 21:41:18.376 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:18.376 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:18.378 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:18.379 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:18.390 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:18.390 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:18.391 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/"
+    hasCredentials: false
+[2026-04-19 21:41:18.631 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "239ms"
+    database: "test"
+    host: "localhost"
+    port: 27017
+[2026-04-19 21:41:18.632 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:18.632 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:18.633 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-19 21:41:18.709 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-19 21:41:18.711 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-19 21:41:18.711 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 21:41:19.045 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:41:19.056 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:41:20.525 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 21:41:20.775 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:20.775 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:20.777 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:20.778 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:20.791 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:20.791 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:20.792 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/"
+    hasCredentials: false
+[2026-04-19 21:41:20.952 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "160ms"
+    database: "test"
+    host: "localhost"
+    port: 27017
+[2026-04-19 21:41:20.952 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:20.952 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:41:20.953 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-19 21:41:21.079 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+              at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-19 21:41:21.082 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-19 21:41:21.082 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 21:43:33.274 -0300] DEBUG: Rota /swagger.json acessada
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:43.295 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:44:43.302 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:44:44.437 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 21:44:44.671 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:44.671 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:44.673 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:44.674 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:44.684 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:44.684 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:44.684 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/"
+    hasCredentials: false
+[2026-04-19 21:44:44.814 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "130ms"
+    database: "test"
+    host: "localhost"
+    port: 27017
+[2026-04-19 21:44:44.815 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:44.815 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:44.815 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-19 21:44:44.875 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-19 21:44:44.876 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-19 21:44:44.876 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 21:44:45.359 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:44:45.369 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:44:46.586 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 21:44:46.688 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:46.688 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:46.689 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:46.690 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:46.699 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:46.699 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:46.700 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/"
+    hasCredentials: false
+[2026-04-19 21:44:46.805 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "105ms"
+    database: "test"
+    host: "localhost"
+    port: 27017
+[2026-04-19 21:44:46.806 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:46.806 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:44:46.806 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-19 21:44:46.892 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+              at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-19 21:44:46.894 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-19 21:44:46.895 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 21:46:08.127 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:46:08.137 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:46:09.494 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 21:46:09.622 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:46:09.622 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:46:09.623 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:46:09.624 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:46:09.634 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:46:09.634 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:46:09.634 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/"
+    hasCredentials: false
+[2026-04-19 21:46:09.753 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "119ms"
+    database: "test"
+    host: "localhost"
+    port: 27017
+[2026-04-19 21:46:09.754 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:46:09.754 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:46:09.755 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-19 21:46:09.837 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+              at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-19 21:46:09.838 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-19 21:46:09.838 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 21:46:42.617 -0300] INFO: [REQUEST] GET /v1/whatsapp/perfil/%2811%29%2095854-2994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "qw7t0h"
+    method: "GET"
+    url: "/v1/whatsapp/perfil/%2811%29%2095854-2994"
+    path: "/v1/whatsapp/perfil/%2811%29%2095854-2994"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 21:46:42.668 -0300] WARN: [RESPONSE] GET /perfil/%2811%29%2095854-2994 - 404
+    env: "development"
+    service: "physioGest-api"
+    requestId: "qw7t0h"
+    method: "GET"
+    url: "/perfil/%2811%29%2095854-2994"
+    statusCode: 404
+    duration: "52ms"
+    contentLength: "79"
+[2026-04-19 21:46:54.861 -0300] INFO: [REQUEST] GET /v1/whatsapp/perfil/11958542994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "sg0wwi"
+    method: "GET"
+    url: "/v1/whatsapp/perfil/11958542994"
+    path: "/v1/whatsapp/perfil/11958542994"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 21:46:54.870 -0300] WARN: [RESPONSE] GET /perfil/11958542994 - 404
+    env: "development"
+    service: "physioGest-api"
+    requestId: "sg0wwi"
+    method: "GET"
+    url: "/perfil/11958542994"
+    statusCode: 404
+    duration: "10ms"
+    contentLength: "79"
+[2026-04-19 21:47:02.832 -0300] INFO: [REQUEST] GET /v1/whatsapp/perfil/11958542994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "vut2g8"
+    method: "GET"
+    url: "/v1/whatsapp/perfil/11958542994"
+    path: "/v1/whatsapp/perfil/11958542994"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 21:47:02.869 -0300] WARN: [RESPONSE] GET /perfil/11958542994 - 404
+    env: "development"
+    service: "physioGest-api"
+    requestId: "vut2g8"
+    method: "GET"
+    url: "/perfil/11958542994"
+    statusCode: 404
+    duration: "37ms"
+    contentLength: "79"
+[2026-04-19 21:47:36.561 -0300] INFO: [REQUEST] POST /v1/auth/sessions
+    env: "development"
+    service: "physioGest-api"
+    requestId: "11j9ai"
+    method: "POST"
+    url: "/v1/auth/sessions"
+    path: "/v1/auth/sessions"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "66"
+[2026-04-19 21:47:36.562 -0300] DEBUG: Tentativa de login
+    env: "development"
+    service: "physioGest-api"
+    email: "viniciusneri7@gmail.com"
+    hasPassword: true
+[2026-04-19 21:47:36.566 -0300] WARN: Tentativa de login com usuário não encontrado
+    env: "development"
+    service: "physioGest-api"
+    email: "viniciusneri7@gmail.com"
+[2026-04-19 21:47:36.566 -0300] ERROR: Erro durante login
+    env: "development"
+    service: "physioGest-api"
+    email: "viniciusneri7@gmail.com"
+    error: {
+      "type": "Error",
+      "message": "Usuário não encontrado",
+      "stack":
+          Error: Usuário não encontrado
+              at AuthenticateService.login (C:\Applications\physioGest-api\src\application\services\AuthenticateService.ts:36:15)
+              at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+              at async AuthenticateController.handle (C:\Applications\physioGest-api\src\presentation\auth\controllers\AuthController.ts:43:22)
+    }
+[2026-04-19 21:47:36.577 -0300] WARN: [RESPONSE] POST /sessions - 401
+    env: "development"
+    service: "physioGest-api"
+    requestId: "11j9ai"
+    method: "POST"
+    url: "/sessions"
+    statusCode: 401
+    duration: "16ms"
+    contentLength: "38"
+[2026-04-19 21:49:17.345 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:49:17.354 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:49:18.289 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 21:49:18.376 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:49:18.377 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:49:18.377 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:49:18.378 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:49:18.386 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:49:18.386 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:49:18.386 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physiogest"
+    hasCredentials: false
+[2026-04-19 21:49:18.482 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "96ms"
+    database: "physiogest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 21:49:18.483 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:49:18.483 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:49:18.483 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-19 21:49:18.521 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+              at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-19 21:49:18.522 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-19 21:49:18.522 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 21:49:39.152 -0300] INFO: [REQUEST] POST /v1/auth/sessions
+    env: "development"
+    service: "physioGest-api"
+    requestId: "0kttwj"
+    method: "POST"
+    url: "/v1/auth/sessions"
+    path: "/v1/auth/sessions"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "66"
+[2026-04-19 21:49:39.152 -0300] DEBUG: Tentativa de login
+    env: "development"
+    service: "physioGest-api"
+    email: "viniciusneri7@gmail.com"
+    hasPassword: true
+[2026-04-19 21:49:39.158 -0300] WARN: Tentativa de login com usuário não encontrado
+    env: "development"
+    service: "physioGest-api"
+    email: "viniciusneri7@gmail.com"
+[2026-04-19 21:49:39.159 -0300] ERROR: Erro durante login
+    env: "development"
+    service: "physioGest-api"
+    email: "viniciusneri7@gmail.com"
+    error: {
+      "type": "Error",
+      "message": "Usuário não encontrado",
+      "stack":
+          Error: Usuário não encontrado
+              at AuthenticateService.login (C:\Applications\physioGest-api\src\application\services\AuthenticateService.ts:36:15)
+              at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+              at async AuthenticateController.handle (C:\Applications\physioGest-api\src\presentation\auth\controllers\AuthController.ts:43:22)
+    }
+[2026-04-19 21:49:39.163 -0300] WARN: [RESPONSE] POST /sessions - 401
+    env: "development"
+    service: "physioGest-api"
+    requestId: "0kttwj"
+    method: "POST"
+    url: "/sessions"
+    statusCode: 401
+    duration: "11ms"
+    contentLength: "38"
+[2026-04-19 21:51:45.337 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:51:45.348 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:51:46.576 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 21:51:46.725 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:51:46.725 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:51:46.726 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:51:46.727 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:51:46.737 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:51:46.737 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:51:46.738 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 21:51:46.874 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "135ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 21:51:46.875 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:51:46.875 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:51:46.875 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+[2026-04-19 21:51:46.933 -0300] ERROR: Falha ao conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+    url: "amqp://localhost"
+    queueName: "email_queue"
+    error: {
+      "type": "AggregateError",
+      "message": "",
+      "stack":
+          AggregateError [ECONNREFUSED]: 
+              at internalConnectMultiple (node:net:1134:18)
+              at afterConnectMultiple (node:net:1715:7)
+              at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+      "aggregateErrors": [
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED ::1:5672",
+          "stack":
+              Error: connect ECONNREFUSED ::1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "::1",
+          "port": 5672
+        },
+        {
+          "type": "Error",
+          "message": "connect ECONNREFUSED 127.0.0.1:5672",
+          "stack":
+              Error: connect ECONNREFUSED 127.0.0.1:5672
+                  at createConnectionError (node:net:1678:14)
+                  at afterConnectMultiple (node:net:1708:16)
+                  at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+          "errno": -4078,
+          "code": "ECONNREFUSED",
+          "syscall": "connect",
+          "address": "127.0.0.1",
+          "port": 5672
+        }
+      ],
+      "code": "ECONNREFUSED"
+    }
+[2026-04-19 21:51:46.934 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: ""
+[2026-04-19 21:51:46.934 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 21:52:48.478 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:52:48.487 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:52:49.595 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 21:52:49.717 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:52:49.718 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:52:49.718 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:52:49.719 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:52:49.731 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:52:49.731 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:52:49.731 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 21:52:49.829 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "98ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 21:52:49.830 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:52:49.830 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:52:49.830 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 21:52:49.831 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:52:49.831 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:52:49.838 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 21:52:49.838 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 21:53:24.276 -0300] INFO: [REQUEST] POST /v1/auth/sessions
+    env: "development"
+    service: "physioGest-api"
+    requestId: "uk9g0c"
+    method: "POST"
+    url: "/v1/auth/sessions"
+    path: "/v1/auth/sessions"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "66"
+[2026-04-19 21:53:24.277 -0300] DEBUG: Tentativa de login
+    env: "development"
+    service: "physioGest-api"
+    email: "viniciusneri7@gmail.com"
+    hasPassword: true
+[2026-04-19 21:53:24.292 -0300] DEBUG: Usuário encontrado
+    env: "development"
+    service: "physioGest-api"
+    userId: "69c0a278b97db3310cf73dd3"
+    verified: true
+[2026-04-19 21:53:24.476 -0300] INFO: Login realizado com sucesso
+    env: "development"
+    service: "physioGest-api"
+    userId: "69c0a278b97db3310cf73dd3"
+    email: "viniciusneri7@gmail.com"
+[2026-04-19 21:53:24.481 -0300] INFO: [RESPONSE] POST /sessions - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "uk9g0c"
+    method: "POST"
+    url: "/sessions"
+    statusCode: 200
+    duration: "205ms"
+    contentLength: "535"
+[2026-04-19 21:53:37.195 -0300] INFO: [REQUEST] GET /v1/whatsapp/perfil/11958542994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "ezbh"
+    method: "GET"
+    url: "/v1/whatsapp/perfil/11958542994"
+    path: "/v1/whatsapp/perfil/11958542994"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 21:53:37.243 -0300] WARN: [RESPONSE] GET /perfil/11958542994 - 404
+    env: "development"
+    service: "physioGest-api"
+    requestId: "ezbh"
+    method: "GET"
+    url: "/perfil/11958542994"
+    statusCode: 404
+    duration: "48ms"
+    contentLength: "79"
+[2026-04-19 21:53:41.193 -0300] INFO: [REQUEST] GET /v1/whatsapp/perfil/11958542994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "fysjmi"
+    method: "GET"
+    url: "/v1/whatsapp/perfil/11958542994"
+    path: "/v1/whatsapp/perfil/11958542994"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 21:53:41.224 -0300] WARN: [RESPONSE] GET /perfil/11958542994 - 404
+    env: "development"
+    service: "physioGest-api"
+    requestId: "fysjmi"
+    method: "GET"
+    url: "/perfil/11958542994"
+    statusCode: 404
+    duration: "30ms"
+    contentLength: "79"
+[2026-04-19 21:54:23.430 -0300] INFO: [REQUEST] GET /v1/whatsapp/perfil/%2811%29%2095854-2994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "ci7glx"
+    method: "GET"
+    url: "/v1/whatsapp/perfil/%2811%29%2095854-2994"
+    path: "/v1/whatsapp/perfil/%2811%29%2095854-2994"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 21:54:23.588 -0300] INFO: [RESPONSE] GET /perfil/%2811%29%2095854-2994 - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "ci7glx"
+    method: "GET"
+    url: "/perfil/%2811%29%2095854-2994"
+    statusCode: 200
+    duration: "158ms"
+    contentLength: "168"
+[2026-04-19 21:56:31.584 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:56:31.595 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:56:32.991 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 21:56:33.131 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:33.132 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:33.133 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:33.134 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:33.146 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:33.146 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:33.147 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 21:56:33.281 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "134ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 21:56:33.282 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:33.282 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:33.282 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 21:56:33.282 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:33.283 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:33.289 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 21:56:33.290 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 21:56:47.195 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 21:56:47.204 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 21:56:48.351 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 21:56:48.499 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:48.499 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:48.500 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:48.501 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:48.512 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:48.512 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:48.513 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 21:56:48.606 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "92ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 21:56:48.606 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:48.606 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:48.606 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 21:56:48.607 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:48.607 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 21:56:48.610 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 21:56:48.611 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:07:34.425 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:07:34.433 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:07:35.550 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:07:35.658 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:35.658 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:35.659 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:35.660 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:35.670 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:35.670 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:35.670 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:07:35.781 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "110ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:07:35.782 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:35.782 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:35.782 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:07:35.782 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:35.782 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:35.788 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:07:35.788 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:07:46.912 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:07:46.924 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:07:48.172 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:07:48.283 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:48.283 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:48.284 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:48.284 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:48.294 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:48.294 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:48.294 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:07:48.388 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "93ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:07:48.388 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:48.388 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:48.388 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:07:48.389 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:48.389 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:07:48.394 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:07:48.394 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:08:05.615 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:08:05.627 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:08:06.959 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:08:07.136 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:07.136 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:07.137 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:07.138 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:07.150 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:07.150 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:07.151 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:08:07.286 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "135ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:08:07.287 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:07.287 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:07.288 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:08:07.288 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:07.288 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:07.294 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:08:07.294 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:08:17.200 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:08:17.212 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:08:18.568 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:08:18.707 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:18.708 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:18.709 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:18.710 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:18.722 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:18.722 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:18.723 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:08:18.827 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "104ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:08:18.829 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:18.829 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:18.829 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:08:18.829 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:18.829 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:18.835 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:08:18.835 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:08:34.641 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:08:34.648 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:08:35.989 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:08:36.170 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:36.170 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:36.171 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:36.172 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:36.184 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:36.184 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:36.184 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:08:36.291 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "107ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:08:36.292 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:36.292 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:36.292 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:08:36.292 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:36.293 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:08:36.300 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:08:36.301 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:09:08.267 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:09:08.278 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:09:09.397 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:09:09.517 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:09.517 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:09.518 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:09.518 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:09.529 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:09.529 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:09.529 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:09:09.668 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "139ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:09:09.669 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:09.669 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:09.669 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:09:09.669 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:09.669 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:09.673 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:09:09.674 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:09:36.497 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:09:36.510 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:09:38.330 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:09:38.635 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:38.635 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:38.637 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:38.638 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:38.664 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:38.664 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:38.665 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:09:38.905 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "240ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:09:38.907 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:38.907 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:38.907 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:09:38.907 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:38.907 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:09:38.929 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:09:38.929 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:10:32.373 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:10:32.384 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:10:34.198 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:10:34.361 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:10:34.361 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:10:34.362 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:10:34.363 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:10:34.377 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:10:34.377 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:10:34.377 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:10:34.514 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "137ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:10:34.515 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:10:34.515 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:10:34.515 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:10:34.516 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:10:34.516 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:10:34.521 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:10:34.521 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:10:59.904 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:10:59.917 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:11:01.388 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:11:01.546 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:11:01.546 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:11:01.547 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:11:01.548 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:11:01.562 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:11:01.562 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:11:01.563 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:11:01.682 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "119ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:11:01.683 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:11:01.683 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:11:01.683 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:11:01.683 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:11:01.684 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:11:01.690 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:11:01.691 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:13:26.285 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:13:26.301 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:13:27.920 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:13:28.042 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:13:28.043 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:13:28.044 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:13:28.045 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:13:28.056 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:13:28.056 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:13:28.057 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:13:28.180 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "123ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:13:28.181 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:13:28.181 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:13:28.181 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:13:28.181 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:13:28.182 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:13:28.187 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:13:28.188 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:18:25.374 -0300] INFO: [REQUEST] GET /v1/whatsapp/perfil/%2811%29%2095854-2994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "7bfmu"
+    method: "GET"
+    url: "/v1/whatsapp/perfil/%2811%29%2095854-2994"
+    path: "/v1/whatsapp/perfil/%2811%29%2095854-2994"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:18:25.414 -0300] INFO: [RESPONSE] GET /perfil/%2811%29%2095854-2994 - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "7bfmu"
+    method: "GET"
+    url: "/perfil/%2811%29%2095854-2994"
+    statusCode: 304
+    duration: "40ms"
+[2026-04-19 22:20:46.359 -0300] INFO: [REQUEST] GET /v1/whatsapp/disponibilidade/69c0a0a018d5e8762ce469ec
+    env: "development"
+    service: "physioGest-api"
+    requestId: "1pxw2u"
+    method: "GET"
+    url: "/v1/whatsapp/disponibilidade/69c0a0a018d5e8762ce469ec"
+    path: "/v1/whatsapp/disponibilidade/69c0a0a018d5e8762ce469ec"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:20:46.381 -0300] WARN: [RESPONSE] GET /disponibilidade/69c0a0a018d5e8762ce469ec - 404
+    env: "development"
+    service: "physioGest-api"
+    requestId: "1pxw2u"
+    method: "GET"
+    url: "/disponibilidade/69c0a0a018d5e8762ce469ec"
+    statusCode: 404
+    duration: "22ms"
+    contentLength: "75"
+[2026-04-19 22:21:26.003 -0300] INFO: [REQUEST] GET /v1/whatsapp/disponibilidade/9db8cc85-7047-4cc8-a570-9d1c757882d8
+    env: "development"
+    service: "physioGest-api"
+    requestId: "0a6qxx"
+    method: "GET"
+    url: "/v1/whatsapp/disponibilidade/9db8cc85-7047-4cc8-a570-9d1c757882d8"
+    path: "/v1/whatsapp/disponibilidade/9db8cc85-7047-4cc8-a570-9d1c757882d8"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:21:26.102 -0300] INFO: [RESPONSE] GET /disponibilidade/9db8cc85-7047-4cc8-a570-9d1c757882d8 - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "0a6qxx"
+    method: "GET"
+    url: "/disponibilidade/9db8cc85-7047-4cc8-a570-9d1c757882d8"
+    statusCode: 200
+    duration: "99ms"
+    contentLength: "3066"
+[2026-04-19 22:22:03.606 -0300] INFO: [REQUEST] GET /v1/whatsapp/disponibilidade/69c0a278b97db3310cf73dd3
+    env: "development"
+    service: "physioGest-api"
+    requestId: "0kl0h"
+    method: "GET"
+    url: "/v1/whatsapp/disponibilidade/69c0a278b97db3310cf73dd3"
+    path: "/v1/whatsapp/disponibilidade/69c0a278b97db3310cf73dd3"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:22:03.611 -0300] WARN: [RESPONSE] GET /disponibilidade/69c0a278b97db3310cf73dd3 - 404
+    env: "development"
+    service: "physioGest-api"
+    requestId: "0kl0h"
+    method: "GET"
+    url: "/disponibilidade/69c0a278b97db3310cf73dd3"
+    statusCode: 404
+    duration: "6ms"
+    contentLength: "56"
+[2026-04-19 22:22:22.399 -0300] INFO: [REQUEST] GET /v1/whatsapp/disponibilidade/69c0a278b97db3310cf73dd7
+    env: "development"
+    service: "physioGest-api"
+    requestId: "1a6kon"
+    method: "GET"
+    url: "/v1/whatsapp/disponibilidade/69c0a278b97db3310cf73dd7"
+    path: "/v1/whatsapp/disponibilidade/69c0a278b97db3310cf73dd7"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:22:22.491 -0300] INFO: [RESPONSE] GET /disponibilidade/69c0a278b97db3310cf73dd7 - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "1a6kon"
+    method: "GET"
+    url: "/disponibilidade/69c0a278b97db3310cf73dd7"
+    statusCode: 200
+    duration: "92ms"
+    contentLength: "3774"
+[2026-04-19 22:22:34.852 -0300] INFO: [REQUEST] GET /v1/whatsapp/disponibilidade/69c0a0a018d5e8762ce469f2
+    env: "development"
+    service: "physioGest-api"
+    requestId: "rlph5"
+    method: "GET"
+    url: "/v1/whatsapp/disponibilidade/69c0a0a018d5e8762ce469f2"
+    path: "/v1/whatsapp/disponibilidade/69c0a0a018d5e8762ce469f2"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:22:34.857 -0300] WARN: [RESPONSE] GET /disponibilidade/69c0a0a018d5e8762ce469f2 - 404
+    env: "development"
+    service: "physioGest-api"
+    requestId: "rlph5"
+    method: "GET"
+    url: "/disponibilidade/69c0a0a018d5e8762ce469f2"
+    statusCode: 404
+    duration: "5ms"
+    contentLength: "75"
+[2026-04-19 22:27:49.257 -0300] INFO: [REQUEST] GET /v1/whatsapp/perfil/%2811%29%2095854-2994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "dfdkn"
+    method: "GET"
+    url: "/v1/whatsapp/perfil/%2811%29%2095854-2994"
+    path: "/v1/whatsapp/perfil/%2811%29%2095854-2994"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:27:49.291 -0300] INFO: [RESPONSE] GET /perfil/%2811%29%2095854-2994 - 304
+    env: "development"
+    service: "physioGest-api"
+    requestId: "dfdkn"
+    method: "GET"
+    url: "/perfil/%2811%29%2095854-2994"
+    statusCode: 304
+    duration: "34ms"
+[2026-04-19 22:35:34.826 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:35:34.838 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:35:35.925 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:35:36.040 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:35:36.041 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:35:36.041 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:35:36.042 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:35:36.051 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:35:36.051 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:35:36.051 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:35:36.135 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "84ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:35:36.136 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:35:36.136 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:35:36.136 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:35:36.136 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:35:36.136 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:35:36.141 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:35:36.141 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:38:23.894 -0300] DEBUG: Rota /swagger.json acessada
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:39:12.753 -0300] INFO: [REQUEST] GET /v1/whatsapp/disponibilidade/69c0a0a018d5e8762ce469f2?phone=%2811%29%2095854-2994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "qbd0m"
+    method: "GET"
+    url: "/v1/whatsapp/disponibilidade/69c0a0a018d5e8762ce469f2?phone=%2811%29%2095854-2994"
+    path: "/v1/whatsapp/disponibilidade/69c0a0a018d5e8762ce469f2"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:39:12.775 -0300] WARN: [RESPONSE] GET /disponibilidade/69c0a0a018d5e8762ce469f2?phone=%2811%29%2095854-2994 - 404
+    env: "development"
+    service: "physioGest-api"
+    requestId: "qbd0m"
+    method: "GET"
+    url: "/disponibilidade/69c0a0a018d5e8762ce469f2?phone=%2811%29%2095854-2994"
+    statusCode: 404
+    duration: "22ms"
+    contentLength: "81"
+[2026-04-19 22:39:35.135 -0300] INFO: [REQUEST] GET /v1/whatsapp/disponibilidade/69c0a0a018d5e8762ce469f2?phone=%2811%29%2095854-2994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "xk4wn"
+    method: "GET"
+    url: "/v1/whatsapp/disponibilidade/69c0a0a018d5e8762ce469f2?phone=%2811%29%2095854-2994"
+    path: "/v1/whatsapp/disponibilidade/69c0a0a018d5e8762ce469f2"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:39:35.296 -0300] INFO: [RESPONSE] GET /disponibilidade/69c0a0a018d5e8762ce469f2?phone=%2811%29%2095854-2994 - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "xk4wn"
+    method: "GET"
+    url: "/disponibilidade/69c0a0a018d5e8762ce469f2?phone=%2811%29%2095854-2994"
+    statusCode: 200
+    duration: "161ms"
+    contentLength: "3417"
+[2026-04-19 22:40:36.026 -0300] INFO: [REQUEST] GET /v1/whatsapp/disponibilidade/69c0a278b97db3310cf73dd7?phone=%2811%29%2095854-2994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "sypi9a"
+    method: "GET"
+    url: "/v1/whatsapp/disponibilidade/69c0a278b97db3310cf73dd7?phone=%2811%29%2095854-2994"
+    path: "/v1/whatsapp/disponibilidade/69c0a278b97db3310cf73dd7"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:40:36.039 -0300] WARN: [RESPONSE] GET /disponibilidade/69c0a278b97db3310cf73dd7?phone=%2811%29%2095854-2994 - 403
+    env: "development"
+    service: "physioGest-api"
+    requestId: "sypi9a"
+    method: "GET"
+    url: "/disponibilidade/69c0a278b97db3310cf73dd7?phone=%2811%29%2095854-2994"
+    statusCode: 403
+    duration: "13ms"
+    contentLength: "102"
+[2026-04-19 22:41:21.961 -0300] INFO: [REQUEST] GET /v1/whatsapp/disponibilidade/9db8cc85-7047-4cc8-a570-9d1c757882d8?phone=%2811%29%2095854-2994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "9bu8"
+    method: "GET"
+    url: "/v1/whatsapp/disponibilidade/9db8cc85-7047-4cc8-a570-9d1c757882d8?phone=%2811%29%2095854-2994"
+    path: "/v1/whatsapp/disponibilidade/9db8cc85-7047-4cc8-a570-9d1c757882d8"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:41:22.043 -0300] INFO: [RESPONSE] GET /disponibilidade/9db8cc85-7047-4cc8-a570-9d1c757882d8?phone=%2811%29%2095854-2994 - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "9bu8"
+    method: "GET"
+    url: "/disponibilidade/9db8cc85-7047-4cc8-a570-9d1c757882d8?phone=%2811%29%2095854-2994"
+    statusCode: 200
+    duration: "82ms"
+    contentLength: "3066"
+[2026-04-19 22:52:01.018 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:52:01.027 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:52:02.142 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:52:02.259 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:52:02.260 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:52:02.261 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:52:02.261 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:52:02.270 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:52:02.270 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:52:02.270 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:52:02.360 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "90ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:52:02.361 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:52:02.361 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:52:02.361 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:52:02.361 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:52:02.361 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:52:02.367 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:52:02.367 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:53:02.391 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:53:02.402 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:53:03.572 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:53:03.671 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:53:03.672 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:53:03.672 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:53:03.673 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:53:03.683 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:53:03.683 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:53:03.683 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:53:03.775 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "92ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:53:03.776 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:53:03.776 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:53:03.776 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:53:03.776 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:53:03.776 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:53:03.780 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:53:03.780 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:56:47.478 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 22:56:47.489 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 22:56:49.201 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 22:56:49.331 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:56:49.331 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:56:49.332 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:56:49.333 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:56:49.345 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:56:49.345 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:56:49.346 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 22:56:49.475 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "129ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 22:56:49.476 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:56:49.476 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:56:49.476 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 22:56:49.477 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:56:49.477 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 22:56:49.482 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 22:56:49.482 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 22:57:42.743 -0300] INFO: [REQUEST] GET /v1/whatsapp/perfil/5511958542994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "7efu8j"
+    method: "GET"
+    url: "/v1/whatsapp/perfil/5511958542994"
+    path: "/v1/whatsapp/perfil/5511958542994"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:57:42.803 -0300] INFO: [RESPONSE] GET /perfil/5511958542994 - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "7efu8j"
+    method: "GET"
+    url: "/perfil/5511958542994"
+    statusCode: 200
+    duration: "61ms"
+    contentLength: "166"
+[2026-04-19 22:58:27.992 -0300] INFO: [REQUEST] GET /v1/whatsapp/disponibilidade/b3b8a99f-0b9d-42be-b9c9-3b6ce01fb89f?phone=5511958542994
+    env: "development"
+    service: "physioGest-api"
+    requestId: "wsf5nh"
+    method: "GET"
+    url: "/v1/whatsapp/disponibilidade/b3b8a99f-0b9d-42be-b9c9-3b6ce01fb89f?phone=5511958542994"
+    path: "/v1/whatsapp/disponibilidade/b3b8a99f-0b9d-42be-b9c9-3b6ce01fb89f"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 22:58:28.148 -0300] INFO: [RESPONSE] GET /disponibilidade/b3b8a99f-0b9d-42be-b9c9-3b6ce01fb89f?phone=5511958542994 - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "wsf5nh"
+    method: "GET"
+    url: "/disponibilidade/b3b8a99f-0b9d-42be-b9c9-3b6ce01fb89f?phone=5511958542994"
+    statusCode: 200
+    duration: "156ms"
+    contentLength: "3066"
+[2026-04-19 22:59:47.191 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "rl33do"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 22:59:52.073 -0300] WARN: [RESPONSE] POST /agendamentos - 400
+    env: "development"
+    service: "physioGest-api"
+    requestId: "rl33do"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 400
+    duration: "4882ms"
+    contentLength: "158"
+[2026-04-19 23:03:29.876 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:03:29.884 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:03:31.146 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:03:31.259 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:31.259 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:31.260 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:31.261 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:31.270 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:31.270 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:31.271 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:03:31.365 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "94ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:03:31.366 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:31.366 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:31.366 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:03:31.366 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:31.366 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:31.370 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:03:31.370 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:03:46.572 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:03:46.579 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:03:48.008 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:03:48.134 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:48.134 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:48.136 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:48.137 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:48.149 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:48.149 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:48.149 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:03:48.258 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "109ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:03:48.259 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:48.259 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:48.259 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:03:48.259 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:48.260 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:03:48.263 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:03:48.263 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:04:03.917 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:04:03.926 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:04:05.175 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:04:05.297 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:05.298 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:05.300 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:05.301 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:05.313 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:05.313 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:05.313 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:04:05.429 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "115ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:04:05.430 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:05.430 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:05.430 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:04:05.430 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:05.431 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:05.435 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:04:05.435 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:04:23.404 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:04:23.422 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:04:25.258 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:04:25.435 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:25.435 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:25.436 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:25.437 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:25.450 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:25.450 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:25.451 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:04:25.573 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "122ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:04:25.574 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:25.574 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:25.574 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:04:25.575 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:25.575 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:25.582 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:04:25.582 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:04:40.503 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:04:40.525 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:04:42.297 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:04:42.494 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:42.495 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:42.499 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:42.500 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:42.519 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:42.519 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:42.519 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:04:42.693 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "173ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:04:42.695 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:42.695 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:42.695 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:04:42.695 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:42.696 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:04:42.706 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:04:42.706 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:05:16.327 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:05:16.341 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:05:17.953 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:05:18.110 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:18.111 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:18.113 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:18.114 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:18.127 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:18.127 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:18.128 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:05:18.255 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "127ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:05:18.256 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:18.256 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:18.256 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:05:18.256 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:18.256 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:18.262 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:05:18.263 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:05:29.960 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:05:29.975 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:05:31.410 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:05:31.565 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:31.566 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:31.567 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:31.567 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:31.579 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:31.579 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:31.580 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:05:31.683 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "102ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:05:31.684 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:31.684 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:31.684 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:05:31.685 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:31.685 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:05:31.691 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:05:31.691 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:07:13.357 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "g2afo"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 23:07:16.976 -0300] WARN: [RESPONSE] POST /agendamentos - 409
+    env: "development"
+    service: "physioGest-api"
+    requestId: "g2afo"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 409
+    duration: "3619ms"
+    contentLength: "75"
+[2026-04-19 23:08:48.634 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "tle4k"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 23:09:53.857 -0300] WARN: [RESPONSE] POST /agendamentos - 400
+    env: "development"
+    service: "physioGest-api"
+    requestId: "tle4k"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 400
+    duration: "65223ms"
+    contentLength: "158"
+[2026-04-19 23:11:04.227 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "gv14kb"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 23:12:04.939 -0300] WARN: [RESPONSE] POST /agendamentos - 400
+    env: "development"
+    service: "physioGest-api"
+    requestId: "gv14kb"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 400
+    duration: "60712ms"
+    contentLength: "158"
+[2026-04-19 23:13:48.795 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:13:48.801 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:13:49.919 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:13:50.031 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:13:50.031 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:13:50.032 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:13:50.034 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:13:50.048 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:13:50.048 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:13:50.048 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:13:50.167 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "119ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:13:50.168 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:13:50.168 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:13:50.168 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:13:50.168 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:13:50.168 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:13:50.172 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:13:50.173 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:15:14.493 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "7hoh78"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 23:15:32.329 -0300] INFO: [RESPONSE] POST /agendamentos - 201
+    env: "development"
+    service: "physioGest-api"
+    requestId: "7hoh78"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 201
+    duration: "17837ms"
+    contentLength: "343"
+[2026-04-19 23:17:30.457 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "vkpdae"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 23:17:36.153 -0300] WARN: [RESPONSE] POST /agendamentos - 409
+    env: "development"
+    service: "physioGest-api"
+    requestId: "vkpdae"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 409
+    duration: "5695ms"
+    contentLength: "75"
+[2026-04-19 23:18:54.868 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "vfjgg6"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 23:20:05.497 -0300] INFO: [RESPONSE] POST /agendamentos - 201
+    env: "development"
+    service: "physioGest-api"
+    requestId: "vfjgg6"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 201
+    duration: "70630ms"
+    contentLength: "343"
+[2026-04-19 23:20:22.770 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "zlt0dr"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 23:21:57.347 -0300] INFO: [RESPONSE] POST /agendamentos - 201
+    env: "development"
+    service: "physioGest-api"
+    requestId: "zlt0dr"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 201
+    duration: "94577ms"
+    contentLength: "343"
+[2026-04-19 23:23:44.508 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:23:44.515 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:23:45.524 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:23:45.638 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:23:45.639 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:23:45.640 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:23:45.640 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:23:45.649 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:23:45.650 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:23:45.650 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:23:45.732 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "82ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:23:45.733 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:23:45.733 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:23:45.733 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:23:45.734 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:23:45.734 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:23:45.739 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:23:45.739 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:24:41.582 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "2hcgb"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 23:25:13.302 -0300] INFO: [RESPONSE] POST /agendamentos - 201
+    env: "development"
+    service: "physioGest-api"
+    requestId: "2hcgb"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 201
+    duration: "31720ms"
+    contentLength: "343"
+[2026-04-19 23:27:32.378 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:27:32.389 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:27:33.961 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:27:34.135 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:27:34.135 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:27:34.136 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:27:34.137 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:27:34.151 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:27:34.151 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:27:34.152 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:27:34.285 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "133ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:27:34.286 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:27:34.286 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:27:34.286 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:27:34.287 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:27:34.287 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:27:34.291 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:27:34.292 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:28:18.934 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "gmxva"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 23:28:27.296 -0300] INFO: [RESPONSE] POST /agendamentos - 201
+    env: "development"
+    service: "physioGest-api"
+    requestId: "gmxva"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 201
+    duration: "8362ms"
+    contentLength: "343"
+[2026-04-19 23:29:39.520 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "9chpmu"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 23:30:36.088 -0300] INFO: [RESPONSE] POST /agendamentos - 201
+    env: "development"
+    service: "physioGest-api"
+    requestId: "9chpmu"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 201
+    duration: "56568ms"
+    contentLength: "343"
+[2026-04-19 23:31:12.605 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:31:12.617 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:31:14.504 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:31:14.708 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:31:14.708 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:31:14.710 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:31:14.711 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:31:14.729 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:31:14.729 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:31:14.730 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:31:14.885 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "155ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:31:14.887 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:31:14.887 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:31:14.887 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:31:14.887 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:31:14.888 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:31:14.895 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:31:14.895 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:31:19.280 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "051mmk"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 23:32:01.133 -0300] INFO: [RESPONSE] POST /agendamentos - 201
+    env: "development"
+    service: "physioGest-api"
+    requestId: "051mmk"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 201
+    duration: "41852ms"
+    contentLength: "343"
+[2026-04-19 23:38:28.145 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:38:28.155 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:38:30.812 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:38:31.043 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:31.044 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:31.047 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:31.049 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:31.061 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:31.061 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:31.062 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:38:31.230 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "167ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:38:31.231 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:31.231 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:31.231 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:38:31.231 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:31.232 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:31.235 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:38:31.236 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:38:30.357 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:38:30.417 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:38:32.207 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:38:32.334 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:32.335 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:32.336 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:32.337 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:32.348 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:32.348 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:32.349 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:38:32.440 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "91ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:38:32.441 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:32.441 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:32.441 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:38:32.441 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:32.441 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:32.447 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:38:32.447 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:38:44.980 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:38:44.988 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:38:46.170 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:38:46.386 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:46.386 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:46.387 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:46.388 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:46.398 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:46.398 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:46.399 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:38:46.516 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "117ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:38:46.517 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:46.517 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:46.517 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:38:46.517 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:46.518 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:46.520 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:38:46.521 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:38:47.738 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:38:47.746 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:38:48.988 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:38:49.119 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:49.119 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:49.120 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:49.121 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:49.132 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:49.132 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:49.133 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:38:49.244 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "111ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:38:49.244 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:49.244 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:49.244 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:38:49.245 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:49.245 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:38:49.249 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:38:49.249 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:40:18.790 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-19 23:40:18.801 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-19 23:40:20.305 -0300] INFO: Iniciando aplicação PhysioGest API
+    env: "development"
+    service: "physioGest-api"
+    nodeEnv: "development"
+    port: "3000"
+    logLevel: "debug"
+[2026-04-19 23:40:20.481 -0300] DEBUG: Especificação Swagger gerada com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:40:20.482 -0300] DEBUG: Configurando middleware Express
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:40:20.483 -0300] DEBUG: Configurando Swagger
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:40:20.484 -0300] DEBUG: Configurando rotas da aplicação
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:40:20.505 -0300] INFO: Servidor iniciando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:40:20.505 -0300] DEBUG: Conectando ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:40:20.505 -0300] DEBUG: Tentando conectar ao MongoDB
+    env: "development"
+    service: "physioGest-api"
+    uri: "mongodb://localhost:27017/physioGest"
+    hasCredentials: false
+[2026-04-19 23:40:20.643 -0300] INFO: Conectado ao MongoDB com sucesso
+    env: "development"
+    service: "physioGest-api"
+    duration: "138ms"
+    database: "physioGest"
+    host: "localhost"
+    port: 27017
+[2026-04-19 23:40:20.644 -0300] INFO: Conexão com MongoDB estabelecida com sucesso
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:40:20.644 -0300] DEBUG: Tentando conectar ao RabbitMQ
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:40:20.644 -0300] INFO: EmailProvider: Inicializado. API Key: xkeysib-20...
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+    fromEmail: "viniciusneri7@gmail.com"
+[2026-04-19 23:40:20.644 -0300] INFO: Iniciando consumo de mensagens de email
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:40:20.644 -0300] ERROR: Tentativa de consumir mensagens sem canal inicializado
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:40:20.651 -0300] WARN: RabbitMQ não disponível, funcionalidades de email funcionarão em modo fallback
+    env: "development"
+    service: "physioGest-api"
+    error: "RabbitMQ channel not initialized"
+[2026-04-19 23:40:20.651 -0300] INFO: 🚀 Servidor rodando na porta 3000
+    env: "development"
+    service: "physioGest-api"
+    swaggerUrl: "http://localhost:3000/docs"
+    environment: "development"
+    logLevel: "debug"
+[2026-04-19 23:41:18.787 -0300] INFO: [REQUEST] POST /v1/whatsapp/agendamentos
+    env: "development"
+    service: "physioGest-api"
+    requestId: "v4g36m"
+    method: "POST"
+    url: "/v1/whatsapp/agendamentos"
+    path: "/v1/whatsapp/agendamentos"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "192"
+[2026-04-19 23:41:24.048 -0300] INFO: [RESPONSE] POST /agendamentos - 201
+    env: "development"
+    service: "physioGest-api"
+    requestId: "v4g36m"
+    method: "POST"
+    url: "/agendamentos"
+    statusCode: 201
+    duration: "5260ms"
+    contentLength: "343"
+[2026-04-19 23:50:00.749 -0300] INFO: [REQUEST] GET /v1/whatsapp/agendamentos/paciente/aaa
+    env: "development"
+    service: "physioGest-api"
+    requestId: "5ckmb2"
+    method: "GET"
+    url: "/v1/whatsapp/agendamentos/paciente/aaa"
+    path: "/v1/whatsapp/agendamentos/paciente/aaa"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 23:50:00.762 -0300] WARN: [RESPONSE] GET /agendamentos/paciente/aaa - 404
+    env: "development"
+    service: "physioGest-api"
+    requestId: "5ckmb2"
+    method: "GET"
+    url: "/agendamentos/paciente/aaa"
+    statusCode: 404
+    duration: "13ms"
+    contentLength: "55"
+[2026-04-19 23:53:37.528 -0300] INFO: [REQUEST] PATCH /v1/whatsapp/agendamentos/a/cancelar
+    env: "development"
+    service: "physioGest-api"
+    requestId: "1vyuu7"
+    method: "PATCH"
+    url: "/v1/whatsapp/agendamentos/a/cancelar"
+    path: "/v1/whatsapp/agendamentos/a/cancelar"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 23:53:37.534 -0300] WARN: [RESPONSE] PATCH /agendamentos/a/cancelar - 404
+    env: "development"
+    service: "physioGest-api"
+    requestId: "1vyuu7"
+    method: "PATCH"
+    url: "/agendamentos/a/cancelar"
+    statusCode: 404
+    duration: "6ms"
+    contentLength: "58"
+[2026-04-19 23:54:57.558 -0300] INFO: [REQUEST] PATCH /v1/whatsapp/agendamentos/s/remarcar
+    env: "development"
+    service: "physioGest-api"
+    requestId: "4igyro"
+    method: "PATCH"
+    url: "/v1/whatsapp/agendamentos/s/remarcar"
+    path: "/v1/whatsapp/agendamentos/s/remarcar"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+    contentType: "application/json"
+    contentLength: "56"
+[2026-04-19 23:54:57.564 -0300] WARN: [RESPONSE] PATCH /agendamentos/s/remarcar - 404
+    env: "development"
+    service: "physioGest-api"
+    requestId: "4igyro"
+    method: "PATCH"
+    url: "/agendamentos/s/remarcar"
+    statusCode: 404
+    duration: "6ms"
+    contentLength: "58"
+[2026-04-19 23:55:33.233 -0300] INFO: [REQUEST] GET /v1/categories/a
+    env: "development"
+    service: "physioGest-api"
+    requestId: "jfkefb"
+    method: "GET"
+    url: "/v1/categories/a"
+    path: "/v1/categories/a"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 23:55:33.236 -0300] WARN: [RESPONSE] GET /a - 401
+    env: "development"
+    service: "physioGest-api"
+    requestId: "jfkefb"
+    method: "GET"
+    url: "/a"
+    statusCode: 401
+    duration: "3ms"
+    contentLength: "44"
+[2026-04-19 23:57:04.887 -0300] INFO: [REQUEST] GET /v1/categories/iduser
+    env: "development"
+    service: "physioGest-api"
+    requestId: "ul2od"
+    method: "GET"
+    url: "/v1/categories/iduser"
+    path: "/v1/categories/iduser"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 23:57:04.890 -0300] WARN: [RESPONSE] GET /iduser - 401
+    env: "development"
+    service: "physioGest-api"
+    requestId: "ul2od"
+    method: "GET"
+    url: "/iduser"
+    statusCode: 401
+    duration: "3ms"
+    contentLength: "44"
+[2026-04-19 23:57:33.287 -0300] INFO: [REQUEST] GET /v1/categories
+    env: "development"
+    service: "physioGest-api"
+    requestId: "gazxq"
+    method: "GET"
+    url: "/v1/categories"
+    path: "/v1/categories"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 23:57:33.289 -0300] WARN: [RESPONSE] GET / - 401
+    env: "development"
+    service: "physioGest-api"
+    requestId: "gazxq"
+    method: "GET"
+    url: "/"
+    statusCode: 401
+    duration: "2ms"
+    contentLength: "44"
+[2026-04-19 23:57:50.831 -0300] INFO: [REQUEST] GET /v1/categories/user/userId
+    env: "development"
+    service: "physioGest-api"
+    requestId: "jahhng"
+    method: "GET"
+    url: "/v1/categories/user/userId"
+    path: "/v1/categories/user/userId"
+    ip: "::1"
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+[2026-04-19 23:57:50.831 -0300] INFO: Buscando categorias por usuário
+    env: "development"
+    service: "physioGest-api"
+    userId: "userId"
+[2026-04-19 23:57:50.831 -0300] INFO: Buscando categorias por usuário: userId
+    env: "development"
+    service: "physioGest-api"
+[2026-04-19 23:57:50.837 -0300] INFO: [RESPONSE] GET /user/userId - 200
+    env: "development"
+    service: "physioGest-api"
+    requestId: "jahhng"
+    method: "GET"
+    url: "/user/userId"
+    statusCode: 200
+    duration: "6ms"
+    contentLength: "1713"

@@ -280,11 +280,6 @@ export class PatientFinancialController {
         try {
             const { patientId } = req.params;
             const financialData = { ...req.body, patientId, userId: req.user?.id };
-            // Garantir que valores numéricos sejam tratados corretamente
-            if (financialData.amount)
-                financialData.amount = Number(financialData.amount);
-            if (financialData.totalSessions)
-                financialData.totalSessions = Number(financialData.totalSessions);
             this.logger.info("Criando registro financeiro", { patientId, type: financialData.type, amount: financialData.amount });
             const financial = await this.service.createFinancial(financialData);
             return res.status(201).json(convertFinancialDates(financial));
@@ -402,11 +397,7 @@ export class PatientFinancialController {
                 return res.status(400).json({ message: "ID do registro financeiro é obrigatório" });
             }
             this.logger.info("Atualizando registro financeiro", { financialId: id });
-            const updates = { ...req.body };
-            if (updates.amount)
-                updates.amount = Number(updates.amount);
-            if (updates.totalSessions)
-                updates.totalSessions = Number(updates.totalSessions);
+            const updates = req.body;
             const financial = await this.service.updateFinancial(id, updates);
             if (!financial) {
                 return res.status(404).json({ message: "Registro financeiro não encontrado" });

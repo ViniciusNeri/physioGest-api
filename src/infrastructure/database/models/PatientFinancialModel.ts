@@ -27,7 +27,7 @@ const patientFinancialSchema = new mongoose.Schema<PatientFinancial>(
     paymentDate: { type: String, required: false },
     notes: { type: String, required: false },
   },
-  { timestamps: true }
+  { timestamps: true, id: false }
 );
 
 // @ts-ignore
@@ -40,7 +40,7 @@ patientFinancialSchema.pre('save', function() {
 patientFinancialSchema.virtual('patient', {
   ref: 'Patient',
   localField: 'patientId',
-  foreignField: '_id',
+  foreignField: 'id',
   justOne: true
 });
 

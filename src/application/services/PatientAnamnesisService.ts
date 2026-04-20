@@ -4,6 +4,7 @@ import type { IPatientAnamnesisService } from "../../domain/services/IPatientSub
 import type { PatientAnamnesis } from "../../domain/entities/PatientSubdomains.js";
 import logger from "../../infrastructure/logging/Logger.js";
 import type { IPatientActivityService } from "../../domain/services/IPatientActivityService.js";
+import { toLocalISOString } from "../../utils/dateUtils.js";
 
 @injectable()
 export class PatientAnamnesisService implements IPatientAnamnesisService {
@@ -48,6 +49,9 @@ export class PatientAnamnesisService implements IPatientAnamnesisService {
     logger.debug("Criando nova anamnese", { patientId: anamnesis.patientId });
 
     try {
+      if (anamnesis.date) {
+        anamnesis.date = toLocalISOString(anamnesis.date);
+      }
       const newAnamnesis = await this.repository.create(anamnesis);
       
       // Registra atividade
@@ -71,6 +75,9 @@ export class PatientAnamnesisService implements IPatientAnamnesisService {
     logger.debug("Atualizando anamnese", { anamnesisId: id });
 
     try {
+      if (anamnesis.date) {
+        anamnesis.date = toLocalISOString(anamnesis.date);
+      }
       const updatedAnamnesis = await this.repository.update(id, anamnesis);
       if (updatedAnamnesis) {
         // Registra atividade

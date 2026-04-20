@@ -20,6 +20,9 @@ let UserRepository = class UserRepository {
     async findByEmail(email) {
         return UserModel.findOne({ email }).lean({ virtuals: true }).exec();
     }
+    async findByPhone(phone) {
+        return UserModel.findOne({ phone }).lean({ virtuals: true }).exec();
+    }
     async findAll() {
         return UserModel.find().lean({ virtuals: true }).exec();
     }

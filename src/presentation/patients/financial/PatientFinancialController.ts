@@ -287,9 +287,6 @@ export class PatientFinancialController {
       const { patientId } = req.params;
       const financialData = { ...req.body, patientId, userId: (req as any).user?.id };
       
-      // Garantir que valores numéricos sejam tratados corretamente
-      if (financialData.amount) financialData.amount = Number(financialData.amount);
-      if (financialData.totalSessions) financialData.totalSessions = Number(financialData.totalSessions);
 
       this.logger.info("Criando registro financeiro", { patientId, type: financialData.type, amount: financialData.amount });
       const financial = await this.service.createFinancial(financialData);
@@ -409,9 +406,7 @@ export class PatientFinancialController {
       }
       this.logger.info("Atualizando registro financeiro", { financialId: id });
       
-      const updates = { ...req.body };
-      if (updates.amount) updates.amount = Number(updates.amount);
-      if (updates.totalSessions) updates.totalSessions = Number(updates.totalSessions);
+      const updates = req.body;
 
       const financial = await this.service.updateFinancial(id as string, updates);
       if (!financial) {

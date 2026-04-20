@@ -16,7 +16,7 @@ const agendaSchema = new mongoose.Schema({
     },
     description: { type: String },
     notes: { type: String },
-}, { timestamps: true });
+}, { timestamps: true, id: false });
 // @ts-ignore
 agendaSchema.pre('save', function () {
     if (!this.id) {
@@ -26,13 +26,13 @@ agendaSchema.pre('save', function () {
 agendaSchema.virtual('patient', {
     ref: 'Patient',
     localField: 'patientId',
-    foreignField: '_id',
+    foreignField: 'id',
     justOne: true
 });
 agendaSchema.virtual('category', {
     ref: 'Category',
     localField: 'categoryId',
-    foreignField: '_id',
+    foreignField: 'id',
     justOne: true
 });
 agendaSchema.set('toObject', { virtuals: true });

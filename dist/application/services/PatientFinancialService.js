@@ -58,6 +58,10 @@ let PatientFinancialService = class PatientFinancialService {
         this.logger.debug("Criando novo registro financeiro", { patientId: financial.patientId, type: financial.type });
         try {
             const normalized = { ...financial };
+            if (normalized.amount)
+                normalized.amount = Number(normalized.amount);
+            if (normalized.totalSessions)
+                normalized.totalSessions = Number(normalized.totalSessions);
             if (normalized.date)
                 normalized.date = toLocalISOString(normalized.date);
             if (normalized.dueDate)
@@ -88,6 +92,10 @@ let PatientFinancialService = class PatientFinancialService {
         this.logger.debug("Atualizando registro financeiro", { financialId: id });
         try {
             const normalized = { ...financial };
+            if (normalized.amount)
+                normalized.amount = Number(normalized.amount);
+            if (normalized.totalSessions)
+                normalized.totalSessions = Number(normalized.totalSessions);
             if (normalized.date)
                 normalized.date = toLocalISOString(normalized.date);
             if (normalized.dueDate)

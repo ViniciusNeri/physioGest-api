@@ -4,12 +4,16 @@ import type { IUserRepository } from "../../domain/interfaces/IUserRepository.js
 import type { IUserService } from "../../domain/services/IUserService.js";
 import type { User } from "../../domain/entities/User.js";
 import logger from "../../infrastructure/logging/Logger.js";
+import { sanitizePhone } from "../../utils/phoneUtils.js";
+import { WhatsappNotificationService } from "../../infrastructure/external/WhatsappNotificationService.js";
 
 @injectable()
 export class UserService implements IUserService {
   constructor(
     @inject("IUserRepository")
-    private repository: IUserRepository
+    private repository: IUserRepository,
+    @inject("WhatsappNotificationService")
+    private notificationService: WhatsappNotificationService
   ) {}
 
   async getUserById(id: string): Promise<User | null> {
@@ -42,14 +46,30 @@ export class UserService implements IUserService {
     }
   }
 
-  async createUser(user: Omit<User, 'id'>): Promise<User> {
+  async createUser(user: Omit<User, 'id' | 'verified'> & { verified?: boolean }): Promise<User> {
     logger.debug("Criando usuário", { email: user.email, name: user.name });
 
     try {
+      if (!user.phone) {
+        throw new Error("O campo telefone (phone) é obrigatório.");
+      }
+      
+      user.phone = sanitizePhone(user.phone);
+      
+      if (!/^\d{10,15}$/.test(user.phone)) {
+        throw new Error("Telefone inválido. Informe somente números com DDD (ex: 5511999998888).");
+      }
+
       const existingUser = await this.repository.findByEmail(user.email);
       if (existingUser) {
         logger.warn("Tentativa de criar usuário com email já existente", { email: user.email });
         throw new Error("Email já cadastrado");
+      }
+
+      const existingPhone = await this.repository.findByPhone(user.phone);
+      if (existingPhone) {
+        logger.warn("Tentativa de criar usuário com telefone já existente", { phone: user.phone });
+        throw new Error("Telefone já cadastrado por outro usuário.");
       }
 
       let hashedPassword: string | undefined;
@@ -58,7 +78,7 @@ export class UserService implements IUserService {
         hashedPassword = await bcrypt.hash(user.password, 10);
       }
 
-      const newUser = { ...user, password: hashedPassword } as Omit<User, 'id'>;
+      const newUser = { ...user, password: hashedPassword, verified: user.verified ?? false } as Omit<User, 'id'>;
       const createdUser = await this.repository.create(newUser);
       logger.debug('Documento salvo no banco:', createdUser.id);
 
@@ -67,6 +87,12 @@ export class UserService implements IUserService {
         email: createdUser.email,
         verified: createdUser.verified
       });
+
+      // Envia notificação de boas-vindas
+      this.notificationService.notificarBoasVindasUsuario({
+        phone: createdUser.phone,
+        nome: createdUser.name
+      }).catch(err => logger.error("Erro ao enviar boas-vindas via WhatsApp", err));
 
       return createdUser;
     } catch (error) {
@@ -79,6 +105,17 @@ export class UserService implements IUserService {
     logger.debug("Atualizando usuário", { identifier: id, updates: Object.keys(user) });
 
     try {
+      if (user.phone !== undefined) {
+        user.phone = sanitizePhone(user.phone);
+        if (!/^\d{10,15}$/.test(user.phone)) {
+          throw new Error("Telefone inválido. Informe somente números com DDD (ex: 5511999998888).");
+        }
+        const existingPhone = await this.repository.findByPhone(user.phone);
+        if (existingPhone && existingPhone.id !== id) {
+          throw new Error("Telefone já cadastrado por outro usuário.");
+        }
+      }
+
       if (user.password) {
         logger.debug("Criptografando nova senha do usuário", { userId: id });
         user.password = await bcrypt.hash(user.password, 10);

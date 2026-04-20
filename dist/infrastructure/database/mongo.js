@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 import logger from '../logging/Logger.js';
 export const connectMongo = async () => {
-    // const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/physioGest';
-    const uri = process.env.MONGO_URI || 'mongodb+srv://dbUser:123456789Neri@cluster0.z9g74ud.mongodb.net/physioGest?appName=Cluster0&directConnection=false&family=4';
+    const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/physioGest';
     logger.debug("Tentando conectar ao MongoDB", {
         uri: uri.replace(/\/\/.*@/, '//***:***@'), // Oculta credenciais no log
         hasCredentials: uri.includes('@')

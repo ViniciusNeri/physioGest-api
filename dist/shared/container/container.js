@@ -25,10 +25,12 @@ import { CategoryService } from "../../application/services/CategoryService.js";
 import { PaymentMethodService } from "../../application/services/PaymentMethodService.js";
 import { SettingService } from "../../application/services/SettingService.js";
 import { PatientActivityService } from "../../application/services/PatientActivityService.js";
+import { WhatsappService } from "../../application/services/WhatsappService.js";
 import Logger from "../../infrastructure/logging/Logger.js";
 import { GoogleProvider } from "../../infrastructure/external/GoogleProvider.js";
 import { EmailProvider } from "../../infrastructure/external/EmailProvider.js";
 import { RabbitMQService } from "../../infrastructure/messaging/RabbitMQService.js";
+import { WhatsappNotificationService } from "../../infrastructure/external/WhatsappNotificationService.js";
 // Bindings
 container.register("IAuthenticateRepository", {
     useClass: UserRepository,
@@ -124,5 +126,11 @@ container.register("EmailProvider", {
 });
 container.register("RabbitMQService", {
     useClass: RabbitMQService,
+});
+container.register("IWhatsappService", {
+    useClass: WhatsappService,
+});
+container.register("WhatsappNotificationService", {
+    useClass: WhatsappNotificationService,
 });
 //# sourceMappingURL=container.js.map

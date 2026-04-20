@@ -19,7 +19,7 @@ const financialSchema = new mongoose.Schema<Financial>(
     userId: { type: String, required: true },
     patientId: { type: String, required: false },
   },
-  { timestamps: true }
+  { timestamps: true, id: false }
 );
 
 // @ts-ignore

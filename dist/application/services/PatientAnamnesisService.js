@@ -12,6 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 import { injectable, inject } from "tsyringe";
 import logger from "../../infrastructure/logging/Logger.js";
+import { toLocalISOString } from "../../utils/dateUtils.js";
 let PatientAnamnesisService = class PatientAnamnesisService {
     repository;
     activityService;
@@ -51,6 +52,9 @@ let PatientAnamnesisService = class PatientAnamnesisService {
     async createAnamnesis(anamnesis) {
         logger.debug("Criando nova anamnese", { patientId: anamnesis.patientId });
         try {
+            if (anamnesis.date) {
+                anamnesis.date = toLocalISOString(anamnesis.date);
+            }
             const newAnamnesis = await this.repository.create(anamnesis);
             // Registra atividade
             await this.activityService.logActivity({
@@ -71,6 +75,9 @@ let PatientAnamnesisService = class PatientAnamnesisService {
     async updateAnamnesis(id, anamnesis) {
         logger.debug("Atualizando anamnese", { anamnesisId: id });
         try {
+            if (anamnesis.date) {
+                anamnesis.date = toLocalISOString(anamnesis.date);
+            }
             const updatedAnamnesis = await this.repository.update(id, anamnesis);
             if (updatedAnamnesis) {
                 // Registra atividade
