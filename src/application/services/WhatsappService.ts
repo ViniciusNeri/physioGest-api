@@ -121,8 +121,11 @@ export class WhatsappService implements IWhatsappService {
 
   async getPerfil(phone: string): Promise<WhatsappPerfilResponse> {
     const sanitizedPhone = sanitizePhone(phone);
+    console.log(`[getPerfil] phone recebido: "${phone}" | sanitizado: "${sanitizedPhone}" | tamanho original: ${phone.length} | tamanho sanitizado: ${sanitizedPhone.length}`);
+
     // Busca primeiro em usuários
     const user = await this.userRepository.findByPhone(sanitizedPhone);
+    console.log(`[getPerfil] resultado findByPhone (usuário):`, user ? `encontrado id=${user.id}` : 'não encontrado');
     if (user) {
       return {
         tipo: 'usuario',
@@ -132,8 +135,10 @@ export class WhatsappService implements IWhatsappService {
       };
     }
 
-    // Busca em pacientes
-    const patient = await (this.patientRepository as any).findByPhone(phone);
+    // Busca em pacientes (corrigido: usa sanitizedPhone em vez de phone original)
+    console.log(`[getPerfil] buscando paciente com phone sanitizado: "${sanitizedPhone}"`);
+    const patient = await (this.patientRepository as any).findByPhone(sanitizedPhone);
+    console.log(`[getPerfil] resultado findByPhone (paciente):`, patient ? `encontrado id=${patient.id}` : 'não encontrado');
     if (patient) {
       // Busca o usuário responsável
       const responsavel = patient.userId
@@ -151,6 +156,7 @@ export class WhatsappService implements IWhatsappService {
       };
     }
 
+    console.log(`[getPerfil] nenhum registro encontrado para "${sanitizedPhone}"`);
     throw Object.assign(new Error('Perfil não encontrado para o telefone informado'), { statusCode: 404 });
   }
 
@@ -162,7 +168,9 @@ export class WhatsappService implements IWhatsappService {
     // Se o telefone foi fornecido, buscamos o paciente para identificar o profissional responsável
     if (phone) {
       const sanitizedPhone = sanitizePhone(phone);
+      console.log(`[getDisponibilidade] phone recebido: "${phone}" | sanitizado: "${sanitizedPhone}" | tamanho original: ${phone.length} | tamanho sanitizado: ${sanitizedPhone.length}`);
       const patient = await this.patientRepository.findByPhone(sanitizedPhone);
+      console.log(`[getDisponibilidade] resultado findByPhone (paciente):`, patient ? `encontrado id=${patient.id}` : 'não encontrado');
       if (!patient) {
         throw Object.assign(new Error('Paciente não encontrado para o telefone informado'), { statusCode: 404 });
       }
