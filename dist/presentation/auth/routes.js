@@ -35,6 +35,7 @@ const authRoutes = Router();
  *           id: "60d5ecb74b24c72b8c8b4567"
  *           name: "João Silva"
  *           email: "usuario@example.com"
+ *           phone: "5511999998888"
  *         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
  *
  *     SignupRequest:
@@ -58,7 +59,7 @@ const authRoutes = Router();
  *           description: Senha do usuário (mínimo 6 caracteres)
  *         phone:
  *           type: string
- *           description: Telefone com DDD (ex: 5511999998888)
+ *           description: Telefone com DDD, apenas números (ex: 5511999998888)
  *       example:
  *         name: "João Silva"
  *         email: "usuario@example.com"
@@ -79,6 +80,7 @@ const authRoutes = Router();
  *           id: "60d5ecb74b24c72b8c8b4567"
  *           name: "João Silva"
  *           email: "usuario@example.com"
+ *           phone: "5511999998888"
  *
  *     ConfirmSignupRequest:
  *       type: object
@@ -137,6 +139,17 @@ const authRoutes = Router();
  *       example:
  *         token: "eyJhbGciOiJSUzI1NiIsImtpZCI6..."
  *
+ *     VerifyEmailRequest:
+ *       type: object
+ *       required:
+ *         - token
+ *       properties:
+ *         token:
+ *           type: string
+ *           description: Token JWT de verificação de email
+ *       example:
+ *         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+ *
  *     ErrorResponse:
  *       type: object
  *       properties:
@@ -159,11 +172,18 @@ const authRoutes = Router();
  *           type: string
  *           format: email
  *           description: Email do usuário
+ *         phone:
+ *           type: string
+ *           description: Telefone do usuário (somente números)
+ *         verified:
+ *           type: boolean
+ *           description: Se o email do usuário foi verificado
  *       example:
  *         id: "60d5ecb74b24c72b8c8b4567"
  *         name: "João Silva"
  *         email: "usuario@example.com"
- *
+ *         phone: "5511999998888"
+ *         verified: true
  *
  */
 authRoutes.post("/sessions", (req, res) => authenticateController.handle(req, res));
