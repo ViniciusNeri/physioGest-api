@@ -68,14 +68,20 @@ export class AuthenticateService implements IAuthenticateService {
     }
   }
 
-  async signup(name: string, email: string, password: string): Promise<User> {
-    logger.debug("Tentativa de cadastro", { name, email });
+  async signup(name: string, email: string, password: string, phone: string): Promise<User> {
+    logger.debug("Tentativa de cadastro", { name, email, phone });
 
     try {
       const existingUser = await this.repository.findByEmail(email);
       if (existingUser) {
         logger.warn("Tentativa de cadastro com email já existente", { email });
         throw new Error("Email já cadastrado");
+      }
+
+      // Sanitização do telefone (remove espaços, parênteses, traços, etc)
+      const sanitizedPhone = phone.replace(/\D/g, '');
+      if (sanitizedPhone.length < 10) {
+        throw new Error("Telefone inválido. Informe o número com DDD.");
       }
 
       logger.debug("Criptografando senha");
@@ -85,7 +91,7 @@ export class AuthenticateService implements IAuthenticateService {
         name,
         email,
         password: hashedPassword,
-        phone: '',  // phone é coletado via endpoint /users, não no signup inicial
+        phone: sanitizedPhone,
         verified: false
       });
 

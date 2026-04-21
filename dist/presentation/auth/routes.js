@@ -43,6 +43,7 @@ const authRoutes = Router();
  *         - name
  *         - email
  *         - password
+ *         - phone
  *       properties:
  *         name:
  *           type: string
@@ -55,10 +56,14 @@ const authRoutes = Router();
  *           type: string
  *           minLength: 6
  *           description: Senha do usuário (mínimo 6 caracteres)
+ *         phone:
+ *           type: string
+ *           description: Telefone com DDD (ex: 5511999998888)
  *       example:
  *         name: "João Silva"
  *         email: "usuario@example.com"
  *         password: "senha123"
+ *         phone: "5511999998888"
  *
  *     SignupResponse:
  *       type: object

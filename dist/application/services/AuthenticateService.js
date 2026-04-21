@@ -58,13 +58,18 @@ let AuthenticateService = class AuthenticateService {
             throw error;
         }
     }
-    async signup(name, email, password) {
-        logger.debug("Tentativa de cadastro", { name, email });
+    async signup(name, email, password, phone) {
+        logger.debug("Tentativa de cadastro", { name, email, phone });
         try {
             const existingUser = await this.repository.findByEmail(email);
             if (existingUser) {
                 logger.warn("Tentativa de cadastro com email já existente", { email });
                 throw new Error("Email já cadastrado");
+            }
+            // Sanitização do telefone (remove espaços, parênteses, traços, etc)
+            const sanitizedPhone = phone.replace(/\D/g, '');
+            if (sanitizedPhone.length < 10) {
+                throw new Error("Telefone inválido. Informe o número com DDD.");
             }
             logger.debug("Criptografando senha");
             const hashedPassword = await bcrypt.hash(password, 10);
@@ -72,7 +77,7 @@ let AuthenticateService = class AuthenticateService {
                 name,
                 email,
                 password: hashedPassword,
-                phone: '', // phone é coletado via endpoint /users, não no signup inicial
+                phone: sanitizedPhone,
                 verified: false
             });
             logger.info("Usuário criado com sucesso", { userId: user.id, email });

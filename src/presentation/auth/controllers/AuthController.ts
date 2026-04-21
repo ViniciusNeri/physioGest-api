@@ -74,8 +74,8 @@ export class AuthenticateController {
    */
   signup = async (req: Request, res: Response) => {
     try {
-      const { name, email, password } = req.body;
-      const user = await this.service.signup(name, email, password);
+      const { name, email, password, phone } = req.body;
+      const user = await this.service.signup(name, email, password, phone);
       return res.status(201).json({
         message: "Usuário criado com sucesso. Verifique seu email para confirmar o cadastro.",
         user
