@@ -477,4 +477,41 @@ whatsappRoutes.patch("/agendamentos/:agendamentoId/cancelar", (req, res) => what
  */
 whatsappRoutes.patch("/agendamentos/:agendamentoId/remarcar", (req, res) => whatsappController.remarcarAgendamento(req, res));
 
+/**
+ * @swagger
+ * /whatsapp/agendamentos/proximas-24h:
+ *   get:
+ *     summary: Retorna todos os agendamentos do sistema previstos para as próximas 24 horas
+ *     tags: [WhatsApp]
+ *     responses:
+ *       200:
+ *         description: Lista de agendamentos das próximas 24 horas
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   agendamentoId:
+ *                     type: string
+ *                   pacienteId:
+ *                     type: string
+ *                   userId:
+ *                     type: string
+ *                   nomePaciente:
+ *                     type: string
+ *                   nomeUsuario:
+ *                     type: string
+ *                   categoria:
+ *                     type: string
+ *                   data:
+ *                     type: string
+ *                     example: "2025-04-23"
+ *                   horario:
+ *                     type: string
+ *                     example: "09:00"
+ */
+whatsappRoutes.get("/agendamentos/proximas-24h", (req, res) => whatsappController.listarAgendamentosProximas24h(req, res));
+
 export default whatsappRoutes;

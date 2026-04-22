@@ -1,5 +1,6 @@
 import { injectable, inject } from "tsyringe";
 import { sanitizePhone } from "../../utils/phoneUtils.js";
+import { getNaiveNowString, toLocalISOString } from "../../utils/dateUtils.js";
 import type { IWhatsappService, WhatsappPerfilResponse, WhatsappDisponibilidadeResponse, WhatsappCriarAgendamentoInput, WhatsappAgendamentoResponse, WhatsappListaAgendamentosResponse, WhatsappCancelamentoResponse, WhatsappRemarcacaoInput, WhatsappRemarcacaoResponse } from "../../domain/services/IWhatsappService.js";
 import type { IUserRepository } from "../../domain/interfaces/IUserRepository.js";
 import type { IPatientRepository } from "../../domain/interfaces/IPatientRepository.js";
@@ -475,5 +476,52 @@ export class WhatsappService implements IWhatsappService {
       status: 'confirmado',
       remarcadoEm,
     };
+  }
+
+  // ─── Endpoint 7 — Listar Agendamentos Próximas 24/27 horas ───────────────────
+
+  async listarAgendamentosProximas24h(): Promise<any[]> {
+    const now = new Date();
+    // Range exato: entre 24 e 27 horas no futuro (tempo absoluto UTC)
+    const startFuture = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+    const endFuture = new Date(now.getTime() + 27 * 60 * 60 * 1000);
+
+    const users = await this.userRepository.findAll();
+    const todasAgendas: any[] = [];
+
+    await Promise.all(users.map(async (user) => {
+      if (!user.id) return;
+      
+      const settings = await this.settingRepository.findByUserId(user.id);
+      const tz = settings?.timezone || 'America/Sao_Paulo';
+
+      // Converte a janela de 24h a 27h para a string local do fuso do usuário
+      const startStr = toLocalISOString(startFuture, tz);
+      const endStr = toLocalISOString(endFuture, tz);
+
+      const agendasDoUsuario = await this.agendaRepository.findByDateRange(user.id, startStr, endStr);
+      
+      for (const a of agendasDoUsuario) {
+        todasAgendas.push({
+          agendamentoId: a.id,
+          pacienteId: a.patientId,
+          userId: user.id,
+          nomePaciente: a.patientName || (a as any).patient?.name || '',
+          nomeUsuario: user.name || '',
+          categoria: a.categoryName || (a as any).category?.name || '',
+          data: extrairData(a.startDate),
+          horario: extrairHorario(a.startDate),
+        });
+      }
+    }));
+
+    // Ordena globalmente pela string de data/hora
+    todasAgendas.sort((a, b) => {
+      const aTime = a.data + 'T' + a.horario;
+      const bTime = b.data + 'T' + b.horario;
+      return aTime.localeCompare(bTime);
+    });
+
+    return todasAgendas;
   }
 }

@@ -47,6 +47,14 @@ export interface IAgendaRepository {
   findByDateRange(userId: string, startDate: string, endDate: string): Promise<Agenda[]>;
 
   /**
+   * Busca agendamentos de TODOS os usuários em um intervalo de datas
+   * @param startDate - Data inicial
+   * @param endDate - Data final
+   * @returns Lista de agendamentos no periodo
+   */
+  findGlobalByDateRange(startDate: string, endDate: string): Promise<Agenda[]>;
+
+  /**
    * Cria uma nova agenda
    * @param agenda - dados da agenda
    * @returns Agenda criada

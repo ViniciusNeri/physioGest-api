@@ -52,6 +52,7 @@ export function toLocalISOString(date: Date | string, timezone: string = BRASILI
     minute: '2-digit',
     second: '2-digit',
     hour12: false,
+    hourCycle: 'h23',
   };
 
   const formatter = new Intl.DateTimeFormat('en-CA', options);
@@ -59,7 +60,10 @@ export function toLocalISOString(date: Date | string, timezone: string = BRASILI
   const parts = formatter.formatToParts(d);
   const get = (type: string) => parts.find(p => p.type === type)?.value ?? '00';
 
-  return `${get('year')}-${get('month')}-${get('day')}T${get('hour')}:${get('minute')}:${get('second')}`;
+  let hour = get('hour');
+  if (hour === '24') hour = '00';
+
+  return `${get('year')}-${get('month')}-${get('day')}T${hour}:${get('minute')}:${get('second')}`;
 }
 
 /**

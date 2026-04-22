@@ -83,7 +83,24 @@ export class AgendaRepository implements IAgendaRepository {
         { startDate: { $lt: endDate } },
         { endDate: { $gt: startDate } }
       ]
-    }).lean({ virtuals: true }).exec();
+    })
+    .populate('patient', 'name')
+    .populate('category', 'name duration')
+    .lean({ virtuals: true }).exec();
+    return appointments.map(mapAgenda);
+  }
+
+  async findGlobalByDateRange(startDate: string, endDate: string): Promise<Agenda[]> {
+    const appointments = await AgendaModel.find({
+      status: { $nin: ['cancelled', 'no_show'] },
+      $and: [
+        { startDate: { $lt: endDate } },
+        { endDate: { $gt: startDate } }
+      ]
+    })
+    .populate('patient', 'name')
+    .populate('category', 'name duration')
+    .lean({ virtuals: true }).exec();
     return appointments.map(mapAgenda);
   }
 

@@ -83,4 +83,6 @@ export interface IWhatsappService {
     agendamentoId: string,
     input: WhatsappRemarcacaoInput
   ): Promise<WhatsappRemarcacaoResponse>;
+
+  listarAgendamentosProximas24h(): Promise<any[]>;
 }

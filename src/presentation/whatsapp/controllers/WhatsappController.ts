@@ -91,6 +91,17 @@ export class WhatsappController {
       return res.status(status).json({ statusCode: status, message: error.message });
     }
   };
+
+  /** GET /v1/whatsapp/agendamentos/proximas-24h */
+  listarAgendamentosProximas24h = async (req: Request, res: Response) => {
+    try {
+      const lista = await this.service.listarAgendamentosProximas24h();
+      return res.status(200).json(lista);
+    } catch (error: any) {
+      const status = error.statusCode || 500;
+      return res.status(status).json({ statusCode: status, message: error.message });
+    }
+  };
 }
 
 export const whatsappController = new WhatsappController();
