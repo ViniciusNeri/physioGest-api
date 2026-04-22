@@ -40,7 +40,7 @@ agendaSchema.virtual('patient', {
 agendaSchema.virtual('category', {
   ref: 'Category',
   localField: 'categoryId',
-  foreignField: '_id',
+  foreignField: 'id',
   justOne: true
 });
 

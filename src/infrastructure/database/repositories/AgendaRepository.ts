@@ -84,7 +84,7 @@ export class AgendaRepository implements IAgendaRepository {
         { endDate: { $gt: startDate } }
       ]
     })
-    .populate('patient', 'name')
+    .populate('patient', 'name phone')
     .populate('category', 'name duration')
     .lean({ virtuals: true }).exec();
     return appointments.map(mapAgenda);
@@ -98,7 +98,7 @@ export class AgendaRepository implements IAgendaRepository {
         { endDate: { $gt: startDate } }
       ]
     })
-    .populate('patient', 'name')
+    .populate('patient', 'name phone')
     .populate('category', 'name duration')
     .lean({ virtuals: true }).exec();
     return appointments.map(mapAgenda);

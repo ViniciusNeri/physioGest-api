@@ -501,6 +501,9 @@ whatsappRoutes.patch("/agendamentos/:agendamentoId/remarcar", (req, res) => what
  *                     type: string
  *                   nomePaciente:
  *                     type: string
+ *                   telefonePaciente:
+ *                     type: string
+ *                     example: "5571999999999"
  *                   nomeUsuario:
  *                     type: string
  *                   categoria:
