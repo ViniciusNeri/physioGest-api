@@ -507,7 +507,7 @@ export class WhatsappService implements IWhatsappService {
           pacienteId: a.patientId,
           userId: user.id,
           nomePaciente: a.patientName || (a as any).patient?.name || '',
-          telefonePaciente: (a as any).patient?.phone || '',
+          phone: (a as any).patient?.phone || '',
           nomeUsuario: user.name || '',
           categoria: a.categoryName || (a as any).category?.name || '',
           data: extrairData(a.startDate),

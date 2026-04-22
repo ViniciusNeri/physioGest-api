@@ -82966,3 +82966,43 @@
     statusCode: 200
     duration: "6ms"
     contentLength: "1713"
+[2026-04-22 02:15:07.069 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-22 02:15:07.078 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-22 02:15:07.205 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-22 02:15:07.206 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-22 02:15:07.211 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-22 02:15:07.212 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"
+[2026-04-22 02:15:16.943 -0300] DEBUG: GoogleProvider inicializado
+    env: "development"
+    service: "physioGest-api"
+    hasClientId: false
+    hasClientSecret: false
+    hasRedirectUri: false
+[2026-04-22 02:15:16.948 -0300] INFO: EmailProvider: Inicializado. API Key: NÃO DEFINIDA
+    env: "development"
+    service: "physioGest-api"
+    baseUrl: "https://api.brevo.com/v3"

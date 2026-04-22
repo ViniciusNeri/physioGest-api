@@ -33,7 +33,7 @@ agendaSchema.pre('save', function() {
 agendaSchema.virtual('patient', {
   ref: 'Patient',
   localField: 'patientId',
-  foreignField: '_id',
+  foreignField: 'id',
   justOne: true
 });
 
