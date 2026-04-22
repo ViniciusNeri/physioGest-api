@@ -2,6 +2,8 @@ import { injectable } from "tsyringe";
 import type { IAgendaRepository } from "../../../domain/interfaces/IAgendaRepository.js";
 import type { Agenda } from "../../../domain/entities/Agenda.js";
 import AgendaModel from "../models/AgendaModel.js";
+import PatientModel from "../models/PatientModel.js";
+import CategoryModel from "../models/CategoryModel.js";
 import mongoose from "mongoose";
 import { getNaiveNowString } from "../../../utils/dateUtils.js";
 
@@ -15,6 +17,23 @@ const mapAgenda = (agenda: any): Agenda => {
   }
   return agenda;
 };
+
+async function enrichAgendas(agendas: any[]): Promise<any[]> {
+  for (const a of agendas) {
+    if (!a.patient && a.patientId) {
+      const isObjectId = mongoose.Types.ObjectId.isValid(a.patientId);
+      const query = isObjectId ? { _id: a.patientId } : { id: a.patientId };
+      a.patient = await PatientModel.findOne(query, 'name phone').lean().exec();
+    }
+    if (!a.category && a.categoryId) {
+      const isObjectId = mongoose.Types.ObjectId.isValid(a.categoryId);
+      const query = isObjectId ? { _id: a.categoryId } : { id: a.categoryId };
+      a.category = await CategoryModel.findOne(query, 'name duration').lean().exec();
+    }
+  }
+  return agendas;
+}
+
 
 @injectable()
 export class AgendaRepository implements IAgendaRepository {
@@ -87,6 +106,7 @@ export class AgendaRepository implements IAgendaRepository {
     .populate('patient', 'name phone')
     .populate('category', 'name duration')
     .lean({ virtuals: true }).exec();
+    await enrichAgendas(appointments);
     return appointments.map(mapAgenda);
   }
 
@@ -101,6 +121,7 @@ export class AgendaRepository implements IAgendaRepository {
     .populate('patient', 'name phone')
     .populate('category', 'name duration')
     .lean({ virtuals: true }).exec();
+    await enrichAgendas(appointments);
     return appointments.map(mapAgenda);
   }
 
