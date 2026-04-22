@@ -48,7 +48,9 @@ export class PatientRepository implements IPatientRepository {
   }
 
   async findByPhone(phone: string): Promise<Patient | null> {
-    return PatientModel.findOne({ phone }).lean<Patient>({ virtuals: true }).exec();
+    const patient = await PatientModel.findOne({ phone }).lean().exec();
+    if (!patient) return null;
+    return { ...patient, id: patient._id.toString() } as Patient;
   }
 
   private async enrichWithAgendaStats(patients: Patient[]): Promise<Patient[]> {

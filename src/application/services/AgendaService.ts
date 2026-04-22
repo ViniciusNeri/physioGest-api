@@ -57,6 +57,7 @@ export class AgendaService implements IAgendaService {
   /** Compara string ISO local "YYYY-MM-DDTHH:mm:ss" com o agora local */
   private isPastDate(localDateStr: string, timezone: string): boolean {
     const nowStr = getNaiveNowString(timezone);
+    console.log("Data: ", localDateStr, " Agora: ", nowStr, 'timezone: ', timezone);
     // Remove seconds for minute-level comparison
     return localDateStr.substring(0, 16) < nowStr.substring(0, 16);
   }
@@ -110,6 +111,7 @@ export class AgendaService implements IAgendaService {
     const endStr = toLocalISOString(agenda.endDate, timezone);
 
     if (this.isPastDate(startStr, timezone)) {
+      console.log("Data: ", startStr, " Agora: ", getNaiveNowString(timezone), 'timezone: ', timezone, 'isPastDate: ', this.isPastDate(startStr, timezone));
       throw new Error("Não é possível realizar agendamentos para datas passadas.");
     }
 
@@ -161,7 +163,7 @@ export class AgendaService implements IAgendaService {
     const created = await this.repository.create(agendaToSave as Agenda);
 
     await this.activityService.logActivity({
-      patientId: created.patientId,
+      patientId: (created as any)._id.toString(),
       userId: created.userId,
       type: 'appointment_created',
       description: `Agendamento: ${startStr.substring(8, 10)}/${startStr.substring(5, 7)}`
