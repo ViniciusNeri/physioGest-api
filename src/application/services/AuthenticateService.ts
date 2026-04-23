@@ -607,6 +607,15 @@ Este é um email automático. Não responda a este email.`
       showActivePayments: true,
       showNextAppointment: true,
       categoryControlMode: 'none',
+      operatingDays: [1, 2, 3, 4, 5], // Segunda a Sexta
+      businessHours: {
+        startTime: '08:00',
+        endTime: '18:00',
+        lunchStart: '12:00',
+        lunchEnd: '13:00'
+      },
+      timezone: 'America/Sao_Paulo',
+      sessionDuration: 60,
     });    
     } catch (error) {
       console.error("Erro ao inicializar dados do usuário:", error);

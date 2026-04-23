@@ -16,7 +16,7 @@ export class PatientService implements IPatientService {
     private userRepository: IUserRepository,
     @inject("WhatsappNotificationService")
     private notificationService: WhatsappNotificationService
-  ) {}
+  ) { }
 
   async getPatientById(id: string): Promise<Patient | null> {
     logger.debug("Buscando paciente por ID", { patientId: id });
@@ -82,7 +82,7 @@ export class PatientService implements IPatientService {
       if (patient.phone) {
         patient.phone = sanitizePhone(patient.phone);
       }
- 
+
       if (patient.birthDate && typeof patient.birthDate === 'string') {
         patient.birthDate = new Date(patient.birthDate);
       }
@@ -99,13 +99,13 @@ export class PatientService implements IPatientService {
       // Busca o profissional para pegar o nome e enviar notificação
       this.userRepository.findById(createdPatient.userId).then(professional => {
         const professionalName = professional ? professional.name : "Seu profissional";
-        if (createdPatient.phone) {
-          this.notificationService.notificarBoasVindasPaciente({
-            phone: createdPatient.phone,
-            nomePaciente: createdPatient.name,
-            nomeUsuario: professionalName
-          }).catch(err => logger.error("Erro ao enviar boas-vindas ao paciente via WhatsApp", err));
-        }
+        // if (createdPatient.phone) {
+        //   this.notificationService.notificarBoasVindasPaciente({
+        //     phone: createdPatient.phone,
+        //     nomePaciente: createdPatient.name,
+        //     nomeUsuario: professionalName
+        //   }).catch(err => logger.error("Erro ao enviar boas-vindas ao paciente via WhatsApp", err));
+        // }
       }).catch(err => logger.error("Erro ao buscar profissional para notificação", err));
 
       return createdPatient;
@@ -122,11 +122,11 @@ export class PatientService implements IPatientService {
       if (patient.phone) {
         patient.phone = sanitizePhone(patient.phone);
       }
- 
+
       if (patient.birthDate && typeof patient.birthDate === 'string') {
         patient.birthDate = new Date(patient.birthDate);
       }
- 
+
       const updatedPatient = await this.repository.update(id, patient);
 
       if (updatedPatient) {
